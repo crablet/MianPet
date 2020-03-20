@@ -12,6 +12,11 @@ Widget::Widget(QWidget *parent)
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
     setFixedSize(gif->currentImage().size());
+
+    petToolButtonsContainer = new PetToolButtonsContainer;
+    petToolButtonsContainer->setFixedWidth(this->width());
+    petToolButtonsContainer->setFixedHeight(50);
+    petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width()));
 }
 
 void Widget::mouseMoveEvent(QMouseEvent *event)
@@ -22,6 +27,7 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
         {
             const auto delta = event->globalPos() - startPos;
             this->move(framePos + delta);
+            petToolButtonsContainer->move(framePos + delta + QPoint(0, width()));
         }
     }
 
@@ -45,4 +51,21 @@ void Widget::mouseReleaseEvent(QMouseEvent *event)
     isDragging = false;
 
     QWidget::mouseReleaseEvent(event);
+}
+
+void Widget::enterEvent(QEvent *event)
+{
+    petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width()));
+    petToolButtonsContainer->show();
+}
+
+void Widget::leaveEvent(QEvent *event)
+{
+    QTimer::singleShot(520, this, [=]()
+    {
+        if (!petToolButtonsContainer->underMouse())
+        {
+            petToolButtonsContainer->hide();
+        }
+    });
 }
