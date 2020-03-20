@@ -3,13 +3,13 @@
 Widget::Widget(QWidget *parent)
     : QWidget(parent), isDragging(false)
 {
-    auto *gif = new QMovie(R"(C:\Users\crabl\Desktop\TestPet\test.gif)");
+    auto *gif = new QMovie(R"(C:\Users\crabl\Desktop\TestPet\test.gif)", {}, this);
     auto *label = new QLabel(this);
     label->move(0, 0);
     label->setMovie(gif);
     gif->start();
 
-    setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
+    setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
     setFixedSize(gif->currentImage().size());
 }
