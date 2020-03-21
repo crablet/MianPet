@@ -13,7 +13,7 @@ public:
 
 private:
     QHBoxLayout *layout;
-    QPushButton *button1, *button2;
+    QPushButton *button1, *button2, *button3, *button4;
 };
 
 #endif // PETTOOLBUTTONSCONTAINER_H

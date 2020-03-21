@@ -16,7 +16,7 @@ Widget::Widget(QWidget *parent)
     petToolButtonsContainer = new PetToolButtonsContainer;
     petToolButtonsContainer->setFixedWidth(this->width());
     petToolButtonsContainer->setFixedHeight(50);
-    petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width()));
+    petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - 16));
 }
 
 void Widget::mouseMoveEvent(QMouseEvent *event)
@@ -27,7 +27,7 @@ void Widget::mouseMoveEvent(QMouseEvent *event)
         {
             const auto delta = event->globalPos() - startPos;
             this->move(framePos + delta);
-            petToolButtonsContainer->move(framePos + delta + QPoint(0, width()));
+            petToolButtonsContainer->move(framePos + delta + QPoint(0, width() - 16));
         }
     }
 
@@ -55,7 +55,7 @@ void Widget::mouseReleaseEvent(QMouseEvent *event)
 
 void Widget::enterEvent(QEvent *event)
 {
-    petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width()));
+    petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - 16));
     petToolButtonsContainer->show();
 }
 
