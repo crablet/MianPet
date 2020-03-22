@@ -2,10 +2,16 @@
 
 PetToolButtonsContainer::PetToolButtonsContainer(QWidget *parent) : QWidget(parent)
 {
+    smallWindow = new SmallItemsContainerWindow;
+
     layout = new QHBoxLayout(this);
 
-    button1 = new QPushButton;
-    button2 = new QPushButton;
+    button1 = new QPushButton(QIcon(R"(C:\Users\crabl\Documents\Tencent Files\1063221915\FileRecv\qq-pet\bow.png)"), {});
+    button1->setIconSize({ 43, 43 });
+    button1->setFlat(true);
+    button2 = new QPushButton(QIcon(R"(C:\Users\crabl\Documents\Tencent Files\1063221915\FileRecv\qq-pet\clean.png)"), {});
+    button2->setIconSize({ 43, 43 });
+    button2->setFlat(true);
     button3 = new QPushButton;
     button4 = new QPushButton;
 
@@ -23,4 +29,6 @@ PetToolButtonsContainer::PetToolButtonsContainer(QWidget *parent) : QWidget(pare
 
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
+
+    connect(button1, &QPushButton::clicked, smallWindow, &SmallItemsContainerWindow::show);
 }

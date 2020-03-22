@@ -53,13 +53,13 @@ void Widget::mouseReleaseEvent(QMouseEvent *event)
     QWidget::mouseReleaseEvent(event);
 }
 
-void Widget::enterEvent(QEvent *event)
+void Widget::enterEvent([[maybe_unused]] QEvent *event)
 {
     petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - 16));
     petToolButtonsContainer->show();
 }
 
-void Widget::leaveEvent(QEvent *event)
+void Widget::leaveEvent([[maybe_unused]] QEvent *event)
 {
     QTimer::singleShot(520, this, [=]()
     {
