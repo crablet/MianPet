@@ -20,6 +20,7 @@ SOURCES += \
     Src/PetClient.cpp
 
 HEADERS += \
+    Src/Config/UiConstants.h \
     Src/PetClient.h
 
 # Default rules for deployment.
