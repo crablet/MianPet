@@ -2,6 +2,8 @@
 #define PETTOOLBUTTONSCONTAINER_H
 
 #include <QWidget>
+#include <QPushButton>
+#include <QHBoxLayout>
 
 class PetToolButtonsContainer : public QWidget
 {
@@ -9,8 +11,8 @@ class PetToolButtonsContainer : public QWidget
 public:
     explicit PetToolButtonsContainer(QWidget *parent = nullptr);
 
-signals:
-
+private:
+    QHBoxLayout *layout;
 };
 
 #endif // PETTOOLBUTTONSCONTAINER_H

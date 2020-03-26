@@ -61,7 +61,7 @@ void PetClient::enterEvent([[maybe_unused]] QEvent *event)
 
 void PetClient::leaveEvent([[maybe_unused]] QEvent *event)
 {
-    QTimer::singleShot(520, this, [=]()
+    QTimer::singleShot(PetToolButtonsContainerStayingTime, this, [=]()
     {
         if (!petToolButtonsContainer->underMouse())
         {
