@@ -12,6 +12,11 @@ PetClient::PetClient(QWidget *parent)
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
     setFixedSize(petGif->currentImage().size());
+
+    petToolButtonsContainer = new PetToolButtonsContainer;
+    petToolButtonsContainer->setFixedWidth(PetToolButtonsContainerWidth);
+    petToolButtonsContainer->setFixedHeight(PetToolButtonsContainerHeight);
+    petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - PetToolButtonsContainerUiDelta));
 }
 
 void PetClient::mouseMoveEvent(QMouseEvent *event)
@@ -22,6 +27,7 @@ void PetClient::mouseMoveEvent(QMouseEvent *event)
         {
             const auto delta = event->globalPos() - previousMousePos;
             this->move(previousUiPos + delta);
+            petToolButtonsContainer->move(previousUiPos + delta + QPoint(0, width() - PetToolButtonsContainerUiDelta));
         }
     }
 
@@ -45,4 +51,21 @@ void PetClient::mouseReleaseEvent(QMouseEvent *event)
     isUiBeingDragging = false;
 
     QWidget::mouseReleaseEvent(event);
+}
+
+void PetClient::enterEvent([[maybe_unused]] QEvent *event)
+{
+    petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - PetToolButtonsContainerUiDelta));
+    petToolButtonsContainer->show();
+}
+
+void PetClient::leaveEvent([[maybe_unused]] QEvent *event)
+{
+    QTimer::singleShot(520, this, [=]()
+    {
+        if (!petToolButtonsContainer->underMouse())
+        {
+            petToolButtonsContainer->hide();
+        }
+    });
 }
