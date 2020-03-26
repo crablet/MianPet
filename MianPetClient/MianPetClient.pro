@@ -16,12 +16,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Src/PetToolButtonsContainer.cpp \
     Src/main.cpp \
     Src/PetClient.cpp
 
 HEADERS += \
     Src/Config/UiConstants.h \
-    Src/PetClient.h
+    Src/PetClient.h \
+    Src/PetToolButtonsContainer.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
