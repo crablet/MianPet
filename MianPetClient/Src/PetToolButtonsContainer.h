@@ -4,6 +4,9 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QHBoxLayout>
+#include <QIcon>
+
+#include "Src/Config/UiConstants.h"
 
 class PetToolButtonsContainer : public QWidget
 {
@@ -13,6 +16,7 @@ public:
 
 private:
     QHBoxLayout *layout;
+    QPushButton *foodButton, *cleanButton, *dummyButton1, *dummyButton2;
 };
 
 #endif // PETTOOLBUTTONSCONTAINER_H
