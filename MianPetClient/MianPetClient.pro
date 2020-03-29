@@ -17,13 +17,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Src/PetToolButtonsContainer.cpp \
+    Src/SmallItemsContainerWindow.cpp \
     Src/main.cpp \
     Src/PetClient.cpp
 
 HEADERS += \
     Src/Config/UiConstants.h \
     Src/PetClient.h \
-    Src/PetToolButtonsContainer.h
+    Src/PetToolButtonsContainer.h \
+    Src/SmallItemsContainerWindow.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
