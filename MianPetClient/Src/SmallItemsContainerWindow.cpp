@@ -12,7 +12,7 @@ void SmallItemsContainerWindow::InitializeUi()
     setFixedSize(SmallItemsContainerWindowWidth, SmallItemsContainerWindowHeight);
 
     QPalette palette;
-    palette.setBrush(backgroundRole(), QBrush(QPixmap("./Pic/container-background.png")));
+    palette.setBrush(backgroundRole(), QBrush(SmallItemsContainerWindowBackgroundPixmap));
     setPalette(palette);
 }
 
@@ -48,5 +48,3 @@ void SmallItemsContainerWindow::mouseReleaseEvent(QMouseEvent *event)
 
     QWidget::mouseReleaseEvent(event);
 }
-
-

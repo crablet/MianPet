@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Pic/bow.png</file>
+        <file>Pic/bow-mix.png</file>
+        <file>Pic/clean.png</file>
+        <file>Pic/clean-mix.png</file>
+        <file>Pic/close.png</file>
+        <file>Pic/close-cloud.png</file>
+        <file>Pic/container-background.png</file>
+        <file>Pic/icon-base.png</file>
+        <file>Pic/icon-base-2.png</file>
+        <file>Pic/test.gif</file>
+        <file>Pic/fork-and-knife.png</file>
+        <file>Pic/fork-and-knife2.png</file>
+    </qresource>
+</RCC>

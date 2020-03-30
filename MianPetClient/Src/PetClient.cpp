@@ -3,7 +3,7 @@
 PetClient::PetClient(QWidget *parent)
     : QWidget(parent), isUiBeingDragging(false)
 {
-    petGif = new QMovie(R"(./Pic/test.gif)", {}, this);
+    petGif = new QMovie(R"(:/Pic/test.gif)", {}, this);
     petGifLabel = new QLabel(this);
     petGifLabel->move(0, 0);
     petGifLabel->setMovie(petGif);

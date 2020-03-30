@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>bow.png</file>
+        <file>bow-mix.png</file>
+        <file>clean.png</file>
+        <file>clean-mix.png</file>
+        <file>close.png</file>
+        <file>close-cloud.png</file>
+        <file>container-background.png</file>
+        <file>fork&amp;knife.png</file>
+        <file>fork&amp;knife2.png</file>
+        <file>icon-base.png</file>
+        <file>icon-base-2.png</file>
+        <file>test.gif</file>
+    </qresource>
+</RCC>
