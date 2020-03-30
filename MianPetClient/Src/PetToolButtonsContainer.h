@@ -8,6 +8,8 @@
 
 #include "Src/Config/UiConstants.h"
 
+#include "SmallItemsContainerWindow.h"
+
 class PetToolButtonsContainer : public QWidget
 {
     Q_OBJECT

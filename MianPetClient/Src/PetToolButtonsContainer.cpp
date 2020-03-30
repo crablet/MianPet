@@ -31,4 +31,6 @@ PetToolButtonsContainer::PetToolButtonsContainer(QWidget *parent) : QWidget(pare
 
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
+
+    (new SmallItemsContainerWindow)->show();
 }

@@ -4,6 +4,11 @@
 #include <QWidget>
 #include <QPoint>
 #include <QMouseEvent>
+#include <QPalette>
+#include <QPixmap>
+#include <QBrush>
+
+#include "Src/Config/UiConstants.h"
 
 class SmallItemsContainerWindow : public QWidget
 {
@@ -15,6 +20,9 @@ private:
     virtual void mouseMoveEvent(QMouseEvent *event) override;
     virtual void mousePressEvent(QMouseEvent *event) override;
     virtual void mouseReleaseEvent(QMouseEvent *event) override;
+
+private:
+    void InitializeUi();
 
 private:
     QPoint previousMousePos, previousUiPos;

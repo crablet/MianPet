@@ -3,7 +3,17 @@
 SmallItemsContainerWindow::SmallItemsContainerWindow(QWidget *parent) 
     : QWidget(parent), isUiBeingDragging(false)
 {
+    InitializeUi();
+}
+
+void SmallItemsContainerWindow::InitializeUi()
+{
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+    setFixedSize(SmallItemsContainerWindowWidth, SmallItemsContainerWindowHeight);
+
+    QPalette palette;
+    palette.setBrush(backgroundRole(), QBrush(QPixmap("./Pic/container-background.png")));
+    setPalette(palette);
 }
 
 void SmallItemsContainerWindow::mouseMoveEvent(QMouseEvent *event)
@@ -38,3 +48,5 @@ void SmallItemsContainerWindow::mouseReleaseEvent(QMouseEvent *event)
 
     QWidget::mouseReleaseEvent(event);
 }
+
+

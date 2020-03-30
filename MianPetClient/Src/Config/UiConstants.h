@@ -11,4 +11,7 @@ inline const QSize PetToolButtonsContainerButtonSize = QSize(43, 66);
 #define PetToolButtonsContainerFoodButtonIcon (QIcon("./Pic/bow-mix.png"))
 #define PetToolButtonsContainerWaterButtonIcon (QIcon("./Pic/clean-mix.png"))
 
+inline constexpr int SmallItemsContainerWindowWidth = 440;
+inline constexpr int SmallItemsContainerWindowHeight = 196;
+
 #endif // UICONSTANTS_H
