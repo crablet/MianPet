@@ -7,6 +7,7 @@
 #include <QPalette>
 #include <QPixmap>
 #include <QBrush>
+#include <QPushButton>
 
 #include "Src/Config/UiConstants.h"
 
@@ -23,8 +24,10 @@ private:
 
 private:
     void InitializeUi();
+    void InitializeConnect();
 
 private:
+    QPushButton *closeButton;
     QPoint previousMousePos, previousUiPos;
 
     bool isUiBeingDragging;

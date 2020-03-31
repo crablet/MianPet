@@ -4,6 +4,7 @@ SmallItemsContainerWindow::SmallItemsContainerWindow(QWidget *parent)
     : QWidget(parent), isUiBeingDragging(false)
 {
     InitializeUi();
+    InitializeConnect();
 }
 
 void SmallItemsContainerWindow::InitializeUi()
@@ -14,6 +15,18 @@ void SmallItemsContainerWindow::InitializeUi()
     QPalette palette;
     palette.setBrush(backgroundRole(), QBrush(SmallItemsContainerWindowBackgroundPixmap));
     setPalette(palette);
+
+    closeButton = new QPushButton(this);
+    closeButton->setIcon(SmallItemsContainerWindowCloseButtonIcon);
+    closeButton->setIconSize(QSize(SmallItemsContainerWindowCloseButtonWidth, SmallItemsContainerWindowCloseButtonHeight));
+    closeButton->move(SmallItemsContainerWindowCloseButtonX, SmallItemsContainerWindowCloseButtonY);
+    closeButton->setFlat(true);
+    closeButton->setStyleSheet("QPushButton{ border: none }");
+}
+
+void SmallItemsContainerWindow::InitializeConnect()
+{
+    connect(closeButton, &QPushButton::clicked, this, &QWidget::hide);  // hide or close or quit?
 }
 
 void SmallItemsContainerWindow::mouseMoveEvent(QMouseEvent *event)
