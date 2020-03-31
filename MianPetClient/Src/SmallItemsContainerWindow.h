@@ -31,11 +31,11 @@ private:
 
 public:
     void SetIcon(const QPixmap &icon, const QSize &size = QSize(0, 0));
-    void SetWindowTitle(const QString &title);
+    void SetWindowTitle(const QString &text);
 
 private:
     QPushButton *closeButton;
-    QLabel *iconLabel;
+    QLabel *iconLabel, *windowTitleLabel;
     QPoint previousMousePos, previousUiPos;
 
     bool isUiBeingDragging;

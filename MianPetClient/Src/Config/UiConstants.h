@@ -22,9 +22,16 @@ inline constexpr int SmallItemsContainerWindowCloseButtonHeight = 25;
 inline constexpr int SmallItemsContainerWindowCloseButtonX = 412;
 inline constexpr int SmallItemsContainerWindowCloseButtonY = 0;
 
-inline constexpr int SmallItemsContainerWindowIconLabelWidth = 36;
-inline constexpr int SmallItemsContainerWindowIconLabelHeight = 36;
+inline constexpr int SmallItemsContainerWindowIconLabelWidth = 35;
+inline constexpr int SmallItemsContainerWindowIconLabelHeight = 35;
 inline constexpr int SmallItemsContainerWindowIconLabelX = 0;
 inline constexpr int SmallItemsContainerWindowIconLabelY = 0;
+
+inline constexpr int SmallItemsContainerWindowWindowTitleLabelX 
+    = SmallItemsContainerWindowIconLabelX + SmallItemsContainerWindowIconLabelWidth + 5;
+inline constexpr int SmallItemsContainerWindowWindowTitleLabelY
+    = SmallItemsContainerWindowIconLabelY;
+inline constexpr int SmallItemsContainerWindowWindowTitleLabelWidth = 99;
+inline constexpr int SmallItemsContainerWindowWindowTitleLabelHeight = SmallItemsContainerWindowIconLabelHeight;
 
 #endif // UICONSTANTS_H

@@ -26,6 +26,11 @@ void SmallItemsContainerWindow::InitializeUi()
     iconLabel = new QLabel(this);
     iconLabel->setFixedSize(SmallItemsContainerWindowIconLabelWidth, SmallItemsContainerWindowIconLabelHeight);
     iconLabel->move(SmallItemsContainerWindowIconLabelX, SmallItemsContainerWindowIconLabelY);
+
+    windowTitleLabel = new QLabel(this);
+    windowTitleLabel->setFixedSize(SmallItemsContainerWindowWindowTitleLabelWidth, SmallItemsContainerWindowWindowTitleLabelHeight);
+    windowTitleLabel->move(SmallItemsContainerWindowWindowTitleLabelX, SmallItemsContainerWindowWindowTitleLabelY);
+    windowTitleLabel->setStyleSheet("QLabel { color: white }");
 }
 
 void SmallItemsContainerWindow::InitializeConnect()
@@ -45,8 +50,9 @@ void SmallItemsContainerWindow::SetIcon(const QPixmap &icon, const QSize &size)
     }
 }
 
-void SmallItemsContainerWindow::SetWindowTitle(const QString &title)
+void SmallItemsContainerWindow::SetWindowTitle(const QString &text)
 {
+    windowTitleLabel->setText(text);
 }
 
 void SmallItemsContainerWindow::mouseMoveEvent(QMouseEvent *event)
