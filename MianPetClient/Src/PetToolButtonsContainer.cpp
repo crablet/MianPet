@@ -31,4 +31,8 @@ PetToolButtonsContainer::PetToolButtonsContainer(QWidget *parent) : QWidget(pare
 
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
+
+    //auto *ptr = new SmallItemsContainerWindow;
+    //ptr->SetIcon(QPixmap(":/Pic/fork-and-knife2.png"), QSize(36, 36));
+    //ptr->show();
 }

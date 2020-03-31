@@ -8,6 +8,9 @@
 #include <QPixmap>
 #include <QBrush>
 #include <QPushButton>
+#include <QLabel>
+#include <QString>
+#include <QSize>
 
 #include "Src/Config/UiConstants.h"
 
@@ -26,8 +29,13 @@ private:
     void InitializeUi();
     void InitializeConnect();
 
+public:
+    void SetIcon(const QPixmap &icon, const QSize &size = QSize(0, 0));
+    void SetWindowTitle(const QString &title);
+
 private:
     QPushButton *closeButton;
+    QLabel *iconLabel;
     QPoint previousMousePos, previousUiPos;
 
     bool isUiBeingDragging;

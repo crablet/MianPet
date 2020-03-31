@@ -22,11 +22,31 @@ void SmallItemsContainerWindow::InitializeUi()
     closeButton->move(SmallItemsContainerWindowCloseButtonX, SmallItemsContainerWindowCloseButtonY);
     closeButton->setFlat(true);
     closeButton->setStyleSheet("QPushButton{ border: none }");
+
+    iconLabel = new QLabel(this);
+    iconLabel->setFixedSize(SmallItemsContainerWindowIconLabelWidth, SmallItemsContainerWindowIconLabelHeight);
+    iconLabel->move(SmallItemsContainerWindowIconLabelX, SmallItemsContainerWindowIconLabelY);
 }
 
 void SmallItemsContainerWindow::InitializeConnect()
 {
     connect(closeButton, &QPushButton::clicked, this, &QWidget::hide);  // hide or close or quit?
+}
+
+void SmallItemsContainerWindow::SetIcon(const QPixmap &icon, const QSize &size)
+{
+    if (size == QSize(0, 0))
+    {
+        iconLabel->setPixmap(icon);
+    }
+    else
+    {
+        iconLabel->setPixmap(icon.scaled(size));
+    }
+}
+
+void SmallItemsContainerWindow::SetWindowTitle(const QString &title)
+{
 }
 
 void SmallItemsContainerWindow::mouseMoveEvent(QMouseEvent *event)
