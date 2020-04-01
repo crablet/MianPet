@@ -2,6 +2,8 @@
 #define UICONSTANTS_H
 
 #include <QSize>
+#include <QIcon>
+#include <QPixmap>
 
 #define PetToolButtonsContainerWidth (this->width())
 inline constexpr int PetToolButtonsContainerHeight = 66;
@@ -33,5 +35,7 @@ inline constexpr int SmallItemsContainerWindowWindowTitleLabelY
     = SmallItemsContainerWindowIconLabelY;
 inline constexpr int SmallItemsContainerWindowWindowTitleLabelWidth = 99;
 inline constexpr int SmallItemsContainerWindowWindowTitleLabelHeight = SmallItemsContainerWindowIconLabelHeight;
+
+#define FoodWindowIcon (QPixmap(":/Pic/fork-and-knife2.png"))
 
 #endif // UICONSTANTS_H

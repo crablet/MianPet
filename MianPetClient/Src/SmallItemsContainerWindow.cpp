@@ -42,7 +42,7 @@ void SmallItemsContainerWindow::SetIcon(const QPixmap &icon, const QSize &size)
 {
     if (size == QSize(0, 0))
     {
-        iconLabel->setPixmap(icon);
+        iconLabel->setPixmap(icon.scaled(iconLabel->size()));
     }
     else
     {

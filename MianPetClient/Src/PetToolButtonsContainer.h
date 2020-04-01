@@ -8,6 +8,8 @@
 
 #include "Src/Config/UiConstants.h"
 
+#include "FoodWindow.h"
+
 class PetToolButtonsContainer : public QWidget
 {
     Q_OBJECT
@@ -17,6 +19,7 @@ public:
 private:
     QHBoxLayout *layout;
     QPushButton *foodButton, *cleanButton, *dummyButton1, *dummyButton2;
+    FoodWindow *foodWindow;
 };
 
 #endif // PETTOOLBUTTONSCONTAINER_H

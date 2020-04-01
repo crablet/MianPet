@@ -31,4 +31,11 @@ PetToolButtonsContainer::PetToolButtonsContainer(QWidget *parent) : QWidget(pare
 
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
+
+    // memory leaks, only for testing
+    connect(foodButton, &QPushButton::clicked, [=]()
+    {
+        foodWindow = new FoodWindow;
+        foodWindow->show();
+    });
 }
