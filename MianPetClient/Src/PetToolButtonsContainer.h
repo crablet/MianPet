@@ -17,6 +17,13 @@ public:
     explicit PetToolButtonsContainer(QWidget *parent = nullptr);
 
 private:
+    void InitializeUi();
+    void InitializeConnect();
+
+private slots:
+    void OnFoodButtonClicked();
+
+private:
     QHBoxLayout *layout;
     QPushButton *foodButton, *cleanButton, *dummyButton1, *dummyButton2;
     FoodWindow *foodWindow;

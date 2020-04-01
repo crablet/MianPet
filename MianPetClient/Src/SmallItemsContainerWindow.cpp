@@ -11,6 +11,7 @@ void SmallItemsContainerWindow::InitializeUi()
 {
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setFixedSize(SmallItemsContainerWindowWidth, SmallItemsContainerWindowHeight);
+    setAttribute(Qt::WA_DeleteOnClose);
 
     QPalette palette;
     palette.setBrush(backgroundRole(), QBrush(SmallItemsContainerWindowBackgroundPixmap));
@@ -35,7 +36,7 @@ void SmallItemsContainerWindow::InitializeUi()
 
 void SmallItemsContainerWindow::InitializeConnect()
 {
-    connect(closeButton, &QPushButton::clicked, this, &QWidget::hide);  // hide or close or quit?
+    connect(closeButton, &QPushButton::clicked, this, &QWidget::close);  // hide or close or quit?
 }
 
 void SmallItemsContainerWindow::SetIcon(const QPixmap &icon, const QSize &size)

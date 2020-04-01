@@ -2,6 +2,12 @@
 
 PetToolButtonsContainer::PetToolButtonsContainer(QWidget *parent) : QWidget(parent)
 {
+    InitializeUi();
+    InitializeConnect();
+}
+
+void PetToolButtonsContainer::InitializeUi()
+{
     layout = new QHBoxLayout(this);
 
     foodButton = new QPushButton(PetToolButtonsContainerFoodButtonIcon, {});
@@ -31,11 +37,20 @@ PetToolButtonsContainer::PetToolButtonsContainer(QWidget *parent) : QWidget(pare
 
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
+}
 
-    // memory leaks, only for testing
-    connect(foodButton, &QPushButton::clicked, [=]()
+void PetToolButtonsContainer::InitializeConnect()
+{
+    connect(foodButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
+}
+
+void PetToolButtonsContainer::OnFoodButtonClicked()
+{
+    foodWindow = new FoodWindow;
+    foodWindow->show();
+    disconnect(foodButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
+    connect(foodWindow, &FoodWindow::destroyed, [=]()
     {
-        foodWindow = new FoodWindow;
-        foodWindow->show();
+        connect(foodButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
     });
 }
