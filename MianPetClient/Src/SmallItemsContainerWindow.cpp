@@ -32,6 +32,20 @@ void SmallItemsContainerWindow::InitializeUi()
     windowTitleLabel->setFixedSize(SmallItemsContainerWindowWindowTitleLabelWidth, SmallItemsContainerWindowWindowTitleLabelHeight);
     windowTitleLabel->move(SmallItemsContainerWindowWindowTitleLabelX, SmallItemsContainerWindowWindowTitleLabelY);
     windowTitleLabel->setStyleSheet("QLabel { color: white }");
+
+    previousPageButton = new QPushButton(this);
+    previousPageButton->move(SmallItemsContainerWindowPreviousPageButtonX, SmallItemsContainerWindowPreviousPageButtonY);
+    previousPageButton->setFlat(true);
+    previousPageButton->setStyleSheet("QPushButton{ border: none }");
+    previousPageButton->setIcon(SmallItemsContainerWindowPreviousPageButtonIcon);
+    previousPageButton->setIconSize(QSize(SmallItemsContainerWindowPreviousPageButtonWidth, SmallItemsContainerWindowPreviousPageButtonHeight));
+
+    nextPageButton = new QPushButton(this);
+    nextPageButton->move(SmallItemsContainerWindowNextPageButtonX, SmallItemsContainerWindowNextPageButtonY);
+    nextPageButton->setFlat(true);
+    nextPageButton->setStyleSheet("QPushButton{ border: none }");
+    nextPageButton->setIcon(SmallItemsContainerWindowNextPageButtonIcon);
+    nextPageButton->setIconSize(QSize(SmallItemsContainerWindowNextPageButtonWidth, SmallItemsContainerWindowNextPageButtonHeight));
 }
 
 void SmallItemsContainerWindow::InitializeConnect()

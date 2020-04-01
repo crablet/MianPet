@@ -22,7 +22,7 @@ inline constexpr int SmallItemsContainerWindowHeight = 196;
 inline constexpr int SmallItemsContainerWindowCloseButtonWidth = 25;
 inline constexpr int SmallItemsContainerWindowCloseButtonHeight = 25;
 inline constexpr int SmallItemsContainerWindowCloseButtonX = 412;
-inline constexpr int SmallItemsContainerWindowCloseButtonY = 0;
+inline constexpr int SmallItemsContainerWindowCloseButtonY = 2;
 
 inline constexpr int SmallItemsContainerWindowIconLabelWidth = 35;
 inline constexpr int SmallItemsContainerWindowIconLabelHeight = 35;
@@ -33,8 +33,21 @@ inline constexpr int SmallItemsContainerWindowWindowTitleLabelX
     = SmallItemsContainerWindowIconLabelX + SmallItemsContainerWindowIconLabelWidth + 5;
 inline constexpr int SmallItemsContainerWindowWindowTitleLabelY
     = SmallItemsContainerWindowIconLabelY;
-inline constexpr int SmallItemsContainerWindowWindowTitleLabelWidth = 99;
+inline constexpr int SmallItemsContainerWindowWindowTitleLabelWidth = 199;
 inline constexpr int SmallItemsContainerWindowWindowTitleLabelHeight = SmallItemsContainerWindowIconLabelHeight;
+
+inline constexpr int SmallItemsContainerWindowPreviousPageButtonWidth = 30;
+inline constexpr int SmallItemsContainerWindowPreviousPageButtonHeight = 40;
+inline constexpr int SmallItemsContainerWindowPreviousPageButtonX = 6;
+inline constexpr int SmallItemsContainerWindowPreviousPageButtonY = SmallItemsContainerWindowHeight / 2;
+#define SmallItemsContainerWindowPreviousPageButtonIcon (QIcon(":/Pic/left-arrow.png"))
+
+inline constexpr int SmallItemsContainerWindowNextPageButtonWidth = SmallItemsContainerWindowPreviousPageButtonWidth;
+inline constexpr int SmallItemsContainerWindowNextPageButtonHeight = SmallItemsContainerWindowPreviousPageButtonHeight;
+inline constexpr int SmallItemsContainerWindowNextPageButtonX 
+    = SmallItemsContainerWindowWidth - SmallItemsContainerWindowPreviousPageButtonX - SmallItemsContainerWindowPreviousPageButtonWidth;
+inline constexpr int SmallItemsContainerWindowNextPageButtonY = SmallItemsContainerWindowPreviousPageButtonY;
+#define SmallItemsContainerWindowNextPageButtonIcon (QIcon(":/Pic/right-arrow.png"))
 
 #define FoodWindowIcon (QPixmap(":/Pic/fork-and-knife2.png"))
 

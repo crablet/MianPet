@@ -8,4 +8,5 @@ FoodWindow::FoodWindow(QWidget *parent) : SmallItemsContainerWindow(parent)
 void FoodWindow::InitializeUi()
 {
     SetIcon(FoodWindowIcon);
+    SetWindowTitle("Pet Food Shop");
 }

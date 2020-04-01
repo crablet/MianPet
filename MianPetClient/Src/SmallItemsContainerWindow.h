@@ -34,7 +34,7 @@ public:
     void SetWindowTitle(const QString &text);
 
 private:
-    QPushButton *closeButton;
+    QPushButton *closeButton, *previousPageButton, *nextPageButton;
     QLabel *iconLabel, *windowTitleLabel;
     QPoint previousMousePos, previousUiPos;
 
