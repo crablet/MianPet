@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Src/FoodWindow.cpp \
+    Src/LoginWindow.cpp \
     Src/PetToolButtonsContainer.cpp \
     Src/SmallItemsContainerWindow.cpp \
     Src/main.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 HEADERS += \
     Src/Config/UiConstants.h \
     Src/FoodWindow.h \
+    Src/LoginWindow.h \
     Src/PetClient.h \
     Src/PetToolButtonsContainer.h \
     Src/SmallItemsContainerWindow.h
