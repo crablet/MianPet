@@ -51,4 +51,27 @@ inline constexpr int SmallItemsContainerWindowNextPageButtonY = SmallItemsContai
 
 #define FoodWindowIcon (QPixmap(":/Pic/fork-and-knife2.png"))
 
+inline constexpr int LoginWindowWidth = 537;
+inline constexpr int LoginWindowHeight = 412;
+
+inline constexpr int LoginWindowAccountLineEditWidth = LoginWindowWidth - 64 * 2;
+inline constexpr int LoginWindowAccountLineEditHeight = 44;
+inline constexpr int LoginWindowAccountLineEditX = 64;
+inline constexpr int LoginWindowAccountLineEditY = 199;
+
+inline constexpr int LoginWindowPasswordLineEditWidth = LoginWindowAccountLineEditWidth;
+inline constexpr int LoginWindowPasswordLineEditHeight = LoginWindowAccountLineEditHeight;
+inline constexpr int LoginWindowPasswordLineEditX = LoginWindowAccountLineEditX;
+inline constexpr int LoginWindowPasswordLineEditY = LoginWindowAccountLineEditY + LoginWindowAccountLineEditHeight + 6;
+
+inline constexpr int LoginWindowLoginButtonWidth = LoginWindowPasswordLineEditWidth;
+inline constexpr int LoginWindowLoginButtonHeight = LoginWindowPasswordLineEditHeight;
+inline constexpr int LoginWindowLoginButtonX = LoginWindowPasswordLineEditX;
+inline constexpr int LoginWindowLoginButtonY = LoginWindowPasswordLineEditY + LoginWindowPasswordLineEditHeight + 50;
+
+inline constexpr int LoginWindowCloseButtonWidth = 40;
+inline constexpr int LoginWindowCloseButtonHeight = 40;
+inline constexpr int LoginWindowCloseButtonX = LoginWindowWidth - LoginWindowCloseButtonWidth;
+inline constexpr int LoginWindowCloseButtonY = 0;
+
 #endif // UICONSTANTS_H

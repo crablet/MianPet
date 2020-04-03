@@ -1,6 +1,10 @@
 ﻿#ifndef SMALLITEMSCONTAINERWINDOW_H
 #define SMALLITEMSCONTAINERWINDOW_H
 
+#ifdef Q_OS_WIN
+    #pragma execution_character_set("utf-8")
+#endif // Q_OS_WIN
+
 #include <QWidget>
 #include <QPoint>
 #include <QMouseEvent>

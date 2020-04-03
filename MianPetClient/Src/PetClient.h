@@ -10,6 +10,10 @@
 #include "PetToolButtonsContainer.h"
 #include "Src/Config/UiConstants.h"
 
+#ifdef Q_OS_WIN
+    #pragma execution_character_set("utf-8")
+#endif // Q_OS_WIN
+
 class PetClient : public QWidget
 {
     Q_OBJECT
