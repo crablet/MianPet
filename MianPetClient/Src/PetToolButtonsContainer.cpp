@@ -42,6 +42,18 @@ void PetToolButtonsContainer::InitializeUi()
 void PetToolButtonsContainer::InitializeConnect()
 {
     connect(foodButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
+    connect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnCleanButtonClicked);
+}
+
+void PetToolButtonsContainer::OnCleanButtonClicked()
+{
+    cleanWindow = new CleanWindow;
+    cleanWindow->show();
+    disconnect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
+    connect(cleanWindow, &FoodWindow::destroyed, [=]()
+    {
+        connect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
+    });
 }
 
 void PetToolButtonsContainer::OnFoodButtonClicked()

@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Src/CleanWindow.cpp \
     Src/FoodWindow.cpp \
     Src/LoginWindow.cpp \
     Src/PetToolButtonsContainer.cpp \
@@ -24,6 +25,7 @@ SOURCES += \
     Src/PetClient.cpp
 
 HEADERS += \
+    Src/CleanWindow.h \
     Src/Config/UiConstants.h \
     Src/FoodWindow.h \
     Src/LoginWindow.h \
