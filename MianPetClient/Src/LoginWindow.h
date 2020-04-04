@@ -29,7 +29,7 @@ private:
 
 private:
     QLineEdit *accountLineEdit, *passwordLineEdit;
-    QPushButton *loginButton, *closeButton;
+    QPushButton *loginButton, *closeButton, *registerButton;
     QPoint previousMousePos, previousUiPos;
 
     bool isUiBeingDragging;

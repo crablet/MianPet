@@ -54,9 +54,9 @@ inline constexpr int SmallItemsContainerWindowNextPageButtonY = SmallItemsContai
 inline constexpr int LoginWindowWidth = 537;
 inline constexpr int LoginWindowHeight = 412;
 
-inline constexpr int LoginWindowAccountLineEditWidth = LoginWindowWidth - 64 * 2;
+inline constexpr int LoginWindowAccountLineEditWidth = LoginWindowWidth - 121 * 2;
 inline constexpr int LoginWindowAccountLineEditHeight = 44;
-inline constexpr int LoginWindowAccountLineEditX = 64;
+inline constexpr int LoginWindowAccountLineEditX = 121;
 inline constexpr int LoginWindowAccountLineEditY = 199;
 
 inline constexpr int LoginWindowPasswordLineEditWidth = LoginWindowAccountLineEditWidth;
@@ -73,5 +73,11 @@ inline constexpr int LoginWindowCloseButtonWidth = 40;
 inline constexpr int LoginWindowCloseButtonHeight = 40;
 inline constexpr int LoginWindowCloseButtonX = LoginWindowWidth - LoginWindowCloseButtonWidth;
 inline constexpr int LoginWindowCloseButtonY = 0;
+
+inline constexpr int LoginWindowRegisterButtonWidth = 77;
+inline constexpr int LoginWindowRegisterButtonHeight = 32;
+inline constexpr int LoginWindowRegisterButtonX = 4;
+inline constexpr int LoginWindowRegisterButtonY 
+    = LoginWindowHeight - LoginWindowRegisterButtonHeight - LoginWindowRegisterButtonX;
 
 #endif // UICONSTANTS_H

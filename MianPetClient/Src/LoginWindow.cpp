@@ -22,6 +22,7 @@ void LoginWindow::InitializeUi()
     passwordLineEdit->setFixedSize(LoginWindowPasswordLineEditWidth, LoginWindowPasswordLineEditHeight);
     passwordLineEdit->move(LoginWindowPasswordLineEditX, LoginWindowPasswordLineEditY);
     passwordLineEdit->setPlaceholderText("密码");
+    passwordLineEdit->setEchoMode(QLineEdit::Password);
 
     loginButton = new QPushButton(this);
     loginButton->setFixedSize(LoginWindowLoginButtonWidth, LoginWindowLoginButtonHeight);
@@ -31,6 +32,11 @@ void LoginWindow::InitializeUi()
     closeButton = new QPushButton(this);
     closeButton->setFixedSize(LoginWindowCloseButtonWidth, LoginWindowCloseButtonHeight);
     closeButton->move(LoginWindowCloseButtonX, LoginWindowCloseButtonY);
+
+    registerButton = new QPushButton(this);
+    registerButton->setFixedSize(LoginWindowRegisterButtonWidth, LoginWindowRegisterButtonHeight);
+    registerButton->move(LoginWindowRegisterButtonX, LoginWindowRegisterButtonY);
+    registerButton->setText("注册账号");
 }
 
 void LoginWindow::InitializeConnect()
