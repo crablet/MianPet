@@ -19,6 +19,7 @@ SOURCES += \
     Src/CleanWindow.cpp \
     Src/FoodWindow.cpp \
     Src/LoginWindow.cpp \
+    Src/PetProfileWindow.cpp \
     Src/PetToolButtonsContainer.cpp \
     Src/SmallItemsContainerWindow.cpp \
     Src/main.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     Src/FoodWindow.h \
     Src/LoginWindow.h \
     Src/PetClient.h \
+    Src/PetProfileWindow.h \
     Src/PetToolButtonsContainer.h \
     Src/SmallItemsContainerWindow.h
 
