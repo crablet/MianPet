@@ -10,6 +10,7 @@
 
 #include "FoodWindow.h"
 #include "CleanWindow.h"
+#include "PetProfileWindow.h"
 
 class PetToolButtonsContainer : public QWidget
 {
@@ -24,12 +25,14 @@ private:
 private slots:
     void OnFoodButtonClicked();
     void OnCleanButtonClicked();
+    void OnPetProfileButtonClicked();
 
 private:
     QHBoxLayout *layout;
-    QPushButton *foodButton, *cleanButton, *dummyButton1, *dummyButton2;
+    QPushButton *foodButton, *cleanButton, *petProfileButton, *dummyButton2;
     FoodWindow *foodWindow;
     CleanWindow *cleanWindow;
+    PetProfileWindow *petProfileWindow;
 };
 
 #endif // PETTOOLBUTTONSCONTAINER_H

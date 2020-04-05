@@ -20,7 +20,8 @@ void PetToolButtonsContainer::InitializeUi()
     cleanButton->setFlat(true);
     cleanButton->setStyleSheet("QPushButton { border: none }");
 
-    dummyButton1 = new QPushButton;
+    petProfileButton = new QPushButton;
+
     dummyButton2 = new QPushButton;
 
     layout->addStretch();
@@ -28,7 +29,7 @@ void PetToolButtonsContainer::InitializeUi()
     layout->addStretch();
     layout->addWidget(cleanButton);
     layout->addStretch();
-    layout->addWidget(dummyButton1);
+    layout->addWidget(petProfileButton);
     layout->addStretch();
     layout->addWidget(dummyButton2);
     layout->addStretch();
@@ -43,17 +44,7 @@ void PetToolButtonsContainer::InitializeConnect()
 {
     connect(foodButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
     connect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnCleanButtonClicked);
-}
-
-void PetToolButtonsContainer::OnCleanButtonClicked()
-{
-    cleanWindow = new CleanWindow;
-    cleanWindow->show();
-    disconnect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
-    connect(cleanWindow, &FoodWindow::destroyed, [=]()
-    {
-        connect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
-    });
+    connect(petProfileButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnPetProfileButtonClicked);
 }
 
 void PetToolButtonsContainer::OnFoodButtonClicked()
@@ -64,5 +55,27 @@ void PetToolButtonsContainer::OnFoodButtonClicked()
     connect(foodWindow, &FoodWindow::destroyed, [=]()
     {
         connect(foodButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
+    });
+}
+
+void PetToolButtonsContainer::OnCleanButtonClicked()
+{
+    cleanWindow = new CleanWindow;
+    cleanWindow->show();
+    disconnect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnCleanButtonClicked);
+    connect(cleanWindow, &CleanWindow::destroyed, [=]()
+    {
+        connect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnCleanButtonClicked);
+    });
+}
+
+void PetToolButtonsContainer::OnPetProfileButtonClicked()
+{
+    petProfileWindow = new PetProfileWindow;
+    petProfileWindow->show();
+    disconnect(petProfileButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnPetProfileButtonClicked);
+    connect(petProfileWindow, &PetProfileWindow::destroyed, [=]()
+    {
+        connect(petProfileButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnPetProfileButtonClicked);
     });
 }

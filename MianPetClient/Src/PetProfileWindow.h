@@ -3,13 +3,13 @@
 
 #include <QWidget>
 
-class PetProfileWindow : public QWidget
+#include "FramelessWindow.h"
+
+class PetProfileWindow final : public FramelessWindow
 {
     Q_OBJECT
 public:
     explicit PetProfileWindow(QWidget *parent = nullptr);
-
-signals:
 
 };
 
