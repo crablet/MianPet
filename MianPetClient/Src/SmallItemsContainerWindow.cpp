@@ -1,7 +1,7 @@
 ﻿#include "SmallItemsContainerWindow.h"
 
 SmallItemsContainerWindow::SmallItemsContainerWindow(QWidget *parent) 
-    : QWidget(parent), isUiBeingDragging(false)
+    : FramelessWindow(parent)
 {
     InitializeUi();
     InitializeConnect();
@@ -9,7 +9,6 @@ SmallItemsContainerWindow::SmallItemsContainerWindow(QWidget *parent)
 
 void SmallItemsContainerWindow::InitializeUi()
 {
-    setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setFixedSize(SmallItemsContainerWindowWidth, SmallItemsContainerWindowHeight);
     setAttribute(Qt::WA_DeleteOnClose);
 
@@ -68,37 +67,4 @@ void SmallItemsContainerWindow::SetIcon(const QPixmap &icon, const QSize &size)
 void SmallItemsContainerWindow::SetWindowTitle(const QString &text)
 {
     windowTitleLabel->setText(text);
-}
-
-void SmallItemsContainerWindow::mouseMoveEvent(QMouseEvent *event)
-{
-    if (event->buttons() & Qt::LeftButton)
-    {
-        if (isUiBeingDragging)
-        {
-            const auto delta = event->globalPos() - previousMousePos;
-            this->move(previousUiPos + delta);
-        }
-    }
-
-    QWidget::mouseMoveEvent(event);
-}
-
-void SmallItemsContainerWindow::mousePressEvent(QMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton)
-    {
-        isUiBeingDragging = true;
-        previousMousePos = event->globalPos();
-        previousUiPos = frameGeometry().topLeft();
-    }
-
-    QWidget::mousePressEvent(event);
-}
-
-void SmallItemsContainerWindow::mouseReleaseEvent(QMouseEvent *event)
-{
-    isUiBeingDragging = false;
-
-    QWidget::mouseReleaseEvent(event);
 }
