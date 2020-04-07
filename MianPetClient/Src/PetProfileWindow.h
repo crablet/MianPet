@@ -8,6 +8,8 @@
 #include <QLabel>
 #include <QProgressBar>
 #include <QSizePolicy>
+#include <QTimer>
+#include <QEvent>
 
 #include "Src/Config/UiConstants.h"
 
@@ -21,6 +23,9 @@ public:
 
 private:
     void InitializeUi();
+    void InitializeConnect();
+
+    virtual void leaveEvent(QEvent *event) override;
 
 private:
     QWidget *upperWidget, *lowerWidget;
@@ -28,6 +33,7 @@ private:
     QVBoxLayout *lowerLayout, *allLayout;
     QLabel *nicknameLabel, *idLabel, *levelLabel, *ageLabel, *grouthSpeedLabel, *statusLabel, *onlineTimeLabel;
     QProgressBar *growthBar, *foodBar, *cleanBar, *healthBar, *moodBar;
+    QTimer *closeCountdownTimer;
 };
 
 #endif // PETPROFILEWINDOW_H

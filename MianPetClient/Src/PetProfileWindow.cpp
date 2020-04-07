@@ -4,11 +4,13 @@ PetProfileWindow::PetProfileWindow(QWidget *parent)
     : FramelessWindow(parent)
 {
     InitializeUi();
+    InitializeConnect();
 }
 
 void PetProfileWindow::InitializeUi()
 {
     setFixedSize(PetProfileWindowWidth, PetProfileWindowHeight);
+    setAttribute(Qt::WA_DeleteOnClose);
 
     nicknameLabel = new QLabel;
     idLabel = new QLabel;
@@ -55,4 +57,17 @@ void PetProfileWindow::InitializeUi()
     allLayout->addWidget(upperWidget);
     allLayout->addWidget(lowerWidget);
     this->setLayout(allLayout);
+
+    closeCountdownTimer = new QTimer(this);
+}
+
+void PetProfileWindow::InitializeConnect()
+{
+    connect(closeCountdownTimer, &QTimer::timeout, this, &PetProfileWindow::close);
+}
+
+// 鼠标离开显示范围则开始倒计时，时间一到就自动关闭页面
+void PetProfileWindow::leaveEvent([[maybe_unused]] QEvent *event)
+{
+    closeCountdownTimer->start(999);
 }
