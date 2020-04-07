@@ -66,6 +66,12 @@ void PetProfileWindow::InitializeConnect()
     connect(closeCountdownTimer, &QTimer::timeout, this, &PetProfileWindow::close);
 }
 
+// 鼠标进入显示范围则结束倒计时，否则鼠标多次重入时会出现问题
+void PetProfileWindow::enterEvent([[maybe_unused]] QEvent *event)
+{
+    closeCountdownTimer->stop();
+}
+
 // 鼠标离开显示范围则开始倒计时，时间一到就自动关闭页面
 void PetProfileWindow::leaveEvent([[maybe_unused]] QEvent *event)
 {

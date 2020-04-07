@@ -25,6 +25,7 @@ private:
     void InitializeUi();
     void InitializeConnect();
 
+    virtual void enterEvent(QEvent *event) override;
     virtual void leaveEvent(QEvent *event) override;
 
 private:
