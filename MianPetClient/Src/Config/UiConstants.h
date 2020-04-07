@@ -80,7 +80,7 @@ inline constexpr int LoginWindowRegisterButtonX = 4;
 inline constexpr int LoginWindowRegisterButtonY 
     = LoginWindowHeight - LoginWindowRegisterButtonHeight - LoginWindowRegisterButtonX;
 
-inline constexpr int PetProfileWindowWidth = 207;
+inline constexpr int PetProfileWindowWidth = 204;
 inline constexpr int PetProfileWindowHeight = 327;
 
 #endif // UICONSTANTS_H

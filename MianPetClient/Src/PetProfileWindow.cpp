@@ -30,9 +30,11 @@ void PetProfileWindow::InitializeUi()
     upperLayout->addRow("清洁：", cleanBar);
     upperLayout->addRow("健康：", healthBar);
     upperLayout->addRow("心情：", moodBar);
+    upperLayout->setContentsMargins({ 2, 0, 2, 0 });
 
     upperWidget = new QWidget(this);
     upperWidget->setLayout(upperLayout);
+    
 
     //////////////////////////////////////////////////////
 
@@ -44,6 +46,7 @@ void PetProfileWindow::InitializeUi()
     lowerLayout->addWidget(grouthSpeedLabel);
     lowerLayout->addWidget(statusLabel);
     lowerLayout->addWidget(onlineTimeLabel);
+    lowerLayout->setContentsMargins({ 2, 0, 2, 0 });
 
     lowerWidget = new QWidget(this);
     lowerWidget->setLayout(lowerLayout);
