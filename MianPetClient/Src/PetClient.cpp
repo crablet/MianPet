@@ -23,10 +23,19 @@ void PetClient::InitializeUi()
     petToolButtonsContainer->setFixedWidth(PetToolButtonsContainerWidth);
     petToolButtonsContainer->setFixedHeight(PetToolButtonsContainerHeight);
     petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - PetToolButtonsContainerUiDelta));
+
+    //this->hide();
+    //loginWindow = new LoginWindow;
+    //loginWindow->show();
 }
 
 void PetClient::InitializeConnect()
 {
+    //connect(loginWindow, &LoginWindow::LoginSuccessed, this, []()
+    //{
+    //    this->show();
+    //    loginWindow->hide();
+    //});
 }
 
 void PetClient::mouseMoveEvent(QMouseEvent *event)

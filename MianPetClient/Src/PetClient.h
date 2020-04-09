@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QTimer>
 
+//#include "LoginWindow.h"
 #include "PetToolButtonsContainer.h"
 #include "Src/Config/UiConstants.h"
 
@@ -36,6 +37,7 @@ private:
     QLabel *petGifLabel;
     QPoint previousMousePos, previousUiPos;
 
+    //LoginWindow *loginWindow;
     PetToolButtonsContainer *petToolButtonsContainer;
 
     bool isUiBeingDragging;
