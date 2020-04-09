@@ -22,6 +22,9 @@ public:
     PetClient(QWidget *parent = nullptr);
 
 private:
+    void InitializeUi();
+    void InitializeConnect();
+
     virtual void mouseMoveEvent(QMouseEvent *event) override;
     virtual void mousePressEvent(QMouseEvent *event) override;
     virtual void mouseReleaseEvent(QMouseEvent *event) override;

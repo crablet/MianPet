@@ -3,6 +3,12 @@
 PetClient::PetClient(QWidget *parent)
     : QWidget(parent), isUiBeingDragging(false)
 {
+    InitializeUi();
+    InitializeConnect();
+}
+
+void PetClient::InitializeUi()
+{
     petGif = new QMovie(R"(:/Pic/test.gif)", {}, this);
     petGifLabel = new QLabel(this);
     petGifLabel->move(0, 0);
@@ -17,6 +23,10 @@ PetClient::PetClient(QWidget *parent)
     petToolButtonsContainer->setFixedWidth(PetToolButtonsContainerWidth);
     petToolButtonsContainer->setFixedHeight(PetToolButtonsContainerHeight);
     petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - PetToolButtonsContainerUiDelta));
+}
+
+void PetClient::InitializeConnect()
+{
 }
 
 void PetClient::mouseMoveEvent(QMouseEvent *event)
