@@ -47,6 +47,7 @@ void PetClient::mouseMoveEvent(QMouseEvent *event)
             const auto delta = event->globalPos() - previousMousePos;
             this->move(previousUiPos + delta);
             petToolButtonsContainer->move(previousUiPos + delta + QPoint(0, width() - PetToolButtonsContainerUiDelta));
+            // 这里要保证petToolButtonsContainer始终处于petClient的下方，同步运动
         }
     }
 
