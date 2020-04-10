@@ -45,6 +45,22 @@ void SmallItemsContainerWindow::InitializeUi()
     nextPageButton->setStyleSheet("QPushButton{ border: none }");
     nextPageButton->setIcon(SmallItemsContainerWindowNextPageButtonIcon);
     nextPageButton->setIconSize(QSize(SmallItemsContainerWindowNextPageButtonWidth, SmallItemsContainerWindowNextPageButtonHeight));
+
+    item0 = new QPushButton(this);
+    item0->move(SmallItemsContainerWindowItem0X, SmallItemsContainerWindowItem0Y);
+    item0->setFixedSize(SmallItemsContainerWindowItem0Width, SmallItemsContainerWindowItem0Height);
+
+    item1 = new QPushButton(this);
+    item1->move(SmallItemsContainerWindowItem1X, SmallItemsContainerWindowItem1Y);
+    item1->setFixedSize(SmallItemsContainerWindowItem1Width, SmallItemsContainerWindowItem1Height);
+
+    item2 = new QPushButton(this);
+    item2->move(SmallItemsContainerWindowItem2X, SmallItemsContainerWindowItem2Y);
+    item2->setFixedSize(SmallItemsContainerWindowItem2Width, SmallItemsContainerWindowItem2Height);
+
+    item3 = new QPushButton(this);
+    item3->move(SmallItemsContainerWindowItem3X, SmallItemsContainerWindowItem3Y);
+    item3->setFixedSize(SmallItemsContainerWindowItem3Width, SmallItemsContainerWindowItem3Height);
 }
 
 void SmallItemsContainerWindow::InitializeConnect()

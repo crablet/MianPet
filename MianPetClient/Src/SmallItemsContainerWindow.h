@@ -33,6 +33,9 @@ public:
 private:
     QPushButton *closeButton, *previousPageButton, *nextPageButton;
     QLabel *iconLabel, *windowTitleLabel;
+
+protected:
+    QWidget *item0, *item1, *item2, *item3;
 };
 
 #endif // SMALLITEMSCONTAINERWINDOW_H
