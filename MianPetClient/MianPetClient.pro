@@ -28,6 +28,7 @@ SOURCES += \
 
 HEADERS += \
     Src/CleanWindow.h \
+    Src/Config/NetworkConstants.h \
     Src/Config/UiConstants.h \
     Src/FoodWindow.h \
     Src/FramelessWindow.h \
