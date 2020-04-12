@@ -36,7 +36,8 @@ HEADERS += \
     Src/PetClient.h \
     Src/PetProfileWindow.h \
     Src/PetToolButtonsContainer.h \
-    Src/SmallItemsContainerWindow.h
+    Src/SmallItemsContainerWindow.h \
+    Src/Tools/Network/NetworkTools.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
