@@ -1,6 +1,9 @@
 ﻿#ifndef PETPROFILEWINDOW_H
 #define PETPROFILEWINDOW_H
 
+#include <memory>
+#include <thread>
+
 #include <QWidget>
 #include <QFormLayout>
 #include <QHBoxLayout>
@@ -10,8 +13,11 @@
 #include <QSizePolicy>
 #include <QTimer>
 #include <QEvent>
+#include <QTcpSocket>
+#include <QMessageBox>
 
 #include "Src/Config/UiConstants.h"
+#include "Src/Config/NetworkConstants.h"
 
 #include "FramelessWindow.h"
 
@@ -21,12 +27,18 @@ class PetProfileWindow final : public FramelessWindow
 public:
     explicit PetProfileWindow(QWidget *parent = nullptr);
 
+signals:
+    void CanUpdatePetProfile(const QString &profile);
+
 private:
     void InitializeUi();
     void InitializeConnect();
 
     virtual void enterEvent(QEvent *event) override;
     virtual void leaveEvent(QEvent *event) override;
+
+    void UpdatePetProfile();
+    void UpdatePetProfileHelper(const QString &profile);
 
 private:
     QWidget *upperWidget, *lowerWidget;

@@ -1,5 +1,7 @@
 ﻿#include "PetProfileWindow.h"
 
+#include <qdebug.h>
+
 PetProfileWindow::PetProfileWindow(QWidget *parent) 
     : FramelessWindow(parent)
 {
@@ -9,6 +11,12 @@ PetProfileWindow::PetProfileWindow(QWidget *parent)
 
 void PetProfileWindow::InitializeUi()
 {
+    // 我们有理由相信：和服务器建立连接并从服务器获取有效数据所耗费的时间远比初始化UI和信号槽要长。
+    // 所以为了缩短响应时间，我们就让获取数据的线程先执行，虽然这样有几率会出现数据比UI先获取并且信号槽还没建立的情况。
+    // 但我们认为这种情况是很少见的，如果收到大量汇报说出现了此情况，则我们再调整这段代码的顺序。
+    std::thread thread(&PetProfileWindow::UpdatePetProfile, this);
+    thread.detach();
+
     setFixedSize(PetProfileWindowWidth, PetProfileWindowHeight);
     setAttribute(Qt::WA_DeleteOnClose);
 
@@ -64,6 +72,7 @@ void PetProfileWindow::InitializeUi()
 void PetProfileWindow::InitializeConnect()
 {
     connect(closeCountdownTimer, &QTimer::timeout, this, &PetProfileWindow::close);
+    connect(this, &PetProfileWindow::CanUpdatePetProfile, this, &PetProfileWindow::UpdatePetProfileHelper);
 }
 
 // 鼠标进入显示范围则结束倒计时，否则鼠标多次重入时会出现问题
@@ -76,4 +85,36 @@ void PetProfileWindow::enterEvent([[maybe_unused]] QEvent *event)
 void PetProfileWindow::leaveEvent([[maybe_unused]] QEvent *event)
 {
     closeCountdownTimer->start(999);
+}
+
+void PetProfileWindow::UpdatePetProfile()
+{
+    auto tcpSocket = std::make_unique<QTcpSocket>();
+
+    tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+    if (!tcpSocket->waitForConnected())
+    {
+        return;
+    }
+
+    // 并不是要这样做，只是为了调试方便
+    tcpSocket->write("get for petprofilewindow");
+    if (!tcpSocket->waitForBytesWritten())
+    {
+        return;
+    }
+
+    if (!tcpSocket->waitForReadyRead())
+    {
+        return;
+    }
+
+    auto message = tcpSocket->readAll();
+    emit CanUpdatePetProfile(message);
+}
+
+void PetProfileWindow::UpdatePetProfileHelper(const QString &profile)
+{
+    // 并不是要这样做，只是为了调试方便
+    nicknameLabel->setText(profile);
 }
