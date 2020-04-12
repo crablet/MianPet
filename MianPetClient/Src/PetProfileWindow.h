@@ -15,6 +15,9 @@
 #include <QEvent>
 #include <QTcpSocket>
 #include <QMessageBox>
+#include <QJsonDocument>
+#include <QByteArray>
+#include <QString>
 
 #include "Src/Config/UiConstants.h"
 #include "Src/Config/NetworkConstants.h"
@@ -28,7 +31,7 @@ public:
     explicit PetProfileWindow(QWidget *parent = nullptr);
 
 signals:
-    void CanUpdatePetProfile(const QString &profile);
+    void CanUpdatePetProfile(const QByteArray &profile);
 
 private:
     void InitializeUi();
@@ -38,7 +41,7 @@ private:
     virtual void leaveEvent(QEvent *event) override;
 
     void UpdatePetProfile();
-    void UpdatePetProfileHelper(const QString &profile);
+    void UpdatePetProfileHelper(const QByteArray &profile);
 
 private:
     QWidget *upperWidget, *lowerWidget;

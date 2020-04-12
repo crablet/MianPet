@@ -30,6 +30,20 @@ void PetProfileWindow::InitializeUi()
     healthBar = new QProgressBar;
     moodBar = new QProgressBar;
 
+    growthBar->setRange(0, 100);
+    foodBar->setRange(0, 100);
+    cleanBar->setRange(0, 100);
+    healthBar->setRange(0, 100);
+    moodBar->setRange(0, 100);
+
+    // 这样设置可以让进度条的文字显示在中间，实测Ubuntu默认就是在中间但Windows需要手动设置
+    // 所以就干脆统一都这样设置，以免造成平台间的差异
+    growthBar->setAlignment(Qt::AlignCenter);
+    foodBar->setAlignment(Qt::AlignCenter);
+    cleanBar->setAlignment(Qt::AlignCenter);
+    healthBar->setAlignment(Qt::AlignCenter);
+    moodBar->setAlignment(Qt::AlignCenter);
+
     upperLayout = new QFormLayout(this);
     upperLayout->addRow("昵称：", nicknameLabel);
     upperLayout->addRow("号码：", idLabel);
@@ -113,8 +127,26 @@ void PetProfileWindow::UpdatePetProfile()
     emit CanUpdatePetProfile(message);
 }
 
-void PetProfileWindow::UpdatePetProfileHelper(const QString &profile)
+void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
 {
-    // 并不是要这样做，只是为了调试方便
-    nicknameLabel->setText(profile);
+    // 测试样例（中间故意不添加空格是为了模拟真实的发包环境）
+    // {"nickname":"test name","id":"9999999","level":88,"age":1901,"growth":32,"food":32,"clean":32,"health":32,"mood":32}
+
+    const auto jsonDocument = QJsonDocument::fromJson(profile);
+    if (jsonDocument.isObject())
+    {
+        nicknameLabel->setText(jsonDocument["nickname"].toString());
+        idLabel->setText(jsonDocument["id"].toString());
+        levelLabel->setText(QString::number(jsonDocument["level"].toInt()));
+        ageLabel->setText(QString::number(jsonDocument["age"].toInt()) + "小时");
+        growthBar->setValue(jsonDocument["growth"].toInt());
+        foodBar->setValue(jsonDocument["food"].toInt());
+        cleanBar->setValue(jsonDocument["clean"].toInt());
+        healthBar->setValue(jsonDocument["health"].toInt());
+        moodBar->setValue(jsonDocument["mood"].toInt());
+    }
+    else
+    {
+        // 记录到错误日志中
+    }
 }
