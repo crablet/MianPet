@@ -121,12 +121,19 @@ void PetProfileWindow::UpdatePetProfile()
         return;
     }
     
-    auto message = tcpSocket->readAll();
+    const auto message = tcpSocket->readAll();
     emit CanUpdatePetProfile(message);
 }
 
 void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
 {
+    if (profile.isEmpty())
+    {
+        QMessageBox::warning(this, "传输错误", "无法与服务器进行正常通信，请检查您的网络，若网络无问题请汇报该程序错误");
+
+        return;
+    }
+
     // 测试样例（中间故意不添加空格是为了模拟真实的发包环境）
     // {"nickname":"test name","id":"9999999","level":88,"age":1901,"growth":32,"food":32,"clean":32,"health":32,"mood":32,"grouth_speed":99,"status":"normal","online_time":101}
 
