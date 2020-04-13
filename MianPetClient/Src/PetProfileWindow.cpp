@@ -1,7 +1,5 @@
 ﻿#include "PetProfileWindow.h"
 
-#include <qdebug.h>
-
 PetProfileWindow::PetProfileWindow(QWidget *parent) 
     : FramelessWindow(parent)
 {
@@ -122,7 +120,7 @@ void PetProfileWindow::UpdatePetProfile()
     {
         return;
     }
-
+    
     auto message = tcpSocket->readAll();
     emit CanUpdatePetProfile(message);
 }
@@ -130,7 +128,7 @@ void PetProfileWindow::UpdatePetProfile()
 void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
 {
     // 测试样例（中间故意不添加空格是为了模拟真实的发包环境）
-    // {"nickname":"test name","id":"9999999","level":88,"age":1901,"growth":32,"food":32,"clean":32,"health":32,"mood":32}
+    // {"nickname":"test name","id":"9999999","level":88,"age":1901,"growth":32,"food":32,"clean":32,"health":32,"mood":32,"grouth_speed":99,"status":"normal","online_time":101}
 
     const auto jsonDocument = QJsonDocument::fromJson(profile);
     if (jsonDocument.isObject())
@@ -144,6 +142,9 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         cleanBar->setValue(jsonDocument["clean"].toInt());
         healthBar->setValue(jsonDocument["health"].toInt());
         moodBar->setValue(jsonDocument["mood"].toInt());
+        grouthSpeedLabel->setText("成长速度：" + QString::number(jsonDocument["grouth_speed"].toInt()) + "/小时");
+        statusLabel->setText("状态：" + jsonDocument["status"].toString());
+        onlineTimeLabel->setText("在线时间：" + QString::number(jsonDocument["online_time"].toInt()) + "分钟");
     }
     else
     {
