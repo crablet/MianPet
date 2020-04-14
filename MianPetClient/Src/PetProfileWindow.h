@@ -18,6 +18,10 @@
 #include <QJsonDocument>
 #include <QByteArray>
 #include <QString>
+#include <QPaintEvent>
+#include <QPainter>
+#include <QRadialGradient>
+#include <QColor>
 
 #include "Src/Config/UiConstants.h"
 #include "Src/Config/NetworkConstants.h"
@@ -39,6 +43,7 @@ private:
 
     virtual void enterEvent(QEvent *event) override;
     virtual void leaveEvent(QEvent *event) override;
+    virtual void paintEvent(QPaintEvent *event) override;
 
     void UpdatePetProfile();
     void UpdatePetProfileHelper(const QByteArray &profile);

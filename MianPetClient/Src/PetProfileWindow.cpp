@@ -17,6 +17,7 @@ void PetProfileWindow::InitializeUi()
 
     setFixedSize(PetProfileWindowWidth, PetProfileWindowHeight);
     setAttribute(Qt::WA_DeleteOnClose);
+    setAttribute(Qt::WA_TranslucentBackground);
 
     nicknameLabel = new QLabel;
     idLabel = new QLabel;
@@ -97,6 +98,26 @@ void PetProfileWindow::enterEvent([[maybe_unused]] QEvent *event)
 void PetProfileWindow::leaveEvent([[maybe_unused]] QEvent *event)
 {
     closeCountdownTimer->start(999);
+}
+
+// 设置背景为圆角且由内而外是白到浅蓝
+// 由于这里是继承QWidget，所以只能通过重写paintEvent的方式来自定义样式，而不可以由QSS来实现
+// 参考文档：https://doc.qt.io/qt-5/stylesheet-reference.html
+void PetProfileWindow::paintEvent(QPaintEvent *event)
+{
+    QRadialGradient radial(PetProfileWindowWidth / 2, PetProfileWindowHeight / 2,
+                           PetProfileWindowHeight / 2, 
+                           PetProfileWindowWidth / 2, PetProfileWindowHeight / 2);
+    radial.setColorAt(0, Qt::white);
+    radial.setColorAt(1, QColor(226, 246, 254));
+
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setBrush(radial);
+    painter.setPen(Qt::transparent);
+    painter.drawRoundedRect(rect(), 9, 9);
+
+    FramelessWindow::paintEvent(event);
 }
 
 void PetProfileWindow::UpdatePetProfile()
