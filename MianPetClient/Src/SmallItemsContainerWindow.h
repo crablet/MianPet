@@ -35,7 +35,7 @@ private:
     QLabel *iconLabel, *windowTitleLabel;
 
 protected:
-    QWidget *item0, *item1, *item2, *item3;
+    QPushButton *item0, *item1, *item2, *item3;
 };
 
 #endif // SMALLITEMSCONTAINERWINDOW_H
