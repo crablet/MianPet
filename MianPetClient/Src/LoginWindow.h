@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QLineEdit>
+#include <QMessageBox>
 
 #include "Src/Config/UiConstants.h"
 

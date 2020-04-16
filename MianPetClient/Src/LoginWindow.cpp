@@ -41,4 +41,9 @@ void LoginWindow::InitializeUi()
 void LoginWindow::InitializeConnect()
 {
     connect(closeButton, &QPushButton::clicked, this, &LoginWindow::close);
+    connect(registerButton, &QPushButton::clicked, this, 
+    [=]() 
+    { 
+        QMessageBox::information(this, "暂不支持注册", "内测进行中，暂不开放注册功能，请联系开发者获取内测账号");
+    });
 }

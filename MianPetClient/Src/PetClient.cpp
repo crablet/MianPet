@@ -24,9 +24,9 @@ void PetClient::InitializeUi()
     petToolButtonsContainer->setFixedHeight(PetToolButtonsContainerHeight);
     petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - PetToolButtonsContainerUiDelta));
 
-    //this->hide();
-    //loginWindow = new LoginWindow;
-    //loginWindow->show();
+    this->hide();
+    loginWindow = new LoginWindow;
+    loginWindow->show();
 }
 
 void PetClient::InitializeConnect()
