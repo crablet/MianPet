@@ -127,6 +127,8 @@ void PetProfileWindow::UpdatePetProfile()
     tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
     if (!tcpSocket->waitForConnected())
     {
+        emit CanUpdatePetProfile({});
+
         return;
     }
 
@@ -134,11 +136,15 @@ void PetProfileWindow::UpdatePetProfile()
     tcpSocket->write("get for petprofilewindow");
     if (!tcpSocket->waitForBytesWritten())
     {
+        emit CanUpdatePetProfile({});
+
         return;
     }
 
     if (!tcpSocket->waitForReadyRead())
     {
+        emit CanUpdatePetProfile({});
+
         return;
     }
     

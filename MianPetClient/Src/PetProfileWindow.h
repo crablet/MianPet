@@ -35,6 +35,8 @@ public:
     explicit PetProfileWindow(QWidget *parent = nullptr);
 
 signals:
+    // 如果profile为空，则表示传输过程中出现了差错；如果不为空，则profile中为tcp解包后的内容
+    // 可以改进的地方：profile为空表示出错可以细化成多个信号，只是为空不能表明出错的原因
     void CanUpdatePetProfile(const QByteArray &profile);
 
 private:

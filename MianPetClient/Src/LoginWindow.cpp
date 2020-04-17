@@ -47,3 +47,15 @@ void LoginWindow::InitializeConnect()
         QMessageBox::information(this, "暂不支持注册", "内测进行中，暂不开放注册功能，请联系开发者获取内测账号");
     });
 }
+
+//void LoginWindow::LoginThreadFunction()
+//{
+//    auto tcpSocket = std::make_unique<QTcpSocket>();
+//    tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+//    if (!tcpSocket->waitForConnected())
+//    {
+//        emit ConnectToHostFailed();
+//
+//        return;
+//    }
+//}

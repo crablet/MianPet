@@ -1,12 +1,17 @@
 ﻿#ifndef LOGINWINDOW_H
 #define LOGINWINDOW_H
 
+//#include <thread>
+//#include <memory>
+
 #include <QWidget>
 #include <QPushButton>
 #include <QLineEdit>
 #include <QMessageBox>
+//#include <QTcpSocket>
 
 #include "Src/Config/UiConstants.h"
+//#include "Src/Config/NetworkConstants.h"
 
 #include "FramelessWindow.h"
 
@@ -19,6 +24,11 @@ public:
 private:
     void InitializeUi();
     void InitializeConnect();
+    //void LoginThreadFunction();
+
+//signals:
+//    void ConnectToHostFailed();
+//    void LoginSucceeded();
 
 private:
     QLineEdit *accountLineEdit, *passwordLineEdit;
