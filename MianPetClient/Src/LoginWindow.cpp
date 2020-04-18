@@ -49,15 +49,17 @@ void LoginWindow::InitializeConnect()
     connect(loginButton, &QPushButton::clicked, this, 
     [=]()
     {
-        std::thread loginThread(&LoginWindow::LoginThreadFunction, this);
-        loginThread.detach();
+        if (accountLineEdit->text().isEmpty() || passwordLineEdit->text().isEmpty())
+        {
+            return;
+        }
+        else
+        {
+            std::thread loginThread(&LoginWindow::LoginThreadFunction, this);
+            loginThread.detach();
+        }
     });
 
-    connect(this, &LoginWindow::LoginSucceeded, this,
-    [=]()
-    {
-        QMessageBox::information(this, "登陆成功", "恭喜登录成功！");
-    });
     connect(this, &LoginWindow::AccountOrPasswordWrong, this,
     [=]()
     {
