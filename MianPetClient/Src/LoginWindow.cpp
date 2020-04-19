@@ -97,7 +97,7 @@ void LoginWindow::LoginThreadFunction()
         return;
     }
 
-    const auto str = ("{\"account:" + accountLineEdit->text() + ",\"password:" + passwordLineEdit->text() + "\"}").toStdString();
+    const auto str = ("{\"account:\"" + accountLineEdit->text() + "\",\"password:\"" + passwordLineEdit->text() + "\"\"}").toStdString();
     tcpSocket->write(str.c_str());
     if (!tcpSocket->waitForBytesWritten())
     {
