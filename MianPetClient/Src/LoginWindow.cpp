@@ -16,6 +16,7 @@ void LoginWindow::InitializeUi()
     accountLineEdit->setFixedSize(LoginWindowAccountLineEditWidth, LoginWindowAccountLineEditHeight);
     accountLineEdit->move(LoginWindowAccountLineEditX, LoginWindowAccountLineEditY);
     accountLineEdit->setPlaceholderText("面宠账号");
+    accountLineEdit->setValidator(new QIntValidator(this)); //只允许账号输入框输入数字
 
     passwordLineEdit = new QLineEdit(this);
     passwordLineEdit->setFixedSize(LoginWindowPasswordLineEditWidth, LoginWindowPasswordLineEditHeight);
@@ -44,7 +45,7 @@ void LoginWindow::InitializeConnect()
     connect(registerButton, &QPushButton::clicked, this, 
     [=]() 
     { 
-        QMessageBox::information(this, "暂不支持注册", "内测进行中，暂不开放注册功能，请联系开发者获取内测账号");
+        QMessageBox::information(this, "暂不支持注册", "内测进行中，暂不开放注册功能，请联系开发者获取内测账号。");
     });
     connect(loginButton, &QPushButton::clicked, this, 
     [=]()
@@ -55,19 +56,32 @@ void LoginWindow::InitializeConnect()
         }
         else
         {
+            loginButton->setDisabled(true); // 点击登录后就不应该再允许被点击，除非登陆失败
+
             std::thread loginThread(&LoginWindow::LoginThreadFunction, this);
             loginThread.detach();
         }
     });
 
+    connect(this, &LoginWindow::ConnectToHostFailed, this, 
+    [=]()
+    {
+        loginButton->setEnabled(true);
+
+        QMessageBox::information(this, "连接失败", "无法连接至服务器，请检查网络。");
+    });
     connect(this, &LoginWindow::AccountOrPasswordWrong, this,
     [=]()
     {
+        loginButton->setEnabled(true);
+
         QMessageBox::information(this, "信息错误", "用户名或密码错误，请重新输入。");
     });
     connect(this, &LoginWindow::UnknownLoginError, this,
     [=]()
     {
+        loginButton->setEnabled(true);
+
         QMessageBox::information(this, "未知错误", "出现未知错误，登陆失败。");
     });
 }
@@ -104,15 +118,15 @@ void LoginWindow::LoginThreadFunction()
     if (jsonDocument.isObject())
     {
         const auto status = jsonDocument["status"].toString();
-        if (status == "success")
+        if (status == "success")        // {"status":"success"}
         {
             emit LoginSucceeded();
         }
-        else if (status == "failed")
+        else if (status == "failed")    // {"status":"failed"}
         {
             emit AccountOrPasswordWrong();
         }
-        else
+        else                            // {"status":"hahaha"}
         {
             emit UnknownLoginError();
         }

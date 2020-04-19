@@ -10,6 +10,7 @@
 #include <QMessageBox>
 #include <QTcpSocket>
 #include <QJsonDocument>
+#include <QIntValidator>
 
 #include "Src/Config/UiConstants.h"
 #include "Src/Config/NetworkConstants.h"
