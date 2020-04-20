@@ -56,8 +56,7 @@ void PetProfileWindow::InitializeUi()
     upperLayout->setContentsMargins({ 2, 0, 2, 0 });
 
     upperWidget = new QWidget(this);
-    upperWidget->setLayout(upperLayout);
-    
+    upperWidget->setLayout(upperLayout); 
 
     //////////////////////////////////////////////////////
 
