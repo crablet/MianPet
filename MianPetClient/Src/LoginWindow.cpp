@@ -86,6 +86,14 @@ void LoginWindow::InitializeConnect()
     });
 }
 
+// 登录流程：
+// 1. 连接服务器
+// 2. 从服务器获取加密coreKey
+// 3. 使用加密coreKey拼接待加密的明文
+// 4. 加密使成为密文（暂未实现）
+// 5. 发送密文至服务器
+// 6. 接收从服务器传回的消息，此处是明文，直接读取并解析之
+// 7. 解析结果后看是允许登录还是不允许
 void LoginWindow::LoginThreadFunction()
 {
     auto tcpSocket = std::make_unique<QTcpSocket>();
@@ -97,10 +105,33 @@ void LoginWindow::LoginThreadFunction()
         return;
     }
 
+    tcpSocket->write(R"({"get":"corekey_for_password_transpotation"})");
+    if (!tcpSocket->waitForBytesWritten())
+    {
+        emit ConnectToHostFailed();
+
+        return;
+    }
+
+    if (!tcpSocket->waitForReadyRead())
+    {
+        emit ConnectToHostFailed();
+
+        return;
+    }
+
+    auto message = tcpSocket->readAll();
+    auto jsonDocument = QJsonDocument::fromJson(message);
+    QString coreKey;
+    if (jsonDocument.isObject())
+    {
+        coreKey = jsonDocument["corekey"].toString();   // {"corekey":"45678"}
+    }
+
     const auto str 
         = (R"({"account":")" + accountLineEdit->text() 
          + R"(","password":")" + passwordLineEdit->text() 
-         + R"(","random_key":")" + GetRandomKeyForPasswordTransportation(QString("123"))    /*这个coreKey是要从服务器上获取的，暂时先硬编码*/
+         + R"(","random_key":")" + GetRandomKeyForPasswordTransportation(coreKey)
          + R"("})")
          .toStdString();
     tcpSocket->write(str.c_str());
@@ -118,8 +149,8 @@ void LoginWindow::LoginThreadFunction()
         return;
     }
 
-    const auto message = tcpSocket->readAll();
-    const auto jsonDocument = QJsonDocument::fromJson(message);
+    message = tcpSocket->readAll();
+    jsonDocument = QJsonDocument::fromJson(message);
     if (jsonDocument.isObject())
     {
         const auto status = jsonDocument["status"].toString();
