@@ -15,6 +15,8 @@
 #include "Src/Config/UiConstants.h"
 #include "Src/Config/NetworkConstants.h"
 
+#include "Tools/Network/NetworkTools.h"
+
 #include "FramelessWindow.h"
 
 class LoginWindow : public FramelessWindow

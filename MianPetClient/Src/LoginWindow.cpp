@@ -97,7 +97,12 @@ void LoginWindow::LoginThreadFunction()
         return;
     }
 
-    const auto str = ("{\"account:\"" + accountLineEdit->text() + "\",\"password:\"" + passwordLineEdit->text() + "\"\"}").toStdString();
+    const auto str 
+        = (R"({"account":")" + accountLineEdit->text() 
+         + R"(","password":")" + passwordLineEdit->text() 
+         + R"(","random_key":")" + GetRandomKeyForPasswordTransportation(QString("123"))    /*这个coreKey是要从服务器上获取的，暂时先硬编码*/
+         + R"("})")
+         .toStdString();
     tcpSocket->write(str.c_str());
     if (!tcpSocket->waitForBytesWritten())
     {
