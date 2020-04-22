@@ -23,6 +23,7 @@ SOURCES += \
     Src/PetProfileWindow.cpp \
     Src/PetToolButtonsContainer.cpp \
     Src/SmallItemsContainerWindow.cpp \
+    Src/TransparentItemLabel.cpp \
     Src/main.cpp \
     Src/PetClient.cpp
 
@@ -37,7 +38,8 @@ HEADERS += \
     Src/PetProfileWindow.h \
     Src/PetToolButtonsContainer.h \
     Src/SmallItemsContainerWindow.h \
-    Src/Tools/Network/NetworkTools.h
+    Src/Tools/Network/NetworkTools.h \
+    Src/TransparentItemLabel.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
