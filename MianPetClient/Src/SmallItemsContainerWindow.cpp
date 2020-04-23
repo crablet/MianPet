@@ -51,7 +51,6 @@ void SmallItemsContainerWindow::InitializeUi()
     item0->setFixedSize(SmallItemsContainerWindowItem0Width, SmallItemsContainerWindowItem0Height);
     item0->setFlat(true);
     item0->setStyleSheet("QPushButton { border: none }");
-    item0->setMouseTracking(false);
     item0->installEventFilter(this);
 
     item1 = new QPushButton(this);
@@ -93,7 +92,8 @@ bool SmallItemsContainerWindow::eventFilter(QObject *object, QEvent *event)
         if (event->type() == QEvent::HoverEnter)
         {
             itemLabel->show();
-            itemLabel->move(QCursor::pos());
+            itemLabel->move(QCursor::pos() + QPoint(2, 2)); 
+            // 得预留一些位置，不然会持续触发Enter和Leave事件，从而出现闪烁的情况
         }
         else if (event->type() == QEvent::HoverLeave)
         {

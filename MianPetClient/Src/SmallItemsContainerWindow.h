@@ -13,6 +13,7 @@
 #include <QSize>
 #include <QObject>
 #include <QEvent>
+#include <QPoint>
 
 #include "Src/Config/UiConstants.h"
 
