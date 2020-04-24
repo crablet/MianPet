@@ -29,7 +29,11 @@ QLabel* TransparentItemLabel::GetLowerLabel() const
 void TransparentItemLabel::InitializeUi()
 {
     setFixedSize(TransparentItemLabelWidth, TransparentItemLabelHeight);
+#ifdef Q_OS_LINUX
+    setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+#else
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+#endif // OS_LINUX
     setWindowOpacity(0.8);
 
     upperLabel = new QLabel(this);

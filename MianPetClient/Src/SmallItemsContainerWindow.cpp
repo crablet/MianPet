@@ -11,6 +11,7 @@ void SmallItemsContainerWindow::InitializeUi()
 {
     setFixedSize(SmallItemsContainerWindowWidth, SmallItemsContainerWindowHeight);
     setAttribute(Qt::WA_DeleteOnClose);
+    setWindowFlags(windowFlags() & ~Qt::WindowStaysOnTopHint);   // 取消属性，不然点击按钮的时候弹出框就会被覆盖
 
     QPalette palette;
     palette.setBrush(backgroundRole(), QBrush(SmallItemsContainerWindowBackgroundPixmap));
