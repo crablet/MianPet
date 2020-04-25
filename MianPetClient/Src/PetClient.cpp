@@ -36,6 +36,12 @@ void PetClient::InitializeConnect()
     {
         this->show();
         loginWindow->close();
+
+        // 登录成功后开始每分钟发送一次心跳包
+        using namespace std::chrono_literals;
+        heartbeat = new QTimer(this);
+        connect(heartbeat, &QTimer::timeout, this, &PetClient::SendHeartbeat);
+        heartbeat->start(1min);
     });
 }
 
@@ -89,4 +95,8 @@ void PetClient::leaveEvent([[maybe_unused]] QEvent *event)
             petToolButtonsContainer->hide();
         }
     });
+}
+
+void PetClient::SendHeartbeat()
+{
 }

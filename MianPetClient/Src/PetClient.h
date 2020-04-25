@@ -1,11 +1,14 @@
 ﻿#ifndef PETCLIENT_H
 #define PETCLIENT_H
 
+#include <chrono>
+
 #include <QWidget>
 #include <QMouseEvent>
 #include <QMovie>
 #include <QLabel>
 #include <QTimer>
+#include <QTcpSocket>
 
 #include "LoginWindow.h"
 #include "PetToolButtonsContainer.h"
@@ -32,6 +35,9 @@ private:
     virtual void enterEvent(QEvent *event) override;
     virtual void leaveEvent(QEvent *event) override;
 
+private slots:
+    void SendHeartbeat();
+
 private:
     QMovie *petGif;
     QLabel *petGifLabel;
@@ -39,6 +45,8 @@ private:
 
     LoginWindow *loginWindow;
     PetToolButtonsContainer *petToolButtonsContainer;
+
+    QTimer *heartbeat;
 
     bool isUiBeingDragging;
 };
