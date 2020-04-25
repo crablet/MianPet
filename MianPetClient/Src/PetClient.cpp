@@ -18,6 +18,7 @@ void PetClient::InitializeUi()
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     setAttribute(Qt::WA_TranslucentBackground);
     setFixedSize(petGif->currentImage().size());
+    setMouseTracking(true);
 
     petToolButtonsContainer = new PetToolButtonsContainer;
     petToolButtonsContainer->setFixedWidth(PetToolButtonsContainerWidth);
