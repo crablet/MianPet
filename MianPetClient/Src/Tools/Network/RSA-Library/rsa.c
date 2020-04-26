@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <math.h>
@@ -7,7 +7,7 @@
 
 
 char buffer[1024];
-const int MAX_DIGITS = 50;
+#define MAX_DIGITS 50
 int i,j = 0;
 
 struct public_key_class{
@@ -54,7 +54,7 @@ long long rsa_modExp(long long b, long long e, long long m)
   if( e % 2 == 0){
     return ( rsa_modExp(b * b % m, e/2, m) % m );
   }
-  if( e % 2 == 1){
+  else /*if( e % 2 == 1)*/{
     return ( b * rsa_modExp(b, (e-1), m) % m );
   }
 
@@ -73,7 +73,7 @@ void rsa_gen_keys(struct public_key_class *pub, struct private_key_class *priv, 
   // count number of primes in the list
   long long prime_count = 0;
   do{
-    int bytes_read = fread(buffer,1,sizeof(buffer)-1, primes_list);
+    int bytes_read = (int)fread(buffer,1,sizeof(buffer)-1, primes_list);
     buffer[bytes_read] = '\0';
     for (i=0 ; buffer[i]; i++){
       if (buffer[i] == '\n'){
@@ -89,18 +89,18 @@ void rsa_gen_keys(struct public_key_class *pub, struct private_key_class *priv, 
   long long p = 0;
   long long q = 0;
 
-  long long e = powl(2, 8) + 1;
+  long long e = (long long)powl(2, 8) + 1;
   long long d = 0;
   char prime_buffer[MAX_DIGITS];
   long long max = 0;
   long long phi_max = 0;
   
-  srand(time(NULL));
+  srand((unsigned int)time(NULL));
   
   do{
     // a and b are the positions of p and q in the list
-    int a =  (double)rand() * (prime_count+1) / (RAND_MAX+1.0);
-    int b =  (double)rand() * (prime_count+1) / (RAND_MAX+1.0);
+    int a =  (int)((double)rand() * (prime_count+1) / (RAND_MAX+1.0));
+    int b =  (int)((double)rand() * (prime_count+1) / (RAND_MAX+1.0));
     
     // here we find the prime at position a, store it as p
     rewind(primes_list);
@@ -183,7 +183,7 @@ char *rsa_decrypt(const long long *message,
   // Now we go through each 8-byte chunk and decrypt it.
   long long i = 0;
   for(i=0; i < message_size/8; i++){
-    temp[i] = rsa_modExp(message[i], priv->exponent, priv->modulus);
+    temp[i] = (char)rsa_modExp(message[i], priv->exponent, priv->modulus);
   }
   // The result should be a number in the char range, which gives back the original byte.
   // We put that into decrypted, then return.
