@@ -23,6 +23,7 @@ SOURCES += \
     Src/PetProfileWindow.cpp \
     Src/PetToolButtonsContainer.cpp \
     Src/SmallItemsContainerWindow.cpp \
+    Src/Tools/Network/RSA-Library/rsa.c \
     Src/TransparentItemLabel.cpp \
     Src/main.cpp \
     Src/PetClient.cpp
@@ -39,6 +40,7 @@ HEADERS += \
     Src/PetToolButtonsContainer.h \
     Src/SmallItemsContainerWindow.h \
     Src/Tools/Network/NetworkTools.h \
+    Src/Tools/Network/RSA-Library/rsa.h \
     Src/TransparentItemLabel.h
 
 # Default rules for deployment.
