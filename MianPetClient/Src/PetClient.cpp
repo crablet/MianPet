@@ -43,6 +43,11 @@ void PetClient::InitializeConnect()
         connect(heartbeat, &QTimer::timeout, this, &PetClient::SendHeartbeat);
         heartbeat->start(1min);
     });
+
+    connect(this, &PetClient::HeartbeatError, this, [this]()
+    {
+        QMessageBox::information(this, "心跳停止", "心跳包未能成功发送，请检查网络。");
+    });
 }
 
 void PetClient::mouseMoveEvent(QMouseEvent *event)
@@ -99,4 +104,25 @@ void PetClient::leaveEvent([[maybe_unused]] QEvent *event)
 
 void PetClient::SendHeartbeat()
 {
+    std::thread heartbeatThread(
+    [this]()
+    {
+        auto socket = std::make_unique<QTcpSocket>();
+        socket->connectToHost(ServerAddress, ServerPort);
+        if (!socket->waitForConnected())
+        {
+            emit HeartbeatError();
+
+            return;
+        }
+
+        socket->write(R"({"type":"heartbeat"})");
+        if (!socket->waitForBytesWritten())
+        {
+            emit HeartbeatError();
+
+            return;
+        }
+    });
+    heartbeatThread.detach();
 }
