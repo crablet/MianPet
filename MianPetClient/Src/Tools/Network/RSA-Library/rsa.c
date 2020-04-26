@@ -108,7 +108,7 @@ void rsa_gen_keys(struct public_key_class *pub, struct private_key_class *priv, 
     //  for(j=0; j < MAX_DIGITS; j++){
     //	prime_buffer[j] = 0;
     //  }
-      fgets(prime_buffer,sizeof(prime_buffer)-1, primes_list);
+      (void)fgets(prime_buffer,sizeof(prime_buffer)-1, primes_list);
     }
     p = atol(prime_buffer); 
     
@@ -118,7 +118,7 @@ void rsa_gen_keys(struct public_key_class *pub, struct private_key_class *priv, 
       for(j=0; j < MAX_DIGITS; j++){
 	prime_buffer[j] = 0;
       }
-      fgets(prime_buffer,sizeof(prime_buffer)-1, primes_list);
+      (void)fgets(prime_buffer,sizeof(prime_buffer)-1, primes_list);
     }
     q = atol(prime_buffer); 
 
@@ -155,7 +155,7 @@ long long *rsa_encrypt(const char *message, const unsigned long message_size,
     return NULL;
   }
   long long i = 0;
-  for(i=0; i < message_size; i++){
+  for(i=0; i < (long long)message_size; i++){
     encrypted[i] = rsa_modExp(message[i], pub->exponent, pub->modulus);
   }
   return encrypted;
@@ -182,12 +182,12 @@ char *rsa_decrypt(const long long *message,
   }
   // Now we go through each 8-byte chunk and decrypt it.
   long long i = 0;
-  for(i=0; i < message_size/8; i++){
+  for(i=0; i < (long long)message_size/8; i++){
     temp[i] = (char)rsa_modExp(message[i], priv->exponent, priv->modulus);
   }
   // The result should be a number in the char range, which gives back the original byte.
   // We put that into decrypted, then return.
-  for(i=0; i < message_size/8; i++){
+  for(i=0; i < (long long)message_size/8; i++){
     decrypted[i] = temp[i];
   }
   free(temp);
