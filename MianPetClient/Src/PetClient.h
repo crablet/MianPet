@@ -11,6 +11,9 @@
 #include <QLabel>
 #include <QTimer>
 #include <QTcpSocket>
+#include <QSystemTrayIcon>
+#include <QMenu>
+#include <QAction>
 
 #include "LoginWindow.h"
 #include "PetToolButtonsContainer.h"
@@ -54,6 +57,9 @@ private:
     PetToolButtonsContainer *petToolButtonsContainer;
 
     QTimer *heartbeat;
+
+    QSystemTrayIcon *tray;
+    QMenu *trayMenu;
 
     bool isUiBeingDragging;
 };

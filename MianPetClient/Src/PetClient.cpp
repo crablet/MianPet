@@ -25,6 +25,21 @@ void PetClient::InitializeUi()
     petToolButtonsContainer->setFixedHeight(PetToolButtonsContainerHeight);
     petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - PetToolButtonsContainerUiDelta));
 
+    auto *exitAction = new QAction("退出", this);
+    connect(exitAction, &QAction::triggered, [=]()
+    {
+        qApp->quit();
+    });
+
+    trayMenu = new QMenu(this);
+    trayMenu->addAction(exitAction);
+
+    tray = new QSystemTrayIcon(this);
+    tray->setContextMenu(trayMenu);
+    //tray->setIcon(QIcon(R"(C:\Users\crabl\Desktop\20100915152512-1686607904.jpg)"));
+    tray->setToolTip("未登录");
+    tray->show();
+
     this->hide();
     loginWindow = new LoginWindow;
     loginWindow->show();
