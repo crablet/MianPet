@@ -36,7 +36,7 @@ void PetClient::InitializeUi()
 
     tray = new QSystemTrayIcon(this);
     tray->setContextMenu(trayMenu);
-    //tray->setIcon(QIcon(R"(C:\Users\crabl\Desktop\20100915152512-1686607904.jpg)"));
+    tray->setIcon(QIcon(R"(:/Pic/test.gif)"));
     tray->setToolTip("未登录");
     tray->show();
 
