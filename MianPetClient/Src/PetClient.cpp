@@ -108,6 +108,7 @@ void PetClient::enterEvent([[maybe_unused]] QEvent *event)
 
 void PetClient::leaveEvent([[maybe_unused]] QEvent *event)
 {
+    // 鼠标离开宠物主体时就开始计时，时间一到就隐藏底部工具栏
     QTimer::singleShot(PetToolButtonsContainerStayingTime, this, [=]()
     {
         if (!petToolButtonsContainer->underMouse())
