@@ -117,6 +117,7 @@ void PetClient::leaveEvent([[maybe_unused]] QEvent *event)
     });
 }
 
+// 心跳包释放函数，每一分钟执行一次，一次发一个包，然后结束本次心跳的tcp链接
 void PetClient::SendHeartbeat()
 {
     std::thread heartbeatThread(
