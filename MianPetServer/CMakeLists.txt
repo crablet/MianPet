@@ -8,8 +8,8 @@ set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O2 -Wall")
 
 link_libraries(pthread)
 
-include_directories(./Src/asio-1.16.0/)
+include_directories(./Src/asio-1.16.0)
 
-aux_source_directory(./Src/ DIR_SRSC)
+aux_source_directory(./Src DIR_SRSC)
 
 add_executable(MianPetServer ${DIR_SRSC})

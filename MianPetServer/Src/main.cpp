@@ -1,17 +1,17 @@
 ﻿#include <iostream>
-#include <asio.hpp>
+#include <exception>
+
+#include "Server.h"
 
 int main()
 {
-    asio::io_context io;
-
-    asio::steady_timer t(io, asio::chrono::seconds(5));
-    t.async_wait([](const asio::error_code &e)
+    try
     {
-        std::cout << "Hello World!" << std::endl;
-    });
-
-    io.run();
-
-    return 0;
+        Server server;
+        server.Run();
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << "exception: " << e.what() << '\n';
+    }
 }
