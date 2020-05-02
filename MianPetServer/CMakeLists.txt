@@ -8,7 +8,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O2 -Wall")
 
 link_libraries(pthread)
 
-include_directories(./Src/asio-1.16.0)
+include_directories(./Src/asio-1.16.1)
 
 aux_source_directory(./Src DIR_SRSC)
 
