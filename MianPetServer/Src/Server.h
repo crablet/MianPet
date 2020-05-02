@@ -2,12 +2,12 @@
 
 #include <csignal>
 #include <system_error>
+#include <utility>
 
 #include <asio.hpp>
 
 #include "Connection.h"
 #include "ConnectionManager.h"
-#include "RequestHandler.h"
 
 class Server
 {
@@ -26,8 +26,7 @@ private:
 private:
     asio::io_context ioContext;
     asio::signal_set signals;
-    asio::ip::tcp::acceptor accepter;
+    asio::ip::tcp::acceptor acceptor;
     
     ConnectionManager connectionManager;
-    RequestHandler requestHandler;
 };

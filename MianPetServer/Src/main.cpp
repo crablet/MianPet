@@ -14,4 +14,6 @@ int main()
     {
         std::cerr << "exception: " << e.what() << '\n';
     }
+
+    return 0;
 }
