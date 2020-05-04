@@ -7,6 +7,7 @@
 #include <system_error>
 
 #include "asio.hpp"
+#include "simdjson.h"
 
 class ConnectionManager;
 
@@ -34,6 +35,8 @@ private:
     std::array<char, 8192> buffer;
 
     std::string reply;
+
+    inline static simdjson::dom::parser parser{};
 };
 
 using ConnectionPtr = std::shared_ptr<Connection>;
