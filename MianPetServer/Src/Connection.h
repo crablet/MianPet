@@ -29,7 +29,7 @@ private:
 
 private:
     asio::ip::tcp::socket socket;
-
+    
     ConnectionManager& connectionManager;
 
     std::array<char, 8192> buffer;
