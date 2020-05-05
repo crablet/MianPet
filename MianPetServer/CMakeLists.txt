@@ -14,4 +14,6 @@ include_directories(./Src/otl-4.0.455)
 
 aux_source_directory(./Src DIR_SRSC)
 aux_source_directory(./Src/simdjson-0.3.1 SIMDJSON_SRC) #repeated
+
 add_executable(MianPetServer ${SIMDJSON_SRC} ${DIR_SRSC})
+target_link_libraries(MianPetServer libmyodbc8a.so)
