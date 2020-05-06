@@ -6,6 +6,20 @@ Server::Server()
       acceptor(ioContext),
       connectionManager()
 {
+    otl_connect::otl_initialize();
+    try
+    {
+        // not a true database, only for testing
+        db.rlogon("UID=root;PWD=123456;DSN=my_connector");
+    }
+    catch (otl_exception &p)
+    {
+        std::cerr << p.msg << std::endl; // print out error message
+        std::cerr << p.stm_text << std::endl; // print out SQL that caused the error
+        std::cerr << p.sqlstate << std::endl; // print out SQLSTATE message
+        std::cerr << p.var_info << std::endl; // print out the variable that caused the error
+    }
+
     signals.add(SIGINT);
     signals.add(SIGTERM);
 #ifdef SIGQUIT
@@ -19,6 +33,11 @@ Server::Server()
     acceptor.bind(endpoint);
     acceptor.listen();
     DoAccept();
+}
+
+Server::~Server()
+{
+    db.logoff();
 }
 
 void Server::Run()
