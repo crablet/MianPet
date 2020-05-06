@@ -22,6 +22,7 @@ public:
     Server& operator=(const Server&) = delete;
 
     Server();
+    ~Server();
 
     void Run();
 
