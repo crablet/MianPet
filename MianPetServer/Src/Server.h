@@ -3,6 +3,8 @@
 #include <csignal>
 #include <system_error>
 #include <utility>
+#include <iostream>
+#include <string>
 
 #include <asio.hpp>
 

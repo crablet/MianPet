@@ -9,8 +9,12 @@ Server::Server()
     otl_connect::otl_initialize();
     try
     {
-        // not a true database, only for testing
-        db.rlogon("UID=root;PWD=123456;DSN=my_connector");
+        std::cout << "info of database connection: uid pwd dsn" << std::endl;
+        std::string uid, pwd, dsn;
+        std::cin >> uid >> pwd >> dsn;
+        const std::string loginInfo = "UID=" + uid + ";PWD=" + pwd + ";DSN=" + dsn;
+        std::cout << loginInfo << std::endl;
+        db.rlogon(loginInfo.c_str());
     }
     catch (otl_exception &p)
     {
