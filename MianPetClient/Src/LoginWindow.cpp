@@ -156,7 +156,7 @@ void LoginWindow::LoginThreadFunction()
         const auto status = jsonDocument["status"].toString();
         if (status == "success")        // {"status":"success"}
         {
-            emit LoginSucceeded();
+            emit LoginSucceeded(accountLineEdit->text());
         }
         else if (status == "failed")    // {"status":"failed"}
         {

@@ -47,10 +47,12 @@ void PetClient::InitializeUi()
 
 void PetClient::InitializeConnect()
 {
-    connect(loginWindow, &LoginWindow::LoginSucceeded, this, [=]()
+    connect(loginWindow, &LoginWindow::LoginSucceeded, this, [=](const QString &id)
     {
         this->show();
         loginWindow->close();
+
+        mianPetId = id;
 
         // 登录成功后开始每分钟发送一次心跳包
         using namespace std::chrono_literals;
@@ -133,7 +135,8 @@ void PetClient::SendHeartbeat()
             return;
         }
 
-        socket->write(R"({"type":"heartbeat"})");
+        const auto json = (R"({"type":"heartbeat","id":")" + mianPetId + R"("})").toStdString();
+        socket->write(json.c_str());
         if (!socket->waitForBytesWritten())
         {
             emit HeartbeatError();

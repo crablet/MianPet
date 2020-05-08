@@ -32,7 +32,7 @@ private:
 
 signals:
     void ConnectToHostFailed();
-    void LoginSucceeded();
+    void LoginSucceeded(const QString &account);
     void AccountOrPasswordWrong();
     void UnknownLoginError();
 
