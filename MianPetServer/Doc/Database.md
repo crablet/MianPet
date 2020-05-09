@@ -9,8 +9,8 @@
  
 # petprofile
 ## 宠物实时数据
-|     id    |username|level|age|growth|food|clean|health|mood|growth_speed|status|online_time|
-|:---------:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-|  CHAR(32) |
-|  NOT NULL |
-|PRIMARY KEY|
+|     id    |username|      level      |    age     |   growth   |      food       |     clean       |     health     |      mood       |  growth_speed  | status | online_time|
+|:---------:|:------:|:---------------:|:----------:|:----------:|:---------------:|:---------------:|:--------------:|:---------------:|:--------------:|:------:|:----------:|
+|  CHAR(32) |CHAR(16)|SMALLINT UNSIGNED|INT UNSIGNED|INT UNSIGNED|SMALLINT UNSIGNED|SMALLINT UNSIGNED|TINYINT UNSIGNED|SMALLINT UNSIGNED|TINYINT UNSIGNED|CHAR(24)|INT UNSIGNED|
+|  NOT NULL |NOT NULL|     NOT NULL    |  NOT NULL  |  NOT NULL  |     OT NULL     |    NOT NULL     |    NOT NULL    |     NOT NULL    |    NOT NULL    |NOT NULL|  NOT NULL  |
+|PRIMARY KEY|        |                 |            |            |                 |                 |                |                 |                |        |            |
