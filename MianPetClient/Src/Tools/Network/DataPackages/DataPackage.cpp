@@ -7,7 +7,7 @@ DataPackage::DataPackage()
 
 void DataPackage::SetMethod(int method)
 {
-    json["method"] = method;
+    json.insert("method", method);
 }
 
 int DataPackage::GetMethod() const
@@ -17,7 +17,7 @@ int DataPackage::GetMethod() const
 
 void DataPackage::SetHint(int hint)
 {
-    json["hint"] = hint;
+    json.insert("hint", hint);
 }
 
 int DataPackage::GetHint() const
@@ -27,7 +27,7 @@ int DataPackage::GetHint() const
 
 void DataPackage::SetVersion(int version)
 {
-    json["version"] = version;
+    json.insert("version", version);
 }
 
 int DataPackage::GetVersion() const
@@ -35,9 +35,9 @@ int DataPackage::GetVersion() const
     return json["version"].toInt();
 }
 
-void DataPackage::SetPayload(const QJsonObject &value)
+void DataPackage::SetPayload(const QJsonObject &payload)
 {
-    json["payload"] = value;
+    json.insert("payload", payload);
 }
 
 QJsonObject DataPackage::GetPayload() const
@@ -45,9 +45,7 @@ QJsonObject DataPackage::GetPayload() const
     return json["payload"].toObject();
 }
 
-DataPackage::operator const char*() const
+DataPackage::operator QByteArray() const
 {
-    int dummy;
-    jsonDoc = QJsonDocument(json);
-    return jsonDoc.rawData(&dummy);
+    return QJsonDocument(json).toJson(QJsonDocument::Compact);
 }

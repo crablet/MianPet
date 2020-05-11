@@ -5,6 +5,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QByteArray>
 
 #ifdef Q_OS_WIN
     #pragma execution_character_set("utf-8")
@@ -27,14 +28,13 @@ public:
     void SetVersion(int version);
     int GetVersion() const;
 
-    void SetPayload(const QJsonObject &value);
+    void SetPayload(const QJsonObject &payload);
     QJsonObject GetPayload() const;
 
-    operator const char*() const;
+    operator QByteArray() const;
 
 protected:
     QJsonObject json;
-    mutable QJsonDocument jsonDoc;
 };
 
 #endif // DATAPACKAGE_H

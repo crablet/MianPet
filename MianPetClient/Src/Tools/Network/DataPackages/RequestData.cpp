@@ -2,5 +2,5 @@
 
 RequestData::RequestData()
 {
-
+    SetMethod(GET);
 }

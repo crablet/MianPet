@@ -2,5 +2,6 @@
 
 HeartbeatData::HeartbeatData()
 {
-
+    SetMethod(HERATBEAT);
+    SetPayload({ {"id", mianPetId} });
 }

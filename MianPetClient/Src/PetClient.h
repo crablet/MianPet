@@ -21,6 +21,8 @@
 #include "Src/Config/UiConstants.h"
 #include "Src/Config/NetworkConstants.h"
 
+#include "Tools/Network/DataPackages/HeartbeatData.h"
+
 #ifdef Q_OS_WIN
     #pragma execution_character_set("utf-8")
 #endif // Q_OS_WIN

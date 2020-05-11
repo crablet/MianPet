@@ -135,8 +135,8 @@ void PetClient::SendHeartbeat()
             return;
         }
 
-        const auto json = (R"({"type":"heartbeat","id":")" + mianPetId + R"("})").toStdString();
-        socket->write(json.c_str());
+        const auto json = HeartbeatData{};
+        socket->write(json);
         if (!socket->waitForBytesWritten())
         {
             emit HeartbeatError();

@@ -2,5 +2,5 @@
 
 PetProfileRequestData::PetProfileRequestData()
 {
-
+    SetHint(PETPROFILE);
 }
