@@ -11,4 +11,23 @@ inline constexpr const char *ServerAddress = "127.0.0.1";
 inline const int ServerPort = 9999;
 inline QString mianPetId;
 
+inline constexpr int MianPetVersion = 20200511;
+
+
+/* methor begin */
+
+inline constexpr int GET = 0;
+inline constexpr int HERATBEAT = 1;
+
+/* methor end */
+
+
+/* hint begin */
+
+inline constexpr int FOOD_SHOP_INFO = 0;
+inline constexpr int CLEAN_SHOP_INFO = 1;
+inline constexpr int PETPROFILE = 2;
+
+/* hint end */
+
 #endif // NETWORKCONSTANTS_H
