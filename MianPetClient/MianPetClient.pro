@@ -23,7 +23,12 @@ SOURCES += \
     Src/PetProfileWindow.cpp \
     Src/PetToolButtonsContainer.cpp \
     Src/SmallItemsContainerWindow.cpp \
+    Src/Tools/Network/DataPackages/CleanShopRequestData.cpp \
     Src/Tools/Network/DataPackages/DataPackage.cpp \
+    Src/Tools/Network/DataPackages/FoodShopRequestData.cpp \
+    Src/Tools/Network/DataPackages/HeartbeatData.cpp \
+    Src/Tools/Network/DataPackages/PetProfileRequestData.cpp \
+    Src/Tools/Network/DataPackages/RequestData.cpp \
     Src/Tools/Network/RSA-Library/rsa.c \
     Src/TransparentItemLabel.cpp \
     Src/main.cpp \
@@ -40,7 +45,12 @@ HEADERS += \
     Src/PetProfileWindow.h \
     Src/PetToolButtonsContainer.h \
     Src/SmallItemsContainerWindow.h \
+    Src/Tools/Network/DataPackages/CleanShopRequestData.h \
     Src/Tools/Network/DataPackages/DataPackage.h \
+    Src/Tools/Network/DataPackages/FoodShopRequestData.h \
+    Src/Tools/Network/DataPackages/HeartbeatData.h \
+    Src/Tools/Network/DataPackages/PetProfileRequestData.h \
+    Src/Tools/Network/DataPackages/RequestData.h \
     Src/Tools/Network/NetworkTools.h \
     Src/Tools/Network/RSA-Library/rsa.h \
     Src/TransparentItemLabel.h
