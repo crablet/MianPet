@@ -135,8 +135,7 @@ void PetClient::SendHeartbeat()
             return;
         }
 
-        const auto json = HeartbeatData{};
-        socket->write(json);
+        socket->write(HeartbeatData{});
         if (!socket->waitForBytesWritten())
         {
             emit HeartbeatError();

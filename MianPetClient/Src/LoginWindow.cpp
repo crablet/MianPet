@@ -105,7 +105,7 @@ void LoginWindow::LoginThreadFunction()
         return;
     }
 
-    tcpSocket->write(R"({"get":"corekey_for_password_transpotation"})");
+    tcpSocket->write(CorekeyRequestData{});
     if (!tcpSocket->waitForBytesWritten())
     {
         emit ConnectToHostFailed();
@@ -128,13 +128,11 @@ void LoginWindow::LoginThreadFunction()
         coreKey = jsonDocument["corekey"].toString();   // {"corekey":"45678"}
     }
 
-    const auto str 
-        = (R"({"account":")" + accountLineEdit->text() 
-         + R"(","password":")" + passwordLineEdit->text() 
-         + R"(","random_key":")" + GetRandomKeyForPasswordTransportation(coreKey)
-         + R"("})")
-         .toStdString();
-    tcpSocket->write(str.c_str());
+    LoginRequestData loginJson;
+    loginJson.SetId(accountLineEdit->text());
+    loginJson.SetPassword(passwordLineEdit->text());
+    loginJson.SetRandomKey(GetRandomKeyForPasswordTransportation(coreKey));
+    tcpSocket->write(loginJson);
     if (!tcpSocket->waitForBytesWritten())
     {
         emit ConnectToHostFailed();

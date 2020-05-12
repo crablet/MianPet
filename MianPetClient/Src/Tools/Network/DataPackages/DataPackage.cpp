@@ -37,15 +37,16 @@ int DataPackage::GetVersion() const
 
 void DataPackage::SetPayload(const QJsonObject &payload)
 {
-    json.insert("payload", payload);
+    this->payload = payload;
 }
 
 QJsonObject DataPackage::GetPayload() const
 {
-    return json["payload"].toObject();
+    return this->payload;
 }
 
-DataPackage::operator QByteArray() const
+DataPackage::operator QByteArray()
 {
+    json.insert("payload", payload);
     return QJsonDocument(json).toJson(QJsonDocument::Compact);
 }

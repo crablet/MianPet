@@ -31,10 +31,10 @@ public:
     void SetPayload(const QJsonObject &payload);
     QJsonObject GetPayload() const;
 
-    operator QByteArray() const;
+    operator QByteArray();
 
 protected:
-    QJsonObject json;
+    QJsonObject json, payload;
 };
 
 #endif // DATAPACKAGE_H

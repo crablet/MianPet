@@ -16,6 +16,8 @@
 #include "Src/Config/NetworkConstants.h"
 
 #include "Tools/Network/NetworkTools.h"
+#include "Tools/Network/DataPackages/CorekeyRequestData.h"
+#include "Tools/Network/DataPackages/LoginRequestData.h"
 
 #include "FramelessWindow.h"
 
