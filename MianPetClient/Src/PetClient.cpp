@@ -57,7 +57,7 @@ void PetClient::InitializeConnect()
         // 登录成功后开始每分钟发送一次心跳包
         using namespace std::chrono_literals;
         heartbeat = new QTimer(this);
-        connect(heartbeat, &QTimer::timeout, this, &PetClient::SendHeartbeat);
+        connect(heartbeat, &QTimer::timeout, this, &PetClient::Heartbeat);
         heartbeat->start(1min);
     });
 
@@ -121,7 +121,7 @@ void PetClient::leaveEvent([[maybe_unused]] QEvent *event)
 }
 
 // 心跳包释放函数，每一分钟执行一次，一次发一个包，然后结束本次心跳的tcp链接
-void PetClient::SendHeartbeat()
+void PetClient::Heartbeat()
 {
     std::thread heartbeatThread(
     [this]()
@@ -142,6 +142,8 @@ void PetClient::SendHeartbeat()
 
             return;
         }
+
+        // 发送完心跳包以后还需要接收的，但是目前服务器那边还没同步好，所以先没有这个功能
     });
     heartbeatThread.detach();
 }

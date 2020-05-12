@@ -3,6 +3,7 @@
 DataPackage::DataPackage()
 {
     SetVersion(MianPetVersion);
+    SetId(mianPetId);
 }
 
 void DataPackage::SetMethod(int method)
@@ -33,6 +34,16 @@ void DataPackage::SetVersion(int version)
 int DataPackage::GetVersion() const
 {
     return json["version"].toInt();
+}
+
+void DataPackage::SetId(const QString &id)
+{
+    json.insert("id", id);
+}
+
+QString DataPackage::GetId() const
+{
+    return json["id"].toString();
 }
 
 void DataPackage::SetPayload(const QJsonObject &payload)

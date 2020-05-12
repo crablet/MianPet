@@ -48,7 +48,7 @@ signals:
     void HeartbeatError();
 
 private slots:
-    void SendHeartbeat();
+    void Heartbeat();
 
 private:
     QMovie *petGif;

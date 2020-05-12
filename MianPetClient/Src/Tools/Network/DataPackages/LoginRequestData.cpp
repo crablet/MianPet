@@ -5,16 +5,6 @@ LoginRequestData::LoginRequestData()
     SetHint(LOGIN);
 }
 
-void LoginRequestData::SetId(const QString &id)
-{
-    payload.insert("id", id);
-}
-
-QString LoginRequestData::GetId() const
-{
-    return payload["id"].toString();
-}
-
 void LoginRequestData::SetPassword(const QString &password)
 {
     payload.insert("password", password);

@@ -28,6 +28,9 @@ public:
     void SetVersion(int version);
     int GetVersion() const;
 
+    void SetId(const QString &id);
+    QString GetId() const;
+
     void SetPayload(const QJsonObject &payload);
     QJsonObject GetPayload() const;
 

@@ -25,6 +25,7 @@
 
 #include "Src/Config/UiConstants.h"
 #include "Src/Config/NetworkConstants.h"
+#include "Src/Tools/Network/DataPackages/PetProfileRequestData.h"
 
 #include "FramelessWindow.h"
 

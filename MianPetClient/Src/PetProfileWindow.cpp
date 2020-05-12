@@ -130,7 +130,7 @@ void PetProfileWindow::UpdatePetProfile()
     }
 
     // 并不是要这样做，只是为了调试方便
-    tcpSocket->write("get for petprofilewindow");
+    tcpSocket->write(PetProfileRequestData{});
     if (!tcpSocket->waitForBytesWritten())
     {
         return;

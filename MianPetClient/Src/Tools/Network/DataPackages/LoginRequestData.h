@@ -12,9 +12,6 @@ public:
     LoginRequestData();
 
 public:
-    void SetId(const QString &id);
-    QString GetId() const;
-
     void SetPassword(const QString &password);
     QString GetPassword() const;
 
