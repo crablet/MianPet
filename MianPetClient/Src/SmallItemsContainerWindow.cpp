@@ -1,7 +1,7 @@
 ﻿#include "SmallItemsContainerWindow.h"
 
 SmallItemsContainerWindow::SmallItemsContainerWindow(QWidget *parent) 
-    : FramelessWindow(parent)
+    : FramelessWindow(parent), currentPage(0)
 {
     InitializeUi();
     InitializeConnect();

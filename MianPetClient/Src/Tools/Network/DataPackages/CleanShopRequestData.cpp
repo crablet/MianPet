@@ -3,6 +3,7 @@
 CleanShopRequestData::CleanShopRequestData()
 {
     SetHint(FOOD_SHOP_INFO);
+    SetItems({});
 }
 
 void CleanShopRequestData::SetItems(const QJsonArray &items)

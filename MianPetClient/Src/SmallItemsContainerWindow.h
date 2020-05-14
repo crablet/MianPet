@@ -37,12 +37,15 @@ public:
     void SetWindowTitle(const QString &text);
 
 private:
-    QPushButton *closeButton, *previousPageButton, *nextPageButton;
+    QPushButton *closeButton;
     QLabel *iconLabel, *windowTitleLabel;
 
 protected:
     QPushButton *item0, *item1, *item2, *item3;
+    QPushButton *previousPageButton, *nextPageButton;
     TransparentItemLabel *itemLabel;
+
+    int currentPage;
 };
 
 #endif // SMALLITEMSCONTAINERWINDOW_H
