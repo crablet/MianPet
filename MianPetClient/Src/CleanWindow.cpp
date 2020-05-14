@@ -16,6 +16,8 @@ void CleanWindow::InitializeUi()
 
 void CleanWindow::InitializeConnect()
 {
+    connect(previousPageButton, &QPushButton::clicked, this, &CleanWindow::ViewPreviousPage);
+    connect(nextPageButton, &QPushButton::clicked, this, &CleanWindow::ViewNextPage);
 }
 
 void CleanWindow::DataPrepare()
@@ -53,8 +55,25 @@ void CleanWindow::DataPrepare()
 
 void CleanWindow::ViewPreviousPage()
 {
+    if (currentPage > 0)
+    {
+        --currentPage;
+        const auto rangeBegin = currentPage * 4;
+        const auto rangeEnd = rangeBegin + 4;
+
+        // 展示[rangeBegin, rangeEnd)中的内容
+    }
 }
 
 void CleanWindow::ViewNextPage()
 {
+    const auto max = itemNames.size();
+    if (max >= 2 && currentPage <= max - 2)
+    {
+        ++currentPage;
+        const auto rangeBegin = currentPage * 4;
+        const auto rangeEnd = std::min(rangeBegin + 4, max);
+
+        // 展示[rangeBegin, rangeEnd)中的内容
+    }
 }

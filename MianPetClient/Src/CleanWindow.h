@@ -4,6 +4,7 @@
 #include <thread>
 #include <memory>
 #include <atomic>
+#include <algorithm>
 
 #include <QWidget>
 #include <QFile>

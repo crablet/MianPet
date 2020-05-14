@@ -18,6 +18,8 @@ void FoodWindow::InitializeUi()
 
 void FoodWindow::InitializeConnect()
 {
+    connect(previousPageButton, &QPushButton::clicked, this, &FoodWindow::ViewPreviousPage);
+    connect(nextPageButton, &QPushButton::clicked, this, &FoodWindow::ViewNextPage);
 }
 
 void FoodWindow::DataPrepare()
@@ -55,8 +57,25 @@ void FoodWindow::DataPrepare()
 
 void FoodWindow::ViewPreviousPage()
 {
+    if (currentPage > 0)
+    {
+        --currentPage;
+        const auto rangeBegin = currentPage * 4;
+        const auto rangeEnd = rangeBegin + 4;
+
+        // 展示[rangeBegin, rangeEnd)中的内容
+    }
 }
 
 void FoodWindow::ViewNextPage()
 {
+    const auto max = itemNames.size();
+    if (max >= 2 && currentPage <= max - 2)
+    {
+        ++currentPage;
+        const auto rangeBegin = currentPage * 3;
+        const auto rangeEnd = std::min(rangeBegin + 4, max);
+
+        // 展示[rangeBegin, rangeEnd)中的内容
+    }
 }
