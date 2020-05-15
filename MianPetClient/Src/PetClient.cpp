@@ -58,6 +58,7 @@ void PetClient::InitializeConnect()
         loginWindow->close();
 
         mianPetId = id;
+        tray->setToolTip(mianPetId);    // 登录成功以后托盘提示要改成用户id（或用户名）
 
         // 登录成功后开始每分钟发送一次心跳包
         using namespace std::chrono_literals;
