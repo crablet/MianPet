@@ -126,12 +126,13 @@ void LoginWindow::LoginThreadFunction()
     if (jsonDocument.isObject())
     {
         coreKey = jsonDocument["corekey"].toString();   // {"corekey":"45678"}
+        randomKey = GetRandomKeyForPasswordTransportation(coreKey);
     }
 
     LoginRequestData loginJson;
     loginJson.SetId(accountLineEdit->text());
     loginJson.SetPassword(passwordLineEdit->text());
-    loginJson.SetRandomKey(GetRandomKeyForPasswordTransportation(coreKey));
+    loginJson.SetRandomKey(randomKey);
     tcpSocket->write(loginJson);
     if (!tcpSocket->waitForBytesWritten())
     {

@@ -22,6 +22,7 @@
 #include "Src/Config/NetworkConstants.h"
 
 #include "Tools/Network/DataPackages/HeartbeatData.h"
+#include "Tools/Network/DataPackages/LogoutData.h"
 
 #ifdef Q_OS_WIN
     #pragma execution_character_set("utf-8")
@@ -33,6 +34,7 @@ class PetClient : public QWidget
 
 public:
     PetClient(QWidget *parent = nullptr);
+    ~PetClient();
 
 private:
     void InitializeUi();
@@ -43,6 +45,8 @@ private:
     virtual void mouseReleaseEvent(QMouseEvent *event) override;
     virtual void enterEvent(QEvent *event) override;
     virtual void leaveEvent(QEvent *event) override;
+
+    void Logout() noexcept;
 
 signals:
     void HeartbeatError();

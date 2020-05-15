@@ -10,16 +10,18 @@ inline QString clientPort;
 inline constexpr const char *ServerAddress = "127.0.0.1";
 inline const int ServerPort = 9999;
 inline QString mianPetId;
+inline QString randomKey;
 
 inline constexpr int MianPetVersion = 20200511;
 
 
-/* methor begin */
+/* method begin */
 
 inline constexpr int GET = 0;
 inline constexpr int HERATBEAT = 1;
+inline constexpr int LOGOUT = 2;
 
-/* methor end */
+/* method end */
 
 
 /* hint begin */

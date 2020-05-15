@@ -7,6 +7,11 @@ PetClient::PetClient(QWidget *parent)
     InitializeConnect();
 }
 
+PetClient::~PetClient()
+{
+    Logout();
+}
+
 void PetClient::InitializeUi()
 {
     petGif = new QMovie(R"(:/Pic/test.gif)", {}, this);
@@ -118,6 +123,29 @@ void PetClient::leaveEvent([[maybe_unused]] QEvent *event)
             petToolButtonsContainer->hide();
         }
     });
+}
+
+void PetClient::Logout() noexcept
+{
+    if (!randomKey.isEmpty())   // 如果randomKey存在则说明登录流程至少已经走过一遍了，暂且不论走通没有
+    {
+        this->hide();   // 先隐藏主体让用户以为程序已经完全结束了，耗时的登出操作在后面慢慢做也可以，这样能流畅一些
+
+        heartbeat->stop();  // 心跳包的发送要于登出数据的发送之前停止，以免出现退出之后服务器仍然收到心跳包导致重新上线的情况
+
+        auto tcpSocket = std::make_unique<QTcpSocket>();
+        tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::WriteOnly);
+        if (!tcpSocket->waitForConnected())
+        {
+            return;
+        }
+
+        tcpSocket->write(LogoutData{});
+        if (tcpSocket->waitForBytesWritten())
+        {
+            return;
+        }
+    }
 }
 
 // 心跳包释放函数，每一分钟执行一次，一次发一个包，然后结束本次心跳的tcp链接
