@@ -18,6 +18,7 @@
 //{
 //  "version": int,
 //  "id": string,
+//  "hint": int,
 //  "payload":
 //  {
 //  }
@@ -28,21 +29,32 @@ public:
     DataPackage();
 
 public:
+    // 设置"method"字段
     void SetMethod(int method);
+    // 获取"method"字段的数据
     int GetMethod() const;
 
+    // 设置"hint"字段
     void SetHint(int hint);
+    // 获取"hint"字段的数据
     int GetHint() const;
 
+    // 设置"version"字段
     void SetVersion(int version);
+    // 获取"version"字段的数据
     int GetVersion() const;
 
+    // 设置"id"字段
     void SetId(const QString &id);
+    // 获取"id"字段的数据
     QString GetId() const;
 
+    // 设置"payload"字段
     void SetPayload(const QJsonObject &payload);
+    // 获取"payload"字段的数据
     QJsonObject GetPayload() const;
 
+    // 和QByteArray的类型转换运算符，适合用于QTcpSocket::write(const QByteArray&)函数中
     operator QByteArray();
 
 protected:
