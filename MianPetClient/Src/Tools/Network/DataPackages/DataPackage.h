@@ -8,11 +8,20 @@
 #include <QByteArray>
 
 #ifdef Q_OS_WIN
-    #pragma execution_character_set("utf-8")
+#pragma execution_character_set("utf-8")
 #endif // Q_OS_WIN
 
 #include "Src/Config/NetworkConstants.h"
 
+// 所有数据包的基类
+// 转为待传输的json文件后会拥有以下的通用格式：
+//{
+//  "version": int,
+//  "id": string,
+//  "payload":
+//  {
+//  }
+//}
 class DataPackage
 {
 public:
