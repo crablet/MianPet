@@ -29,6 +29,7 @@ SOURCES += \
     Src/Tools/Network/DataPackages/FoodShopRequestData.cpp \
     Src/Tools/Network/DataPackages/HeartbeatData.cpp \
     Src/Tools/Network/DataPackages/LoginRequestData.cpp \
+    Src/Tools/Network/DataPackages/LogoutData.cpp \
     Src/Tools/Network/DataPackages/PetProfileRequestData.cpp \
     Src/Tools/Network/DataPackages/RequestData.cpp \
     Src/Tools/Network/RSA-Library/rsa.c \
@@ -53,6 +54,7 @@ HEADERS += \
     Src/Tools/Network/DataPackages/FoodShopRequestData.h \
     Src/Tools/Network/DataPackages/HeartbeatData.h \
     Src/Tools/Network/DataPackages/LoginRequestData.h \
+    Src/Tools/Network/DataPackages/LogoutData.h \
     Src/Tools/Network/DataPackages/PetProfileRequestData.h \
     Src/Tools/Network/DataPackages/RequestData.h \
     Src/Tools/Network/NetworkTools.h \
