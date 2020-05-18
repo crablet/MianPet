@@ -9,12 +9,7 @@ Server::Server()
     otl_connect::otl_initialize();
     try
     {
-        std::cout << "info of database connection: uid pwd dsn" << std::endl;
-        std::string uid, pwd, dsn;
-        std::cin >> uid >> pwd >> dsn;
-        const std::string loginInfo = "UID=" + uid + ";PWD=" + pwd + ";DSN=" + dsn;
-        std::cout << loginInfo << std::endl;
-        db.rlogon(loginInfo.c_str());
+        db.rlogon("DSN=TEST");
     }
     catch (otl_exception &p)
     {
