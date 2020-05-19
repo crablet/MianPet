@@ -18,6 +18,7 @@
 //{
 //  "version": int,
 //  "id": string,
+//  "method": int,
 //  "hint": int,
 //  "payload":
 //  {
