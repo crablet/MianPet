@@ -5,6 +5,7 @@
 #include <string>
 #include <utility>
 #include <system_error>
+#include <cinttypes>
 
 #include "asio.hpp"
 #include "simdjson.h"

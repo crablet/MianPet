@@ -25,7 +25,17 @@ void Connection::DoRead()
     {
         if (!ec)
         {
-            reply = std::string(buffer.data(), buffer.data() + length);
+            const auto [json, err] = parser.parse(buffer.data(), length).get<simdjson::dom::object>();
+            if (err)
+            {
+                std::cout << err << std::endl;
+
+                return;
+            }
+            const auto id = std::string(json["id"]);
+            const auto version = static_cast<std::int64_t>(json["version"]);
+            const auto method = static_cast<std::int64_t>(json["method"]);
+            reply = id + std::to_string(version) + std::to_string(method);
             // do something and do write
             DoWrite();
         }
