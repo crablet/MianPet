@@ -11,6 +11,7 @@ link_libraries(pthread)
 include_directories(./Src/asio-1.16.1)
 include_directories(./Src/simdjson-0.3.1) #repeated
 include_directories(./Src/otl-4.0.455)
+include_directories(./Src/Config)
 
 aux_source_directory(./Src DIR_SRSC)
 aux_source_directory(./Src/simdjson-0.3.1 SIMDJSON_SRC) #repeated

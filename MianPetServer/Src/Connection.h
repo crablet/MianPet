@@ -6,9 +6,12 @@
 #include <utility>
 #include <system_error>
 #include <cinttypes>
+#include <thread>
 
 #include "asio.hpp"
 #include "simdjson.h"
+
+#include "Config/NetworkConstants.h"
 
 class ConnectionManager;
 
@@ -27,6 +30,9 @@ public:
 private:
     void DoRead();
     void DoWrite();
+
+    // 用于处理json文件所指定的任务，其中会解析json文件并分发任务至各个线程
+    void TaskRunnerThread(int jsonLength);
 
 private:
     asio::ip::tcp::socket socket;

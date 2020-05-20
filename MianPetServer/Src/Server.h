@@ -11,6 +11,8 @@
 #include "Connection.h"
 #include "ConnectionManager.h"
 
+#include "Config/NetworkConstants.h"
+
 #define OTL_ODBC // Compile OTL 4.0/ODBC
 // The following #define is required with MyODBC 3.51.11 and higher
 #define OTL_ODBC_SELECT_STM_EXECUTE_BEFORE_DESCRIBE

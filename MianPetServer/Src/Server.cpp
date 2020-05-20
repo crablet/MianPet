@@ -26,7 +26,7 @@ Server::Server()
 #endif // SIGQUIT
     DoAwaitStop();
 
-    const auto endpoint = asio::ip::tcp::endpoint(asio::ip::tcp::v4(), 9999);
+    const auto endpoint = asio::ip::tcp::endpoint(asio::ip::tcp::v4(), ServerPort);
     acceptor.open(endpoint.protocol());
     acceptor.set_option(asio::ip::tcp::acceptor::reuse_address(true));
     acceptor.bind(endpoint);
