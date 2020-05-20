@@ -8,7 +8,7 @@ inline QString clientAddress;
 inline QString clientPort;
 
 inline constexpr const char *ServerAddress = "127.0.0.1";
-inline const int ServerPort = 9999;
+inline constexpr int ServerPort = 9999;
 inline QString mianPetId;
 inline QString randomKey;
 
