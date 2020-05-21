@@ -1,0 +1,41 @@
+﻿CREATE TABLE userinfo
+(
+    id CHAR(16) NOT NULL PRIMARY KEY,
+    username CHAR(24) NOT NULL,
+    password CHAR(32) NOT NULL,
+    logintime DATETIME NOT NULL,
+    online TINYINT(1) NOT NULL,
+    secretkey CHAR(18)
+);
+
+CREATE TABLE petprofile
+(
+    id CHAR(16) NOT NULL PRIMARY KEY,
+    username CHAR(24) NOT NULL,
+    level SMALLINT UNSIGNED NOT NULL,
+    age INT UNSIGNED NOT NULL,
+    growth INT UNSIGNED NOT NULL,
+    food SMALLINT UNSIGNED NOT NULL,
+    clean SMALLINT UNSIGNED NOT NULL,
+    health TINYINT UNSIGNED NOT NULL,
+    mood SMALLINT UNSIGNED NOT NULL,
+    growth_speed TINYINT UNSIGNED NOT NULL,
+    status CHAR(24) NOT NULL,
+    online_time INT UNSIGNED NOT NULL
+);
+
+CREATE TABLE shopinfo
+(
+    itemname CHAR(18) NOT NULL PRIMARY KEY,
+    price SMALLINT NOT NULL,
+    descrpition VARCHAR(32),
+    type TINYINT UNSIGNED NOT NULL
+);
+
+CREATE TABLE ownitems
+(
+    itemname CHAR(18) NOT NULL PRIMARY KEY,
+    quantity SMALLINT UNSIGNED NOT NULL,
+    type TINYINT UNSIGNED NOT NULL,
+    id CHAR(16) NOT NULL
+);

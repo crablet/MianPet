@@ -19,7 +19,7 @@
 ## 商店货品信息
 |  itemname |  price |description|      type      |
 |:---------:|:------:|:---------:|:--------------:|
-|  CHAR(18) |SMALLINT|  VARCHAR  |TINYINT UNSIGNED|
+|  CHAR(18) |SMALLINT|VARCHAR(32)|TINYINT UNSIGNED|
 |  NOT NULL |NOT NULL|           |    NOT NULL    |
 |PRIMARY KEY|        |           |                |
 
