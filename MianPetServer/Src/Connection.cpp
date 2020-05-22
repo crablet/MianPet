@@ -61,7 +61,7 @@ void Connection::TaskRunnerThread(int jsonLength)
         try
         {
             const auto json = parser.parse(buffer.data(), jsonLength).get<simdjson::dom::object>();
-            const auto id = std::string(json["id"]);
+            const char *id = json["id"].get<const char*>();
             const auto version = static_cast<std::int64_t>(json["version"]);
             const auto method = static_cast<std::int64_t>(json["method"]);
 
@@ -83,11 +83,13 @@ void Connection::TaskRunnerThread(int jsonLength)
                 }
                 else if (hint == CORE_KEY_FOR_PASSWORD_TRANSPORTATION)
                 {
-
+                    DealWithGetCoreKeyForPasswordTransportation();
                 }
                 else if (hint == LOGIN)
                 {
-
+                    const char *password = payload["password"].get<const char*>();
+                    const char *randomKey = payload["random_key"].get<const char*>();
+                    DealWithGetLogin(id, password, randomKey);
                 }
                 else
                 {
@@ -106,9 +108,6 @@ void Connection::TaskRunnerThread(int jsonLength)
             {
                 // error
             }
-            reply = id + std::to_string(version) + std::to_string(method);
-
-            DoWrite();
         }
         catch (const simdjson::simdjson_error &err)
         {
@@ -116,4 +115,60 @@ void Connection::TaskRunnerThread(int jsonLength)
         }
     });
     taskRunner.detach();
+}
+
+void Connection::DealWithGetCoreKeyForPasswordTransportation()
+{
+    std::random_device rd;
+    std::minstd_rand gen(rd());
+    std::uniform_int_distribution<> dis(100000, 999999);
+    reply = R"({"corekey":")" + std::to_string(dis(gen)) + R"("})";
+
+    DoWrite();
+}
+
+void Connection::DealWithGetLogin(const char *id, const char *password, const char *randomKey)
+{
+    try
+    {
+        std::lock_guard<std::mutex> lock(dbMutex);
+
+        constexpr const char *sqlStr =
+            R"(SELECT password, online, secretkey
+               FROM userinfo
+               WHERE id = :id<char[16]>)";
+        otl_stream otlCur(64, sqlStr, db);
+        otlCur << id;
+
+        char truePassword[32 + 1];
+        int online;
+        char trueSecretKey[18 + 1];
+        for (auto &in : otlCur)
+        {
+            in >> truePassword >> online >> trueSecretKey;
+        }
+
+        if (std::strncmp(password, truePassword, 32) == 0)
+        {
+            if (online)
+            {
+                reply = R"({"status":"failed"})";
+            }
+            else
+            {
+                reply = R"({"status":"success"})";
+            }
+        }
+        else
+        {
+            reply = R"({"status":"failed"})";
+        }
+
+        DoWrite();
+    }
+    catch (const otl_exception &exp)
+    {
+        std::cout << exp.stm_text << std::endl;
+        std::cout << exp.msg << std::endl;
+    }
 }

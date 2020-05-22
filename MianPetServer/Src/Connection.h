@@ -7,11 +7,14 @@
 #include <system_error>
 #include <cinttypes>
 #include <thread>
+#include <random>
 
 #include "asio.hpp"
 #include "simdjson.h"
 
 #include "Config/NetworkConstants.h"
+
+#include "DatabaseSharedVars.h"
 
 class ConnectionManager;
 
@@ -33,6 +36,9 @@ private:
 
     // 用于处理json文件所指定的任务，其中会解析json文件并分发任务至各个线程
     void TaskRunnerThread(int jsonLength);
+
+    void DealWithGetCoreKeyForPasswordTransportation();
+    void DealWithGetLogin(const char *id, const char *password, const char *randomKey);
 
 private:
     asio::ip::tcp::socket socket;

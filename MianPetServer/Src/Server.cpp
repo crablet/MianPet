@@ -6,9 +6,9 @@ Server::Server()
       acceptor(ioContext),
       connectionManager()
 {
-    otl_connect::otl_initialize();
     try
     {
+        otl_connect::otl_initialize(1); // 1 for multi-threaded
         db.rlogon("DSN=TEST");
     }
     catch (otl_exception &p)
