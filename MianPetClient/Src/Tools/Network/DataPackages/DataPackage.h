@@ -19,7 +19,7 @@
 //  "version": int,
 //  "id": string,
 //  "method": int,
-//  "hint": int,
+//  "hint": int,    // 若"method"为GET才会有此字段
 //  "payload":
 //  {
 //  }

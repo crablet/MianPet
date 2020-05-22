@@ -129,6 +129,15 @@ void LoginWindow::LoginThreadFunction()
         randomKey = GetRandomKeyForPasswordTransportation(coreKey);
     }
 
+    tcpSocket = std::make_unique<QTcpSocket>(); // 这里每个tcp连接都是短连接，要想重新发数据必须重新新建一个tcp连接
+    tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+    if (!tcpSocket->waitForConnected())
+    {
+        emit ConnectToHostFailed();
+
+        return;
+    }
+
     LoginRequestData loginJson;
     loginJson.SetId(accountLineEdit->text());
     loginJson.SetPassword(passwordLineEdit->text());
