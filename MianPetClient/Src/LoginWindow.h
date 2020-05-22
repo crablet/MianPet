@@ -18,6 +18,7 @@
 #include "Tools/Network/NetworkTools.h"
 #include "Tools/Network/DataPackages/CorekeyRequestData.h"
 #include "Tools/Network/DataPackages/LoginRequestData.h"
+#include "spdlog/spdlog.h"
 
 #include "FramelessWindow.h"
 
