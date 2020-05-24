@@ -2,7 +2,7 @@
 
 CleanShopRequestData::CleanShopRequestData()
 {
-    SetHint(FOOD_SHOP_INFO);
+    SetHint(CLEAN_SHOP_INFO);
     SetItems({});
 }
 

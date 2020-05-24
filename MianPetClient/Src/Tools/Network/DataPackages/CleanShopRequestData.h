@@ -11,7 +11,7 @@
 //  "version": int,
 //  "id": string,
 //  "method": GET,
-//  "hint": FOOD_SHOP_INFO,
+//  "hint": CLEAN_SHOP_INFO,
 //  "payload":
 //  {
 //     "items": array
