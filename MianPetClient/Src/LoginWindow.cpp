@@ -141,7 +141,6 @@ void LoginWindow::LoginThreadFunction()
     LoginRequestData loginJson;
     loginJson.SetId(accountLineEdit->text());
     loginJson.SetPassword(passwordLineEdit->text());
-    loginJson.SetRandomKey(randomKey);
     tcpSocket->write(loginJson);
     if (!tcpSocket->waitForBytesWritten())
     {

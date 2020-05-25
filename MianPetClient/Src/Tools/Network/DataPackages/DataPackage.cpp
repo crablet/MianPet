@@ -4,6 +4,7 @@ DataPackage::DataPackage()
 {
     SetVersion(MianPetVersion);
     SetId(mianPetId);
+    SetRandomKey(randomKey);
 }
 
 void DataPackage::SetMethod(int method)
@@ -54,6 +55,16 @@ void DataPackage::SetPayload(const QJsonObject &payload)
 QJsonObject DataPackage::GetPayload() const
 {
     return this->payload;
+}
+
+void DataPackage::SetRandomKey(const QString &randomKey)
+{
+    json.insert("random_key", randomKey);
+}
+
+QString DataPackage::GetRandomKey() const
+{
+    return json["random_key"].toString();
 }
 
 DataPackage::operator QByteArray()

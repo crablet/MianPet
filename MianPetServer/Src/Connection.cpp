@@ -62,6 +62,7 @@ void Connection::TaskRunnerThread(int jsonLength)
         {
             const auto json = parser.parse(buffer.data(), jsonLength).get<simdjson::dom::object>();
             const char *id = json["id"].get<const char*>();
+            const char *randomKey = json["random_key"].get<const char *>();
             const auto version = static_cast<std::int64_t>(json["version"]);
             const auto method = static_cast<std::int64_t>(json["method"]);
 
@@ -88,7 +89,6 @@ void Connection::TaskRunnerThread(int jsonLength)
                 else if (hint == LOGIN)
                 {
                     const char *password = payload["password"].get<const char*>();
-                    const char *randomKey = payload["random_key"].get<const char*>();
                     DealWithGetLogin(id, password, randomKey);
                 }
                 else

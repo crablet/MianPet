@@ -20,6 +20,7 @@
 //  "id": string,
 //  "method": int,
 //  "hint": int,    // 若"method"为GET才会有此字段
+//  "random_key": string
 //  "payload":
 //  {
 //  }
@@ -54,6 +55,11 @@ public:
     void SetPayload(const QJsonObject &payload);
     // 获取"payload"字段的数据
     QJsonObject GetPayload() const;
+
+    // 设置"random_key"字段
+    void SetRandomKey(const QString &randomKey);
+    // 获取"random_key"字段的数据
+    QString GetRandomKey() const;
 
     // 和QByteArray的类型转换运算符，适合用于QTcpSocket::write(const QByteArray&)函数中
     operator QByteArray();

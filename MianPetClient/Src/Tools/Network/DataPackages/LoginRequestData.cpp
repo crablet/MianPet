@@ -14,13 +14,3 @@ QString LoginRequestData::GetPassword() const
 {
     return payload["password"].toString();
 }
-
-void LoginRequestData::SetRandomKey(const QString &randomKey)
-{
-    payload.insert("random_key", randomKey);
-}
-
-QString LoginRequestData::GetRandomKey() const
-{
-    return payload["random_key"].toString();
-}
