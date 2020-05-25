@@ -55,7 +55,7 @@ private:
     QWidget *upperWidget, *lowerWidget;
     QFormLayout *upperLayout;
     QVBoxLayout *lowerLayout, *allLayout;
-    QLabel *nicknameLabel, *idLabel, *levelLabel, *ageLabel, *grouthSpeedLabel, *statusLabel, *onlineTimeLabel;
+    QLabel *usernameLabel, *idLabel, *levelLabel, *ageLabel, *grouthSpeedLabel, *statusLabel, *onlineTimeLabel;
     QProgressBar *growthBar, *foodBar, *cleanBar, *healthBar, *moodBar;
     QTimer *closeCountdownTimer;
 };

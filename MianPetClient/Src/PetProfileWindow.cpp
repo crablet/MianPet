@@ -19,7 +19,7 @@ void PetProfileWindow::InitializeUi()
     setAttribute(Qt::WA_DeleteOnClose);
     setAttribute(Qt::WA_TranslucentBackground);
 
-    nicknameLabel = new QLabel;
+    usernameLabel = new QLabel;
     idLabel = new QLabel;
     levelLabel = new QLabel;
     ageLabel = new QLabel;
@@ -44,7 +44,7 @@ void PetProfileWindow::InitializeUi()
     moodBar->setAlignment(Qt::AlignCenter);
 
     upperLayout = new QFormLayout(this);
-    upperLayout->addRow("昵称：", nicknameLabel);
+    upperLayout->addRow("昵称：", usernameLabel);
     upperLayout->addRow("号码：", idLabel);
     upperLayout->addRow("等级：", levelLabel);
     upperLayout->addRow("年龄：", ageLabel);
@@ -160,7 +160,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
     const auto jsonDocument = QJsonDocument::fromJson(profile);
     if (jsonDocument.isObject())
     {
-        nicknameLabel->setText(jsonDocument["nickname"].toString());
+        usernameLabel->setText(jsonDocument["username"].toString());
         idLabel->setText(jsonDocument["id"].toString());
         levelLabel->setText(QString::number(jsonDocument["level"].toInt()));
         ageLabel->setText(QString::number(jsonDocument["age"].toInt()) + "小时");
@@ -169,7 +169,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         cleanBar->setValue(jsonDocument["clean"].toInt());
         healthBar->setValue(jsonDocument["health"].toInt());
         moodBar->setValue(jsonDocument["mood"].toInt());
-        grouthSpeedLabel->setText("成长速度：" + QString::number(jsonDocument["grouth_speed"].toInt()) + "/小时");
+        grouthSpeedLabel->setText("成长速度：" + QString::number(jsonDocument["growth_speed"].toInt()) + "/小时");
         statusLabel->setText("状态：" + jsonDocument["status"].toString());
         onlineTimeLabel->setText("在线时间：" + QString::number(jsonDocument["online_time"].toInt()) + "分钟");
     }

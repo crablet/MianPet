@@ -80,11 +80,11 @@ void Connection::TaskRunnerThread(int jsonLength)
                 }
                 else if (hint == PETPROFILE)
                 {
-
+                    DealWithGetPetProfile(id, randomKey);
                 }
                 else if (hint == CORE_KEY_FOR_PASSWORD_TRANSPORTATION)
                 {
-                    DealWithGetCoreKeyForPasswordTransportation();
+                    DealWithGetCoreKeyForPasswordTransportation(id);
                 }
                 else if (hint == LOGIN)
                 {
@@ -117,14 +117,48 @@ void Connection::TaskRunnerThread(int jsonLength)
     taskRunner.detach();
 }
 
-void Connection::DealWithGetCoreKeyForPasswordTransportation()
+void Connection::DealWithGetCoreKeyForPasswordTransportation(const char *id)
 {
-    std::random_device rd;
-    std::minstd_rand gen(rd());
-    std::uniform_int_distribution<> dis(100000, 999999);
-    reply = R"({"corekey":")" + std::to_string(dis(gen)) + R"("})";
+    try
+    {
+        std::lock_guard<std::mutex> lock(dbMutex);
 
-    DoWrite();
+        constexpr const char *sqlStr =
+            R"(SELECT online
+               FROM userinfo
+               WHERE id = :id<char[16]>)";
+        otl_stream selectStream(64, sqlStr, db);
+        selectStream << id;
+
+        int online;
+        for (auto &r : selectStream)
+        {
+            r << online;
+        }
+
+        if (online)
+        {
+            reply = R"({"status":"failed"})";
+        }
+        else
+        {
+            std::random_device rd;
+            std::minstd_rand gen(rd());
+            std::uniform_int_distribution<> dis(100000, 999999);
+
+            const auto key = std::to_string(dis(gen));
+            tempKeyOf[id] = key;
+
+            reply = R"({"corekey":")" + key + R"("})";
+        }
+
+        DoWrite();
+    }
+    catch (const otl_exception &exp)
+    {
+        std::cout << exp.stm_text << std::endl;
+        std::cout << exp.msg << std::endl;
+    }
 }
 
 void Connection::DealWithGetLogin(const char *id, const char *password, const char *randomKey)
@@ -137,13 +171,13 @@ void Connection::DealWithGetLogin(const char *id, const char *password, const ch
             R"(SELECT password, online, secretkey
                FROM userinfo
                WHERE id = :id<char[16]>)";
-        otl_stream otlCur(64, sqlStr, db);
-        otlCur << id;
+        otl_stream selectStream(64, sqlStr, db);
+        selectStream << id;
 
         char truePassword[32 + 1];
         int online;
         char trueSecretKey[18 + 1];
-        for (auto &in : otlCur)
+        for (auto &in : selectStream)
         {
             in >> truePassword >> online >> trueSecretKey;
         }
@@ -156,6 +190,15 @@ void Connection::DealWithGetLogin(const char *id, const char *password, const ch
             }
             else
             {
+                // TODO: need an extra compare between screctkey and tempKeyOf[id]
+
+                constexpr const char *updateSecretKeySql =
+                    R"(UPDATE userinfo
+                       SET secretkey = :key<char[24]>, online = 1
+                       WHERE id = :id<char[16]>)";
+                otl_stream updateStream(1, updateSecretKeySql, db);
+                updateStream << randomKey << id;
+
                 reply = R"({"status":"success"})";
             }
         }
@@ -171,4 +214,74 @@ void Connection::DealWithGetLogin(const char *id, const char *password, const ch
         std::cout << exp.stm_text << std::endl;
         std::cout << exp.msg << std::endl;
     }
+}
+
+void Connection::DealWithGetPetProfile(const char *id, const char *randomKey)
+{
+    //try
+    //{
+    //    std::lock_guard<std::mutex> lock(dbMutex);
+
+    //    constexpr const char *checkOnlineAndSecretKeySqlStr =
+    //        R"(SELECT online, secretKey FROM userinfo
+    //           WHERE id = :id<char[16]>)";
+    //    otl_stream checkOnlineStream(64, checkOnlineAndSecretKeySqlStr, db);
+    //    checkOnlineStream << id;
+    //    
+    //    int online;
+    //    char trueSecretKey[18 + 1];
+    //    for (auto &r : checkOnlineStream)
+    //    {
+    //        r >> online >> trueSecretKey;
+    //    }
+
+    //    if (online)
+    //    {
+    //        if (std::strncmp(randomKey, trueSecretKey, 18) == 0)
+    //        {
+    //            constexpr const char *petprofileSql =
+    //                R"(SELECT id, user, level, age, growth, food, clean, health, mood, growth_speed, status, online_time
+    //                   FROM petprofile
+    //                   WHERE id = :id<char[16]>)";
+    //            otl_stream petprofileStream(384, petprofileSql, db);
+    //            petprofileStream << id;
+
+    //            char id[16 + 1];
+    //            char username[24 + 1];
+    //            int level, age, growth, food, clean, health, mood, growthSpeed;
+    //            char status[24 + 1];
+    //            int onlineTime;
+    //            for (auto &r : petprofileStream)
+    //            {
+    //                r >> id >> username >> level >> age >> growth 
+    //                  >> food >> clean >> health >> mood >> growthSpeed 
+    //                  >> status >> onlineTime;
+    //            }
+
+    //            char buffer[384];
+    //            std::snprintf
+    //            (
+    //                buffer, 384,
+    //                R"("{"id":"%s","username":"%s","level":%d,"age":%d,"growth":%d,"food":%d,"clean":%d,"health":%d,"mood":%d,"growth_speed":%d,"status":"%s","online_time":%d}")",
+    //                id, username, level, age, growth, food, clean, health, mood, growthSpeed, status, onlineTime
+    //            );
+    //            reply = buffer;
+    //        }
+    //        else
+    //        {
+    //            reply = R"({"status":"failed"})";
+    //        }
+    //    }
+    //    else
+    //    {
+    //        reply = R"({"status":"failed"})";
+    //    }
+
+    //    DoWrite();
+    //}
+    //catch (const otl_exception &exp)
+    //{
+    //    std::cout << exp.stm_text << std::endl;
+    //    std::cout << exp.msg << std::endl;
+    //}
 }

@@ -8,6 +8,9 @@
 #include <cinttypes>
 #include <thread>
 #include <random>
+#include <iostream>
+#include <cstdio>
+#include <unordered_map>
 
 #include "asio.hpp"
 #include "simdjson.h"
@@ -37,8 +40,9 @@ private:
     // 用于处理json文件所指定的任务，其中会解析json文件并分发任务至各个线程
     void TaskRunnerThread(int jsonLength);
 
-    void DealWithGetCoreKeyForPasswordTransportation();
+    void DealWithGetCoreKeyForPasswordTransportation(const char *id);
     void DealWithGetLogin(const char *id, const char *password, const char *randomKey);
+    void DealWithGetPetProfile(const char *id, const char *randomKey);
 
 private:
     asio::ip::tcp::socket socket;
@@ -48,6 +52,8 @@ private:
     std::array<char, 8192> buffer;
 
     std::string reply;
+
+    inline static std::unordered_map<std::string, std::string> tempKeyOf{};
 
     inline static simdjson::dom::parser parser{};
 };
