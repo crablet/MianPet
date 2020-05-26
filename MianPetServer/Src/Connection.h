@@ -44,6 +44,8 @@ private:
     void DealWithGetLogin(const char *id, const char *password, const char *randomKey);
     void DealWithGetPetProfile(const char *id, const char *randomKey);
 
+    void DealWithLogout(const char *id, const char *randomKey);
+
 private:
     asio::ip::tcp::socket socket;
     

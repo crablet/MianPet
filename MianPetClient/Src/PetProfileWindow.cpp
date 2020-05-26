@@ -129,7 +129,6 @@ void PetProfileWindow::UpdatePetProfile()
         return;
     }
 
-    // 并不是要这样做，只是为了调试方便
     tcpSocket->write(PetProfileRequestData{});
     if (!tcpSocket->waitForBytesWritten())
     {
@@ -164,11 +163,11 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         idLabel->setText(jsonDocument["id"].toString());
         levelLabel->setText(QString::number(jsonDocument["level"].toInt()));
         ageLabel->setText(QString::number(jsonDocument["age"].toInt()) + "小时");
-        growthBar->setValue(jsonDocument["growth"].toInt());
-        foodBar->setValue(jsonDocument["food"].toInt());
-        cleanBar->setValue(jsonDocument["clean"].toInt());
-        healthBar->setValue(jsonDocument["health"].toInt());
-        moodBar->setValue(jsonDocument["mood"].toInt());
+        growthBar->setValue(jsonDocument["growth"].toInt());    // TODO: 这几个要按照换算公式换回百分比
+        foodBar->setValue(jsonDocument["food"].toInt());        // TODO: 这几个要按照换算公式换回百分比
+        cleanBar->setValue(jsonDocument["clean"].toInt());      // TODO: 这几个要按照换算公式换回百分比
+        healthBar->setValue(jsonDocument["health"].toInt());    // TODO: 这几个要按照换算公式换回百分比
+        moodBar->setValue(jsonDocument["mood"].toInt());        // TODO: 这几个要按照换算公式换回百分比
         grouthSpeedLabel->setText("成长速度：" + QString::number(jsonDocument["growth_speed"].toInt()) + "/小时");
         statusLabel->setText("状态：" + jsonDocument["status"].toString());
         onlineTimeLabel->setText("在线时间：" + QString::number(jsonDocument["online_time"].toInt()) + "分钟");

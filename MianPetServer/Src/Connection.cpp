@@ -102,7 +102,7 @@ void Connection::TaskRunnerThread(int jsonLength)
             }
             else if (method == LOGOUT)
             {
-
+                DealWithLogout(id, randomKey);
             }
             else
             {
@@ -278,6 +278,53 @@ void Connection::DealWithGetPetProfile(const char *id, const char *randomKey)
         }
 
         DoWrite();
+    }
+    catch (const otl_exception &exp)
+    {
+        std::cout << exp.stm_text << std::endl;
+        std::cout << exp.msg << std::endl;
+    }
+}
+
+void Connection::DealWithLogout(const char *id, const char *randomKey)
+{
+    try
+    {
+        std::lock_guard<std::mutex> lock(dbMutex);
+
+        constexpr const char *checkOnlineAndSecretKeySqlStr =
+            R"(SELECT online, secretKey FROM userinfo
+               WHERE id = :id<char[16]>)";
+        otl_stream checkOnlineStream(64, checkOnlineAndSecretKeySqlStr, db);
+        checkOnlineStream << id;
+
+        int online;
+        char trueSecretKey[18 + 1];
+        for (auto &r : checkOnlineStream)
+        {
+            r >> online >> trueSecretKey;
+        }
+
+        if (online)
+        {
+            if (std::strncmp(randomKey, trueSecretKey, 18) == 0)
+            {
+                constexpr const char *updateSql =
+                    R"(UPDATE userinfo
+                       SET online = 0, secretkey = NULL
+                       WHERE id = :id<char[16]>)";
+                otl_stream updateStream(1, updateSql, db);
+                updateStream << id;
+            }
+            else
+            {
+                // error
+            }
+        }
+        else
+        {
+            // error
+        }
     }
     catch (const otl_exception &exp)
     {
