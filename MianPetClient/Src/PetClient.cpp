@@ -56,6 +56,7 @@ void PetClient::InitializeConnect()
     connect(loginWindow, &LoginWindow::LoginSucceeded, this, [=](const QString &id)
     {
         this->show();
+        HideTaskbarIconOf(this);
         loginWindow->close();
 
         mianPetId = id;

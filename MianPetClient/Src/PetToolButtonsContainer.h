@@ -12,7 +12,7 @@
 #include "CleanWindow.h"
 #include "PetProfileWindow.h"
 
-//#include "Tools/Ui/UiTools.h"
+#include "Tools/Ui/UiTools.h"
 
 class PetToolButtonsContainer : public QWidget
 {
