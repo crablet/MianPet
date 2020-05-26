@@ -24,6 +24,8 @@
 #include "Tools/Network/DataPackages/HeartbeatData.h"
 #include "Tools/Network/DataPackages/LogoutData.h"
 
+#include "Tools/Ui/UiTools.h"
+
 #ifdef Q_OS_WIN
     #pragma execution_character_set("utf-8")
 #endif // Q_OS_WIN

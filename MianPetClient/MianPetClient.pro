@@ -61,6 +61,7 @@ HEADERS += \
     Src/Tools/Network/DataPackages/RequestData.h \
     Src/Tools/Network/NetworkTools.h \
     Src/Tools/Network/RSA-Library/rsa.h \
+    Src/Tools/Ui/UiTools.h \
     Src/TransparentItemLabel.h
 
 # Default rules for deployment.

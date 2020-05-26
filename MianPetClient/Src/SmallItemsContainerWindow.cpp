@@ -1,4 +1,5 @@
 ﻿#include "SmallItemsContainerWindow.h"
+#include "Tools/Ui/UiTools.h"   // 在此包含是为了避免std::min, std::max无法使用的问题，因为Windows.h宏定义了它们
 
 SmallItemsContainerWindow::SmallItemsContainerWindow(QWidget *parent) 
     : FramelessWindow(parent), currentPage(0)
@@ -76,6 +77,7 @@ void SmallItemsContainerWindow::InitializeUi()
     item3->installEventFilter(this);
 
     itemLabel = new TransparentItemLabel;
+    HideTaskbarIconOf(itemLabel);
 }
 
 void SmallItemsContainerWindow::InitializeConnect()

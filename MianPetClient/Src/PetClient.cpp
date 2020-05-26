@@ -29,6 +29,7 @@ void PetClient::InitializeUi()
     petToolButtonsContainer->setFixedWidth(PetToolButtonsContainerWidth);
     petToolButtonsContainer->setFixedHeight(PetToolButtonsContainerHeight);
     petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - PetToolButtonsContainerUiDelta));
+    HideTaskbarIconOf(petToolButtonsContainer);
 
     auto *exitAction = new QAction("退出", this);
     connect(exitAction, &QAction::triggered, [=]()

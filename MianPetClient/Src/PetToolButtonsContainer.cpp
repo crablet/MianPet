@@ -51,6 +51,7 @@ void PetToolButtonsContainer::OnFoodButtonClicked()
 {
     foodWindow = new FoodWindow;
     foodWindow->show();
+    //HideTaskbarIconOf(foodWindow);
     disconnect(foodButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
     connect(foodWindow, &FoodWindow::destroyed, [=]()
     {
@@ -62,6 +63,7 @@ void PetToolButtonsContainer::OnCleanButtonClicked()
 {
     cleanWindow = new CleanWindow;
     cleanWindow->show();
+    //HideTaskbarIconOf(cleanWindow);
     disconnect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnCleanButtonClicked);
     connect(cleanWindow, &CleanWindow::destroyed, [=]()
     {
@@ -73,6 +75,7 @@ void PetToolButtonsContainer::OnPetProfileButtonClicked()
 {
     petProfileWindow = new PetProfileWindow;
     petProfileWindow->show();
+    //HideTaskbarIconOf(petProfileWindow);
     disconnect(petProfileButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnPetProfileButtonClicked);
     connect(petProfileWindow, &PetProfileWindow::destroyed, [=]()
     {
