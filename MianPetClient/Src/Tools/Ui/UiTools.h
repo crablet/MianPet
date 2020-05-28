@@ -9,6 +9,7 @@
 #endif // Q_OS_WIN
 
 // 隐藏widget在任务栏上的图标
+// 当Qt::Tool不生效时才使用这个函数，否则优先使用Qt::Tool来隐藏widget在任务栏上的图标
 inline void HideTaskbarIconOf(QWidget *widget) noexcept
 {
 #ifdef Q_OS_WIN

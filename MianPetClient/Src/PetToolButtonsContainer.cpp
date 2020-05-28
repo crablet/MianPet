@@ -36,7 +36,7 @@ void PetToolButtonsContainer::InitializeUi()
 
     this->setLayout(layout);
 
-    setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+    setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool);  // Qt::Tool属性使得其任务栏图标被隐藏
     setAttribute(Qt::WA_TranslucentBackground);
 }
 
@@ -51,7 +51,6 @@ void PetToolButtonsContainer::OnFoodButtonClicked()
 {
     foodWindow = new FoodWindow;
     foodWindow->show();
-    HideTaskbarIconOf(foodWindow);
     disconnect(foodButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
     connect(foodWindow, &FoodWindow::destroyed, [=]()
     {
@@ -63,7 +62,6 @@ void PetToolButtonsContainer::OnCleanButtonClicked()
 {
     cleanWindow = new CleanWindow;
     cleanWindow->show();
-    HideTaskbarIconOf(cleanWindow);
     disconnect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnCleanButtonClicked);
     connect(cleanWindow, &CleanWindow::destroyed, [=]()
     {
@@ -75,7 +73,6 @@ void PetToolButtonsContainer::OnPetProfileButtonClicked()
 {
     petProfileWindow = new PetProfileWindow;
     petProfileWindow->show();
-    HideTaskbarIconOf(petProfileWindow);
     disconnect(petProfileButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnPetProfileButtonClicked);
     connect(petProfileWindow, &PetProfileWindow::destroyed, [=]()
     {

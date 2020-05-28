@@ -16,6 +16,7 @@ void PetProfileWindow::InitializeUi()
     thread.detach();
 
     setFixedSize(PetProfileWindowWidth, PetProfileWindowHeight);
+    setWindowFlags(windowFlags() | Qt::Tool);   // Qt::Tool属性使得其任务栏图标被隐藏
     setAttribute(Qt::WA_DeleteOnClose);
     setAttribute(Qt::WA_TranslucentBackground);
 

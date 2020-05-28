@@ -30,9 +30,9 @@ void TransparentItemLabel::InitializeUi()
 {
     setFixedSize(TransparentItemLabelWidth, TransparentItemLabelHeight);
 #ifdef Q_OS_LINUX
-    setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+    setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint | Qt::Tool); // Qt::Tool属性使得其任务栏图标被隐藏
 #else
-    setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+    setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool);  // Qt::Tool属性使得其任务栏图标被隐藏
 #endif // OS_LINUX
     setWindowOpacity(0.8);
 

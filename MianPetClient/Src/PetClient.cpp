@@ -29,7 +29,6 @@ void PetClient::InitializeUi()
     petToolButtonsContainer->setFixedWidth(PetToolButtonsContainerWidth);
     petToolButtonsContainer->setFixedHeight(PetToolButtonsContainerHeight);
     petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - PetToolButtonsContainerUiDelta));
-    HideTaskbarIconOf(petToolButtonsContainer);
 
     auto *exitAction = new QAction("退出", this);
     connect(exitAction, &QAction::triggered, [=]()
@@ -56,7 +55,7 @@ void PetClient::InitializeConnect()
     connect(loginWindow, &LoginWindow::LoginSucceeded, this, [=](const QString &id)
     {
         this->show();
-        HideTaskbarIconOf(this);
+        HideTaskbarIconOf(this);    // 这里使用Qt::Tool隐藏其任务栏图标会导致主界面闪退，因此才使用这个函数
         loginWindow->close();
 
         mianPetId = id;

@@ -1,5 +1,4 @@
 ﻿#include "SmallItemsContainerWindow.h"
-#include "Tools/Ui/UiTools.h"   // 在此包含是为了避免std::min, std::max无法使用的问题，因为Windows.h宏定义了它们
 
 SmallItemsContainerWindow::SmallItemsContainerWindow(QWidget *parent) 
     : FramelessWindow(parent), currentPage(0)
@@ -12,7 +11,7 @@ void SmallItemsContainerWindow::InitializeUi()
 {
     setFixedSize(SmallItemsContainerWindowWidth, SmallItemsContainerWindowHeight);
     setAttribute(Qt::WA_DeleteOnClose);
-    setWindowFlags(windowFlags() & ~Qt::WindowStaysOnTopHint);   // 取消属性，不然点击按钮的时候弹出框就会被覆盖
+    setWindowFlags(windowFlags() | Qt::Tool);   // Qt::Tool属性使得其任务栏图标被隐藏
 
     QPalette palette;
     palette.setBrush(backgroundRole(), QBrush(SmallItemsContainerWindowBackgroundPixmap));
@@ -77,7 +76,6 @@ void SmallItemsContainerWindow::InitializeUi()
     item3->installEventFilter(this);
 
     itemLabel = new TransparentItemLabel;
-    HideTaskbarIconOf(itemLabel);
 }
 
 void SmallItemsContainerWindow::InitializeConnect()
