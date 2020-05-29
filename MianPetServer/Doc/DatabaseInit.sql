@@ -5,7 +5,8 @@
     password CHAR(32) NOT NULL,
     logintime DATETIME NOT NULL,
     online TINYINT(1) NOT NULL,
-    secretkey CHAR(18)
+    secretkey CHAR(20),
+    heartbeat DATETIME
 );
 
 CREATE TABLE petprofile

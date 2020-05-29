@@ -1,10 +1,10 @@
 ﻿# userinfo
 ## 用于处理登录信息
-|     id    |username|password|logintime|  online  |secretkey|
-|:---------:|:------:|:------:|:-------:|:--------:|:-------:|
-|  CHAR(16) |CHAR(24)|CHAR(32)| DATETIME|TINYINT(1)| CHAR(18)|
-|  NOT NULL |NOT NULL|NOT NULL| NOT NULL| NOT NULL |         |
-|PRIMARY KEY|        |        |         |          |         |
+|     id    |username|password|logintime|  online  |secretkey|heartbeat|
+|:---------:|:------:|:------:|:-------:|:--------:|:-------:|:-------:|
+|  CHAR(16) |CHAR(24)|CHAR(32)| DATETIME|TINYINT(1)| CHAR(20)| DATATIME|
+|  NOT NULL |NOT NULL|NOT NULL| NOT NULL| NOT NULL |         |         |
+|PRIMARY KEY|        |        |         |          |         |         |
 ### 注：在MySQL中用tinyint(1)代替boolean，MySQL并无真实的boolean类型
  
 # petprofile
@@ -14,6 +14,7 @@
 |  CHAR(16) |CHAR(24)|SMALLINT UNSIGNED|INT UNSIGNED|INT UNSIGNED|SMALLINT UNSIGNED|SMALLINT UNSIGNED|TINYINT UNSIGNED|SMALLINT UNSIGNED|TINYINT UNSIGNED|CHAR(24)|INT UNSIGNED|
 |  NOT NULL |NOT NULL|     NOT NULL    |  NOT NULL  |  NOT NULL  |    NOT NULL     |    NOT NULL     |    NOT NULL    |     NOT NULL    |    NOT NULL    |NOT NULL|  NOT NULL  |
 |PRIMARY KEY|        |                 |            |            |                 |                 |                |                 |                |        |            |
+### 注：此处设计时间总和的单位均为分钟，客户端需注意转换单位
 
 # shopinfo
 ## 商店货品信息
