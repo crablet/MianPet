@@ -98,7 +98,7 @@ void Connection::TaskRunnerThread(int jsonLength)
             }
             else if (method == HERATBEAT)
             {
-
+                DealWithHeartbeat(id, randomKey);
             }
             else if (method == LOGOUT)
             {
@@ -194,7 +194,7 @@ void Connection::DealWithGetLogin(const char *id, const char *password, const ch
 
                 constexpr const char *updateSecretKeySql =
                     R"(UPDATE userinfo
-                       SET secretkey = :key<char[24]>, online = 1
+                       SET logintime = NOW(), online = 1, secretkey = :key<char[24]>, heartbeat = NOW()
                        WHERE id = :id<char[16]>)";
                 otl_stream updateStream(1, updateSecretKeySql, db);
                 updateStream << randomKey << id;
@@ -278,6 +278,111 @@ void Connection::DealWithGetPetProfile(const char *id, const char *randomKey)
         }
 
         DoWrite();
+    }
+    catch (const otl_exception &exp)
+    {
+        std::cout << exp.stm_text << std::endl;
+        std::cout << exp.msg << std::endl;
+    }
+}
+
+void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
+{
+    try
+    {
+        std::lock_guard<std::mutex> lock(dbMutex);
+
+        constexpr const char *checkOnlineAndSecretKeySqlStr =
+            R"(SELECT online, secretKey FROM userinfo
+               WHERE id = :id<char[16]>)";
+        otl_stream checkOnlineStream(64, checkOnlineAndSecretKeySqlStr, db);
+        checkOnlineStream << id;
+
+        int online;
+        char trueSecretKey[18 + 1];
+        for (auto &r : checkOnlineStream)
+        {
+            r >> online >> trueSecretKey;
+        }
+
+        if (!online)
+        {
+            // error
+        }
+        else
+        {
+            if (std::strncmp(randomKey, trueSecretKey, 18) != 0)
+            {
+                // error
+            }
+            else
+            {
+                constexpr const char *countMinuteDeltaSql =
+                    R"(SELECT TIMESTAMPDIFF(MINUTE, heartbeat, NOW())
+                       FROM userinfo
+                       WHERE id = :id<char[16]>)";
+                otl_stream countMinuteDeltaStream(16, countMinuteDeltaSql, db);
+                countMinuteDeltaStream << id;
+
+                int minuteDelta;
+                for (auto &r : countMinuteDeltaStream)
+                {
+                    r >> minuteDelta;
+                }
+
+                constexpr const char *updateHeartbeatSql =
+                    R"(UPDATE userinfo
+                       SET heartbeat = NOW()
+                       WHERE id = :id<char[16]>)";
+                otl_stream updateHeartbeatStream(1, updateHeartbeatSql, db);
+                updateHeartbeatStream << id;
+
+                constexpr const char *petprofileSql =
+                    R"(SELECT level, age, growth, food, clean, health, mood, growth_speed, status, online_time
+                       FROM petprofile
+                       WHERE id = :id<char[16]>)";
+                otl_stream petprofileStream(384, petprofileSql, db);
+                petprofileStream << id;
+
+                int level, age, growth, food, clean, health, mood, growthSpeed;
+                char status[24 + 1];
+                int onlineTime;
+                for (auto &r : petprofileStream)
+                {
+                    r >> level >> age >> growth
+                      >> food >> clean >> health >> mood >> growthSpeed
+                      >> status >> onlineTime;
+                }
+
+                const auto newAge = age + growthSpeed * minuteDelta;
+                const auto newGrowth = growth + growthSpeed * minuteDelta;
+                const auto newLevel = 
+                    level + (newGrowth >= 
+                                (level % 2 == 0 ? (1 + level / 2) * level / 2 
+                                                : ((level + 1) / 2) * ((level + 1) / 2)));
+                // TODO: finish the calculation
+                const auto newFood = food;
+                const auto newClean = clean;
+                const auto newHealth = health;
+                const auto newMood = mood;
+                const auto newGrowthSpeed = growthSpeed;
+                char newStatus[24 + 1];
+                std::strcpy(newStatus, status);
+                // TODO: finish the calculation
+
+                const auto newOnlineTime = onlineTime + minuteDelta;
+
+                constexpr const char *updateProfileSql =
+                    R"(UPDATE petprofile
+                       SET level = :newLevel<int>, age = :newAge<int>, growth = :newGrowth<int>, 
+                           food = :newFood<int>, clean = :newClean<int>, health = :newHealth<int>, mood = :newMood<int>, growth_speed = :newGrowthSpeed<int>, 
+                           status = :newStatus<char[24]>, online_time = :newOnlineTime<int>)";
+                otl_stream updateProfileStream(1, updateProfileSql, db);
+                updateProfileStream << newLevel << newAge << newGrowth 
+                                    << newFood << newClean << newHealth << newMood << newGrowthSpeed
+                                    << newStatus << newOnlineTime;
+            }
+        }
     }
     catch (const otl_exception &exp)
     {
