@@ -163,7 +163,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         usernameLabel->setText(jsonDocument["username"].toString());
         idLabel->setText(jsonDocument["id"].toString());
         levelLabel->setText(QString::number(jsonDocument["level"].toInt()));
-        ageLabel->setText(QString::number(jsonDocument["age"].toInt()) + "小时");
+        ageLabel->setText(QString::number(jsonDocument["age"].toInt() / 60) + "小时");
         growthBar->setValue(jsonDocument["growth"].toInt());    // TODO: 这几个要按照换算公式换回百分比
         foodBar->setValue(jsonDocument["food"].toInt());        // TODO: 这几个要按照换算公式换回百分比
         cleanBar->setValue(jsonDocument["clean"].toInt());      // TODO: 这几个要按照换算公式换回百分比
