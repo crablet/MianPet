@@ -6,6 +6,18 @@
 
 #include "RequestData.h"
 
+// 用于向服务器请求用于登录时的数据包，此包包含密码等敏感信息
+// 其拥有以下格式：
+//{
+//  "version": int,
+//  "id": string,
+//  "method": GET,
+//  "hint": LOGIN,
+//  "payload":
+//  {
+//     "password": string
+//  }
+//}
 class LoginRequestData : public RequestData
 {
 public:
