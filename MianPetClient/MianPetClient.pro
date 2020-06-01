@@ -34,7 +34,6 @@ SOURCES += \
     Src/Tools/Network/DataPackages/LogoutData.cpp \
     Src/Tools/Network/DataPackages/PetProfileRequestData.cpp \
     Src/Tools/Network/DataPackages/RequestData.cpp \
-    Src/Tools/Network/RSA-Library/rsa.c \
     Src/TransparentItemLabel.cpp \
     Src/main.cpp \
     Src/PetClient.cpp
@@ -60,7 +59,6 @@ HEADERS += \
     Src/Tools/Network/DataPackages/PetProfileRequestData.h \
     Src/Tools/Network/DataPackages/RequestData.h \
     Src/Tools/Network/NetworkTools.h \
-    Src/Tools/Network/RSA-Library/rsa.h \
     Src/Tools/Ui/UiTools.h \
     Src/TransparentItemLabel.h
 
