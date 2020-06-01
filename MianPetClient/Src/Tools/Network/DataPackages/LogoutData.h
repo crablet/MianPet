@@ -7,12 +7,17 @@
 
 #include "Src/Config/NetworkConstants.h"
 
-// 用于传递登出消息的json文本
-// 其"payload"字段拥有如下格式：
-// "payload":
-// {
+// 用于传递登出消息的数据包
+// 其拥有以下格式：
+//{
+//  "version": int,
+//  "id": string,
+//  "method": HEARTBEAT,
+//  "payload":
+//  {
 //   "random_key": string
-// }
+//  }
+//}
 class LogoutData : public DataPackage
 {
 public:
