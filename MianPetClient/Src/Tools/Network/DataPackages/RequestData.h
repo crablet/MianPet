@@ -9,6 +9,7 @@
 //  "version": int,
 //  "id": string,
 //  "method": GET,
+//  "random_key": string
 //  "payload":
 //  {
 //  }

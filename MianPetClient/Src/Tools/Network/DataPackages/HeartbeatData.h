@@ -9,6 +9,7 @@
 //  "version": int,
 //  "id": string,
 //  "method": HEARTBEAT,
+//  "random_key": string
 //  "payload":
 //  {
 //  }

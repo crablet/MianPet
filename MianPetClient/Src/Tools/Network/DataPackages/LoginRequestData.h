@@ -13,6 +13,7 @@
 //  "id": string,
 //  "method": GET,
 //  "hint": LOGIN,
+//  "random_key": string
 //  "payload":
 //  {
 //     "password": string

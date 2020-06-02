@@ -12,6 +12,7 @@
 //  "id": string,
 //  "method": GET,
 //  "hint": CLEAN_SHOP_INFO,
+//  "random_key": string
 //  "payload":
 //  {
 //     "items": array
