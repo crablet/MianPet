@@ -10,7 +10,7 @@
 //  "id": string,
 //  "method": GET,
 //  "hint": CORE_KEY_FOR_PASSWORD_TRANSPORTATION,
-//  "random_key": string
+//  "random_key": string,
 //  "payload":
 //  {
 //  }

@@ -20,7 +20,7 @@
 //  "id": string,
 //  "method": int,
 //  "hint": int,    // 若"method"为GET才会有此字段
-//  "random_key": string
+//  "random_key": string,
 //  "payload":
 //  {
 //  }
