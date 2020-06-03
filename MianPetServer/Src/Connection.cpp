@@ -136,11 +136,12 @@ void Connection::DealWithGetCoreKeyForPasswordTransportation(const char *id)
             r << online;
         }
 
-        if (online)
+        // 首先看该用户是否已经在线
+        if (online) // 如果已经在线，则不允许重新登录，所以返回错误
         {
             reply = R"({"status":"failed"})";
         }
-        else
+        else        // 如果没有在线，则根据规则随机生成corekey并且返回
         {
             std::random_device rd;
             std::minstd_rand gen(rd());
