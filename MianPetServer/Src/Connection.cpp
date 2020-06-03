@@ -183,13 +183,14 @@ void Connection::DealWithGetLogin(const char *id, const char *password, const ch
             in >> truePassword >> online >> trueSecretKey;
         }
 
-        if (std::strncmp(password, truePassword, 32) == 0)
+        // 首先看密码是否正确
+        if (std::strncmp(password, truePassword, 32) == 0)  // 如果密码正确，则看用户是否在线
         {
-            if (online)
+            if (online) // 如果用户已经在线，则不允许重新登陆，所以返回错误
             {
                 reply = R"({"status":"failed"})";
             }
-            else
+            else        // 如果用户还没有在线，才可以执行下面的登录流程
             {
                 // TODO: need an extra compare between screctkey and tempKeyOf[id]
 
@@ -203,7 +204,7 @@ void Connection::DealWithGetLogin(const char *id, const char *password, const ch
                 reply = R"({"status":"success"})";
             }
         }
-        else
+        else    // 如果用户密码错误，则返回失败
         {
             reply = R"({"status":"failed"})";
         }
