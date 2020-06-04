@@ -237,9 +237,10 @@ void Connection::DealWithGetPetProfile(const char *id, const char *randomKey)
             r >> online >> trueSecretKey;
         }
 
+        // 首先看密码是否正确
         if (online)
         {
-            if (std::strncmp(randomKey, trueSecretKey, 18) == 0)
+            if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果密码正确，则直接取出结果返回
             {
                 constexpr const char *petprofileSql =
                     R"(SELECT id, username, level, age, growth, food, clean, health, mood, growth_speed, status, online_time
@@ -253,7 +254,7 @@ void Connection::DealWithGetPetProfile(const char *id, const char *randomKey)
                 int level, age, growth, food, clean, health, mood, growthSpeed;
                 char status[24 + 1];
                 int onlineTime;
-                for (auto &r : petprofileStream)
+                for (auto &r : petprofileStream)    // 从数据库中取出petprofile数据
                 {
                     r >> id >> username >> level >> age >> growth 
                       >> food >> clean >> health >> mood >> growthSpeed 
