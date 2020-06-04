@@ -308,17 +308,18 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
             r >> online >> trueSecretKey;
         }
 
-        if (!online)
+        // 首先看用户是否在线
+        if (!online)    // 如果不在线，则报告错误
         {
             // error
         }
-        else
+        else            // 如果用户在线，则判断randomKey是否一致，这里有简单的cookie的感觉
         {
-            if (std::strncmp(randomKey, trueSecretKey, 18) != 0)
+            if (std::strncmp(randomKey, trueSecretKey, 18) != 0)    // 如果randomKey不一致，则报告错误
             {
                 // error
             }
-            else
+            else        // 如果randomKey一致，则可以处理该心跳包
             {
                 constexpr const char *countMinuteDeltaSql =
                     R"(SELECT TIMESTAMPDIFF(MINUTE, heartbeat, NOW())
