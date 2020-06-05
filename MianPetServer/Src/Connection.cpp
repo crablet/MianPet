@@ -414,10 +414,13 @@ void Connection::DealWithLogout(const char *id, const char *randomKey)
             r >> online >> trueSecretKey;
         }
 
-        if (online)
+        // 先检查用户是否在线，如果不在线那执行登出操作也没有意义
+        if (online) // 如果在线则检查randomKey是否一致，有点cookies的感觉
         {
-            if (std::strncmp(randomKey, trueSecretKey, 18) == 0)
+            if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果连randomKey都一致，那就可以开始登出
             {
+                // 登出操作只需要更改数据库userinfo表中相应id的online为0和secretkey为NULL即可
+
                 constexpr const char *updateSql =
                     R"(UPDATE userinfo
                        SET online = 0, secretkey = NULL
