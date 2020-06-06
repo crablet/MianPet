@@ -164,6 +164,8 @@ void Connection::DealWithGetCoreKeyForPasswordTransportation(const char *id)
 
 void Connection::DealWithGetLogin(const char *id, const char *password, const char *randomKey)
 {
+    // TODO: 这一块似乎有bug，现在无法登出了
+
     try
     {
         std::lock_guard<std::mutex> lock(dbMutex);
