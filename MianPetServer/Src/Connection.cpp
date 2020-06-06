@@ -397,6 +397,7 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
 
 void Connection::DealWithLogout(const char *id, const char *randomKey)
 {
+    // TODO: 这一块似乎有bug，现在无法登出了
     try
     {
         std::lock_guard<std::mutex> lock(dbMutex);
