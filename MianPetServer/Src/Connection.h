@@ -34,7 +34,9 @@ public:
     void Stop();
 
 private:
+    // 用于向客户端接收消息
     void DoRead();
+    // 用于向客户端发送消息
     void DoWrite();
 
     // 用于处理json文件所指定的任务，其中会解析json文件并分发任务至各个线程
