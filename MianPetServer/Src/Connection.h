@@ -40,11 +40,16 @@ private:
     // 用于处理json文件所指定的任务，其中会解析json文件并分发任务至各个线程
     void TaskRunnerThread(int jsonLength);
 
+    // 处理用于登录的corekey的请求 /GET/CORE_KEY_FOR_PASSWORD_TRANSPORTATION
     void DealWithGetCoreKeyForPasswordTransportation(const char *id);
+    // 处理登入请求 /GET/LOGIN
     void DealWithGetLogin(const char *id, const char *password, const char *randomKey);
+    // 处理获取宠物信息的请求 /GET/PETPROFILE
     void DealWithGetPetProfile(const char *id, const char *randomKey);
 
+    // 处理心跳包 /HEARTBEAT
     void DealWithHeartbeat(const char *id, const char *randomKey);
+    // 处理登出请求 /GET/LOGOUT
     void DealWithLogout(const char *id, const char *randomKey);
 
 private:
