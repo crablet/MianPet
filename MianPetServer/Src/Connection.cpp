@@ -364,8 +364,8 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                 const auto newGrowth = growth + growthSpeed * minuteDelta;
                 const auto newLevel =   // 根据文档得出的所需经验计算公式，加号后面为布尔值
                     level + (newGrowth >= 
-                                (level % 2 == 0 ? (1 + level / 2) * level / 2 
-                                                : ((level + 1) / 2) * ((level + 1) / 2)));
+                                ((level % 2) == 0 ? (1 + level / 2) * level / 2 
+                                                  : ((level + 1) / 2) * ((level + 1) / 2)));
                 // TODO: finish the calculation
                 const auto newFood = food;
                 const auto newClean = clean;
