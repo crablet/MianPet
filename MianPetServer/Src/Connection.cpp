@@ -164,7 +164,7 @@ void Connection::DealWithGetCoreKeyForPasswordTransportation(const char *id)
 
 void Connection::DealWithGetLogin(const char *id, const char *password, const char *randomKey)
 {
-    // TODO: 这一块似乎有bug，现在无法登出了
+    // TODO: 这一块似乎有bug，现在无法登出了。时而可以复现，时而不行，暂无100%复现的方法。
 
     try
     {
@@ -399,7 +399,8 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
 
 void Connection::DealWithLogout(const char *id, const char *randomKey)
 {
-    // TODO: 这一块似乎有bug，现在无法登出了
+    // TODO: 这一块似乎有bug，现在无法登出了。时而可以复现，时而不行，暂无100%复现的方法。
+
     try
     {
         std::lock_guard<std::mutex> lock(dbMutex);
