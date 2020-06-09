@@ -30,7 +30,9 @@ public:
     explicit Connection(
         asio::ip::tcp::socket socket, ConnectionManager &manager);
 
+    // 开始接收tcp消息
     void Start();
+    // 停止接收tcp消息
     void Stop();
 
 private:
