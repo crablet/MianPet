@@ -67,6 +67,8 @@ private:
 
     inline static std::unordered_map<std::string, std::string> tempKeyOf{};
 
+    // 用于解释json文件
+    // 根据simdjson文档，该变量应尽量复用
     inline static simdjson::dom::parser parser{};
 };
 
