@@ -360,7 +360,7 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                       >> status >> onlineTime;
                 }
 
-                const auto newAge = age + growthSpeed * minuteDelta;
+                const auto newAge = age + minuteDelta;
                 const auto newGrowth = growth + growthSpeed * minuteDelta;
                 const auto newLevel =   // 根据文档得出的所需经验计算公式，加号后面为布尔值
                     level + (newGrowth >= 
