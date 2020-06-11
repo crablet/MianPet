@@ -5,6 +5,8 @@
 #include <utility>
 #include <iostream>
 #include <string>
+#include <thread>
+#include <chrono>
 
 #include <asio.hpp>
 
@@ -29,6 +31,8 @@ public:
 private:
     void DoAccept();
     void DoAwaitStop();
+
+    void CheckLogoutThread();
 
 private:
     asio::io_context ioContext;

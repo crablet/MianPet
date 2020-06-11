@@ -32,6 +32,8 @@ Server::Server()
     acceptor.bind(endpoint);
     acceptor.listen();
     DoAccept();
+
+    CheckLogoutThread();
 }
 
 Server::~Server()
@@ -73,4 +75,8 @@ void Server::DoAwaitStop()
         acceptor.close();
         connectionManager.StopAll();
     });
+}
+
+void Server::CheckLogoutThread()
+{
 }
