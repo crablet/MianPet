@@ -79,4 +79,14 @@ void Server::DoAwaitStop()
 
 void Server::CheckLogoutThread()
 {
+    std::thread checkLogoutThread(
+    [this]()
+    {
+        while (true)
+        {
+            using std::chrono_literals;
+            std::this_thread::sleep(5min);
+        }
+    });
+    checkLogoutThread.detach();
 }
