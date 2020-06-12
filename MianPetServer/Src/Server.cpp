@@ -95,7 +95,6 @@ void Server::CheckLogoutThread()
                     R"(UPDATE userinfo
                        SET online = 0, heartbeat = NULL
                        WHERE id IN (SELECT id
-                                    FROM userinfo
                                     WHERE online = 1 AND TIMESTAMPDIFF(MINUTE, heartbeat, NOW()) >= 3))";
                 otl_stream updateSqlStream(1, updateSql, db);
             }
