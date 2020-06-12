@@ -84,8 +84,26 @@ void Server::CheckLogoutThread()
     {
         while (true)
         {
-            using std::chrono_literals;
-            std::this_thread::sleep(5min);
+            using namespace std::chrono_literals;
+            std::this_thread::sleep_for(5min);
+
+            try
+            {
+                std::lock_guard<std::mutex> lock(dbMutex);
+
+                constexpr const char *updateSql =
+                    R"(UPDATE userinfo
+                       SET online = 0, heartbeat = NULL
+                       WHERE id IN (SELECT id
+                                    FROM userinfo
+                                    WHERE online = 1 AND TIMESTAMPDIFF(MINUTE, heartbeat, NOW()) >= 3))";
+                otl_stream updateSqlStream(1, updateSql, db);
+            }
+            catch (const otl_exception &exp)
+            {
+                std::cout << exp.stm_text << std::endl;
+                std::cout << exp.msg << std::endl;
+            }
         }
     });
     checkLogoutThread.detach();
