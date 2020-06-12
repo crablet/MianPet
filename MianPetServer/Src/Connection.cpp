@@ -133,7 +133,7 @@ void Connection::DealWithGetCoreKeyForPasswordTransportation(const char *id)
         int online;
         for (auto &r : selectStream)
         {
-            r << online;
+            r >> online;
         }
 
         // 首先看该用户是否已经在线
