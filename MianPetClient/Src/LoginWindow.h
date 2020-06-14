@@ -37,6 +37,8 @@ signals:
     void ConnectToHostFailed();
     void LoginSucceeded(const QString &account);
     void AccountOrPasswordWrong();
+    void CannotGetCorekeyFromServer();
+    void NotJsonObject();
     void UnknownLoginError();
 
 private:

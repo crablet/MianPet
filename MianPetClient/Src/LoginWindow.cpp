@@ -77,6 +77,20 @@ void LoginWindow::InitializeConnect()
 
         QMessageBox::information(this, "信息错误", "用户名或密码错误，请重新输入。");
     });
+    connect(this, &LoginWindow::CannotGetCorekeyFromServer, this,
+    [=]()
+    {
+        loginButton->setEnabled(true);
+
+        QMessageBox::information(this, "登陆失败", "无法从服务器获取corekey，登陆失败。");
+    });
+    connect(this, &LoginWindow::NotJsonObject, this,
+    [=]()
+    {
+        loginButton->setEnabled(true);
+
+        QMessageBox::information(this, "解析错误", "收到的json并不是object格式，登陆失败。");
+    });
     connect(this, &LoginWindow::UnknownLoginError, this,
     [=]()
     {
@@ -125,8 +139,28 @@ void LoginWindow::LoginThreadFunction()
     QString coreKey;
     if (jsonDocument.isObject())
     {
-        coreKey = jsonDocument["corekey"].toString();   // {"corekey":"45678"}
-        randomKey = GetRandomKeyForPasswordTransportation(coreKey);
+        if (const auto status = jsonDocument["status"].toString(); 
+            status.isEmpty())
+        {
+            coreKey = jsonDocument["corekey"].toString();   // {"corekey":"45678"}
+            randomKey = GetRandomKeyForPasswordTransportation(coreKey);
+        }
+        else if (status == "failed")
+        {
+            emit CannotGetCorekeyFromServer();
+
+            return;
+        }
+        else
+        {
+            emit UnknownLoginError();
+
+            return;
+        }
+    }
+    else
+    {
+        emit NotJsonObject();
     }
 
     tcpSocket = std::make_unique<QTcpSocket>(); // 这里每个tcp连接都是短连接，要想重新发数据必须重新新建一个tcp连接
@@ -176,6 +210,6 @@ void LoginWindow::LoginThreadFunction()
     }
     else
     {
-        emit UnknownLoginError();
+        emit NotJsonObject();
     }
 }

@@ -48,7 +48,7 @@ private:
     virtual void enterEvent(QEvent *event) override;
     virtual void leaveEvent(QEvent *event) override;
 
-    void Logout() noexcept;
+    void Logout();
 
 signals:
     void HeartbeatError();

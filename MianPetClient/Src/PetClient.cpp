@@ -33,6 +33,8 @@ void PetClient::InitializeUi()
     auto *exitAction = new QAction("退出", this);
     connect(exitAction, &QAction::triggered, [=]()
     {
+        Logout();
+
         qApp->quit();
     });
 
@@ -127,7 +129,7 @@ void PetClient::leaveEvent([[maybe_unused]] QEvent *event)
     });
 }
 
-void PetClient::Logout() noexcept
+void PetClient::Logout()
 {
     if (!randomKey.isEmpty())   // 如果randomKey存在则说明登录流程至少已经走过一遍了，暂且不论走通没有
     {
@@ -136,17 +138,14 @@ void PetClient::Logout() noexcept
         heartbeat->stop();  // 心跳包的发送要于登出数据的发送之前停止，以免出现退出之后服务器仍然收到心跳包导致重新上线的情况
 
         auto tcpSocket = std::make_unique<QTcpSocket>();
-        tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::WriteOnly);
+        tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
         if (!tcpSocket->waitForConnected())
         {
             return;
         }
 
         tcpSocket->write(LogoutData{});
-        if (tcpSocket->waitForBytesWritten())
-        {
-            return;
-        }
+        tcpSocket->waitForBytesWritten();
     }
 }
 
