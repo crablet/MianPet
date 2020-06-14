@@ -58,6 +58,8 @@ void LoginWindow::InitializeConnect()
         {
             loginButton->setDisabled(true); // 点击登录后就不应该再允许被点击，除非登陆失败
 
+            mianPetId = accountLineEdit->text();    // 记录下目前的账号id，不然发包时无法辨认是谁发的
+
             std::thread loginThread(&LoginWindow::LoginThreadFunction, this);
             loginThread.detach();
         }
