@@ -66,6 +66,11 @@ void Connection::TaskRunnerThread(int jsonLength)
             const auto version = static_cast<std::int64_t>(json["version"]);
             const auto method = static_cast<std::int64_t>(json["method"]);
 
+#ifdef DEBUG
+            std::cout << id << ' ' << randomKey << ' ' << version << ' ' << method << std::endl;
+#endif // DEBUG
+
+
             if (method == GET)
             {
                 const auto payload = json["payload"];
@@ -184,6 +189,12 @@ void Connection::DealWithGetLogin(const char *id, const char *password, const ch
         {
             in >> truePassword >> online >> trueSecretKey;
         }
+
+#ifdef DEBUG
+        std::cout << "In DealWithGetLogin()" << std::endl;
+        std::cout << id << ' ' << truePassword << ' '  << online << ' ' << trueSecretKey << std::endl;
+#endif // DEBUG
+
 
         // 首先看密码是否正确
         if (std::strncmp(password, truePassword, 32) == 0)  // 如果密码正确，则看用户是否在线
