@@ -9,7 +9,7 @@ PetClient::PetClient(QWidget *parent)
 
 PetClient::~PetClient()
 {
-    Logout();
+    Logout();   // 第二次登出，只是为了确保一定登出了，但还是有概率无法登出，需要服务器端强制执行登出
 }
 
 void PetClient::InitializeUi()

@@ -163,6 +163,8 @@ void LoginWindow::LoginThreadFunction()
     else
     {
         emit NotJsonObject();
+
+        return;
     }
 
     tcpSocket = std::make_unique<QTcpSocket>(); // 这里每个tcp连接都是短连接，要想重新发数据必须重新新建一个tcp连接
