@@ -25,6 +25,7 @@ SOURCES += \
     Src/PetProfileWindow.cpp \
     Src/PetToolButtonsContainer.cpp \
     Src/SmallItemsContainerWindow.cpp \
+    Src/Tools/Network/DataPackages/BuyRequestData.cpp \
     Src/Tools/Network/DataPackages/CleanShopRequestData.cpp \
     Src/Tools/Network/DataPackages/CorekeyRequestData.cpp \
     Src/Tools/Network/DataPackages/DataPackage.cpp \
@@ -49,6 +50,7 @@ HEADERS += \
     Src/PetProfileWindow.h \
     Src/PetToolButtonsContainer.h \
     Src/SmallItemsContainerWindow.h \
+    Src/Tools/Network/DataPackages/BuyRequestData.h \
     Src/Tools/Network/DataPackages/CleanShopRequestData.h \
     Src/Tools/Network/DataPackages/CorekeyRequestData.h \
     Src/Tools/Network/DataPackages/DataPackage.h \
