@@ -22,7 +22,8 @@ CREATE TABLE petprofile
     mood SMALLINT UNSIGNED NOT NULL,
     growth_speed TINYINT UNSIGNED NOT NULL,
     status CHAR(24) NOT NULL,
-    online_time INT UNSIGNED NOT NULL
+    online_time INT UNSIGNED NOT NULL,
+    tuotuo INT DEFAULT 0
 );
 
 CREATE TABLE shopinfo
