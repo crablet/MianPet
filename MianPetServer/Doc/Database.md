@@ -9,11 +9,11 @@
  
 # petprofile
 ## 宠物实时数据
-|     id    |username|      level      |    age     |   growth   |      food       |     clean       |     health     |      mood       |  growth_speed  | status | online_time|
-|:---------:|:------:|:---------------:|:----------:|:----------:|:---------------:|:---------------:|:--------------:|:---------------:|:--------------:|:------:|:----------:|
-|  CHAR(16) |CHAR(24)|SMALLINT UNSIGNED|INT UNSIGNED|INT UNSIGNED|SMALLINT UNSIGNED|SMALLINT UNSIGNED|TINYINT UNSIGNED|SMALLINT UNSIGNED|TINYINT UNSIGNED|CHAR(24)|INT UNSIGNED|
-|  NOT NULL |NOT NULL|     NOT NULL    |  NOT NULL  |  NOT NULL  |    NOT NULL     |    NOT NULL     |    NOT NULL    |     NOT NULL    |    NOT NULL    |NOT NULL|  NOT NULL  |
-|PRIMARY KEY|        |                 |            |            |                 |                 |                |                 |                |        |            |
+|     id    |username|      level      |    age     |   growth   |      food       |     clean       |     health     |      mood       |  growth_speed  | status | online_time|tuotuo|
+|:---------:|:------:|:---------------:|:----------:|:----------:|:---------------:|:---------------:|:--------------:|:---------------:|:--------------:|:------:|:----------:|:----:|
+|  CHAR(16) |CHAR(24)|SMALLINT UNSIGNED|INT UNSIGNED|INT UNSIGNED|SMALLINT UNSIGNED|SMALLINT UNSIGNED|TINYINT UNSIGNED|SMALLINT UNSIGNED|TINYINT UNSIGNED|CHAR(24)|INT UNSIGNED| INT  |
+|  NOT NULL |NOT NULL|     NOT NULL    |  NOT NULL  |  NOT NULL  |    NOT NULL     |    NOT NULL     |    NOT NULL    |     NOT NULL    |    NOT NULL    |NOT NULL|  NOT NULL  |      |
+|PRIMARY KEY|        |                 |            |            |                 |                 |                |                 |                |        |            |      |
 ### 注：此处设计时间总和的单位均为分钟，客户端需注意转换单位
 
 # shopinfo
