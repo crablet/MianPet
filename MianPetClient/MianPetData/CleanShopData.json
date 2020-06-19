@@ -1,12 +1,33 @@
 ﻿{
   "items": 
   [
-    "qimiaoyuyan",
-    "piaopiaoxiangbo",
-    "xiangpaopao",
-    "xiangzaozao",
-    "xiangfashui",
-    "xiangmulu",
-    "xiangmaoshui"
+    {
+      "name": "qimiaoyuyan",
+      "price": 10
+    },
+    {
+      "name": "piaopiaoxiangbo",
+      "price": 10
+    },
+    {
+      "name": "xiangpaopao",
+      "price": 10
+    },
+    {
+      "name": "xiangzaozao",
+      "price": 10
+    },
+    {
+      "name": "xiangfashui",
+      "price": 10
+    },
+    {
+      "name": "xiangmulu",
+      "price": 10
+    },
+    {
+      "name": "xiangmaoshui",
+      "price": 10
+    }
   ]
 }
