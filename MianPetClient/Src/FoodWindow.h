@@ -5,6 +5,8 @@
 #include <memory>
 #include <atomic>
 #include <algorithm>
+#include <vector>
+#include <utility>
 
 #include <QWidget>
 #include <QFile>
@@ -34,7 +36,7 @@ private:
     void ViewNextPage();
 
 private:
-    inline static QJsonArray itemNames{};
+    inline static std::vector<std::pair<QString, int>> items{}; // first: name, second: price
 };
 
 #endif // FOODWINDOW_H

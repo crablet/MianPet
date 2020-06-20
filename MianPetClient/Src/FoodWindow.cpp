@@ -31,7 +31,12 @@ void FoodWindow::DataPrepare()
     }
 
     const auto localJson = QJsonDocument::fromJson(jsonFile.readAll());
-    itemNames = localJson["items"].toArray();
+    const auto tempArray = localJson["items"].toArray();
+    for (int i = 0; i < tempArray.size(); ++i)
+    {
+        const auto itemInfo = tempArray[i].toObject();
+        items.emplace_back(itemInfo["name"].toString(), itemInfo["price"].toInt());
+    }
 
     auto tcpSocket = std::make_unique<QTcpSocket>();
     tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
@@ -69,7 +74,7 @@ void FoodWindow::ViewPreviousPage()
 
 void FoodWindow::ViewNextPage()
 {
-    const auto max = itemNames.size();
+    const auto max = static_cast<int>(items.size());
     if (max >= 2 && currentPage <= max - 2)
     {
         ++currentPage;
