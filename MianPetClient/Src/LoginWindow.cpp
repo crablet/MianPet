@@ -65,6 +65,7 @@ void LoginWindow::InitializeConnect()
         }
     });
 
+    // 无法连接至服务器的响应函数
     connect(this, &LoginWindow::ConnectToHostFailed, this, 
     [=]()
     {
@@ -72,6 +73,8 @@ void LoginWindow::InitializeConnect()
 
         QMessageBox::information(this, "连接失败", "无法连接至服务器，请检查网络。");
     });
+
+    // 服务器返回账户或密码错误时的响应函数
     connect(this, &LoginWindow::AccountOrPasswordWrong, this,
     [=]()
     {
@@ -79,6 +82,8 @@ void LoginWindow::InitializeConnect()
 
         QMessageBox::information(this, "信息错误", "用户名或密码错误，请重新输入。");
     });
+
+    // 无法从服务器获取corekey的响应函数
     connect(this, &LoginWindow::CannotGetCorekeyFromServer, this,
     [=]()
     {
@@ -86,6 +91,8 @@ void LoginWindow::InitializeConnect()
 
         QMessageBox::information(this, "登陆失败", "无法从服务器获取corekey，登陆失败。");
     });
+
+    // json解析失败（返回包不是json的object格式）的响应函数
     connect(this, &LoginWindow::NotJsonObject, this,
     [=]()
     {
@@ -93,6 +100,8 @@ void LoginWindow::InitializeConnect()
 
         QMessageBox::information(this, "解析错误", "收到的json并不是object格式，登陆失败。");
     });
+
+    // 服务器返回未知错误的响应函数
     connect(this, &LoginWindow::UnknownLoginError, this,
     [=]()
     {
