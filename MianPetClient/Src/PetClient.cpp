@@ -54,6 +54,7 @@ void PetClient::InitializeUi()
 
 void PetClient::InitializeConnect()
 {
+    // 登录成功的处理函数
     connect(loginWindow, &LoginWindow::LoginSucceeded, this, [=](const QString &id)
     {
         this->show();
@@ -70,6 +71,7 @@ void PetClient::InitializeConnect()
         heartbeat->start(1min);
     });
 
+    // 处理收到错误的心跳包返回消息，应给出提示
     connect(this, &PetClient::HeartbeatError, this, [this]()
     {
         QMessageBox::information(this, "心跳停止", "心跳包未能成功发送，请检查网络。");
