@@ -49,9 +49,14 @@ void PetToolButtonsContainer::InitializeConnect()
 
 void PetToolButtonsContainer::OnFoodButtonClicked()
 {
+    // 因为FoodWindow有只要退出就自动delete自身的特性，所以可以重复new
     foodWindow = new FoodWindow;
     foodWindow->show();
+
+    // 点击以后就取消和这个槽的链接，就不会出现多次点击出现多个窗口的情况
     disconnect(foodButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
+    
+    // 当窗口关闭时可以恢复链接，以响应下一次的信号
     connect(foodWindow, &FoodWindow::destroyed, [=]()
     {
         connect(foodButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
@@ -60,9 +65,14 @@ void PetToolButtonsContainer::OnFoodButtonClicked()
 
 void PetToolButtonsContainer::OnCleanButtonClicked()
 {
+    // 因为CleanWindow有只要退出就自动delete自身的特性，所以可以重复new
     cleanWindow = new CleanWindow;
     cleanWindow->show();
+
+    // 点击以后就取消和这个槽的链接，就不会出现多次点击出现多个窗口的情况
     disconnect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnCleanButtonClicked);
+    
+    // 当窗口关闭时可以恢复链接，以响应下一次的信号
     connect(cleanWindow, &CleanWindow::destroyed, [=]()
     {
         connect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnCleanButtonClicked);
