@@ -19,6 +19,10 @@
     {
       "name": "nongfusanquan",
       "price": 10
+    },
+    {
+      "name": "lanxingtangguo",
+      "price": 10
     }
   ]
 }
