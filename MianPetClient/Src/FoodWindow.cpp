@@ -37,27 +37,6 @@ void FoodWindow::DataPrepare()
         const auto itemInfo = tempArray[i].toObject();
         items.emplace_back(itemInfo["name"].toString(), itemInfo["price"].toInt());
     }
-
-    auto tcpSocket = std::make_unique<QTcpSocket>();
-    tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
-    if (!tcpSocket->waitForConnected())
-    {
-        return;
-    }
-
-    tcpSocket->write(FoodShopRequestData{});
-    if (!tcpSocket->waitForBytesWritten())
-    {
-        return;
-    }
-
-    if (!tcpSocket->waitForReadyRead())
-    {
-        return;
-    }
-
-    const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
-    // 处理remoteJson
 }
 
 void FoodWindow::ViewPreviousPage()
@@ -67,6 +46,28 @@ void FoodWindow::ViewPreviousPage()
         --currentPage;
         const auto rangeBegin = currentPage * 4;
         const auto rangeEnd = rangeBegin + 4;
+
+        // 每翻一页就请求一次
+        //auto tcpSocket = std::make_unique<QTcpSocket>();
+        //tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+        //if (!tcpSocket->waitForConnected())
+        //{
+        //    return;
+        //}
+
+        //tcpSocket->write(FoodShopRequestData{});
+        //if (!tcpSocket->waitForBytesWritten())
+        //{
+        //    return;
+        //}
+
+        //if (!tcpSocket->waitForReadyRead())
+        //{
+        //    return;
+        //}
+
+        //const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+        //// 处理remoteJson
 
         item0->setIcon(QIcon(":/" + items[rangeBegin + 0].first));
         item1->setIcon(QIcon(":/" + items[rangeBegin + 1].first));
@@ -84,6 +85,28 @@ void FoodWindow::ViewNextPage()
         ++currentPage;
         const auto rangeBegin = currentPage * 3;
         const auto rangeEnd = std::min(rangeBegin + 4, max);
+
+        // 每翻一页就请求一次
+        //auto tcpSocket = std::make_unique<QTcpSocket>();
+        //tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+        //if (!tcpSocket->waitForConnected())
+        //{
+        //    return;
+        //}
+
+        //tcpSocket->write(FoodShopRequestData{});
+        //if (!tcpSocket->waitForBytesWritten())
+        //{
+        //    return;
+        //}
+
+        //if (!tcpSocket->waitForReadyRead())
+        //{
+        //    return;
+        //}
+
+        //const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+        //// 处理remoteJson
 
         item0->setIcon(QIcon(":/" + items[rangeBegin + 0].first));
         item1->setIcon(QIcon(":/" + items[rangeBegin + 1].first));
