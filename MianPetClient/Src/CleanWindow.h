@@ -14,6 +14,7 @@
 #include <QJsonArray>
 #include <QMessageBox>
 #include <QTcpSocket>
+#include <QIcon>
 
 #include "SmallItemsContainerWindow.h"
 

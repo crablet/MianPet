@@ -66,6 +66,10 @@ void CleanWindow::ViewPreviousPage()
         const auto rangeBegin = currentPage * 4;
         const auto rangeEnd = rangeBegin + 4;
 
+        item0->setIcon(QIcon(":/" + items[rangeBegin + 0].first));
+        item1->setIcon(QIcon(":/" + items[rangeBegin + 1].first));
+        item2->setIcon(QIcon(":/" + items[rangeBegin + 2].first));
+        item3->setIcon(QIcon(":/" + items[rangeBegin + 3].first));
         // 展示[rangeBegin, rangeEnd)中的内容
     }
 }
@@ -79,6 +83,10 @@ void CleanWindow::ViewNextPage()
         const auto rangeBegin = currentPage * 4;
         const auto rangeEnd = std::min(rangeBegin + 4, max);
 
+        item0->setIcon(QIcon(":/" + items[rangeBegin + 0].first));
+        item1->setIcon(QIcon(":/" + items[rangeBegin + 1].first));
+        item2->setIcon(QIcon(":/" + items[rangeBegin + 2].first));
+        item3->setIcon(QIcon(":/" + items[rangeBegin + 3].first));
         // 展示[rangeBegin, rangeEnd)中的内容
     }
 }
