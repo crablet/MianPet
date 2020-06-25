@@ -70,11 +70,18 @@ void FoodWindow::ViewNextPage()
         std::thread requestThread(&FoodWindow::RequestDataInRange, this, rangeBegin, rangeEnd);
         requestThread.detach();
 
-        // FIXME: 注意越界问题，'rangeBegin + x'可能会越界
-        item0->setIcon(QIcon(":/" + items[rangeBegin + 0].first));
-        item1->setIcon(QIcon(":/" + items[rangeBegin + 1].first));
-        item2->setIcon(QIcon(":/" + items[rangeBegin + 2].first));
-        item3->setIcon(QIcon(":/" + items[rangeBegin + 3].first));
+        rangeBegin + 0 < rangeEnd
+            ? item0->setIcon(QIcon(":/" + items[rangeBegin + 0].first))
+            : item0->setIcon(QIcon());
+        rangeBegin + 1 < rangeEnd
+            ? item1->setIcon(QIcon(":/" + items[rangeBegin + 1].first))
+            : item1->setIcon(QIcon());
+        rangeBegin + 2 < rangeEnd
+            ? item2->setIcon(QIcon(":/" + items[rangeBegin + 2].first))
+            : item2->setIcon(QIcon());
+        rangeBegin + 3 < rangeEnd
+            ? item3->setIcon(QIcon(":/" + items[rangeBegin + 3].first))
+            : item3->setIcon(QIcon());
         // 展示[rangeBegin, rangeEnd)中的内容
     }
 }
