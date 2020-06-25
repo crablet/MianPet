@@ -36,6 +36,8 @@ private:
     void ViewPreviousPage();
     void ViewNextPage();
 
+    void RequestDataInRange(int rangeBegin, int rangeEnd);
+
 private:
     inline static std::vector<std::pair<QString, int>> items{}; // first: name, second: price
 };

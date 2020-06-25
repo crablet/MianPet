@@ -66,27 +66,8 @@ void CleanWindow::ViewPreviousPage()
         const auto rangeBegin = currentPage * 4;
         const auto rangeEnd = rangeBegin + 4;
 
-        // 每翻一页就请求一次
-        //auto tcpSocket = std::make_unique<QTcpSocket>();
-        //tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
-        //if (!tcpSocket->waitForConnected())
-        //{
-        //    return;
-        //}
-
-        //tcpSocket->write(FoodShopRequestData{});
-        //if (!tcpSocket->waitForBytesWritten())
-        //{
-        //    return;
-        //}
-
-        //if (!tcpSocket->waitForReadyRead())
-        //{
-        //    return;
-        //}
-
-        //const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
-        //// 处理remoteJson
+        std::thread requestThread(&CleanWindow::RequestDataInRange, this, rangeBegin, rangeEnd);
+        requestThread.detach();
 
         item0->setIcon(QIcon(":/" + items[rangeBegin + 0].first));
         item1->setIcon(QIcon(":/" + items[rangeBegin + 1].first));
@@ -105,32 +86,45 @@ void CleanWindow::ViewNextPage()
         const auto rangeBegin = currentPage * 4;
         const auto rangeEnd = std::min(rangeBegin + 4, max);
 
-        // 每翻一页就请求一次
-        //auto tcpSocket = std::make_unique<QTcpSocket>();
-        //tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
-        //if (!tcpSocket->waitForConnected())
-        //{
-        //    return;
-        //}
+        std::thread requestThread(&CleanWindow::RequestDataInRange, this, rangeBegin, rangeEnd);
+        requestThread.detach();
 
-        //tcpSocket->write(FoodShopRequestData{});
-        //if (!tcpSocket->waitForBytesWritten())
-        //{
-        //    return;
-        //}
-
-        //if (!tcpSocket->waitForReadyRead())
-        //{
-        //    return;
-        //}
-
-        //const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
-        //// 处理remoteJson
-
+        // FIXME: 注意越界问题，'rangeBegin + x'可能会越界
         item0->setIcon(QIcon(":/" + items[rangeBegin + 0].first));
         item1->setIcon(QIcon(":/" + items[rangeBegin + 1].first));
         item2->setIcon(QIcon(":/" + items[rangeBegin + 2].first));
         item3->setIcon(QIcon(":/" + items[rangeBegin + 3].first));
         // 展示[rangeBegin, rangeEnd)中的内容
     }
+}
+
+void CleanWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
+{
+    auto tcpSocket = std::make_unique<QTcpSocket>();
+    tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+    if (!tcpSocket->waitForConnected())
+    {
+        return;
+    }
+
+    QJsonArray tempArray;
+    for (int i = rangeBegin; i < rangeEnd; ++i)
+    {
+        tempArray.append(items[i].first);
+    }
+    CleanShopRequestData requestData;
+    requestData.SetItems(tempArray);
+    tcpSocket->write(requestData);
+    if (!tcpSocket->waitForBytesWritten())
+    {
+        return;
+    }
+
+    if (!tcpSocket->waitForReadyRead())
+    {
+        return;
+    }
+
+    const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+    // 处理remoteJson
 }
