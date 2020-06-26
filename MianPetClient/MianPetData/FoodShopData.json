@@ -1,25 +1,26 @@
 ﻿{
-  "items": [
-    {
-      "name": "yuanliandashaobing",
-      "price": 10
-    },
-    {
-      "name": "yuanlianxiaoshaobing",
-      "price": 10
-    },
-    {
-      "name": "yuanlianzhongshaobing",
-      "price": 10
-    },
-    {
-      "name": "shanshancaomeizhi",
-      "price": 10
-    },
-    {
-      "name": "nongfusanquan",
-      "price": 10
-    },
+  "items": 
+  [
+    //{
+    //  "name": "yuanliandashaobing",
+    //  "price": 10
+    //},
+    //{
+    //  "name": "yuanlianxiaoshaobing",
+    //  "price": 10
+    //},
+    //{
+    //  "name": "yuanlianzhongshaobing",
+    //  "price": 10
+    //},
+    //{
+    //  "name": "shanshancaomeizhi",
+    //  "price": 10
+    //},
+    //{
+    //  "name": "nongfusanquan",
+    //  "price": 10
+    //},
     {
       "name": "lanxingtangguo",
       "price": 10
