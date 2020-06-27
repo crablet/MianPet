@@ -115,7 +115,7 @@ void PetProfileWindow::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setBrush(radial);
     painter.setPen(Qt::transparent);
-    painter.drawRoundedRect(rect(), 9, 9);
+    painter.drawRoundedRect(rect(), 9, 9);  // 圆角矩形
 
     FramelessWindow::paintEvent(event);
 }
