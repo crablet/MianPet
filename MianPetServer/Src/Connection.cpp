@@ -70,7 +70,6 @@ void Connection::TaskRunnerThread(int jsonLength)
             std::cout << id << ' ' << randomKey << ' ' << version << ' ' << method << std::endl;
 #endif // DEBUG
 
-
             if (method == GET)
             {
                 const auto payload = json["payload"];
@@ -265,7 +264,7 @@ void Connection::DealWithGetPetProfile(const char *id, const char *randomKey)
                 char id[16 + 1];
                 char username[24 + 1];
                 int level, age, growth, food, clean, health, mood, growthSpeed;
-                char status[24 + 1];
+                int status;
                 int onlineTime;
                 for (auto &r : petprofileStream)    // 从数据库中取出petprofile数据
                 {
@@ -278,7 +277,7 @@ void Connection::DealWithGetPetProfile(const char *id, const char *randomKey)
                 std::snprintf
                 (
                     buffer, 384,
-                    R"({"id":"%s","username":"%s","level":%d,"age":%d,"growth":%d,"food":%d,"clean":%d,"health":%d,"mood":%d,"growth_speed":%d,"status":"%s","online_time":%d})",
+                    R"({"id":"%s","username":"%s","level":%d,"age":%d,"growth":%d,"food":%d,"clean":%d,"health":%d,"mood":%d,"growth_speed":%d,"status":"%d","online_time":%d})",
                     id, username, level, age, growth, food, clean, health, mood, growthSpeed, status, onlineTime
                 );
                 reply = buffer;
@@ -362,7 +361,7 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                 petprofileStream << id;
 
                 int level, age, growth, food, clean, health, mood, growthSpeed;
-                char status[24 + 1];
+                int status;
                 int onlineTime;
                 for (auto &r : petprofileStream)
                 {
@@ -383,8 +382,7 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                 const auto newHealth = health;
                 const auto newMood = mood;
                 const auto newGrowthSpeed = growthSpeed;
-                char newStatus[24 + 1];
-                std::strcpy(newStatus, status);
+                const auto newStatus = status;
                 // TODO: finish the calculation
 
                 const auto newOnlineTime = onlineTime + minuteDelta;
@@ -393,7 +391,7 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                     R"(UPDATE petprofile
                        SET level = :newLevel<int>, age = :newAge<int>, growth = :newGrowth<int>, 
                            food = :newFood<int>, clean = :newClean<int>, health = :newHealth<int>, mood = :newMood<int>, growth_speed = :newGrowthSpeed<int>, 
-                           status = :newStatus<char[24]>, online_time = :newOnlineTime<int>)";
+                           status = :newStatus<int>, online_time = :newOnlineTime<int>)";
                 otl_stream updateProfileStream(1, updateProfileSql, db);
                 updateProfileStream << newLevel << newAge << newGrowth 
                                     << newFood << newClean << newHealth << newMood << newGrowthSpeed

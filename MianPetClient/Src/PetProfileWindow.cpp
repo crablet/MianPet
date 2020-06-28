@@ -170,7 +170,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         healthBar->setValue(jsonDocument["health"].toInt());    // TODO: 这几个要按照换算公式换回百分比
         moodBar->setValue(jsonDocument["mood"].toInt());        // TODO: 这几个要按照换算公式换回百分比
         grouthSpeedLabel->setText("成长速度：" + QString::number(jsonDocument["growth_speed"].toInt()) + "/小时");
-        statusLabel->setText("状态：" + jsonDocument["status"].toString());
+        statusLabel->setText("状态：" + QString::number(jsonDocument["status"].toInt()));
         onlineTimeLabel->setText("在线时间：" + QString::number(jsonDocument["online_time"].toInt()) + "分钟");
     }
     else
