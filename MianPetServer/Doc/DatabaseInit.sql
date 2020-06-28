@@ -21,7 +21,7 @@ CREATE TABLE petprofile
     health TINYINT UNSIGNED NOT NULL DEFAULT 10,
     mood SMALLINT UNSIGNED NOT NULL DEFAULT 100,
     growth_speed TINYINT UNSIGNED NOT NULL DEFAULT 1,
-    status CHAR(24) NOT NULL,
+    status INT UNSIGNED NOT NULL DEFAULT 0,
     online_time INT UNSIGNED NOT NULL DEFAULT 0,
     tuotuo INT DEFAULT 0
 );
@@ -36,8 +36,9 @@ CREATE TABLE shopinfo
 
 CREATE TABLE ownitems
 (
-    itemname CHAR(18) NOT NULL PRIMARY KEY,
+    itemname CHAR(18) NOT NULL,
     quantity SMALLINT UNSIGNED NOT NULL,
     type TINYINT UNSIGNED NOT NULL,
-    id CHAR(16) NOT NULL
+    id CHAR(16) NOT NULL,
+    PRIMARY KEY (itemname, id)
 );
