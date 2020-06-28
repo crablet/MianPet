@@ -42,3 +42,8 @@ CREATE TABLE ownitems
     id CHAR(16) NOT NULL,
     PRIMARY KEY (itemname, id)
 );
+
+INSERT INTO userinfo VALUES("999", "miantuotuo", "123", NOW(), 0, NULL, NOW());
+INSERT INTO petprofile(id, username) VALUES("999", "miantuotuo");
+INSERT INTO shopinfo VALUES("lanxingtangguo", "80", "star-shaped blue candy", 0);
+INSERT INTO ownitems VALUES("lanxingtangguo", 1, 0, "999");
