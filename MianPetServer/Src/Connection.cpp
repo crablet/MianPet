@@ -168,8 +168,6 @@ void Connection::DealWithGetCoreKeyForPasswordTransportation(const char *id)
 
 void Connection::DealWithGetLogin(const char *id, const char *password, const char *randomKey)
 {
-    // TODO: 登入/登出时偶现corekey传递失败的问题
-
     try
     {
         std::lock_guard<std::mutex> lock(dbMutex);
