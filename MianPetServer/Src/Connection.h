@@ -19,6 +19,7 @@
 
 #include "DatabaseSharedVars.h"
 
+// 如果开启了DEBUG，则会出现更多的调试性的输出
 #define DEBUG
 
 class ConnectionManager;
