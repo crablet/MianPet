@@ -38,16 +38,16 @@ void CleanWindow::DataPrepare()
 
     const auto rangeBegin = 0, rangeEnd = tempArray.size() >= 4 ? 4 : tempArray.size();
     rangeBegin + 0 < rangeEnd
-        ? item0->setIcon(QIcon(":/Pic" + items[rangeBegin + 0].first + ".png"))
+        ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].first + ".png"))
         : item0->setIcon(QIcon());
     rangeBegin + 1 < rangeEnd
-        ? item1->setIcon(QIcon(":/Pic" + items[rangeBegin + 1].first + ".png"))
+        ? item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].first + ".png"))
         : item1->setIcon(QIcon());
     rangeBegin + 2 < rangeEnd
-        ? item2->setIcon(QIcon(":/Pic" + items[rangeBegin + 2].first + ".png"))
+        ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].first + ".png"))
         : item2->setIcon(QIcon());
     rangeBegin + 3 < rangeEnd
-        ? item3->setIcon(QIcon(":/Pic" + items[rangeBegin + 3].first + ".png"))
+        ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].first + ".png"))
         : item3->setIcon(QIcon());
 
     currentPage = 0;
@@ -64,10 +64,10 @@ void CleanWindow::ViewPreviousPage()
         std::thread requestThread(&CleanWindow::RequestDataInRange, this, rangeBegin, rangeEnd);
         requestThread.detach();
 
-        item0->setIcon(QIcon(":/" + items[rangeBegin + 0].first));
-        item1->setIcon(QIcon(":/" + items[rangeBegin + 1].first));
-        item2->setIcon(QIcon(":/" + items[rangeBegin + 2].first));
-        item3->setIcon(QIcon(":/" + items[rangeBegin + 3].first));
+        item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].first + ".png"));
+        item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].first + ".png"));
+        item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].first + ".png"));
+        item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].first + ".png"));
         // 展示[rangeBegin, rangeEnd)中的内容
     }
 }
@@ -85,16 +85,16 @@ void CleanWindow::ViewNextPage()
         requestThread.detach();
 
         rangeBegin + 0 < rangeEnd
-            ? item0->setIcon(QIcon(":/" + items[rangeBegin + 0].first))
+            ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].first + ".png"))
             : item0->setIcon(QIcon());
         rangeBegin + 1 < rangeEnd
-            ? item1->setIcon(QIcon(":/" + items[rangeBegin + 1].first))
+            ? item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].first + ".png"))
             : item1->setIcon(QIcon());
         rangeBegin + 2 < rangeEnd
-            ? item2->setIcon(QIcon(":/" + items[rangeBegin + 2].first))
+            ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].first + ".png"))
             : item2->setIcon(QIcon());
         rangeBegin + 3 < rangeEnd
-            ? item3->setIcon(QIcon(":/" + items[rangeBegin + 3].first))
+            ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].first + ".png"))
             : item3->setIcon(QIcon());
         // 展示[rangeBegin, rangeEnd)中的内容
     }
