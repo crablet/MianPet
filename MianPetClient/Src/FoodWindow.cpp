@@ -37,6 +37,22 @@ void FoodWindow::DataPrepare()
         const auto itemInfo = tempArray[i].toObject();
         items.emplace_back(itemInfo["name"].toString(), itemInfo["price"].toInt());
     }
+
+    const auto rangeBegin = 0, rangeEnd = tempArray.size() >= 4 ? 4 : tempArray.size();
+    rangeBegin + 0 < rangeEnd
+        ? item0->setIcon(QIcon(":/Pic" + items[rangeBegin + 0].first + ".png"))
+        : item0->setIcon(QIcon());
+    rangeBegin + 1 < rangeEnd
+        ? item1->setIcon(QIcon(":/Pic" + items[rangeBegin + 1].first + ".png"))
+        : item1->setIcon(QIcon());
+    rangeBegin + 2 < rangeEnd
+        ? item2->setIcon(QIcon(":/Pic" + items[rangeBegin + 2].first + ".png"))
+        : item2->setIcon(QIcon());
+    rangeBegin + 3 < rangeEnd
+        ? item3->setIcon(QIcon(":/Pic" + items[rangeBegin + 3].first + ".png"))
+        : item3->setIcon(QIcon());
+
+    currentPage = 0;
 }
 
 void FoodWindow::ViewPreviousPage()

@@ -36,26 +36,21 @@ void CleanWindow::DataPrepare()
         items.emplace_back(itemInfo["name"].toString(), itemInfo["price"].toInt());
     }
 
-    auto tcpSocket = std::make_unique<QTcpSocket>();
-    tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
-    if (!tcpSocket->waitForConnected())
-    {
-        return;
-    }
+    const auto rangeBegin = 0, rangeEnd = tempArray.size() >= 4 ? 4 : tempArray.size();
+    rangeBegin + 0 < rangeEnd
+        ? item0->setIcon(QIcon(":/Pic" + items[rangeBegin + 0].first + ".png"))
+        : item0->setIcon(QIcon());
+    rangeBegin + 1 < rangeEnd
+        ? item1->setIcon(QIcon(":/Pic" + items[rangeBegin + 1].first + ".png"))
+        : item1->setIcon(QIcon());
+    rangeBegin + 2 < rangeEnd
+        ? item2->setIcon(QIcon(":/Pic" + items[rangeBegin + 2].first + ".png"))
+        : item2->setIcon(QIcon());
+    rangeBegin + 3 < rangeEnd
+        ? item3->setIcon(QIcon(":/Pic" + items[rangeBegin + 3].first + ".png"))
+        : item3->setIcon(QIcon());
 
-    tcpSocket->write(CleanShopRequestData{});
-    if (!tcpSocket->waitForBytesWritten())
-    {
-        return;
-    }
-
-    if (!tcpSocket->waitForReadyRead())
-    {
-        return;
-    }
-
-    const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
-    // 处理remoteJson
+    currentPage = 0;
 }
 
 void CleanWindow::ViewPreviousPage()
