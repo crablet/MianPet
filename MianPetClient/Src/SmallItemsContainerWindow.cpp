@@ -52,6 +52,7 @@ void SmallItemsContainerWindow::InitializeUi()
     item0->setFixedSize(SmallItemsContainerWindowItem0Width, SmallItemsContainerWindowItem0Height);
     item0->setFlat(true);
     item0->setStyleSheet("QPushButton { border: none }");
+    item0->setIconSize(QSize(SmallItemsContainerWindowItem0IconWidth, SmallItemsContainerWindowItem0IconHeight));
     item0->installEventFilter(this);
 
     item1 = new QPushButton(this);
@@ -59,6 +60,7 @@ void SmallItemsContainerWindow::InitializeUi()
     item1->setFixedSize(SmallItemsContainerWindowItem1Width, SmallItemsContainerWindowItem1Height);
     item1->setFlat(true);
     item1->setStyleSheet("QPushButton { border: none }");
+    item1->setIconSize(QSize(SmallItemsContainerWindowItem1IconWidth, SmallItemsContainerWindowItem1IconHeight));
     item1->installEventFilter(this);
 
     item2 = new QPushButton(this);
@@ -66,6 +68,7 @@ void SmallItemsContainerWindow::InitializeUi()
     item2->setFixedSize(SmallItemsContainerWindowItem2Width, SmallItemsContainerWindowItem2Height);
     item2->setFlat(true);
     item2->setStyleSheet("QPushButton { border: none }");
+    item2->setIconSize(QSize(SmallItemsContainerWindowItem2IconWidth, SmallItemsContainerWindowItem2IconHeight));
     item2->installEventFilter(this);
 
     item3 = new QPushButton(this);
@@ -73,6 +76,7 @@ void SmallItemsContainerWindow::InitializeUi()
     item3->setFixedSize(SmallItemsContainerWindowItem3Width, SmallItemsContainerWindowItem3Height);
     item3->setFlat(true);
     item3->setStyleSheet("QPushButton { border: none }");
+    item3->setIconSize(QSize(SmallItemsContainerWindowItem3IconWidth, SmallItemsContainerWindowItem3IconHeight));
     item3->installEventFilter(this);
 
     itemLabel = new TransparentItemLabel;

@@ -55,24 +55,32 @@ inline constexpr int SmallItemsContainerWindowItem0X = 45;
 inline constexpr int SmallItemsContainerWindowItem0Y = 42;
 inline constexpr int SmallItemsContainerWindowItem0Width = 80;
 inline constexpr int SmallItemsContainerWindowItem0Height = 105;
+inline constexpr int SmallItemsContainerWindowItem0IconWidth = 100;
+inline constexpr int SmallItemsContainerWindowItem0IconHeight = 100;
 
 inline constexpr int SmallItemsContainerWindowItem1X 
     = SmallItemsContainerWindowItem0X + SmallItemsContainerWindowItem0Width + 11;
 inline constexpr int SmallItemsContainerWindowItem1Y = SmallItemsContainerWindowItem0Y;
 inline constexpr int SmallItemsContainerWindowItem1Width = SmallItemsContainerWindowItem0Width;
 inline constexpr int SmallItemsContainerWindowItem1Height = SmallItemsContainerWindowItem0Height;
+inline constexpr int SmallItemsContainerWindowItem1IconWidth = SmallItemsContainerWindowItem0IconWidth;
+inline constexpr int SmallItemsContainerWindowItem1IconHeight = SmallItemsContainerWindowItem0IconHeight;
 
 inline constexpr int SmallItemsContainerWindowItem2X 
     = SmallItemsContainerWindowItem1X + SmallItemsContainerWindowItem1Width + 11;
 inline constexpr int SmallItemsContainerWindowItem2Y = SmallItemsContainerWindowItem0Y;
 inline constexpr int SmallItemsContainerWindowItem2Width = SmallItemsContainerWindowItem0Width;
 inline constexpr int SmallItemsContainerWindowItem2Height = SmallItemsContainerWindowItem0Height;
+inline constexpr int SmallItemsContainerWindowItem2IconWidth = SmallItemsContainerWindowItem0IconWidth;
+inline constexpr int SmallItemsContainerWindowItem2IconHeight = SmallItemsContainerWindowItem0IconHeight;
 
 inline constexpr int SmallItemsContainerWindowItem3X
     = SmallItemsContainerWindowItem2X + SmallItemsContainerWindowItem2Width + 11;
 inline constexpr int SmallItemsContainerWindowItem3Y = SmallItemsContainerWindowItem0Y;
 inline constexpr int SmallItemsContainerWindowItem3Width = SmallItemsContainerWindowItem0Width;
 inline constexpr int SmallItemsContainerWindowItem3Height = SmallItemsContainerWindowItem0Height;
+inline constexpr int SmallItemsContainerWindowItem3IconWidth = SmallItemsContainerWindowItem0IconWidth;
+inline constexpr int SmallItemsContainerWindowItem3IconHeight = SmallItemsContainerWindowItem0IconHeight;
 
 inline constexpr int LoginWindowWidth = 537;
 inline constexpr int LoginWindowHeight = 412;
