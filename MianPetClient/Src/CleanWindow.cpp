@@ -129,4 +129,5 @@ void CleanWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
 
     const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
     // 处理remoteJson
+    // 并把更新写入CleanShopData.json和items中
 }

@@ -55,6 +55,8 @@ void FoodWindow::DataPrepare()
         : item3->setIcon(QIcon());
 
     currentPage = 0;
+
+
 }
 
 void FoodWindow::ViewPreviousPage()
@@ -133,4 +135,5 @@ void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
 
     const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
     // 处理remoteJson
+    // 并把更新写入FoodShopData.json和items中
 }
