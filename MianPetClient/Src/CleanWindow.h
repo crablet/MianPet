@@ -38,6 +38,13 @@ private:
 
     void RequestDataInRange(int rangeBegin, int rangeEnd);
 
+    struct ItemInformation
+    {
+        QString name;
+        int price;
+        int amount;
+    };
+
 private:
     inline static std::vector<std::pair<QString, int>> items{}; // first: name, second: price
 };
