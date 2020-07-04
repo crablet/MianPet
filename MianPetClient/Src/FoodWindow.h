@@ -6,7 +6,6 @@
 #include <atomic>
 #include <algorithm>
 #include <vector>
-#include <utility>
 
 #include <QWidget>
 #include <QFile>
@@ -40,13 +39,18 @@ private:
 
     struct ItemInformation
     {
+        ItemInformation(const QString &name, int price, int amount)
+            : name(name), price(price), amount(amount)
+        {
+        }
+
         QString name;
         int price;
         int amount;
     };
 
 private:
-    inline static std::vector<std::pair<QString, int>> items{}; // first: name, second: price
+    inline static std::vector<ItemInformation> items{}; // first: name, second: price
 };
 
 #endif // FOODWINDOW_H

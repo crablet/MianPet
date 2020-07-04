@@ -33,21 +33,21 @@ void CleanWindow::DataPrepare()
     for (int i = 0; i < tempArray.size(); ++i)
     {
         const auto itemInfo = tempArray[i].toObject();
-        items.emplace_back(itemInfo["name"].toString(), itemInfo["price"].toInt());
+        items.emplace_back(itemInfo["name"].toString(), itemInfo["price"].toInt(), itemInfo["amount"].toInt());
     }
 
     const auto rangeBegin = 0, rangeEnd = tempArray.size() >= 4 ? 4 : tempArray.size();
     rangeBegin + 0 < rangeEnd
-        ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].first + ".png"))
+        ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].name + ".png"))
         : item0->setIcon(QIcon());
     rangeBegin + 1 < rangeEnd
-        ? item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].first + ".png"))
+        ? item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].name + ".png"))
         : item1->setIcon(QIcon());
     rangeBegin + 2 < rangeEnd
-        ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].first + ".png"))
+        ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].name + ".png"))
         : item2->setIcon(QIcon());
     rangeBegin + 3 < rangeEnd
-        ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].first + ".png"))
+        ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"))
         : item3->setIcon(QIcon());
 
     currentPage = 0;
@@ -64,10 +64,10 @@ void CleanWindow::ViewPreviousPage()
         std::thread requestThread(&CleanWindow::RequestDataInRange, this, rangeBegin, rangeEnd);
         requestThread.detach();
 
-        item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].first + ".png"));
-        item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].first + ".png"));
-        item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].first + ".png"));
-        item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].first + ".png"));
+        item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].name + ".png"));
+        item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].name + ".png"));
+        item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].name + ".png"));
+        item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"));
         // 展示[rangeBegin, rangeEnd)中的内容
     }
 }
@@ -85,16 +85,16 @@ void CleanWindow::ViewNextPage()
         requestThread.detach();
 
         rangeBegin + 0 < rangeEnd
-            ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].first + ".png"))
+            ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].name + ".png"))
             : item0->setIcon(QIcon());
         rangeBegin + 1 < rangeEnd
-            ? item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].first + ".png"))
+            ? item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].name + ".png"))
             : item1->setIcon(QIcon());
         rangeBegin + 2 < rangeEnd
-            ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].first + ".png"))
+            ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].name + ".png"))
             : item2->setIcon(QIcon());
         rangeBegin + 3 < rangeEnd
-            ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].first + ".png"))
+            ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"))
             : item3->setIcon(QIcon());
         // 展示[rangeBegin, rangeEnd)中的内容
     }
@@ -112,7 +112,7 @@ void CleanWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
     QJsonArray tempArray;
     for (int i = rangeBegin; i < rangeEnd; ++i)
     {
-        tempArray.append(items[i].first);
+        tempArray.append(items[i].name);
     }
     CleanShopRequestData requestData;
     requestData.SetItems(tempArray);
