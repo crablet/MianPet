@@ -1,10 +1,9 @@
 {
-  "items": 
-  [
-    {
-      "amount": 0,
-      "name": "lanxingtangguo",
-      "price": 10
-    }
-  ]
+    "items": [
+        {
+            "amount": 0,
+            "name": "lanxingtangguo",
+            "price": 10
+        }
+    ]
 }
