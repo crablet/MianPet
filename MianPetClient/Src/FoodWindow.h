@@ -11,6 +11,7 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonArray>
+#include <QJsonObject>
 #include <QMessageBox>
 #include <QTcpSocket>
 #include <QIcon>
@@ -25,6 +26,7 @@ class FoodWindow final : public SmallItemsContainerWindow
     Q_OBJECT
 public:
     explicit FoodWindow(QWidget *parent = nullptr);
+    ~FoodWindow();
 
 private:
     void InitializeUi();
@@ -50,7 +52,7 @@ private:
     };
 
 private:
-    inline static std::vector<ItemInformation> items{}; // first: name, second: price
+    std::vector<ItemInformation> items{}; // first: name, second: price
 };
 
 #endif // FOODWINDOW_H

@@ -7,6 +7,32 @@ FoodWindow::FoodWindow(QWidget *parent)
     InitializeConnect();
 }
 
+FoodWindow::~FoodWindow()
+{
+    QJsonArray arr;
+    for (const auto &r : items)
+    {
+        QJsonObject obj;
+        obj.insert("amount", r.amount);
+        obj.insert("name", r.name);
+        obj.insert("price", r.price);
+
+        arr.push_back(obj);
+    }
+
+    QFile jsonFile("MianPetData/FoodShopData.json");
+    if (!jsonFile.open(QIODevice::Text | QIODevice::WriteOnly | QIODevice::Truncate))
+    {
+        return;
+    }
+    else
+    {
+        QJsonObject obj;
+        obj.insert("items", arr);
+        jsonFile.write(QJsonDocument(obj).toJson(QJsonDocument::Indented));
+    }
+}
+
 void FoodWindow::InitializeUi()
 {
     std::thread thread(&FoodWindow::DataPrepare, this);
@@ -136,4 +162,5 @@ void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
     const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
     // 处理remoteJson
     // 并把更新写入FoodShopData.json和items中
+
 }

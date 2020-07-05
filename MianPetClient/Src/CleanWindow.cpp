@@ -6,6 +6,32 @@ CleanWindow::CleanWindow(QWidget *parent) : SmallItemsContainerWindow(parent)
     InitializeConnect();
 }
 
+CleanWindow::~CleanWindow()
+{
+    QJsonArray arr;
+    for (const auto &r : items)
+    {
+        QJsonObject obj;
+        obj.insert("amount", r.amount);
+        obj.insert("name", r.name);
+        obj.insert("price", r.price);
+
+        arr.push_back(obj);
+    }
+
+    QFile jsonFile("MianPetData/CleanShopData.json");
+    if (!jsonFile.open(QIODevice::Text | QIODevice::WriteOnly | QIODevice::Truncate))
+    {
+        return;
+    }
+    else
+    {
+        QJsonObject obj;
+        obj.insert("items", arr);
+        jsonFile.write(QJsonDocument(obj).toJson(QJsonDocument::Indented));
+    }
+}
+
 void CleanWindow::InitializeUi()
 {
     std::thread thread(&CleanWindow::DataPrepare, this);
