@@ -76,11 +76,25 @@ void Connection::TaskRunnerThread(int jsonLength)
                 const auto hint = static_cast<std::int64_t>(json["hint"]);
                 if (hint == FOOD_SHOP_INFO)
                 {
+                    const auto items = payload["items"];
+                    std::vector<const char*> itemsCharVector;
+                    for (const auto &name : items)
+                    {
+                        itemsCharVector.push_back(name.get<const char*>());
+                    }
 
+                    DealWithFoodShopInfo(id, randomKey, itemsCharVector);
                 }
                 else if (hint == CLEAN_SHOP_INFO)
                 {
+                    const auto items = payload["items"];
+                    std::vector<const char*> itemsCharVector;
+                    for (const auto &name : items)
+                    {
+                        itemsCharVector.push_back(name.get<const char*>());
+                    }
 
+                    DealWithCleanShopInfo(id, randomKey, itemsCharVector);
                 }
                 else if (hint == PETPROFILE)
                 {
@@ -452,4 +466,12 @@ void Connection::DealWithLogout(const char *id, const char *randomKey)
         std::cout << exp.stm_text << std::endl;
         std::cout << exp.msg << std::endl;
     }
+}
+
+void Connection::DealWithFoodShopInfo(const char *id, const char *randomKey, const std::vector<const char*> &items)
+{
+}
+
+void Connection::DealWithCleanShopInfo(const char *id, const char *randomKey, const std::vector<const char*> &items)
+{
 }

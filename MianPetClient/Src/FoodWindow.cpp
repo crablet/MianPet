@@ -66,7 +66,7 @@ void FoodWindow::DataPrepare()
     }
 
     const auto rangeBegin = 0;
-    const auto rangeEnd = items.size() >= 4 ? 4 : items.size();
+    const auto rangeEnd = static_cast<decltype(rangeBegin)>(items.size() >= 4 ? 4 : items.size());
     rangeBegin + 0 < rangeEnd
         ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].name + ".png"))
         : item0->setIcon(QIcon());

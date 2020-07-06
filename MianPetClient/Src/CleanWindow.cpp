@@ -62,7 +62,8 @@ void CleanWindow::DataPrepare()
         items.emplace_back(itemInfo["name"].toString(), itemInfo["price"].toInt(), itemInfo["amount"].toInt());
     }
 
-    const auto rangeBegin = 0, rangeEnd = tempArray.size() >= 4 ? 4 : tempArray.size();
+    const auto rangeBegin = 0;
+    const auto rangeEnd = static_cast<decltype(rangeBegin)>(items.size() >= 4 ? 4 : items.size());
     rangeBegin + 0 < rangeEnd
         ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].name + ".png"))
         : item0->setIcon(QIcon());

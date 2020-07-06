@@ -11,6 +11,7 @@
 #include <iostream>
 #include <cstdio>
 #include <unordered_map>
+#include <vector>
 
 #include "asio.hpp"
 #include "simdjson.h"
@@ -58,6 +59,10 @@ private:
     void DealWithHeartbeat(const char *id, const char *randomKey);
     // 处理登出请求 /GET/LOGOUT
     void DealWithLogout(const char *id, const char *randomKey);
+    // 处理食品商店信息请求 /GET/FOOD_SHOP_INFO
+    void DealWithFoodShopInfo(const char *id, const char *randomKey, const std::vector<const char*> &items);
+    // 处理日用品商店信息请求 /GET/CLEAN_SHOP_INFO
+    void DealWithCleanShopInfo(const char *id, const char *randomKey, const std::vector<const char *> &items);
 
 private:
     asio::ip::tcp::socket socket;
