@@ -82,7 +82,7 @@ void FoodWindow::DataPrepare()
 
     currentPage = 0;
 
-
+    RequestDataInRange(rangeBegin, rangeEnd);
 }
 
 void FoodWindow::ViewPreviousPage()

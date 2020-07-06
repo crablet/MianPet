@@ -77,6 +77,8 @@ void CleanWindow::DataPrepare()
         : item3->setIcon(QIcon());
 
     currentPage = 0;
+
+    RequestDataInRange(rangeBegin, rangeEnd);
 }
 
 void CleanWindow::ViewPreviousPage()
