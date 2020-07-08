@@ -75,7 +75,7 @@ void SmallItemsContainerWindow::InitializeUi()
     item3 = new QPushButton(this);
     item3->move(SmallItemsContainerWindowItem3X, SmallItemsContainerWindowItem3Y);
     item3->setFixedSize(SmallItemsContainerWindowItem3Width, SmallItemsContainerWindowItem3Height);
-    item3->setFlat(true);
+    //item3->setFlat(true);
     item3->setStyleSheet("QPushButton { border: none }");
     item3->setIconSize(QSize(SmallItemsContainerWindowItem3IconWidth, SmallItemsContainerWindowItem3IconHeight));
     item3->installEventFilter(this);

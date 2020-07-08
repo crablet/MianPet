@@ -1,5 +1,7 @@
 ﻿#include "FoodWindow.h"
 
+#include <iostream>
+
 FoodWindow::FoodWindow(QWidget *parent) 
     : SmallItemsContainerWindow(parent)
 {
@@ -167,20 +169,60 @@ void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
 
 void FoodWindow::mouseMoveEvent([[maybe_unused]] QMouseEvent *event)
 {
-    if (item0->underMouse() && currentPage * 4 + 0 < items.size())
+    auto InRange = [event](int x, int y, int w, int h)
     {
+        const int ex = event->pos().x();
+        const int ey = event->pos().y();
+        std::printf("ex: %d, ey: %d, x: %d, y: %d, w: %d, h: %d\n", ex, ey, x, y, w, h);
+
+        if (ex >= x && ex <= x + w && ey >= y && ey <= y + h)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    };
+
+    if (InRange(SmallItemsContainerWindowItem0X, 
+                SmallItemsContainerWindowItem0Y, 
+                SmallItemsContainerWindowItem0Width, 
+                SmallItemsContainerWindowItem0Height) 
+     && currentPage * 4 + 0 < items.size())
+    {
+        std::cout << __func__ << " " << __LINE__ << std::endl;
+
         itemLabel->SetUpperLabelText(items[currentPage * 4 + 0].name);
     }
-    else if (item1->underMouse() && currentPage * 4 + 1 < items.size())
+    else if (InRange(SmallItemsContainerWindowItem1X,
+                     SmallItemsContainerWindowItem1Y,
+                     SmallItemsContainerWindowItem1Width,
+                     SmallItemsContainerWindowItem1Height) 
+          && currentPage * 4 + 1 < items.size())
     {
+        std::cout << __func__ << " " << __LINE__ << std::endl;
+
         itemLabel->SetUpperLabelText(items[currentPage * 4 + 1].name);
     }
-    else if (item2->underMouse() && currentPage * 4 + 2 < items.size())
+    else if (InRange(SmallItemsContainerWindowItem2X,
+                     SmallItemsContainerWindowItem2Y,
+                     SmallItemsContainerWindowItem2Width,
+                     SmallItemsContainerWindowItem2Height)
+          && currentPage * 4 + 2 < items.size())
     {
+        std::cout << __func__ << " " << __LINE__ << std::endl;
+
         itemLabel->SetUpperLabelText(items[currentPage * 4 + 2].name);
     }
-    else if (item3->underMouse() && currentPage * 4 + 3 < items.size())
+    else if (InRange(SmallItemsContainerWindowItem3X,
+                     SmallItemsContainerWindowItem3Y,
+                     SmallItemsContainerWindowItem3Width,
+                     SmallItemsContainerWindowItem3Height) 
+          && currentPage * 4 + 3 < items.size())
     {
+        std::cout << __func__ << " " << __LINE__ << std::endl;
+
         itemLabel->SetUpperLabelText(items[currentPage * 4 + 3].name);
     }
     else
