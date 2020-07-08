@@ -193,6 +193,8 @@ void FoodWindow::mouseMoveEvent([[maybe_unused]] QMouseEvent *event)
     {
         std::cout << __func__ << " " << __LINE__ << std::endl;
 
+        itemLabel->move(event->globalPos());
+        itemLabel->show();
         itemLabel->SetUpperLabelText(items[currentPage * 4 + 0].name);
     }
     else if (InRange(SmallItemsContainerWindowItem1X,
@@ -203,6 +205,8 @@ void FoodWindow::mouseMoveEvent([[maybe_unused]] QMouseEvent *event)
     {
         std::cout << __func__ << " " << __LINE__ << std::endl;
 
+        itemLabel->move(event->globalPos());
+        itemLabel->show();
         itemLabel->SetUpperLabelText(items[currentPage * 4 + 1].name);
     }
     else if (InRange(SmallItemsContainerWindowItem2X,
@@ -213,6 +217,8 @@ void FoodWindow::mouseMoveEvent([[maybe_unused]] QMouseEvent *event)
     {
         std::cout << __func__ << " " << __LINE__ << std::endl;
 
+        itemLabel->move(event->globalPos());
+        itemLabel->show();
         itemLabel->SetUpperLabelText(items[currentPage * 4 + 2].name);
     }
     else if (InRange(SmallItemsContainerWindowItem3X,
@@ -223,10 +229,13 @@ void FoodWindow::mouseMoveEvent([[maybe_unused]] QMouseEvent *event)
     {
         std::cout << __func__ << " " << __LINE__ << std::endl;
 
+        itemLabel->move(event->globalPos());
+        itemLabel->show();
         itemLabel->SetUpperLabelText(items[currentPage * 4 + 3].name);
     }
     else
     {
+        itemLabel->hide();
         itemLabel->SetUpperLabelText("");
         itemLabel->SetLowerLabelText("");
     }

@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QPoint>
-#include <QMouseEvent>
 #include <QPalette>
 #include <QPixmap>
 #include <QBrush>
@@ -30,7 +29,7 @@ private:
     void InitializeUi();
     void InitializeConnect();
 
-    bool eventFilter(QObject *object, QEvent *event) override;
+    //bool eventFilter(QObject *object, QEvent *event) override;
 
 public:
     void SetIcon(const QPixmap &icon, const QSize &size = QSize(0, 0));
