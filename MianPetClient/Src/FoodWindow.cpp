@@ -164,3 +164,30 @@ void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
     // 并把更新写入FoodShopData.json和items中
 
 }
+
+void FoodWindow::mouseMoveEvent([[maybe_unused]] QMouseEvent *event)
+{
+    if (item0->underMouse() && currentPage * 4 + 0 < items.size())
+    {
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 0].name);
+    }
+    else if (item1->underMouse() && currentPage * 4 + 1 < items.size())
+    {
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 1].name);
+    }
+    else if (item2->underMouse() && currentPage * 4 + 2 < items.size())
+    {
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 2].name);
+    }
+    else if (item3->underMouse() && currentPage * 4 + 3 < items.size())
+    {
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 3].name);
+    }
+    else
+    {
+        itemLabel->SetUpperLabelText("");
+        itemLabel->SetLowerLabelText("");
+    }
+
+    SmallItemsContainerWindow::mouseMoveEvent(event);
+}

@@ -15,6 +15,7 @@
 #include <QMessageBox>
 #include <QTcpSocket>
 #include <QIcon>
+#include <QMouseEvent>
 
 #include "SmallItemsContainerWindow.h"
 
@@ -38,6 +39,8 @@ private:
     void ViewNextPage();
 
     void RequestDataInRange(int rangeBegin, int rangeEnd);
+
+    void mouseMoveEvent(QMouseEvent *event) override;
 
     struct ItemInformation
     {

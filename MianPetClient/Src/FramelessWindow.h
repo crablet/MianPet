@@ -15,7 +15,7 @@ class FramelessWindow : public QWidget
 public:
     explicit FramelessWindow(QWidget *parent = nullptr);
 
-private:
+protected:
     virtual void mouseMoveEvent(QMouseEvent *event) override;
     virtual void mousePressEvent(QMouseEvent *event) override;
     virtual void mouseReleaseEvent(QMouseEvent *event) override;

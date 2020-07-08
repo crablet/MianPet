@@ -12,6 +12,7 @@ void SmallItemsContainerWindow::InitializeUi()
     setFixedSize(SmallItemsContainerWindowWidth, SmallItemsContainerWindowHeight);
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowFlags(windowFlags() | Qt::Tool);   // Qt::Tool属性使得其任务栏图标被隐藏
+    setMouseTracking(true); // 使得鼠标悬浮时能够及时更新状态
 
     QPalette palette;
     palette.setBrush(backgroundRole(), QBrush(SmallItemsContainerWindowBackgroundPixmap));
