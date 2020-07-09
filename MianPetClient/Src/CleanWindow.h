@@ -37,6 +37,9 @@ private:
     void ViewPreviousPage();
     void ViewNextPage();
 
+    void OnMouseHoversEnterItem(QObject *obj);
+    void OnMouseHoversLeaveItem(QObject *obj);
+
     void RequestDataInRange(int rangeBegin, int rangeEnd);
 
     struct ItemInformation

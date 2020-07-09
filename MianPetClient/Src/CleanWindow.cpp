@@ -44,6 +44,9 @@ void CleanWindow::InitializeConnect()
 {
     connect(previousPageButton, &QPushButton::clicked, this, &CleanWindow::ViewPreviousPage);
     connect(nextPageButton, &QPushButton::clicked, this, &CleanWindow::ViewNextPage);
+
+    connect(this, &CleanWindow::MouseHoversEnterOnItem, this, &CleanWindow::OnMouseHoversEnterItem);
+    connect(this, &CleanWindow::MouseHoversLeaveOnItem, this, &CleanWindow::OnMouseHoversLeaveItem);
 }
 
 void CleanWindow::DataPrepare()
@@ -127,6 +130,43 @@ void CleanWindow::ViewNextPage()
             : item3->setIcon(QIcon());
         // 展示[rangeBegin, rangeEnd)中的内容
     }
+}
+
+void CleanWindow::OnMouseHoversEnterItem(QObject *obj)
+{
+    if (obj == item0 && currentPage * 4 + 0 < items.size())
+    {
+        itemLabel->show();
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 0].name);
+    }
+    else if (obj == item1 && currentPage * 4 + 1 < items.size())
+    {
+        itemLabel->show();
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 1].name);
+    }
+    else if (obj == item2 && currentPage * 4 + 2 < items.size())
+    {
+        itemLabel->show();
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 2].name);
+    }
+    else if (obj == item3 && currentPage * 4 + 3 < items.size())
+    {
+        itemLabel->show();
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 3].name);
+    }
+    else
+    {
+        itemLabel->hide();
+        itemLabel->SetUpperLabelText("");
+        itemLabel->SetLowerLabelText("");
+    }
+}
+
+void CleanWindow::OnMouseHoversLeaveItem([[maybe_unused]] QObject *obj)
+{
+    itemLabel->hide();
+    itemLabel->SetUpperLabelText("");
+    itemLabel->SetLowerLabelText("");
 }
 
 void CleanWindow::RequestDataInRange(int rangeBegin, int rangeEnd)

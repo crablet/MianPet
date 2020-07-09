@@ -48,6 +48,9 @@ void FoodWindow::InitializeConnect()
 {
     connect(previousPageButton, &QPushButton::clicked, this, &FoodWindow::ViewPreviousPage);
     connect(nextPageButton, &QPushButton::clicked, this, &FoodWindow::ViewNextPage);
+
+    connect(this, &FoodWindow::MouseHoversEnterOnItem, this, &FoodWindow::OnMouseHoversEnterItem);
+    connect(this, &FoodWindow::MouseHoversLeaveOnItem, this, &FoodWindow::OnMouseHoversLeaveItem);
 }
 
 void FoodWindow::DataPrepare()
@@ -134,6 +137,43 @@ void FoodWindow::ViewNextPage()
     }
 }
 
+void FoodWindow::OnMouseHoversEnterItem(QObject *obj)
+{
+    if (obj == item0 && currentPage * 4 + 0 < items.size())
+    {
+        itemLabel->show();
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 0].name);
+    }
+    else if (obj == item1 && currentPage * 4 + 1 < items.size())
+    {
+        itemLabel->show();
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 1].name);
+    }
+    else if (obj == item2 && currentPage * 4 + 2 < items.size())
+    {
+        itemLabel->show();
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 2].name);
+    }
+    else if (obj == item3 && currentPage * 4 + 3 < items.size())
+    {
+        itemLabel->show();
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 3].name);
+    }
+    else
+    {
+        itemLabel->hide();
+        itemLabel->SetUpperLabelText("");
+        itemLabel->SetLowerLabelText("");
+    }
+}
+
+void FoodWindow::OnMouseHoversLeaveItem([[maybe_unused]] QObject *obj)
+{
+    itemLabel->hide();
+    itemLabel->SetUpperLabelText("");
+    itemLabel->SetLowerLabelText("");
+}
+
 void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
 {
     auto tcpSocket = std::make_unique<QTcpSocket>();
@@ -165,80 +205,4 @@ void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
     // 处理remoteJson
     // 并把更新写入FoodShopData.json和items中
 
-}
-
-void FoodWindow::mouseMoveEvent([[maybe_unused]] QMouseEvent *event)
-{
-    auto InRange = [event](int x, int y, int w, int h)
-    {
-        const int ex = event->pos().x();
-        const int ey = event->pos().y();
-        std::printf("ex: %d, ey: %d, x: %d, y: %d, w: %d, h: %d\n", ex, ey, x, y, w, h);
-
-        if (ex >= x && ex <= x + w && ey >= y && ey <= y + h)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    };
-
-    if (InRange(SmallItemsContainerWindowItem0X, 
-                SmallItemsContainerWindowItem0Y, 
-                SmallItemsContainerWindowItem0Width, 
-                SmallItemsContainerWindowItem0Height) 
-     && currentPage * 4 + 0 < items.size())
-    {
-        std::cout << __func__ << " " << __LINE__ << std::endl;
-
-        itemLabel->move(event->globalPos());
-        itemLabel->show();
-        itemLabel->SetUpperLabelText(items[currentPage * 4 + 0].name);
-    }
-    else if (InRange(SmallItemsContainerWindowItem1X,
-                     SmallItemsContainerWindowItem1Y,
-                     SmallItemsContainerWindowItem1Width,
-                     SmallItemsContainerWindowItem1Height) 
-          && currentPage * 4 + 1 < items.size())
-    {
-        std::cout << __func__ << " " << __LINE__ << std::endl;
-
-        itemLabel->move(event->globalPos());
-        itemLabel->show();
-        itemLabel->SetUpperLabelText(items[currentPage * 4 + 1].name);
-    }
-    else if (InRange(SmallItemsContainerWindowItem2X,
-                     SmallItemsContainerWindowItem2Y,
-                     SmallItemsContainerWindowItem2Width,
-                     SmallItemsContainerWindowItem2Height)
-          && currentPage * 4 + 2 < items.size())
-    {
-        std::cout << __func__ << " " << __LINE__ << std::endl;
-
-        itemLabel->move(event->globalPos());
-        itemLabel->show();
-        itemLabel->SetUpperLabelText(items[currentPage * 4 + 2].name);
-    }
-    else if (InRange(SmallItemsContainerWindowItem3X,
-                     SmallItemsContainerWindowItem3Y,
-                     SmallItemsContainerWindowItem3Width,
-                     SmallItemsContainerWindowItem3Height) 
-          && currentPage * 4 + 3 < items.size())
-    {
-        std::cout << __func__ << " " << __LINE__ << std::endl;
-
-        itemLabel->move(event->globalPos());
-        itemLabel->show();
-        itemLabel->SetUpperLabelText(items[currentPage * 4 + 3].name);
-    }
-    else
-    {
-        itemLabel->hide();
-        itemLabel->SetUpperLabelText("");
-        itemLabel->SetLowerLabelText("");
-    }
-
-    SmallItemsContainerWindow::mouseMoveEvent(event);
 }
