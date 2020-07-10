@@ -45,7 +45,7 @@ void CleanWindow::InitializeConnect()
     connect(previousPageButton, &QPushButton::clicked, this, &CleanWindow::ViewPreviousPage);
     connect(nextPageButton, &QPushButton::clicked, this, &CleanWindow::ViewNextPage);
 
-    connect(this, &CleanWindow::MouseHoversEnterOnItem, this, &CleanWindow::OnMouseHoversEnterItem);
+    connect(this, &CleanWindow::MouseHoversMoveOnItem, this, &CleanWindow::OnMouseHoversMoveItem);
     connect(this, &CleanWindow::MouseHoversLeaveOnItem, this, &CleanWindow::OnMouseHoversLeaveItem);
 }
 
@@ -132,7 +132,7 @@ void CleanWindow::ViewNextPage()
     }
 }
 
-void CleanWindow::OnMouseHoversEnterItem(QObject *obj)
+void CleanWindow::OnMouseHoversMoveItem(QObject *obj)
 {
     if (obj == item0 && currentPage * 4 + 0 < items.size())
     {

@@ -36,7 +36,7 @@ public:
     void SetWindowTitle(const QString &text);
 
 signals:
-    void MouseHoversEnterOnItem(QObject *item);
+    void MouseHoversMoveOnItem(QObject *item);
     void MouseHoversLeaveOnItem(QObject *item);
 
 private:

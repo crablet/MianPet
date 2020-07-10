@@ -38,7 +38,7 @@ private:
     void ViewPreviousPage();
     void ViewNextPage();
 
-    void OnMouseHoversEnterItem(QObject *obj);
+    void OnMouseHoversMoveItem(QObject *obj);
     void OnMouseHoversLeaveItem(QObject *obj);
 
     void RequestDataInRange(int rangeBegin, int rangeEnd);

@@ -95,18 +95,15 @@ bool SmallItemsContainerWindow::eventFilter(QObject *object, QEvent *event)
      || object == static_cast<QObject*>(item2)
      || object == static_cast<QObject*>(item3))
     {
-        if (event->type() == QEvent::HoverEnter)
+        if (event->type() == QEvent::HoverMove)
         {
-            itemLabel->show();
             itemLabel->move(QCursor::pos() + QPoint(2, 2)); 
             // 得预留一些位置，不然会持续触发Enter和Leave事件，从而出现闪烁的情况
 
-            emit MouseHoversEnterOnItem(object);
+            emit MouseHoversMoveOnItem(object);
         }
         else if (event->type() == QEvent::HoverLeave)
         {
-            itemLabel->hide();
-
             emit MouseHoversLeaveOnItem(object);
         }
     }

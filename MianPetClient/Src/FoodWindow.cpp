@@ -49,7 +49,7 @@ void FoodWindow::InitializeConnect()
     connect(previousPageButton, &QPushButton::clicked, this, &FoodWindow::ViewPreviousPage);
     connect(nextPageButton, &QPushButton::clicked, this, &FoodWindow::ViewNextPage);
 
-    connect(this, &FoodWindow::MouseHoversEnterOnItem, this, &FoodWindow::OnMouseHoversEnterItem);
+    connect(this, &FoodWindow::MouseHoversMoveOnItem, this, &FoodWindow::OnMouseHoversMoveItem);
     connect(this, &FoodWindow::MouseHoversLeaveOnItem, this, &FoodWindow::OnMouseHoversLeaveItem);
 }
 
@@ -137,7 +137,7 @@ void FoodWindow::ViewNextPage()
     }
 }
 
-void FoodWindow::OnMouseHoversEnterItem(QObject *obj)
+void FoodWindow::OnMouseHoversMoveItem(QObject *obj)
 {
     if (obj == item0 && currentPage * 4 + 0 < items.size())
     {
