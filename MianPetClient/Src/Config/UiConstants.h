@@ -117,14 +117,17 @@ inline constexpr int PetProfileWindowHeight = 327;
 inline constexpr int TransparentItemLabelWidth = 167;
 inline constexpr int TransparentItemLabelHeight = 123;
 
-inline constexpr int TransparentItemLabelUpperLabelWidth = 49;
+inline constexpr int TransparentItemLabelUpperLabelWidth = 140;
 inline constexpr int TransparentItemLabelUpperLabelHeight = 24;
 inline constexpr int TransparentItemLabelUpperLabelX = 12;
 inline constexpr int TransparentItemLabelUpperLabelY = 12;
+inline const QString TransparentItemLabelUpperLabelStyle 
+    = R"(QLabel { color: rgb(247, 247, 190); font-size: 22px })";
 
 inline constexpr int TransparentItemLabelLowerLabelWidth = TransparentItemLabelUpperLabelWidth;
 inline constexpr int TransparentItemLabelLowerLabelHeight = 56;
 inline constexpr int TransparentItemLabelLowerLabelX = TransparentItemLabelUpperLabelX;
 inline constexpr int TransparentItemLabelLowerLabelY = 64;
+inline const QString TransparentItemLabelLowerLabelStyle = "";
 
 #endif // UICONSTANTS_H

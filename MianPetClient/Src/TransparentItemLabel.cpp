@@ -39,10 +39,12 @@ void TransparentItemLabel::InitializeUi()
     upperLabel = new QLabel(this);
     upperLabel->setFixedSize(TransparentItemLabelUpperLabelWidth, TransparentItemLabelUpperLabelHeight);
     upperLabel->move(TransparentItemLabelUpperLabelX, TransparentItemLabelUpperLabelY);
+    upperLabel->setStyleSheet(TransparentItemLabelUpperLabelStyle);
 
     lowerLabel = new QLabel(this);
     lowerLabel->setFixedSize(TransparentItemLabelLowerLabelWidth, TransparentItemLabelLowerLabelHeight);
     lowerLabel->move(TransparentItemLabelLowerLabelX, TransparentItemLabelLowerLabelY);
+    lowerLabel->setStyleSheet(TransparentItemLabelLowerLabelStyle);
 }
 
 void TransparentItemLabel::InitializeConnect()
