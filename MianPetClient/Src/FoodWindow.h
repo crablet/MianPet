@@ -8,6 +8,7 @@
 #include <vector>
 
 #include <QWidget>
+#include <QHBoxLayout>
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -16,6 +17,7 @@
 #include <QTcpSocket>
 #include <QIcon>
 #include <QMouseEvent>
+#include <QProgressBar>
 
 #include "SmallItemsContainerWindow.h"
 
@@ -56,7 +58,13 @@ private:
     };
 
 private:
-    std::vector<ItemInformation> items{}; // first: name, second: price
+    std::vector<ItemInformation> items{};
+
+    QWidget *lowerBarWidget;    // 展示饥饿值、文字、购买按钮和使用按钮的地方
+    QHBoxLayout *lowerBarWidgetLayout;
+    QLabel *lowerBarTextLabel;
+    QProgressBar *valueBar;
+    QPushButton *buyButton, *useButton;
 };
 
 #endif // FOODWINDOW_H

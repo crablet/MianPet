@@ -38,6 +38,22 @@ void CleanWindow::InitializeUi()
     thread.detach();
 
     SetWindowTitle("清洁");
+
+    lowerBarTextLabel = new QLabel("清洁值", this);
+    valueBar = new QProgressBar(this);
+    buyButton = new QPushButton("购买", this);
+    useButton = new QPushButton("使用", this);
+
+    lowerBarWidgetLayout = new QHBoxLayout(this);
+    lowerBarWidgetLayout->addWidget(lowerBarTextLabel);
+    lowerBarWidgetLayout->addWidget(valueBar);
+    lowerBarWidgetLayout->addWidget(buyButton);
+    lowerBarWidgetLayout->addWidget(useButton);
+
+    lowerBarWidget = new QWidget(this);
+    lowerBarWidget->setLayout(lowerBarWidgetLayout);
+    lowerBarWidget->setFixedSize(CleanWindowLowerBarWidgetWidth, CleanWindowLowerBarWidgetHeight);
+    lowerBarWidget->move(CleanWindowLowerBarWidgetX, CleanWindowLowerBarWidgetY);
 }
 
 void CleanWindow::InitializeConnect()

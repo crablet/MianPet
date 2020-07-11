@@ -130,4 +130,16 @@ inline constexpr int TransparentItemLabelLowerLabelX = TransparentItemLabelUpper
 inline constexpr int TransparentItemLabelLowerLabelY = 64;
 inline const QString TransparentItemLabelLowerLabelStyle = "";
 
+inline constexpr int FoodWindowLowerBarWidgetWidth 
+    = SmallItemsContainerWindowItem3X + SmallItemsContainerWindowItem3IconWidth - SmallItemsContainerWindowItem0X;
+inline constexpr int FoodWindowLowerBarWidgetHeight = 53;
+inline constexpr int FoodWindowLowerBarWidgetX = SmallItemsContainerWindowItem0X;
+inline constexpr int FoodWindowLowerBarWidgetY 
+    = SmallItemsContainerWindowItem0Y + SmallItemsContainerWindowItem0Height + 3;
+
+inline constexpr int CleanWindowLowerBarWidgetWidth = FoodWindowLowerBarWidgetWidth;
+inline constexpr int CleanWindowLowerBarWidgetHeight = FoodWindowLowerBarWidgetHeight;
+inline constexpr int CleanWindowLowerBarWidgetX = FoodWindowLowerBarWidgetX;
+inline constexpr int CleanWindowLowerBarWidgetY = FoodWindowLowerBarWidgetY;
+
 #endif // UICONSTANTS_H

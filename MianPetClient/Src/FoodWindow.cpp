@@ -42,6 +42,22 @@ void FoodWindow::InitializeUi()
 
     SetIcon(FoodWindowIcon);
     SetWindowTitle("喂食");
+
+    lowerBarTextLabel = new QLabel("饥饿值", this);
+    valueBar = new QProgressBar(this);
+    buyButton = new QPushButton("购买", this);
+    useButton = new QPushButton("使用", this);
+
+    lowerBarWidgetLayout = new QHBoxLayout(this);
+    lowerBarWidgetLayout->addWidget(lowerBarTextLabel);
+    lowerBarWidgetLayout->addWidget(valueBar);
+    lowerBarWidgetLayout->addWidget(buyButton);
+    lowerBarWidgetLayout->addWidget(useButton);
+
+    lowerBarWidget = new QWidget(this);
+    lowerBarWidget->setLayout(lowerBarWidgetLayout);
+    lowerBarWidget->setFixedSize(FoodWindowLowerBarWidgetWidth, FoodWindowLowerBarWidgetHeight);
+    lowerBarWidget->move(FoodWindowLowerBarWidgetX, FoodWindowLowerBarWidgetY);
 }
 
 void FoodWindow::InitializeConnect()
