@@ -48,6 +48,7 @@ HEADERS += \
     Src/LoginWindow.h \
     Src/PetClient.h \
     Src/PetProfileWindow.h \
+    Src/PetStatusData.h \
     Src/PetToolButtonsContainer.h \
     Src/SmallItemsContainerWindow.h \
     Src/Tools/Network/DataPackages/BuyRequestData.h \
