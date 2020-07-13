@@ -27,6 +27,8 @@
 #include "Src/Config/NetworkConstants.h"
 #include "Src/Tools/Network/DataPackages/PetProfileRequestData.h"
 
+#include "PetStatusData.h"
+
 #include "FramelessWindow.h"
 
 class PetProfileWindow final : public FramelessWindow

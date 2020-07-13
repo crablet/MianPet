@@ -36,6 +36,14 @@ void PetProfileWindow::InitializeUi()
     healthBar->setRange(0, 100);
     moodBar->setRange(0, 100);
 
+    levelLabel->setText(QString::number(levelValue));
+    ageLabel->setText(QString::number(ageValue));
+    growthBar->setValue(growthValue);
+    foodBar->setValue(foodValue);
+    cleanBar->setValue(cleanValue);
+    healthBar->setValue(healthValue);
+    moodBar->setValue(moodValue);
+
     // 这样设置可以让进度条的文字显示在中间，实测Ubuntu默认就是在中间但Windows需要手动设置
     // 所以就干脆统一都这样设置，以免造成平台间的差异
     growthBar->setAlignment(Qt::AlignCenter);
