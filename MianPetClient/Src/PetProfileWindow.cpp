@@ -69,9 +69,9 @@ void PetProfileWindow::InitializeUi()
 
     //////////////////////////////////////////////////////
 
-    grouthSpeedLabel = new QLabel("成长速度：260/小时");
+    grouthSpeedLabel = new QLabel("成长速度：" + QString::number(growthValue) + "/小时");
     statusLabel = new QLabel("状态：正在成长");
-    onlineTimeLabel = new QLabel("在线时间：9分钟");
+    onlineTimeLabel = new QLabel("在线时间：" + QString::number(onlineTimeValue) + "分钟");
 
     lowerLayout = new QVBoxLayout(this);
     lowerLayout->addWidget(grouthSpeedLabel);
@@ -168,18 +168,28 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
     const auto jsonDocument = QJsonDocument::fromJson(profile);
     if (jsonDocument.isObject())
     {
+        levelValue = jsonDocument["level"].toInt();
+        ageValue = jsonDocument["age"].toInt();
+        growthValue = jsonDocument["growth"].toInt();
+        foodValue = jsonDocument["food"].toInt();
+        cleanValue = jsonDocument["clean"].toInt();
+        healthValue = jsonDocument["health"].toInt();
+        moodValue = jsonDocument["mood"].toInt();
+        grouthSpeedValue = jsonDocument["growth_speed"].toInt();
+        onlineTimeValue = jsonDocument["online_time"].toInt();
+
         usernameLabel->setText(jsonDocument["username"].toString());
         idLabel->setText(jsonDocument["id"].toString());
-        levelLabel->setText(QString::number(jsonDocument["level"].toInt()));
-        ageLabel->setText(QString::number(jsonDocument["age"].toInt() / 60) + "小时");
-        growthBar->setValue(jsonDocument["growth"].toInt());    // TODO: 这几个要按照换算公式换回百分比
-        foodBar->setValue(jsonDocument["food"].toInt());        // TODO: 这几个要按照换算公式换回百分比
-        cleanBar->setValue(jsonDocument["clean"].toInt());      // TODO: 这几个要按照换算公式换回百分比
-        healthBar->setValue(jsonDocument["health"].toInt());    // TODO: 这几个要按照换算公式换回百分比
-        moodBar->setValue(jsonDocument["mood"].toInt());        // TODO: 这几个要按照换算公式换回百分比
-        grouthSpeedLabel->setText("成长速度：" + QString::number(jsonDocument["growth_speed"].toInt()) + "/小时");
+        levelLabel->setText(QString::number(levelValue));
+        ageLabel->setText(QString::number(ageValue / 60) + "小时");
+        growthBar->setValue(growthValue);    // TODO: 这几个要按照换算公式换回百分比
+        foodBar->setValue(foodValue);        // TODO: 这几个要按照换算公式换回百分比
+        cleanBar->setValue(cleanValue);      // TODO: 这几个要按照换算公式换回百分比
+        healthBar->setValue(healthValue);    // TODO: 这几个要按照换算公式换回百分比
+        moodBar->setValue(moodValue);        // TODO: 这几个要按照换算公式换回百分比
+        grouthSpeedLabel->setText("成长速度：" + QString::number(growthValue) + "/小时");
         statusLabel->setText("状态：" + QString::number(jsonDocument["status"].toInt()));
-        onlineTimeLabel->setText("在线时间：" + QString::number(jsonDocument["online_time"].toInt()) + "分钟");
+        onlineTimeLabel->setText("在线时间：" + QString::number(onlineTimeValue) + "分钟");
     }
     else
     {

@@ -8,5 +8,7 @@ inline int foodValue;
 inline int cleanValue;
 inline int healthValue;
 inline int moodValue;
+inline int grouthSpeedValue;
+inline int onlineTimeValue;
 
 #endif // PETSTATUSDATA_H
