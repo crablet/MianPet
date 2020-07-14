@@ -18,6 +18,7 @@
 #include <QIcon>
 #include <QMouseEvent>
 #include <QProgressBar>
+#include <QString>
 
 #include "SmallItemsContainerWindow.h"
 #include "PetStatusData.h"
@@ -44,6 +45,9 @@ private:
     void OnMouseHoversMoveItem(QObject *obj);
     void OnMouseHoversLeaveItem(QObject *obj);
 
+    void OnBuyButtonClicked();
+    void OnUseButtonClicked();
+
     void RequestDataInRange(int rangeBegin, int rangeEnd);
 
     struct ItemInformation
@@ -66,6 +70,8 @@ private:
     QLabel *lowerBarTextLabel;
     QProgressBar *valueBar;
     QPushButton *buyButton, *useButton;
+
+    QString selectedFood;   // 选中的食品，准备购买/使用
 };
 
 #endif // FOODWINDOW_H

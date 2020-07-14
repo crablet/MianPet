@@ -1,7 +1,5 @@
 ﻿#include "FoodWindow.h"
 
-#include <iostream>
-
 FoodWindow::FoodWindow(QWidget *parent) 
     : SmallItemsContainerWindow(parent)
 {
@@ -70,6 +68,26 @@ void FoodWindow::InitializeConnect()
 
     connect(this, &FoodWindow::MouseHoversMoveOnItem, this, &FoodWindow::OnMouseHoversMoveItem);
     connect(this, &FoodWindow::MouseHoversLeaveOnItem, this, &FoodWindow::OnMouseHoversLeaveItem);
+
+    connect(item0, &QPushButton::clicked, this, [=]()
+    {
+        selectedFood = items[currentPage * 4 + 0].name;
+    });
+    connect(item1, &QPushButton::clicked, this, [=]()
+    {
+        selectedFood = items[currentPage * 4 + 1].name;
+    });
+    connect(item2, &QPushButton::clicked, this, [=]()
+    {
+        selectedFood = items[currentPage * 4 + 2].name;
+    });
+    connect(item3, &QPushButton::clicked, this, [=]()
+    {
+        selectedFood = items[currentPage * 4 + 3].name;
+    });
+
+    connect(buyButton, &QPushButton::clicked, this, &FoodWindow::OnBuyButtonClicked);
+    connect(useButton, &QPushButton::clicked, this, &FoodWindow::OnUseButtonClicked);
 }
 
 void FoodWindow::DataPrepare()
@@ -125,6 +143,8 @@ void FoodWindow::ViewPreviousPage()
         item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].name + ".png"));
         item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"));
         // 展示[rangeBegin, rangeEnd)中的内容
+
+        selectedFood.clear();
     }
 }
 
@@ -153,6 +173,8 @@ void FoodWindow::ViewNextPage()
             ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"))
             : item3->setIcon(QIcon());
         // 展示[rangeBegin, rangeEnd)中的内容
+
+        selectedFood.clear();
     }
 }
 
@@ -191,6 +213,16 @@ void FoodWindow::OnMouseHoversLeaveItem([[maybe_unused]] QObject *obj)
     itemLabel->hide();
     itemLabel->SetUpperLabelText("");
     itemLabel->SetLowerLabelText("");
+}
+
+void FoodWindow::OnBuyButtonClicked()
+{
+    qDebug() << "Buy " << selectedFood;
+}
+
+void FoodWindow::OnUseButtonClicked()
+{
+    qDebug() << "Use " << selectedFood;
 }
 
 void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)

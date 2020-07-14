@@ -66,6 +66,26 @@ void CleanWindow::InitializeConnect()
 
     connect(this, &CleanWindow::MouseHoversMoveOnItem, this, &CleanWindow::OnMouseHoversMoveItem);
     connect(this, &CleanWindow::MouseHoversLeaveOnItem, this, &CleanWindow::OnMouseHoversLeaveItem);
+
+    connect(item0, &QPushButton::clicked, this, [=]()
+    {
+        selectedClean = items[currentPage * 4 + 0].name;
+    });
+    connect(item1, &QPushButton::clicked, this, [=]()
+    {
+        selectedClean = items[currentPage * 4 + 1].name;
+    });
+    connect(item2, &QPushButton::clicked, this, [=]()
+    {
+        selectedClean = items[currentPage * 4 + 2].name;
+    });
+    connect(item3, &QPushButton::clicked, this, [=]()
+    {
+        selectedClean = items[currentPage * 4 + 3].name;
+    });
+
+    connect(buyButton, &QPushButton::clicked, this, &CleanWindow::OnBuyButtonClicked);
+    connect(useButton, &QPushButton::clicked, this, &CleanWindow::OnUseButtonClicked);
 }
 
 void CleanWindow::DataPrepare()
@@ -120,6 +140,8 @@ void CleanWindow::ViewPreviousPage()
         item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].name + ".png"));
         item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"));
         // 展示[rangeBegin, rangeEnd)中的内容
+
+        selectedClean.clear();
     }
 }
 
@@ -148,6 +170,8 @@ void CleanWindow::ViewNextPage()
             ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"))
             : item3->setIcon(QIcon());
         // 展示[rangeBegin, rangeEnd)中的内容
+
+        selectedClean.clear();
     }
 }
 
@@ -186,6 +210,16 @@ void CleanWindow::OnMouseHoversLeaveItem([[maybe_unused]] QObject *obj)
     itemLabel->hide();
     itemLabel->SetUpperLabelText("");
     itemLabel->SetLowerLabelText("");
+}
+
+void CleanWindow::OnBuyButtonClicked()
+{
+    qDebug() << "Buy " << selectedClean;
+}
+
+void CleanWindow::OnUseButtonClicked()
+{
+    qDebug() << "Use " << selectedClean;
 }
 
 void CleanWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
