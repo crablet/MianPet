@@ -20,6 +20,7 @@
 #include <QProgressBar>
 
 #include "SmallItemsContainerWindow.h"
+#include "PetStatusData.h"
 
 #include "Config/NetworkConstants.h"
 #include "Tools/Network/DataPackages/FoodShopRequestData.h"

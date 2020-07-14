@@ -44,6 +44,9 @@ void CleanWindow::InitializeUi()
     buyButton = new QPushButton("购买", this);
     useButton = new QPushButton("使用", this);
 
+    valueBar->setAlignment(Qt::AlignCenter);
+    valueBar->setValue(cleanValue);
+
     lowerBarWidgetLayout = new QHBoxLayout(this);
     lowerBarWidgetLayout->addWidget(lowerBarTextLabel);
     lowerBarWidgetLayout->addWidget(valueBar);

@@ -48,6 +48,9 @@ void FoodWindow::InitializeUi()
     buyButton = new QPushButton("购买", this);
     useButton = new QPushButton("使用", this);
 
+    valueBar->setAlignment(Qt::AlignCenter);
+    valueBar->setValue(foodValue);
+
     lowerBarWidgetLayout = new QHBoxLayout(this);
     lowerBarWidgetLayout->addWidget(lowerBarTextLabel);
     lowerBarWidgetLayout->addWidget(valueBar);
