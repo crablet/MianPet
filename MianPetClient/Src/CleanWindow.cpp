@@ -214,7 +214,34 @@ void CleanWindow::OnMouseHoversLeaveItem([[maybe_unused]] QObject *obj)
 
 void CleanWindow::OnBuyButtonClicked()
 {
-    qDebug() << "Buy " << selectedClean;
+    std::thread thread(
+    [=]()
+    {
+        auto tcpSocket = std::make_unique<QTcpSocket>();
+        tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+        if (!tcpSocket->waitForConnected())
+        {
+            return;
+        }
+
+        BuyRequestData data;
+        data.SetItem(selectedClean);
+        data.SetCount(1);
+        tcpSocket->write(data);
+        if (!tcpSocket->waitForBytesWritten())
+        {
+            return;
+        }
+
+        if (!tcpSocket->waitForReadyRead())
+        {
+            return;
+        }
+
+        const auto message = tcpSocket->readAll();
+        // 处理服务器的返回信息，购买成功/失败要做相应的处理
+    });
+    thread.detach();
 }
 
 void CleanWindow::OnUseButtonClicked()

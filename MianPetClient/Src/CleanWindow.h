@@ -25,6 +25,7 @@
 
 #include "Config/NetworkConstants.h"
 #include "Tools/Network/DataPackages/CleanShopRequestData.h"
+#include "Tools/Network/DataPackages/BuyRequestData.h"
 
 class CleanWindow final : public SmallItemsContainerWindow
 {

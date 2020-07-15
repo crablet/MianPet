@@ -25,6 +25,7 @@
 
 #include "Config/NetworkConstants.h"
 #include "Tools/Network/DataPackages/FoodShopRequestData.h"
+#include "Tools/Network/DataPackages/BuyRequestData.h"
 
 class FoodWindow final : public SmallItemsContainerWindow
 {
