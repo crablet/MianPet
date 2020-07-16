@@ -280,7 +280,21 @@ void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
     }
 
     const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
-    // 处理remoteJson
-    // 并把更新写入FoodShopData.json和items中
+    //处理remoteJson
+    //并把更新写入FoodShopData.json和items中
+    const auto jsonArray = remoteJson["items"].toArray();
+    for (const auto &r : jsonArray)
+    {
+        const auto obj = r.toObject();
+        const auto name = r["name"].toString();
+        const auto amount = r["amount"].toInt();
 
+        auto iter = std::find_if(items.begin(), items.end(), [=, &name](const ItemInformation &rhs)
+        {
+            return name == rhs.name;
+        });
+        iter->amount = amount;  // iter可能为空
+
+        qDebug() << iter->amount;
+    }
 }
