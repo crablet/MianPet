@@ -510,9 +510,9 @@ void Connection::DealWithFoodShopInfo(const char *id, const char *randomKey, con
 
                     replyJson += R"({"name":")";
                     replyJson += itemname;
-                    replyJson += R"(","amount":")";
+                    replyJson += R"(","amount":)";
                     replyJson += std::to_string(amount);
-                    replyJson += R"("},)";
+                    replyJson += R"(},)";
                 }
 
                 replyJson.pop_back();   // 去除最后一个','
@@ -580,9 +580,9 @@ void Connection::DealWithCleanShopInfo(const char *id, const char *randomKey, co
 
                     replyJson += R"({"name":")";
                     replyJson += itemname;
-                    replyJson += R"(","amount":")";
+                    replyJson += R"(","amount":)";
                     replyJson += std::to_string(amount);
-                    replyJson += R"("},)";
+                    replyJson += R"(},)";
                 }
 
                 replyJson.pop_back();   // 去除最后一个','
