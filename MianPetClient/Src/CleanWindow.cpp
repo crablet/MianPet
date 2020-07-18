@@ -226,7 +226,7 @@ void CleanWindow::OnBuyButtonClicked()
 
         BuyRequestData data;
         data.SetItem(selectedClean);
-        data.SetCount(1);
+        data.SetCount(1);   // TODO: 请求的物品数目，目前只支持每次都请求一个，以后再实现一次请求多个
         tcpSocket->write(data);
         if (!tcpSocket->waitForBytesWritten())
         {
