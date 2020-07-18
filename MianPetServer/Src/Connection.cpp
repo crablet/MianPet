@@ -492,6 +492,17 @@ void Connection::DealWithFoodShopInfo(const char *id, const char *randomKey, con
         {
             if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果连randomKey都一致，那就可以开始登出
             {
+                // 回复的json格式为：
+                // {
+                //   "items":
+                //   [
+                //     {
+                //       "name": string
+                //       "amount": int
+                //     },
+                //     ...
+                //   ]
+                //  }
                 std::string replyJson = R"({"items":[)";
 
                 for (const auto &itemname : items)
@@ -562,6 +573,17 @@ void Connection::DealWithCleanShopInfo(const char *id, const char *randomKey, co
         {
             if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果连randomKey都一致，那就可以开始登出
             {
+                // 回复的json格式为：
+                // {
+                //   "items":
+                //   [
+                //     {
+                //       "name": string
+                //       "amount": int
+                //     },
+                //     ...
+                //   ]
+                //  }
                 std::string replyJson = R"({"items":[)";
 
                 for (const auto &itemname : items)
