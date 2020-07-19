@@ -410,6 +410,7 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                        SET level = :newLevel<int>, age = :newAge<int>, growth = :newGrowth<int>, 
                            food = :newFood<int>, clean = :newClean<int>, health = :newHealth<int>, mood = :newMood<int>, growth_speed = :newGrowthSpeed<int>, 
                            status = :newStatus<int>, online_time = :newOnlineTime<int>)";
+                // TODO: 为何上面的sql语句没有"WHERE id = xxx"？是遗漏还是故意为之，这里需要检查清楚
                 otl_stream updateProfileStream(1, updateProfileSql, db);
                 updateProfileStream << newLevel << newAge << newGrowth 
                                     << newFood << newClean << newHealth << newMood << newGrowthSpeed
@@ -638,4 +639,92 @@ void Connection::DealWithCleanShopInfo(const char *id, const char *randomKey, co
 
 void Connection::DealWithBuy(const char *id, const char *randomKey, const char *item, int count)
 {
+    try
+    {
+        std::lock_guard<std::mutex> lock(dbMutex);
+
+        constexpr const char *checkOnlineAndSecretKeySqlStr =
+            R"(SELECT online, secretKey FROM userinfo
+               WHERE id = :id<char[16]>)";
+        otl_stream checkOnlineStream(64, checkOnlineAndSecretKeySqlStr, db);
+        checkOnlineStream << id;
+
+        int online;
+        char trueSecretKey[18 + 1];
+        for (auto &r : checkOnlineStream)
+        {
+            r >> online >> trueSecretKey;
+        }
+
+        // 先检查用户是否在线，如果不在线那执行登出操作也没有意义
+        if (online) // 如果在线则检查randomKey是否一致，有点cookies的感觉
+        {
+            if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果连randomKey都一致，那就可以开始处理购买请求
+            {
+                constexpr const char *getTuotuoAmountSql =
+                    R"(SELECT tuotuo FROM petprofile
+                       WHERE id = :id<char[16]>)";
+                otl_stream getTuotuoAmountStream(16, getTuotuoAmountSql, db);
+                getTuotuoAmountStream << id;
+
+                int tuotuoAmount;
+                for (auto &r : getTuotuoAmountStream)
+                {
+                    r >> tuotuoAmount;
+                }
+
+                constexpr const char *getItemPriceSql =
+                    R"(SELECT price FROM shopinfo
+                       WHERE itemname = :item<char[18]>)";
+                otl_stream getItemPriceStream(16, getItemPriceSql, db);
+                getItemPriceStream << item;
+
+                int itemPrice;
+                for (auto &r : getItemPriceStream)
+                {
+                    r >> itemPrice;
+                }
+
+                const auto totalPrice = itemPrice * count;
+                if (totalPrice > tuotuoAmount)
+                {
+                    reply = R"({"status":"failed"})";
+                }
+                else
+                {
+                    const auto currentTuotuo = tuotuoAmount - totalPrice;
+                    constexpr const char *updateTuotuoSql =
+                        R"(UPDATE petprofile
+                           SET tuotuo = :currentTuotuo<int>
+                           WHERE id = :id<char[16]>)";
+                    otl_stream updateTuotuoStream(1, updateTuotuoSql, db);
+                    updateTuotuoStream << currentTuotuo << id;
+
+                    constexpr const char *updateOwnItemsAmountSql =
+                        R"(UPDATE ownitems
+                           SET quantity = quantity + :delta<int>
+                           WHERE id = :id<char[16]> AND itemname = :itemname<char[18]>)";
+                    otl_stream updateOwnItemsAmountStream(1, updateOwnItemsAmountSql, db);
+                    updateOwnItemsAmountStream << count << id << item;
+
+                    reply = R"({"status":"successed"})";
+                }
+
+                DoWrite();
+            }
+            else
+            {
+                // error
+            }
+        }
+        else
+        {
+            // error
+        }
+    }
+    catch (const otl_exception &exp)
+    {
+        std::cout << exp.stm_text << std::endl;
+        std::cout << exp.msg << std::endl;
+    }
 }
