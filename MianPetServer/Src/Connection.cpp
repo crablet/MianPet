@@ -96,6 +96,12 @@ void Connection::TaskRunnerThread(int jsonLength)
 
                     DealWithCleanShopInfo(id, randomKey, itemsCharVector);
                 }
+                else if (hint == BUY)
+                {
+                    const char *item = payload["item"].get<const char*>();
+                    const auto count = static_cast<std::int64_t>(payload["count"]);
+                    DealWithBuy(id, randomKey, item, count);
+                }
                 else if (hint == PETPROFILE)
                 {
                     DealWithGetPetProfile(id, randomKey);
@@ -628,4 +634,8 @@ void Connection::DealWithCleanShopInfo(const char *id, const char *randomKey, co
         std::cout << exp.stm_text << std::endl;
         std::cout << exp.msg << std::endl;
     }
+}
+
+void Connection::DealWithBuy(const char *id, const char *randomKey, const char *item, int count)
+{
 }
