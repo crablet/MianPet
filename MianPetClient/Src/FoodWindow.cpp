@@ -88,6 +88,15 @@ void FoodWindow::InitializeConnect()
 
     connect(buyButton, &QPushButton::clicked, this, &FoodWindow::OnBuyButtonClicked);
     connect(useButton, &QPushButton::clicked, this, &FoodWindow::OnUseButtonClicked);
+
+    connect(this, &FoodWindow::BuySuccessed, this, [=](const QString &item, int count)
+    {
+        QMessageBox::information(this, "购买成功", "本次共购入" + QString::number(count) + "个" + item);
+    });
+    connect(this, &FoodWindow::BuyFailed, this, [=]()
+    {
+        QMessageBox::information(this, "购买失败", "请检查坨坨余额是否充足");
+    });
 }
 
 void FoodWindow::DataPrepare()
@@ -241,8 +250,22 @@ void FoodWindow::OnBuyButtonClicked()
             return;
         }
 
-        const auto message = tcpSocket->readAll();
-        // 处理服务器的返回信息，购买成功/失败要做相应的处理
+        const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+        const auto status = remoteJson["status"].toString();
+        if (status == "successed")
+        {
+            emit BuySuccessed(selectedFood, 1);
+            // 购买成功
+        }
+        else if (status == "failed")
+        {
+            emit BuyFailed(selectedFood, 1);
+            // 购买失败
+        }
+        else
+        {
+            // error
+        }
     });
     thread.detach();
 }

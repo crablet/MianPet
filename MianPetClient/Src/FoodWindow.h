@@ -63,6 +63,10 @@ private:
         int amount;
     };
 
+signals:
+    void BuySuccessed(const QString &item, int count);
+    void BuyFailed(const QString &item, int count);
+
 private:
     std::vector<ItemInformation> items{};
 
