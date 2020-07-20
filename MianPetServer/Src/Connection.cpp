@@ -409,12 +409,13 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                     R"(UPDATE petprofile
                        SET level = :newLevel<int>, age = :newAge<int>, growth = :newGrowth<int>, 
                            food = :newFood<int>, clean = :newClean<int>, health = :newHealth<int>, mood = :newMood<int>, growth_speed = :newGrowthSpeed<int>, 
-                           status = :newStatus<int>, online_time = :newOnlineTime<int>)";
-                // TODO: 为何上面的sql语句没有"WHERE id = xxx"？是遗漏还是故意为之，这里需要检查清楚
+                           status = :newStatus<int>, online_time = :newOnlineTime<int>
+                       WHERE id = :id<char[16]>)";
                 otl_stream updateProfileStream(1, updateProfileSql, db);
                 updateProfileStream << newLevel << newAge << newGrowth 
                                     << newFood << newClean << newHealth << newMood << newGrowthSpeed
-                                    << newStatus << newOnlineTime;
+                                    << newStatus << newOnlineTime
+                                    << id;
             }
         }
     }
