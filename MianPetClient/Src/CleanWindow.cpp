@@ -238,8 +238,22 @@ void CleanWindow::OnBuyButtonClicked()
             return;
         }
 
-        const auto message = tcpSocket->readAll();
-        // 处理服务器的返回信息，购买成功/失败要做相应的处理
+        const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+        const auto status = remoteJson["status"].toString();
+        if (status == "successed")
+        {
+            emit BuySuccessed(selectedClean, 1);
+            // 购买成功
+        }
+        else if (status == "failed")
+        {
+            emit BuyFailed(selectedClean, 1);
+            // 购买失败
+        }
+        else
+        {
+            // error
+        }
     });
     thread.detach();
 }
