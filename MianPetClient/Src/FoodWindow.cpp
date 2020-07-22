@@ -97,6 +97,15 @@ void FoodWindow::InitializeConnect()
     {
         QMessageBox::information(this, "购买失败", "请检查坨坨余额是否充足");
     });
+
+    connect(this, &FoodWindow::UseSucceeded, this, [=](const QString &item, int count)
+    {
+        QMessageBox::information(this, "使用成功", "本次共使用" + QString::number(count) + "个" + item);
+    });
+    connect(this, &FoodWindow::UseFailed, this, [=]()
+    {
+        QMessageBox::information(this, "使用失败", "我们真的有这个吗");
+    });
 }
 
 void FoodWindow::DataPrepare()
@@ -272,7 +281,48 @@ void FoodWindow::OnBuyButtonClicked()
 
 void FoodWindow::OnUseButtonClicked()
 {
-    qDebug() << "Use " << selectedFood;
+    std::thread thread(
+    [=]()
+    {
+        auto tcpSocket = std::make_unique<QTcpSocket>();
+        tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+        if (!tcpSocket->waitForConnected())
+        {
+            return;
+        }
+
+        UseRequestData data;
+        data.SetItem(selectedFood);
+        data.SetCount(1);   // TODO: 请求的物品数目，目前只支持每次都请求一个，以后再实现一次请求多个
+        tcpSocket->write(data);
+        if (!tcpSocket->waitForBytesWritten())
+        {
+            return;
+        }
+
+        if (!tcpSocket->waitForReadyRead())
+        {
+            return;
+        }
+
+        const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+        const auto status = remoteJson["status"].toString();
+        if (status == "succeeded")
+        {
+            emit UseSucceeded(selectedFood, 1);
+            // 使用成功
+        }
+        else if (status == "failed")
+        {
+            emit UseFailed(selectedFood, 1);
+            // 使用失败
+        }
+        else
+        {
+            // error
+        }
+    });
+    thread.detach();
 }
 
 void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)

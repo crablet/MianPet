@@ -86,6 +86,24 @@ void CleanWindow::InitializeConnect()
 
     connect(buyButton, &QPushButton::clicked, this, &CleanWindow::OnBuyButtonClicked);
     connect(useButton, &QPushButton::clicked, this, &CleanWindow::OnUseButtonClicked);
+
+    connect(this, &CleanWindow::BuySucceeded, this, [=](const QString &item, int count)
+    {
+        QMessageBox::information(this, "购买成功", "本次共购入" + QString::number(count) + "个" + item);
+    });
+    connect(this, &CleanWindow::BuyFailed, this, [=]()
+    {
+        QMessageBox::information(this, "购买失败", "请检查坨坨余额是否充足");
+    });
+
+    connect(this, &CleanWindow::UseSucceeded, this, [=](const QString &item, int count)
+    {
+        QMessageBox::information(this, "使用成功", "本次共使用" + QString::number(count) + "个" + item);
+    });
+    connect(this, &CleanWindow::UseFailed, this, [=]()
+    {
+        QMessageBox::information(this, "使用失败", "我们真的有这个吗");
+    });
 }
 
 void CleanWindow::DataPrepare()
@@ -260,7 +278,48 @@ void CleanWindow::OnBuyButtonClicked()
 
 void CleanWindow::OnUseButtonClicked()
 {
-    qDebug() << "Use " << selectedClean;
+    std::thread thread(
+    [=]()
+    {
+        auto tcpSocket = std::make_unique<QTcpSocket>();
+        tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+        if (!tcpSocket->waitForConnected())
+        {
+            return;
+        }
+
+        UseRequestData data;
+        data.SetItem(selectedClean);
+        data.SetCount(1);   // TODO: 请求的物品数目，目前只支持每次都请求一个，以后再实现一次请求多个
+        tcpSocket->write(data);
+        if (!tcpSocket->waitForBytesWritten())
+        {
+            return;
+        }
+
+        if (!tcpSocket->waitForReadyRead())
+        {
+            return;
+        }
+
+        const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+        const auto status = remoteJson["status"].toString();
+        if (status == "succeeded")
+        {
+            emit UseSucceeded(selectedClean, 1);
+            // 使用成功
+        }
+        else if (status == "failed")
+        {
+            emit UseFailed(selectedClean, 1);
+            // 使用失败
+        }
+        else
+        {
+            // error
+        }
+    });
+    thread.detach();
 }
 
 void CleanWindow::RequestDataInRange(int rangeBegin, int rangeEnd)

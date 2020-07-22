@@ -26,6 +26,7 @@
 #include "Config/NetworkConstants.h"
 #include "Tools/Network/DataPackages/CleanShopRequestData.h"
 #include "Tools/Network/DataPackages/BuyRequestData.h"
+#include "Tools/Network/DataPackages/UseRequestData.h"
 
 class CleanWindow final : public SmallItemsContainerWindow
 {
@@ -66,6 +67,9 @@ private:
 signals:
     void BuySucceeded(const QString &item, int count);
     void BuyFailed(const QString &item, int count);
+
+    void UseSucceeded(const QString &item, int count);
+    void UseFailed(const QString &item, int count);
 
 private:
     std::vector<ItemInformation> items{};
