@@ -22,6 +22,7 @@ inline constexpr int PETPROFILE = 2;
 inline constexpr int CORE_KEY_FOR_PASSWORD_TRANSPORTATION = 3;
 inline constexpr int LOGIN = 4;
 inline constexpr int BUY = 5;
+inline constexpr int USE = 6;
 
 /* hint end */
 
