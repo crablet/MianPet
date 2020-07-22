@@ -64,7 +64,7 @@ private:
     };
 
 signals:
-    void BuySuccessed(const QString &item, int count);
+    void BuySucceeded(const QString &item, int count);
     void BuyFailed(const QString &item, int count);
 
 private:

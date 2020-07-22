@@ -240,9 +240,9 @@ void CleanWindow::OnBuyButtonClicked()
 
         const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
         const auto status = remoteJson["status"].toString();
-        if (status == "successed")
+        if (status == "succeeded")
         {
-            emit BuySuccessed(selectedClean, 1);
+            emit BuySucceeded(selectedClean, 1);
             // 购买成功
         }
         else if (status == "failed")

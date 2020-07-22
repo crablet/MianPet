@@ -708,7 +708,7 @@ void Connection::DealWithBuy(const char *id, const char *randomKey, const char *
                     otl_stream updateOwnItemsAmountStream(1, updateOwnItemsAmountSql, db);
                     updateOwnItemsAmountStream << count << id << item;
 
-                    reply = R"({"status":"successed"})";
+                    reply = R"({"status":"succeeded"})";
                 }
 
                 DoWrite();

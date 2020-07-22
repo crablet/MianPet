@@ -89,7 +89,7 @@ void FoodWindow::InitializeConnect()
     connect(buyButton, &QPushButton::clicked, this, &FoodWindow::OnBuyButtonClicked);
     connect(useButton, &QPushButton::clicked, this, &FoodWindow::OnUseButtonClicked);
 
-    connect(this, &FoodWindow::BuySuccessed, this, [=](const QString &item, int count)
+    connect(this, &FoodWindow::BuySucceeded, this, [=](const QString &item, int count)
     {
         QMessageBox::information(this, "购买成功", "本次共购入" + QString::number(count) + "个" + item);
     });
@@ -252,9 +252,9 @@ void FoodWindow::OnBuyButtonClicked()
 
         const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
         const auto status = remoteJson["status"].toString();
-        if (status == "successed")
+        if (status == "succeeded")
         {
-            emit BuySuccessed(selectedFood, 1);
+            emit BuySucceeded(selectedFood, 1);
             // 购买成功
         }
         else if (status == "failed")
