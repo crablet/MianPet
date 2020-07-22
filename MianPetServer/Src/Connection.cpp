@@ -102,6 +102,12 @@ void Connection::TaskRunnerThread(int jsonLength)
                     const auto count = static_cast<std::int64_t>(payload["count"]);
                     DealWithBuy(id, randomKey, item, count);
                 }
+                else if (hint == USE)
+                {
+                    const char *item = payload["item"].get<const char*>();
+                    const auto count = static_cast<std::int64_t>(payload["count"]);
+                    DealWithUse(id, randomKey, item, count);
+                }
                 else if (hint == PETPROFILE)
                 {
                     DealWithGetPetProfile(id, randomKey);
@@ -709,6 +715,78 @@ void Connection::DealWithBuy(const char *id, const char *randomKey, const char *
                     updateOwnItemsAmountStream << count << id << item;
 
                     reply = R"({"status":"succeeded"})";
+                }
+
+                DoWrite();
+            }
+            else
+            {
+                // error
+            }
+        }
+        else
+        {
+            // error
+        }
+    }
+    catch (const otl_exception &exp)
+    {
+        std::cout << exp.stm_text << std::endl;
+        std::cout << exp.msg << std::endl;
+    }
+}
+
+void Connection::DealWithUse(const char *id, const char *randomKey, const char *item, int count)
+{
+    try
+    {
+        std::lock_guard<std::mutex> lock(dbMutex);
+
+        constexpr const char *checkOnlineAndSecretKeySqlStr =
+            R"(SELECT online, secretKey FROM userinfo
+               WHERE id = :id<char[16]>)";
+        otl_stream checkOnlineStream(64, checkOnlineAndSecretKeySqlStr, db);
+        checkOnlineStream << id;
+
+        int online;
+        char trueSecretKey[18 + 1];
+        for (auto &r : checkOnlineStream)
+        {
+            r >> online >> trueSecretKey;
+        }
+
+        if (online) // 如果在线则检查randomKey是否一致，有点cookies的感觉
+        {
+            if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果连randomKey都一致，那就可以开始操作了
+            {
+                constexpr const char *selectItemInfoSqlStr =
+                    R"(SELECT quantity FROM ownitems
+                       WHERE id = :id<char[16]> AND itemname = :itemname<char[18]>)";
+                otl_stream selectItemInfoStream(64, selectItemInfoSqlStr, db);
+                selectItemInfoStream << id << item;
+
+                int totalAmount; // 用户现在拥有该物品的个数
+                for (auto &in : selectItemInfoStream)
+                {
+                    in >> totalAmount;
+                }
+
+                if (totalAmount >= count)
+                {
+                    constexpr const char *updateOwnItemsAmountSql =
+                        R"(UPDATE ownitems
+                           SET quantity = quantity - :delta<int>
+                           WHERE id = :id<char[16]> AND itemname = :itemname<char[18]>)";
+                    otl_stream updateOwnItemsAmountStream(1, updateOwnItemsAmountSql, db);
+                    updateOwnItemsAmountStream << count << id << item;
+
+                    // TODO: 使用了物品以后状态要响应进行修改，比如饥饿值增加或者清洁增加等等
+
+                    reply = R"({"status":"succeeded"})";
+                }
+                else
+                {
+                    reply = R"({"status":"failed"})";
                 }
 
                 DoWrite();

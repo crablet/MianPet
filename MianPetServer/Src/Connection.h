@@ -63,9 +63,11 @@ private:
     // 处理食品商店信息请求 /GET/FOOD_SHOP_INFO
     void DealWithFoodShopInfo(const char *id, const char *randomKey, const std::vector<const char*> &items);
     // 处理日用品商店信息请求 /GET/CLEAN_SHOP_INFO
-    void DealWithCleanShopInfo(const char *id, const char *randomKey, const std::vector<const char *> &items);
+    void DealWithCleanShopInfo(const char *id, const char *randomKey, const std::vector<const char*> &items);
     // 处理购买食品/日用品的请求 /GET/BUY
     void DealWithBuy(const char *id, const char *randomKey, const char *item, int count);
+    // 处理使用食品/日用品的请求 /GET/USE
+    void DealWithUse(const char *id, const char *randomKey, const char *item, int count);
 
 private:
     asio::ip::tcp::socket socket;
