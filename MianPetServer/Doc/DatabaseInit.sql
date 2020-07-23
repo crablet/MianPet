@@ -31,7 +31,10 @@ CREATE TABLE shopinfo
     itemname CHAR(18) NOT NULL PRIMARY KEY,
     price SMALLINT NOT NULL,
     descrpition VARCHAR(32),
-    type TINYINT UNSIGNED NOT NULL
+    type TINYINT UNSIGNED NOT NULL,
+    food SMALLINT NOT NULL DEFAULT 0,
+    clean SMALLINT NOT NULL DEFAULT 0,
+    health SMALLINT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE ownitems
@@ -45,5 +48,5 @@ CREATE TABLE ownitems
 
 INSERT INTO userinfo VALUES("999", "miantuotuo", "123", NOW(), 0, NULL, NOW());
 INSERT INTO petprofile(id, username) VALUES("999", "miantuotuo");
-INSERT INTO shopinfo VALUES("lanxingtangguo", "80", "star-shaped blue candy", 0);
+INSERT INTO shopinfo VALUES("lanxingtangguo", "80", "star-shaped blue candy", 0, 0, 0, 0);
 INSERT INTO ownitems VALUES("lanxingtangguo", 1, 0, "999");

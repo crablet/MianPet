@@ -18,11 +18,11 @@
 
 # shopinfo
 ## 商店货品信息
-|  itemname |  price |description|      type      |
-|:---------:|:------:|:---------:|:--------------:|
-|  CHAR(18) |SMALLINT|VARCHAR(32)|TINYINT UNSIGNED|
-|  NOT NULL |NOT NULL|           |    NOT NULL    |
-|PRIMARY KEY|        |           |                |
+|  itemname |  price |description|      type      |  food  |  clean | health |
+|:---------:|:------:|:---------:|:--------------:|:------:|:------:|:------:|
+|  CHAR(18) |SMALLINT|VARCHAR(32)|TINYINT UNSIGNED|SMALLINT|SMALLINT|SMALLINT|
+|  NOT NULL |NOT NULL|           |    NOT NULL    |NOT NULL|NOT NULL|NOT NULL|
+|PRIMARY KEY|        |           |                |        |        |        |
 
 # ownitems
 ## 用户拥有的物品
