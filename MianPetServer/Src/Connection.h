@@ -12,6 +12,7 @@
 #include <cstdio>
 #include <unordered_map>
 #include <vector>
+#include <algorithm>
 
 #include "asio.hpp"
 #include "simdjson.h"

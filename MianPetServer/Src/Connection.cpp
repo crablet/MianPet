@@ -780,7 +780,42 @@ void Connection::DealWithUse(const char *id, const char *randomKey, const char *
                     otl_stream updateOwnItemsAmountStream(1, updateOwnItemsAmountSql, db);
                     updateOwnItemsAmountStream << count << id << item;
 
-                    // TODO: 使用了物品以后状态要响应进行修改，比如饥饿值增加或者清洁增加等等
+                    constexpr const char *getBonusSql =
+                        R"(SELECT food, clean, health
+                           FROM shopinfo
+                           WHERE itemname = :itemname<char[18]>)";
+                    otl_stream getBonusStream(32, getBonusSql, db);
+                    getBonusStream << item;
+
+                    int foodBonus, cleanBonus, healthBonus;
+                    for (auto &r : getBonusStream)
+                    {
+                        r >> foodBonus >> cleanBonus >> healthBonus;
+                    }
+
+                    constexpr const char *getOriginalStatusSql =
+                        R"(SELECT food, clean, health
+                           FROM petprofile
+                           WHERE id = :id<char[16]>)";
+                    otl_stream getOriginalStatusStream(32, getOriginalStatusSql, db);
+                    getOriginalStatusStream << id;
+
+                    int food, clean, health;
+                    for (auto &r : getOriginalStatusStream)
+                    {
+                        r >> food >> clean >> health;
+                    }
+
+                    food = std::min(3200, food + foodBonus);
+                    clean = std::min(3200, clean + cleanBonus);
+                    health = std::min(100, health + healthBonus);
+
+                    constexpr const char *updatePetprofileSql =
+                        R"(UPDATE petprofile
+                           SET food = :food<int>, clean = :clean<int>, health = :health<int>
+                           WHERE id = :id<char[16]>)";
+                    otl_stream updatePetprofileStream(1, updatePetprofileSql, db);
+                    updatePetprofileStream << food << clean << health << id;
 
                     reply = R"({"status":"succeeded"})";
                 }
