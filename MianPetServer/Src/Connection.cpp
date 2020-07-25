@@ -771,8 +771,9 @@ void Connection::DealWithUse(const char *id, const char *randomKey, const char *
                     in >> totalAmount;
                 }
 
-                if (totalAmount >= count)
+                if (totalAmount >= count)   // 如果用户现在拥有的物品够用，则去使用
                 {
+                    // 使用物品，原拥有的物品要减少
                     constexpr const char *updateOwnItemsAmountSql =
                         R"(UPDATE ownitems
                            SET quantity = quantity - :delta<int>
@@ -780,6 +781,7 @@ void Connection::DealWithUse(const char *id, const char *randomKey, const char *
                     otl_stream updateOwnItemsAmountStream(1, updateOwnItemsAmountSql, db);
                     updateOwnItemsAmountStream << count << id << item;
 
+                    // 获取这个物品能为面宠带来的属性提升
                     constexpr const char *getBonusSql =
                         R"(SELECT food, clean, health
                            FROM shopinfo
@@ -793,6 +795,7 @@ void Connection::DealWithUse(const char *id, const char *randomKey, const char *
                         r >> foodBonus >> cleanBonus >> healthBonus;
                     }
 
+                    // 获取面宠原来的属性值
                     constexpr const char *getOriginalStatusSql =
                         R"(SELECT food, clean, health
                            FROM petprofile
@@ -806,10 +809,12 @@ void Connection::DealWithUse(const char *id, const char *randomKey, const char *
                         r >> food >> clean >> health;
                     }
 
+                    // 计算使用后的属性值，最大值为3200
                     food = std::min(3200, food + foodBonus);
                     clean = std::min(3200, clean + cleanBonus);
                     health = std::min(100, health + healthBonus);
 
+                    // 更新使用后的状态
                     constexpr const char *updatePetprofileSql =
                         R"(UPDATE petprofile
                            SET food = :food<int>, clean = :clean<int>, health = :health<int>
@@ -819,7 +824,7 @@ void Connection::DealWithUse(const char *id, const char *randomKey, const char *
 
                     reply = R"({"status":"succeeded"})";
                 }
-                else
+                else    // 用户现在拥有的物品不够用
                 {
                     reply = R"({"status":"failed"})";
                 }
