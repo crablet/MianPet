@@ -668,6 +668,7 @@ void Connection::DealWithBuy(const char *id, const char *randomKey, const char *
         {
             if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果连randomKey都一致，那就可以开始处理购买请求
             {
+                // 获取面宠拥有的坨坨数量
                 constexpr const char *getTuotuoAmountSql =
                     R"(SELECT tuotuo FROM petprofile
                        WHERE id = :id<char[16]>)";
@@ -680,6 +681,7 @@ void Connection::DealWithBuy(const char *id, const char *randomKey, const char *
                     r >> tuotuoAmount;
                 }
 
+                // 获取物品单价
                 constexpr const char *getItemPriceSql =
                     R"(SELECT price FROM shopinfo
                        WHERE itemname = :item<char[18]>)";
@@ -692,13 +694,15 @@ void Connection::DealWithBuy(const char *id, const char *randomKey, const char *
                     r >> itemPrice;
                 }
 
+                // 共需要花费的坨坨总数
                 const auto totalPrice = itemPrice * count;
-                if (totalPrice > tuotuoAmount)
+                if (totalPrice > tuotuoAmount)  // 如果坨坨不够花，则失败
                 {
                     reply = R"({"status":"failed"})";
                 }
-                else
+                else        // 坨坨够用
                 {
+                    // 使用后的坨坨余额
                     const auto currentTuotuo = tuotuoAmount - totalPrice;
                     constexpr const char *updateTuotuoSql =
                         R"(UPDATE petprofile
@@ -707,6 +711,7 @@ void Connection::DealWithBuy(const char *id, const char *randomKey, const char *
                     otl_stream updateTuotuoStream(1, updateTuotuoSql, db);
                     updateTuotuoStream << currentTuotuo << id;
 
+                    // 更新使用后的坨坨余额
                     constexpr const char *updateOwnItemsAmountSql =
                         R"(UPDATE ownitems
                            SET quantity = quantity + :delta<int>
