@@ -168,6 +168,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
     const auto jsonDocument = QJsonDocument::fromJson(profile);
     if (jsonDocument.isObject())
     {
+        // 缓存数据
         levelValue = jsonDocument["level"].toInt();
         ageValue = jsonDocument["age"].toInt();
         growthValue = jsonDocument["growth"].toInt();
@@ -178,6 +179,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         grouthSpeedValue = jsonDocument["growth_speed"].toInt();
         onlineTimeValue = jsonDocument["online_time"].toInt();
 
+        // 使用缓存的数据
         usernameLabel->setText(jsonDocument["username"].toString());
         idLabel->setText(jsonDocument["id"].toString());
         levelLabel->setText(QString::number(levelValue));
