@@ -12,7 +12,7 @@ inline constexpr int ServerPort = 9999;
 inline QString mianPetId;
 inline QString randomKey;
 
-inline constexpr int MianPetVersion = 20200511;
+inline constexpr int MianPetVersion = 20200727;
 
 
 /* method begin */

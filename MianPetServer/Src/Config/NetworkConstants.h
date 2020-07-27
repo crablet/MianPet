@@ -3,7 +3,7 @@
 
 inline constexpr int ServerPort = 9999;
 
-inline constexpr int MianPetVersion = 20200511;
+inline constexpr int MianPetVersion = 20200727;
 
 /* method begin */
 
