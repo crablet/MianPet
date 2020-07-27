@@ -7,7 +7,7 @@ inline QString userName;
 inline QString clientAddress;
 inline QString clientPort;
 
-inline QString ServerAddress = "121.37.132.142";
+inline QString ServerAddress = "45.40.228.194";
 inline constexpr int ServerPort = 9999;
 inline QString mianPetId;
 inline QString randomKey;
