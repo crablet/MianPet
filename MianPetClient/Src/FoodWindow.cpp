@@ -198,6 +198,7 @@ void FoodWindow::ViewNextPage()
 
 void FoodWindow::OnMouseHoversMoveItem(QObject *obj)
 {
+    // 判断鼠标放在了哪个控件上面，然后根据控件编号设置展示的itemLabel中的内容应写什么
     if (obj == item0 && currentPage * 4 + 0 < items.size())
     {
         itemLabel->show();
@@ -220,6 +221,7 @@ void FoodWindow::OnMouseHoversMoveItem(QObject *obj)
     }
     else
     {
+        // 鼠标放在的地方没有控件，应该收起itemLabel并且清空其中内容，以免下次展示时出现闪烁
         itemLabel->hide();
         itemLabel->SetUpperLabelText("");
         itemLabel->SetLowerLabelText("");
