@@ -116,7 +116,7 @@ void CleanWindow::DataPrepare()
 
     const auto localJson = QJsonDocument::fromJson(jsonFile.readAll());
     const auto tempArray = localJson["items"].toArray();
-    for (int i = 0; i < tempArray.size(); ++i)
+    for (int i = 0; i < tempArray.size(); ++i)  // 将本地缓存(MianPetData/CleanShopData.json)先存到items中
     {
         const auto itemInfo = tempArray[i].toObject();
         items.emplace_back(itemInfo["name"].toString(), itemInfo["price"].toInt(), itemInfo["amount"].toInt());
