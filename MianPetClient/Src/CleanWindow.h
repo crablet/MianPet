@@ -65,10 +65,14 @@ private:
     };
 
 signals:
+    // 购买count个item成功
     void BuySucceeded(const QString &item, int count);
+    // 购买count个item失败
     void BuyFailed(const QString &item, int count);
 
+    // 使用count个item成功
     void UseSucceeded(const QString &item, int count);
+    // 使用count个item失败
     void UseFailed(const QString &item, int count);
 
 private:
