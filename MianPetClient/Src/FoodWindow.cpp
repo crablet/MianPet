@@ -203,21 +203,25 @@ void FoodWindow::OnMouseHoversMoveItem(QObject *obj)
     {
         itemLabel->show();
         itemLabel->SetUpperLabelText(items[currentPage * 4 + 0].name);
+        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 0].amount));
     }
     else if (obj == item1 && currentPage * 4 + 1 < items.size())
     {
         itemLabel->show();
         itemLabel->SetUpperLabelText(items[currentPage * 4 + 1].name);
+        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 1].amount));
     }
     else if (obj == item2 && currentPage * 4 + 2 < items.size())
     {
         itemLabel->show();
         itemLabel->SetUpperLabelText(items[currentPage * 4 + 2].name);
+        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 2].amount));
     }
     else if (obj == item3 && currentPage * 4 + 3 < items.size())
     {
         itemLabel->show();
         itemLabel->SetUpperLabelText(items[currentPage * 4 + 3].name);
+        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 3].amount));
     }
     else
     {
