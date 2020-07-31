@@ -10,6 +10,7 @@
 
 #include "FoodWindow.h"
 #include "CleanWindow.h"
+#include "WorkingWindow.h"
 #include "PetProfileWindow.h"
 
 class PetToolButtonsContainer : public QWidget
@@ -32,6 +33,7 @@ private:
     QPushButton *foodButton, *cleanButton, *petProfileButton, *dummyButton2;
     FoodWindow *foodWindow;
     CleanWindow *cleanWindow;
+    WorkingWindow *workingWindow;
     PetProfileWindow *petProfileWindow;
 };
 

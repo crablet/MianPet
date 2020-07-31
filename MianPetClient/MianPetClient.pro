@@ -37,6 +37,7 @@ SOURCES += \
     Src/Tools/Network/DataPackages/RequestData.cpp \
     Src/Tools/Network/DataPackages/UseRequestData.cpp \
     Src/TransparentItemLabel.cpp \
+    Src/WorkingWindow.cpp \
     Src/main.cpp \
     Src/PetClient.cpp
 
@@ -65,7 +66,8 @@ HEADERS += \
     Src/Tools/Network/DataPackages/UseRequestData.h \
     Src/Tools/Network/NetworkTools.h \
     Src/Tools/Ui/UiTools.h \
-    Src/TransparentItemLabel.h
+    Src/TransparentItemLabel.h \
+    Src/WorkingWindow.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
