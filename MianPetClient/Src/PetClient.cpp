@@ -38,7 +38,10 @@ void PetClient::InitializeUi()
         qApp->quit();
     });
 
+    auto *settingsAction = new QAction("设置", this);
+
     trayMenu = new QMenu(this);
+    trayMenu->addAction(settingsAction);
     trayMenu->addAction(exitAction);
 
     tray = new QSystemTrayIcon(this);
