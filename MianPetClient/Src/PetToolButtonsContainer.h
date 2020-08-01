@@ -26,11 +26,12 @@ private:
 private slots:
     void OnFoodButtonClicked();
     void OnCleanButtonClicked();
+    void OnWorkingButtonClicked();
     void OnPetProfileButtonClicked();
 
 private:
     QHBoxLayout *layout;
-    QPushButton *foodButton, *cleanButton, *petProfileButton, *dummyButton2;
+    QPushButton *foodButton, *cleanButton, *petProfileButton, *workingButton;
     FoodWindow *foodWindow;
     CleanWindow *cleanWindow;
     WorkingWindow *workingWindow;

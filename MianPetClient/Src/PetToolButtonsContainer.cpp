@@ -22,16 +22,16 @@ void PetToolButtonsContainer::InitializeUi()
 
     petProfileButton = new QPushButton;
 
-    dummyButton2 = new QPushButton;
+    workingButton = new QPushButton;
 
     layout->addStretch();
     layout->addWidget(foodButton);
     layout->addStretch();
     layout->addWidget(cleanButton);
     layout->addStretch();
-    layout->addWidget(petProfileButton);
+    layout->addWidget(workingButton);
     layout->addStretch();
-    layout->addWidget(dummyButton2);
+    layout->addWidget(petProfileButton);
     layout->addStretch();
 
     this->setLayout(layout);
@@ -44,6 +44,7 @@ void PetToolButtonsContainer::InitializeConnect()
 {
     connect(foodButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnFoodButtonClicked);
     connect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnCleanButtonClicked);
+    connect(workingButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnWorkingButtonClicked);
     connect(petProfileButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnPetProfileButtonClicked);
 }
 
@@ -76,6 +77,22 @@ void PetToolButtonsContainer::OnCleanButtonClicked()
     connect(cleanWindow, &CleanWindow::destroyed, [=]()
     {
         connect(cleanButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnCleanButtonClicked);
+    });
+}
+
+void PetToolButtonsContainer::OnWorkingButtonClicked()
+{
+    // 因为WorkingWindow有只要退出就自动delete自身的特性，所以可以重复new
+    workingWindow = new WorkingWindow;
+    workingWindow->show();
+
+    // 点击以后就取消和这个槽的链接，就不会出现多次点击出现多个窗口的情况
+    disconnect(workingButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnWorkingButtonClicked);
+
+    // 当窗口关闭时可以恢复链接，以响应下一次的信号
+    connect(workingWindow, &WorkingWindow::destroyed, [=]()
+    {
+        connect(workingButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnWorkingButtonClicked);
     });
 }
 
