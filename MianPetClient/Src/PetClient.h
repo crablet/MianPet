@@ -57,6 +57,9 @@ signals:
 private slots:
     void Heartbeat();
 
+    void OnExitActionTriggered();
+    void OnSettingsActionTriggered();
+
 private:
     QMovie *petGif;
     QLabel *petGifLabel;
@@ -70,6 +73,8 @@ private:
 
     QSystemTrayIcon *tray;
     QMenu *trayMenu;
+
+    QAction *exitAction, *settingsAction;
 
     bool isUiBeingDragging;
 };

@@ -30,18 +30,8 @@ void PetClient::InitializeUi()
     petToolButtonsContainer->setFixedHeight(PetToolButtonsContainerHeight);
     petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - PetToolButtonsContainerUiDelta));
 
-    auto *exitAction = new QAction("退出", this);
-    connect(exitAction, &QAction::triggered, [=]()
-    {
-        Logout();
-
-        qApp->quit();
-    });
-
-    auto *settingsAction = new QAction("设置", this);
-    connect(settingsAction, &QAction::triggered, [=]()
-    {
-    });
+    settingsAction = new QAction("设置", this);
+    exitAction = new QAction("退出", this);
 
     trayMenu = new QMenu(this);
     trayMenu->addAction(settingsAction);
@@ -82,6 +72,9 @@ void PetClient::InitializeConnect()
     {
         QMessageBox::information(this, "心跳停止", "心跳包未能成功发送，请检查网络。");
     });
+
+    connect(exitAction, &QAction::triggered, this, &PetClient::OnExitActionTriggered);
+    connect(settingsAction, &QAction::triggered, this, &PetClient::OnSettingsActionTriggered);
 }
 
 void PetClient::mouseMoveEvent(QMouseEvent *event)
@@ -155,6 +148,29 @@ void PetClient::Logout()
         tcpSocket->write(LogoutData{});
         tcpSocket->waitForBytesWritten();
     }
+}
+
+void PetClient::OnExitActionTriggered()
+{
+    Logout();
+
+    qApp->quit();
+}
+
+void PetClient::OnSettingsActionTriggered()
+{
+    // 因为SettingsWindow有只要退出就自动delete自身的特性，所以可以重复new
+    settingsWindow = new SettingsWindow;
+    settingsWindow->show();
+
+    // 点击以后就取消和这个槽的链接，就不会出现多次点击出现多个窗口的情况
+    disconnect(settingsAction, &QAction::triggered, this, &PetClient::OnSettingsActionTriggered);
+
+    // 当窗口关闭时可以恢复链接，以响应下一次的信号
+    connect(settingsWindow, &SettingsWindow::destroyed, [=]()
+    {
+        connect(settingsAction, &QAction::triggered, this, &PetClient::OnSettingsActionTriggered);
+    });
 }
 
 // 心跳包释放函数，每一分钟执行一次，一次发一个包，然后结束本次心跳的tcp链接

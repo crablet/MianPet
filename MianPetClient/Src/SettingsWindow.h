@@ -7,6 +7,10 @@ class SettingsWindow final : public FramelessWindow
 {
 public:
     SettingsWindow();
+
+private:
+    void InitializeUi();
+    void InitializeConnect();
 };
 
 #endif // SETTINGSWINDOW_H
