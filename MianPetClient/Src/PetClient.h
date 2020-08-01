@@ -17,6 +17,7 @@
 
 #include "LoginWindow.h"
 #include "PetToolButtonsContainer.h"
+#include "SettingsWindow.h"
 
 #include "Src/Config/UiConstants.h"
 #include "Src/Config/NetworkConstants.h"
@@ -63,6 +64,7 @@ private:
 
     LoginWindow *loginWindow;
     PetToolButtonsContainer *petToolButtonsContainer;
+    SettingsWindow *settingsWindow;
 
     QTimer *heartbeat;
 

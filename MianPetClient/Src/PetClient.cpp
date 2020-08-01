@@ -39,6 +39,9 @@ void PetClient::InitializeUi()
     });
 
     auto *settingsAction = new QAction("设置", this);
+    connect(settingsAction, &QAction::triggered, [=]()
+    {
+    });
 
     trayMenu = new QMenu(this);
     trayMenu->addAction(settingsAction);
