@@ -43,6 +43,7 @@ void CleanWindow::InitializeUi()
     valueBar = new QProgressBar(this);
     buyButton = new QPushButton("购买", this);
     useButton = new QPushButton("使用", this);
+    useButton->setDisabled(true);
 
     valueBar->setAlignment(Qt::AlignCenter);
     valueBar->setValue(cleanValue);
@@ -70,18 +71,26 @@ void CleanWindow::InitializeConnect()
     connect(item0, &QPushButton::clicked, this, [=]()
     {
         selectedClean = items[currentPage * 4 + 0].name;
+
+        useButton->setEnabled(true);
     });
     connect(item1, &QPushButton::clicked, this, [=]()
     {
         selectedClean = items[currentPage * 4 + 1].name;
+
+        useButton->setEnabled(true);
     });
     connect(item2, &QPushButton::clicked, this, [=]()
     {
         selectedClean = items[currentPage * 4 + 2].name;
+
+        useButton->setEnabled(true);
     });
     connect(item3, &QPushButton::clicked, this, [=]()
     {
         selectedClean = items[currentPage * 4 + 3].name;
+
+        useButton->setEnabled(true);
     });
 
     connect(buyButton, &QPushButton::clicked, this, &CleanWindow::OnBuyButtonClicked);

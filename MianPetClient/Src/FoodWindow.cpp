@@ -45,6 +45,7 @@ void FoodWindow::InitializeUi()
     valueBar = new QProgressBar(this);
     buyButton = new QPushButton("购买", this);
     useButton = new QPushButton("使用", this);
+    useButton->setDisabled(true);
 
     valueBar->setAlignment(Qt::AlignCenter);
     valueBar->setValue(foodValue);
@@ -72,18 +73,26 @@ void FoodWindow::InitializeConnect()
     connect(item0, &QPushButton::clicked, this, [=]()
     {
         selectedFood = items[currentPage * 4 + 0].name;
+
+        useButton->setEnabled(true);
     });
     connect(item1, &QPushButton::clicked, this, [=]()
     {
         selectedFood = items[currentPage * 4 + 1].name;
+
+        useButton->setEnabled(true);
     });
     connect(item2, &QPushButton::clicked, this, [=]()
     {
         selectedFood = items[currentPage * 4 + 2].name;
+
+        useButton->setEnabled(true);
     });
     connect(item3, &QPushButton::clicked, this, [=]()
     {
         selectedFood = items[currentPage * 4 + 3].name;
+
+        useButton->setEnabled(true);
     });
 
     connect(buyButton, &QPushButton::clicked, this, &FoodWindow::OnBuyButtonClicked);
