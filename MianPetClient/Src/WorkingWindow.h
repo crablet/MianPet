@@ -1,6 +1,9 @@
 ﻿#ifndef WORKINGWINDOW_H
 #define WORKINGWINDOW_H
 
+#include <vector>
+#include <thread>
+
 #include <QString>
 
 #include "SmallItemsContainerWindow.h"
@@ -20,14 +23,24 @@ private:
     void OnMouseHoversMoveItem(QObject *obj);
     void OnMouseHoversLeaveItem(QObject *obj);
 
+    void RequestDataInRange(int rangeBegin, int rangeEnd);
+
     struct JobInformation
     {
-        JobInformation()
+        JobInformation(const QString &name, int wage, int lowestLevel, const std::vector<QString> &eduRestrictions)
+            : name(name), wage(wage), lowestLevel(lowestLevel), eduRestrictions(eduRestrictions)
         {
         }
+
+        QString name;
+        int wage;
+        int lowestLevel;
+        std::vector<QString> eduRestrictions;
     };
 
 private:
+    std::vector<JobInformation> jobs;
+
     QString selectedJob;
 };
 
