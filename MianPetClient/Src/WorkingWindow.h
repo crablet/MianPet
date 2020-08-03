@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <thread>
+#include <algorithm>
 
 #include <QString>
 
