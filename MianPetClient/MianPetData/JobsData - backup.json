@@ -1,0 +1,29 @@
+{
+  "jobs": 
+  [
+    {
+      "name": "cazhuantou",
+      "wage": 10,
+      "lowestLevel": 0,
+      "eduRestrictions": [
+        "none"
+      ]
+    },
+    {
+      "name": "banzhuantou",
+      "wage": 10,
+      "lowestLevel": 0,
+      "eduRestrictions": [
+        "none"
+      ]
+    },
+    {
+      "name": "qizhuantou",
+      "wage": 15,
+      "lowestLevel": 5,
+      "eduRestrictions": [
+        "xiaoxuetiyu"
+      ]
+    }
+  ]
+}

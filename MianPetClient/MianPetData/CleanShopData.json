@@ -1,10 +1,9 @@
 {
-  "items": 
-  [
-    {
-      "amount": 0,
-      "name": "qimiaoyuyan",
-      "price": 10
-    }
-  ]
+    "items": [
+        {
+            "amount": 16777216,
+            "name": "qimiaoyuyan",
+            "price": 10
+        }
+    ]
 }
