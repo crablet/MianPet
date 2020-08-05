@@ -9,6 +9,8 @@
 
 #include "SmallItemsContainerWindow.h"
 
+#include "Tools/Network/DataPackages/WorkBeginRequest.h"
+
 class WorkingWindow final : public SmallItemsContainerWindow
 {
 public:
