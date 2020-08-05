@@ -24,6 +24,7 @@ inline constexpr int LOGIN = 4;
 inline constexpr int BUY = 5;
 inline constexpr int USE = 6;
 inline constexpr int WORKBEGIN = 7;
+inline constexpr int WORKEND = 8;
 
 /* hint end */
 
