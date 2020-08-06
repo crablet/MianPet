@@ -6,6 +6,8 @@
 #include <algorithm>
 
 #include <QString>
+#include <QJsonArray>
+#include <QJsonObject>
 
 #include "SmallItemsContainerWindow.h"
 
@@ -16,6 +18,7 @@ class WorkingWindow final : public SmallItemsContainerWindow
 {
 public:
     WorkingWindow();
+    ~WorkingWindow();
 
 private:
     void InitializeUi();

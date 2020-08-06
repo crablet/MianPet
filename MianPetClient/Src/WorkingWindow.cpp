@@ -6,6 +6,39 @@ WorkingWindow::WorkingWindow()
     InitializeConnect();
 }
 
+WorkingWindow::~WorkingWindow()
+{
+    QJsonArray arr;
+    for (const auto &r : jobs)
+    {
+        QJsonArray eduRestrictions;
+        for (const auto &edu : r.eduRestrictions)
+        {
+            eduRestrictions.push_back(edu);
+        }
+
+        QJsonObject obj;
+        obj.insert("name", r.name);
+        obj.insert("wage", r.wage);
+        obj.insert("lowestLevel", r.lowestLevel);
+        obj.insert("eduRestrictions", eduRestrictions);
+
+        arr.push_back(obj);
+    }
+
+    QFile jsonFile("MianPetData/JobsData.json");
+    if (!jsonFile.open(QIODevice::Text | QIODevice::WriteOnly | QIODevice::Truncate))
+    {
+        return;
+    }
+    else
+    {
+        QJsonObject obj;
+        obj.insert("jobs", arr);
+        jsonFile.write(QJsonDocument(obj).toJson(QJsonDocument::Indented));
+    }
+}
+
 void WorkingWindow::InitializeUi()
 {
     SetWindowTitle("打工");
