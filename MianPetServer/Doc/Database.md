@@ -31,3 +31,11 @@
 |  CHAR(18) |SMALLINT UNSIGNED|TINYINT UNSIGNED|  CHAR(16) |
 |  NOT NULL |    NOT NULL     |    NOT NULL    |  NOT NULL |
 |PRIMARY KEY|                 |                |PRIMARY KEY|
+
+# jobsinfo
+## 打工职位信息
+|    name   |  wage  |   lowestLevel  |eduRestrictions|
+|:---------:|:------:|:--------------:|:-------------:|
+|  CHAR(18) |SMALLINT|UNSIGNED TINYINT|   CHAR(128)   |
+|  NOT NULL |NOT NULL|    NOT NULL    |   NOT NULL    |
+|PRIMARY KEY|        |                |               |
