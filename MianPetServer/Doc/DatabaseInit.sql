@@ -46,7 +46,16 @@ CREATE TABLE ownitems
     PRIMARY KEY (itemname, id)
 );
 
+CREATE TABLE jobsinfo
+(
+    name CHAR(18) NOT NULL PRIMARY KEY,
+    wage SMALLINT NOT NULL,
+    lowestLevel UNSIGNED TINYINT NOT NULL,
+    eduRestrictions CHAR(128) NOT NULL
+);
+
 INSERT INTO userinfo VALUES("999", "miantuotuo", "123", NOW(), 0, NULL, NOW());
 INSERT INTO petprofile(id, username) VALUES("999", "miantuotuo");
 INSERT INTO shopinfo VALUES("lanxingtangguo", "80", "star-shaped blue candy", 0, 0, 0, 0);
 INSERT INTO ownitems VALUES("lanxingtangguo", 1, 0, "999");
+INSERT INTO jobsinfo VALUES("cazhuantou", 10, 0, "none");
