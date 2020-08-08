@@ -177,6 +177,8 @@ void FoodWindow::ViewPreviousPage()
         // 展示[rangeBegin, rangeEnd)中的内容
 
         selectedFood.clear();
+        buyButton->setDisabled(true);
+        useButton->setDisabled(true);
     }
 }
 
@@ -207,6 +209,8 @@ void FoodWindow::ViewNextPage()
         // 展示[rangeBegin, rangeEnd)中的内容
 
         selectedFood.clear();
+        buyButton->setDisabled(true);
+        useButton->setDisabled(true);
     }
 }
 

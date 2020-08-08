@@ -174,6 +174,8 @@ void CleanWindow::ViewPreviousPage()
         // 展示[rangeBegin, rangeEnd)中的内容
 
         selectedClean.clear();
+        buyButton->setDisabled(true);
+        useButton->setDisabled(true);
     }
 }
 
@@ -204,6 +206,8 @@ void CleanWindow::ViewNextPage()
         // 展示[rangeBegin, rangeEnd)中的内容
 
         selectedClean.clear();
+        buyButton->setDisabled(true);
+        useButton->setDisabled(true);
     }
 }
 
