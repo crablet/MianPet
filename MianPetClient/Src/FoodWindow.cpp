@@ -44,6 +44,7 @@ void FoodWindow::InitializeUi()
     lowerBarTextLabel = new QLabel("饥饿值", this);
     valueBar = new QProgressBar(this);
     buyButton = new QPushButton("购买", this);
+    buyButton->setDisabled(true);
     useButton = new QPushButton("使用", this);
     useButton->setDisabled(true);
 
@@ -74,24 +75,28 @@ void FoodWindow::InitializeConnect()
     {
         selectedFood = items[currentPage * 4 + 0].name;
 
+        buyButton->setEnabled(true);
         useButton->setEnabled(true);
     });
     connect(item1, &QPushButton::clicked, this, [=]()
     {
         selectedFood = items[currentPage * 4 + 1].name;
 
+        buyButton->setEnabled(true);
         useButton->setEnabled(true);
     });
     connect(item2, &QPushButton::clicked, this, [=]()
     {
         selectedFood = items[currentPage * 4 + 2].name;
 
+        buyButton->setEnabled(true);
         useButton->setEnabled(true);
     });
     connect(item3, &QPushButton::clicked, this, [=]()
     {
         selectedFood = items[currentPage * 4 + 3].name;
 
+        buyButton->setEnabled(true);
         useButton->setEnabled(true);
     });
 

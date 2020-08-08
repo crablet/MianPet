@@ -6,6 +6,7 @@ WorkingWindow::WorkingWindow()
     InitializeConnect();
 }
 
+// 退出时保存最新的职位信息
 WorkingWindow::~WorkingWindow()
 {
     QJsonArray arr;
