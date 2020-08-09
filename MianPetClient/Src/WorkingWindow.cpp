@@ -143,9 +143,59 @@ void WorkingWindow::OnMouseHoversLeaveItem([[maybe_unused]] QObject *obj)
     itemLabel->SetLowerLabelText("");
 }
 
-void WorkingWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
-{
-}
+//void WorkingWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
+//{
+//    auto tcpSocket = std::make_unique<QTcpSocket>();
+//    tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+//    if (!tcpSocket->waitForConnected())
+//    {
+//        return;
+//    }
+//
+//    QJsonArray tempArray;
+//    for (int i = rangeBegin; i < rangeEnd; ++i)
+//    {
+//        tempArray.append(jobs[i].name);
+//    }
+//    FoodShopRequestData requestData;
+//    requestData.SetItems(tempArray);
+//    tcpSocket->write(requestData);
+//    if (!tcpSocket->waitForBytesWritten())
+//    {
+//        return;
+//    }
+//
+//    if (!tcpSocket->waitForReadyRead())
+//    {
+//        return;
+//    }
+//
+//    const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+//    const auto jsonArray = remoteJson["jobs"].toArray();
+//    for (const auto &r : jsonArray)
+//    {
+//        const auto obj = r.toObject();
+//        const auto name = r["name"].toString();
+//        const auto wage = r["wage"].toInt();
+//        const auto lowestLevel = r["lowestLevel"].toInt();
+//        const auto eduRestrictions = r["eduRestrictions"].toArray();
+//
+//        std::vector<QString> eduRestrictionsVec;
+//        for (const auto &r : eduRestrictions)
+//        {
+//            eduRestrictionsVec.push_back(r.toString());
+//        }
+//
+//        auto iter = std::find_if(jobs.begin(), jobs.end(), [=, &name](const JobInformation &rhs)
+//        {
+//            return name == rhs.name;
+//        });
+//        iter->name = name;  // iter可能为空
+//        iter->wage = wage;
+//        iter->lowestLevel = lowestLevel;
+//        iter->eduRestrictions = std::move(eduRestrictionsVec);    // 可以std::move吗？
+//    }
+//}
 
 void WorkingWindow::SubmitWorkBeginRequest(const std::string &jobName)
 {

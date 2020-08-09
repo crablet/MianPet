@@ -4,10 +4,12 @@
 #include <vector>
 #include <thread>
 #include <algorithm>
+#include <memory>
 
 #include <QString>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QTcpSocket>
 
 #include "SmallItemsContainerWindow.h"
 
