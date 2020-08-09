@@ -146,3 +146,11 @@ void WorkingWindow::OnMouseHoversLeaveItem([[maybe_unused]] QObject *obj)
 void WorkingWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
 {
 }
+
+void WorkingWindow::SubmitWorkBeginRequest(const std::string &jobName)
+{
+}
+
+void WorkingWindow::SubmitWorkEndRequest(const std::string &jobName)
+{
+}

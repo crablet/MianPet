@@ -31,6 +31,8 @@ private:
     void OnMouseHoversLeaveItem(QObject *obj);
 
     void RequestDataInRange(int rangeBegin, int rangeEnd);
+    void SubmitWorkBeginRequest(const std::string &jobName);
+    void SubmitWorkEndRequest(const std::string &jobName);
 
     struct JobInformation
     {
