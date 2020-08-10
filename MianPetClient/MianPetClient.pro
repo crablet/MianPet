@@ -32,6 +32,7 @@ SOURCES += \
     Src/Tools/Network/DataPackages/DataPackage.cpp \
     Src/Tools/Network/DataPackages/FoodShopRequestData.cpp \
     Src/Tools/Network/DataPackages/HeartbeatData.cpp \
+    Src/Tools/Network/DataPackages/JobsInfoRequestData.cpp \
     Src/Tools/Network/DataPackages/LoginRequestData.cpp \
     Src/Tools/Network/DataPackages/LogoutData.cpp \
     Src/Tools/Network/DataPackages/PetProfileRequestData.cpp \
@@ -63,6 +64,7 @@ HEADERS += \
     Src/Tools/Network/DataPackages/DataPackage.h \
     Src/Tools/Network/DataPackages/FoodShopRequestData.h \
     Src/Tools/Network/DataPackages/HeartbeatData.h \
+    Src/Tools/Network/DataPackages/JobsInfoRequestData.h \
     Src/Tools/Network/DataPackages/LoginRequestData.h \
     Src/Tools/Network/DataPackages/LogoutData.h \
     Src/Tools/Network/DataPackages/PetProfileRequestData.h \
