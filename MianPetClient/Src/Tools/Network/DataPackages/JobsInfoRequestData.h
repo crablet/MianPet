@@ -1,6 +1,8 @@
 ﻿#ifndef JOBSINFOREQUESTDATA_H
 #define JOBSINFOREQUESTDATA_H
 
+#include <QJsonArray>
+
 #include "RequestData.h"
 
 // 用于向服务器请求用于询问打工职位信息时的数据包
@@ -20,6 +22,10 @@ class JobsInfoRequestData : public RequestData
 {
 public:
     JobsInfoRequestData();
+
+public:
+    void SetJobs(const QJsonArray &jobs);
+    QJsonArray GetJobs() const;
 };
 
 #endif // JOBSINFOREQUESTDATA_H
