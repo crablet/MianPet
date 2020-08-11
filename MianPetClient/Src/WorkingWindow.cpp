@@ -57,7 +57,7 @@ void WorkingWindow::ViewPreviousPage()
         const auto rangeBegin = currentPage * 4;
         const auto rangeEnd = rangeBegin + 4;
 
-        std::thread requestThread(&WorkingWindow::RequestDataInRange, this, rangeBegin, rangeEnd);
+        std::thread requestThread(&WorkingWindow::RequestJobsInfoInRange, this, rangeBegin, rangeEnd);
         requestThread.detach();
 
         item0->setIcon(QIcon(":/Pic/" + jobs[rangeBegin + 0].name + ".png"));
@@ -79,7 +79,7 @@ void WorkingWindow::ViewNextPage()
         const auto rangeBegin = currentPage * 3;
         const auto rangeEnd = std::min(rangeBegin + 4, max);
 
-        std::thread requestThread(&WorkingWindow::RequestDataInRange, this, rangeBegin, rangeEnd);
+        std::thread requestThread(&WorkingWindow::RequestJobsInfoInRange, this, rangeBegin, rangeEnd);
         requestThread.detach();
 
         rangeBegin + 0 < rangeEnd
@@ -143,59 +143,59 @@ void WorkingWindow::OnMouseHoversLeaveItem([[maybe_unused]] QObject *obj)
     itemLabel->SetLowerLabelText("");
 }
 
-//void WorkingWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
-//{
-//    auto tcpSocket = std::make_unique<QTcpSocket>();
-//    tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
-//    if (!tcpSocket->waitForConnected())
-//    {
-//        return;
-//    }
-//
-//    QJsonArray tempArray;
-//    for (int i = rangeBegin; i < rangeEnd; ++i)
-//    {
-//        tempArray.append(jobs[i].name);
-//    }
-//    FoodShopRequestData requestData;
-//    requestData.SetItems(tempArray);
-//    tcpSocket->write(requestData);
-//    if (!tcpSocket->waitForBytesWritten())
-//    {
-//        return;
-//    }
-//
-//    if (!tcpSocket->waitForReadyRead())
-//    {
-//        return;
-//    }
-//
-//    const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
-//    const auto jsonArray = remoteJson["jobs"].toArray();
-//    for (const auto &r : jsonArray)
-//    {
-//        const auto obj = r.toObject();
-//        const auto name = r["name"].toString();
-//        const auto wage = r["wage"].toInt();
-//        const auto lowestLevel = r["lowestLevel"].toInt();
-//        const auto eduRestrictions = r["eduRestrictions"].toArray();
-//
-//        std::vector<QString> eduRestrictionsVec;
-//        for (const auto &r : eduRestrictions)
-//        {
-//            eduRestrictionsVec.push_back(r.toString());
-//        }
-//
-//        auto iter = std::find_if(jobs.begin(), jobs.end(), [=, &name](const JobInformation &rhs)
-//        {
-//            return name == rhs.name;
-//        });
-//        iter->name = name;  // iter可能为空
-//        iter->wage = wage;
-//        iter->lowestLevel = lowestLevel;
-//        iter->eduRestrictions = std::move(eduRestrictionsVec);    // 可以std::move吗？
-//    }
-//}
+void WorkingWindow::RequestJobsInfoInRange(int rangeBegin, int rangeEnd)
+{
+    auto tcpSocket = std::make_unique<QTcpSocket>();
+    tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+    if (!tcpSocket->waitForConnected())
+    {
+        return;
+    }
+
+    QJsonArray tempArray;
+    for (int i = rangeBegin; i < rangeEnd; ++i)
+    {
+        tempArray.append(jobs[i].name);
+    }
+    JobsInfoRequestData requestData;
+    requestData.SetJobs(tempArray);
+    tcpSocket->write(requestData);
+    if (!tcpSocket->waitForBytesWritten())
+    {
+        return;
+    }
+
+    if (!tcpSocket->waitForReadyRead())
+    {
+        return;
+    }
+
+    const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+    const auto jsonArray = remoteJson["jobs"].toArray();
+    for (const auto &r : jsonArray)
+    {
+        const auto obj = r.toObject();
+        const auto name = r["name"].toString();
+        const auto wage = r["wage"].toInt();
+        const auto lowestLevel = r["lowestLevel"].toInt();
+        const auto eduRestrictions = r["eduRestrictions"].toArray();
+
+        std::vector<QString> eduRestrictionsVec;
+        for (const auto &r : eduRestrictions)
+        {
+            eduRestrictionsVec.push_back(r.toString());
+        }
+
+        auto iter = std::find_if(jobs.begin(), jobs.end(), [=, &name](const JobInformation &rhs)
+        {
+            return name == rhs.name;
+        });
+        iter->name = name;  // iter可能为空
+        iter->wage = wage;
+        iter->lowestLevel = lowestLevel;
+        iter->eduRestrictions = std::move(eduRestrictionsVec);    // 可以std::move吗？
+    }
+}
 
 void WorkingWindow::SubmitWorkBeginRequest(const std::string &jobName)
 {

@@ -15,6 +15,7 @@
 
 #include "Tools/Network/DataPackages/WorkBeginRequest.h"
 #include "Tools/Network/DataPackages/WorkEndRequest.h"
+#include "Tools/Network/DataPackages/JobsInfoRequestData.h"
 
 class WorkingWindow final : public SmallItemsContainerWindow
 {
@@ -32,7 +33,7 @@ private:
     void OnMouseHoversMoveItem(QObject *obj);
     void OnMouseHoversLeaveItem(QObject *obj);
 
-    void RequestDataInRange(int rangeBegin, int rangeEnd);
+    void RequestJobsInfoInRange(int rangeBegin, int rangeEnd);
     void SubmitWorkBeginRequest(const std::string &jobName);
     void SubmitWorkEndRequest(const std::string &jobName);
 
