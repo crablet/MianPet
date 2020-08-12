@@ -53,6 +53,8 @@ private:
 signals:
     void WorkBeginSucceeded();
     void WorkBeginFailed();
+    void WorkEndSucceeded();
+    void WorkEndFailed();
 
 private:
     std::vector<JobInformation> jobs;

@@ -244,4 +244,45 @@ void WorkingWindow::SubmitWorkBeginRequest(const std::string &jobName)
 
 void WorkingWindow::SubmitWorkEndRequest(const std::string &jobName)
 {
+    std::thread thread(
+    [=]()
+    {
+        auto tcpSocket = std::make_unique<QTcpSocket>();
+        tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+        if (!tcpSocket->waitForConnected())
+        {
+            return;
+        }
+
+        WorkEndRequest data;
+        data.SetJob(selectedJob);
+        tcpSocket->write(data);
+        if (!tcpSocket->waitForBytesWritten())
+        {
+            return;
+        }
+
+        if (!tcpSocket->waitForReadyRead())
+        {
+            return;
+        }
+
+        const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+        const auto status = remoteJson["status"].toString();
+        if (status == "succeeded")
+        {
+            emit WorkEndSucceeded();
+            // 结束打工成功
+        }
+        else if (status == "failed")
+        {
+            emit WorkEndFailed();
+            // 结束打工失败
+        }
+        else
+        {
+            // error
+        }
+    });
+    thread.detach();
 }
