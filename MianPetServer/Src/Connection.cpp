@@ -852,3 +852,11 @@ void Connection::DealWithUse(const char *id, const char *randomKey, const char *
         std::cout << exp.msg << std::endl;
     }
 }
+
+void Connection::DealWithWorkBegin(const char *id, const char *randomKey, const char *job)
+{
+}
+
+void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const char *job)
+{
+}

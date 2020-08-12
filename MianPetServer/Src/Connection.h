@@ -70,6 +70,11 @@ private:
     // 处理使用食品/日用品的请求 /GET/USE
     void DealWithUse(const char *id, const char *randomKey, const char *item, int count);
 
+    // 处理开始工作的请求 /GET/WORKBEGIN
+    void DealWithWorkBegin(const char *id, const char *randomKey, const char *job);
+    // 处理结束工作的请求 /GET/WORKEND
+    void DealWithWorkEnd(const char *id, const char *randomKey, const char *job);
+
 private:
     asio::ip::tcp::socket socket;
     
