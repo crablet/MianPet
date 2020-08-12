@@ -199,6 +199,47 @@ void WorkingWindow::RequestJobsInfoInRange(int rangeBegin, int rangeEnd)
 
 void WorkingWindow::SubmitWorkBeginRequest(const std::string &jobName)
 {
+    std::thread thread(
+    [=]()
+    {
+        auto tcpSocket = std::make_unique<QTcpSocket>();
+        tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+        if (!tcpSocket->waitForConnected())
+        {
+            return;
+        }
+
+        WorkBeginRequest data;
+        data.SetJob(selectedJob);
+        tcpSocket->write(data);
+        if (!tcpSocket->waitForBytesWritten())
+        {
+            return;
+        }
+
+        if (!tcpSocket->waitForReadyRead())
+        {
+            return;
+        }
+
+        const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+        const auto status = remoteJson["status"].toString();
+        if (status == "succeeded")
+        {
+            emit WorkBeginSucceeded();
+            // 开始打工成功
+        }
+        else if (status == "failed")
+        {
+            emit WorkBeginFailed();
+            // 开始打工失败
+        }
+        else
+        {
+            // error
+        }
+    });
+    thread.detach();
 }
 
 void WorkingWindow::SubmitWorkEndRequest(const std::string &jobName)

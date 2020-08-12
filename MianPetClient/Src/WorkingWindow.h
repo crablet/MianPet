@@ -50,6 +50,10 @@ private:
         std::vector<QString> eduRestrictions;
     };
 
+signals:
+    void WorkBeginSucceeded();
+    void WorkBeginFailed();
+
 private:
     std::vector<JobInformation> jobs;
 
