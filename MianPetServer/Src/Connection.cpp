@@ -121,6 +121,16 @@ void Connection::TaskRunnerThread(int jsonLength)
                     const char *password = payload["password"].get<const char*>();
                     DealWithGetLogin(id, password, randomKey);
                 }
+                else if (hint == WORKBEGIN)
+                {
+                    const char *job = payload["job"].get<const char*>();
+                    DealWithWorkBegin(id, randomKey, job);
+                }
+                else if (hint == WORKEND)
+                {
+                    const char *job = payload["job"].get<const char*>();
+                    DealWithWorkEnd(id, randomKey, job);
+                }
                 else
                 {
                     // error
