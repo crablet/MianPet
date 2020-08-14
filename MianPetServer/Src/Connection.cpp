@@ -131,6 +131,16 @@ void Connection::TaskRunnerThread(int jsonLength)
                     const char *job = payload["job"].get<const char*>();
                     DealWithWorkEnd(id, randomKey, job);
                 }
+                else if (hint == JOBS_INFO)
+                {
+                    const auto jobs = payload["jobs"];
+                    std::vector<const char*> jobsCharVector;
+                    for (const auto &job : jobs)
+                    {
+                        jobsCharVector.push_back(job.get<const char*>());
+                    }
+                    DealWithJobsInfo(id, randomKey, jobsCharVector);
+                }
                 else
                 {
                     // error
@@ -868,5 +878,9 @@ void Connection::DealWithWorkBegin(const char *id, const char *randomKey, const 
 }
 
 void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const char *job)
+{
+}
+
+void Connection::DealWithJobsInfo(const char *id, const char *randomKey, const std::vector<const char *> &jobs)
 {
 }
