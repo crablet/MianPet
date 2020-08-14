@@ -10,6 +10,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QTcpSocket>
+#include <QMessageBox>
 
 #include "SmallItemsContainerWindow.h"
 

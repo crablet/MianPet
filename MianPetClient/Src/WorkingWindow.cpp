@@ -48,6 +48,22 @@ void WorkingWindow::InitializeUi()
 
 void WorkingWindow::InitializeConnect()
 {
+    connect(this, &WorkingWindow::WorkBeginSucceeded, this, [=]()
+    {
+        QMessageBox::information(this, "成功", "开始打工！");
+    });
+    connect(this, &WorkingWindow::WorkBeginFailed, this, [=]()
+    {
+        QMessageBox::information(this, "失败", "我们好像打不了这个工。");
+    });
+    connect(this, &WorkingWindow::WorkEndSucceeded, this, [=]()
+    {
+        QMessageBox::information(this, "成功", "我们先不打这个工了。");
+    });
+    connect(this, &WorkingWindow::WorkEndFailed, this, [=]()
+    {
+        QMessageBox::information(this, "失败", "怎么办？这工作结束不了。");
+    });
 }
 
 void WorkingWindow::ViewPreviousPage()
