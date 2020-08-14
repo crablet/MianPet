@@ -19,8 +19,9 @@
 
 class WorkingWindow final : public SmallItemsContainerWindow
 {
+    Q_OBJECT
 public:
-    WorkingWindow();
+    explicit WorkingWindow(QWidget *parent = nullptr);
     ~WorkingWindow();
 
 private:
@@ -34,8 +35,8 @@ private:
     void OnMouseHoversLeaveItem(QObject *obj);
 
     void RequestJobsInfoInRange(int rangeBegin, int rangeEnd);
-    void SubmitWorkBeginRequest(const std::string &jobName);
-    void SubmitWorkEndRequest(const std::string &jobName);
+    void SubmitWorkBeginRequest(const QString &jobName);
+    void SubmitWorkEndRequest(const QString &jobName);
 
     struct JobInformation
     {

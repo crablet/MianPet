@@ -1,6 +1,7 @@
 ﻿#include "WorkingWindow.h"
 
-WorkingWindow::WorkingWindow()
+WorkingWindow::WorkingWindow(QWidget *parent)
+    : SmallItemsContainerWindow(parent)
 {
     InitializeUi();
     InitializeConnect();
@@ -197,7 +198,7 @@ void WorkingWindow::RequestJobsInfoInRange(int rangeBegin, int rangeEnd)
     }
 }
 
-void WorkingWindow::SubmitWorkBeginRequest(const std::string &jobName)
+void WorkingWindow::SubmitWorkBeginRequest(const QString &jobName)
 {
     std::thread thread(
     [=]()
@@ -210,7 +211,7 @@ void WorkingWindow::SubmitWorkBeginRequest(const std::string &jobName)
         }
 
         WorkBeginRequest data;
-        data.SetJob(selectedJob);
+        data.SetJob(jobName);
         tcpSocket->write(data);
         if (!tcpSocket->waitForBytesWritten())
         {
@@ -242,7 +243,7 @@ void WorkingWindow::SubmitWorkBeginRequest(const std::string &jobName)
     thread.detach();
 }
 
-void WorkingWindow::SubmitWorkEndRequest(const std::string &jobName)
+void WorkingWindow::SubmitWorkEndRequest(const QString &jobName)
 {
     std::thread thread(
     [=]()
@@ -255,7 +256,7 @@ void WorkingWindow::SubmitWorkEndRequest(const std::string &jobName)
         }
 
         WorkEndRequest data;
-        data.SetJob(selectedJob);
+        data.SetJob(jobName);
         tcpSocket->write(data);
         if (!tcpSocket->waitForBytesWritten())
         {
