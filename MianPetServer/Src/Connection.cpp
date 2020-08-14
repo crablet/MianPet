@@ -883,4 +883,88 @@ void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const ch
 
 void Connection::DealWithJobsInfo(const char *id, const char *randomKey, const std::vector<const char *> &jobs)
 {
+    try
+    {
+        std::lock_guard<std::mutex> lock(dbMutex);
+
+        constexpr const char *checkOnlineAndSecretKeySqlStr =
+            R"(SELECT online, secretKey FROM userinfo
+               WHERE id = :id<char[16]>)";
+        otl_stream checkOnlineStream(64, checkOnlineAndSecretKeySqlStr, db);
+        checkOnlineStream << id;
+
+        int online;
+        char trueSecretKey[18 + 1];
+        for (auto &r : checkOnlineStream)
+        {
+            r >> online >> trueSecretKey;
+        }
+
+        if (online) // 如果在线则检查randomKey是否一致，有点cookies的感觉
+        {
+            if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果连randomKey都一致，那就可以开始查询了
+            {
+                // 回复的json格式为：
+                // {
+                //   "jobs":
+                //   [
+                //     {
+                //       "name": string,
+                //       "wage": int,
+                //       "lowestLevel": int,
+                //       "eduRestrictions": string
+                //     },
+                //     ...
+                //   ]
+                //  }
+                std::string replyJson = R"({"jobs":[)";
+
+                for (const auto &jobName : jobs)
+                {
+                    constexpr const char *selectItemInfoSqlStr =
+                        R"(SELECT name, wage, lowestLevel, eduRestrictions FROM jobsinfo
+                           WHERE name = :name<char[18]>)";
+                    otl_stream selectItemInfoStream(196, selectItemInfoSqlStr, db);
+                    selectItemInfoStream << jobName;
+
+                    char name[18 + 1];
+                    int wage, lowestLevel;
+                    char eduRestrictions[128 + 1];
+                    for (auto &in : selectItemInfoStream)
+                    {
+                        in >> name >> wage >> lowestLevel >> eduRestrictions;
+                    }
+
+                    replyJson += R"({"name":")";
+                    replyJson += name;
+                    replyJson += R"(","wage":)";
+                    replyJson += std::to_string(wage);
+                    replyJson += R"(","lowestLevel":)";
+                    replyJson += std::to_string(lowestLevel);
+                    replyJson += R"(","eduRestrictions":)";
+                    replyJson += eduRestrictions;
+                    replyJson += R"(},)";
+                }
+
+                replyJson.pop_back();   // 去除最后一个','
+                replyJson += R"(]})";
+                reply = std::move(replyJson);
+
+                DoWrite();
+            }
+            else
+            {
+                // error
+            }
+        }
+        else
+        {
+            // error
+        }
+    }
+    catch (const otl_exception &exp)
+    {
+        std::cout << exp.stm_text << std::endl;
+        std::cout << exp.msg << std::endl;
+    }
 }
