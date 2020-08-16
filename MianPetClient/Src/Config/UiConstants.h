@@ -142,4 +142,8 @@ inline constexpr int CleanWindowLowerBarWidgetHeight = FoodWindowLowerBarWidgetH
 inline constexpr int CleanWindowLowerBarWidgetX = FoodWindowLowerBarWidgetX;
 inline constexpr int CleanWindowLowerBarWidgetY = FoodWindowLowerBarWidgetY;
 
+inline constexpr int WorkingWindowLowerBarWidgetWidth = FoodWindowLowerBarWidgetWidth;
+inline constexpr int WorkingWindowLowerBarWidgetHeight = FoodWindowLowerBarWidgetHeight;
+inline constexpr int WorkingWindowLowerBarWidgetX = FoodWindowLowerBarWidgetX;
+inline constexpr int WorkingWindowLowerBarWidgetY = FoodWindowLowerBarWidgetY;
 #endif // UICONSTANTS_H

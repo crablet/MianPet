@@ -11,9 +11,13 @@
 #include <QJsonObject>
 #include <QTcpSocket>
 #include <QMessageBox>
+#include <QWidget>
+#include <QHBoxLayout>
+#include <QPushButton>
 
 #include "SmallItemsContainerWindow.h"
 
+#include "Config/NetworkConstants.h"
 #include "Tools/Network/DataPackages/WorkBeginRequest.h"
 #include "Tools/Network/DataPackages/WorkEndRequest.h"
 #include "Tools/Network/DataPackages/JobsInfoRequestData.h"
@@ -62,6 +66,10 @@ private:
     std::vector<JobInformation> jobs;
 
     QString selectedJob;
+
+    QWidget *lowerBarWidget;
+    QHBoxLayout *lowerBarWidgetLayout;
+    QPushButton *beginButton, *endButton;
 };
 
 #endif // WORKINGWINDOW_H

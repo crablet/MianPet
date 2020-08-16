@@ -44,6 +44,20 @@ WorkingWindow::~WorkingWindow()
 void WorkingWindow::InitializeUi()
 {
     SetWindowTitle("打工");
+
+    beginButton = new QPushButton("开始", this);
+    endButton = new QPushButton("结束", this);
+
+    lowerBarWidgetLayout = new QHBoxLayout(this);
+    lowerBarWidgetLayout->addStretch();
+    lowerBarWidgetLayout->addWidget(beginButton);
+    lowerBarWidgetLayout->addWidget(endButton);
+    lowerBarWidgetLayout->addStretch();
+
+    lowerBarWidget = new QWidget(this);
+    lowerBarWidget->setLayout(lowerBarWidgetLayout);
+    lowerBarWidget->setFixedSize(WorkingWindowLowerBarWidgetWidth, WorkingWindowLowerBarWidgetHeight);
+    lowerBarWidget->move(WorkingWindowLowerBarWidgetX, WorkingWindowLowerBarWidgetY);
 }
 
 void WorkingWindow::InitializeConnect()
