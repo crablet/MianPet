@@ -78,6 +78,79 @@ void WorkingWindow::InitializeConnect()
     {
         QMessageBox::information(this, "失败", "怎么办？这工作结束不了。");
     });
+
+    connect(item0, &QPushButton::clicked, this, [=]()
+    {
+        if (const auto index = currentPage * 4 + 0;
+            index < jobs.size())
+        {
+            selectedJob = jobs[index].name;
+
+            beginButton->setEnabled(true);
+            endButton->setEnabled(true);
+        }
+        else
+        {
+            selectedJob.clear();
+
+            beginButton->setDisabled(true);
+            endButton->setDisabled(true);
+        }
+    });
+    connect(item1, &QPushButton::clicked, this, [=]()
+    {
+        if (const auto index = currentPage * 4 + 1;
+            index < jobs.size())
+        {
+            selectedJob = jobs[index].name;
+
+            beginButton->setEnabled(true);
+            endButton->setEnabled(true);
+        }
+        else
+        {
+            selectedJob.clear();
+
+            beginButton->setDisabled(true);
+            endButton->setDisabled(true);
+        }
+    });
+    connect(item2, &QPushButton::clicked, this, [=]()
+    {
+        if (const auto index = currentPage * 4 + 2;
+            index < jobs.size())
+        {
+            selectedJob = jobs[index].name;
+
+            beginButton->setEnabled(true);
+            endButton->setEnabled(true);
+        }
+        else
+        {
+            selectedJob.clear();
+
+            beginButton->setDisabled(true);
+            endButton->setDisabled(true);
+        }
+    });
+    connect(item3, &QPushButton::clicked, this, [=]()
+    {
+        if (const auto index = currentPage * 4 + 3;
+            index < jobs.size())
+        {
+            selectedJob = jobs[index].name;
+
+            beginButton->setEnabled(true);
+            endButton->setEnabled(true);
+        }
+        else
+        {
+            selectedJob.clear();
+
+            beginButton->setDisabled(true);
+            endButton->setDisabled(true);
+        }
+    });
 }
 
 void WorkingWindow::ViewPreviousPage()
