@@ -73,31 +73,75 @@ void FoodWindow::InitializeConnect()
 
     connect(item0, &QPushButton::clicked, this, [=]()
     {
-        selectedFood = items[currentPage * 4 + 0].name;
+        if (const auto index = currentPage * 4 + 0; 
+            index < items.size())
+        {
+            selectedFood = items[index].name;
 
-        buyButton->setEnabled(true);
-        useButton->setEnabled(true);
+            buyButton->setEnabled(true);
+            useButton->setEnabled(true);
+        }
+        else
+        {
+            selectedFood.clear();
+
+            buyButton->setDisabled(true);
+            useButton->setDisabled(true);
+        }
     });
     connect(item1, &QPushButton::clicked, this, [=]()
     {
-        selectedFood = items[currentPage * 4 + 1].name;
+        if (const auto index = currentPage * 4 + 1;
+            index < items.size())
+        {
+            selectedFood = items[index].name;
 
-        buyButton->setEnabled(true);
-        useButton->setEnabled(true);
+            buyButton->setEnabled(true);
+            useButton->setEnabled(true);
+        }
+        else
+        {
+            selectedFood.clear();
+
+            buyButton->setDisabled(true);
+            useButton->setDisabled(true);
+        }
     });
     connect(item2, &QPushButton::clicked, this, [=]()
     {
-        selectedFood = items[currentPage * 4 + 2].name;
+        if (const auto index = currentPage * 4 + 2;
+            index < items.size())
+        {
+            selectedFood = items[index].name;
 
-        buyButton->setEnabled(true);
-        useButton->setEnabled(true);
+            buyButton->setEnabled(true);
+            useButton->setEnabled(true);
+        }
+        else
+        {
+            selectedFood.clear();
+
+            buyButton->setDisabled(true);
+            useButton->setDisabled(true);
+        }
     });
     connect(item3, &QPushButton::clicked, this, [=]()
     {
-        selectedFood = items[currentPage * 4 + 3].name;
+        if (const auto index = currentPage * 4 + 3;
+            index < items.size())
+        {
+            selectedFood = items[index].name;
 
-        buyButton->setEnabled(true);
-        useButton->setEnabled(true);
+            buyButton->setEnabled(true);
+            useButton->setEnabled(true);
+        }
+        else
+        {
+            selectedFood.clear();
+
+            buyButton->setDisabled(true);
+            useButton->setDisabled(true);
+        }
     });
 
     connect(buyButton, &QPushButton::clicked, this, &FoodWindow::OnBuyButtonClicked);
