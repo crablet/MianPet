@@ -43,6 +43,8 @@ WorkingWindow::~WorkingWindow()
 
 void WorkingWindow::InitializeUi()
 {
+    GetWorkingStatus(); // 我们有理由相信，与服务器沟通的时间要比初始化下面的控件时间要长，所以先执行此操作
+
     SetWindowTitle("打工");
 
     beginButton = new QPushButton("开始", this);
@@ -387,6 +389,16 @@ void WorkingWindow::SubmitWorkEndRequest(const QString &jobName)
         {
             // error
         }
+    });
+    thread.detach();
+}
+
+void WorkingWindow::GetWorkingStatus()
+{
+    std::thread thread(
+    []()
+    {
+
     });
     thread.detach();
 }

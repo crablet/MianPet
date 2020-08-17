@@ -44,6 +44,8 @@ private:
     void SubmitWorkBeginRequest(const QString &jobName);
     void SubmitWorkEndRequest(const QString &jobName);
 
+    void GetWorkingStatus();
+
     struct JobInformation
     {
         JobInformation(const QString &name, int wage, int lowestLevel, const std::vector<QString> &eduRestrictions)
