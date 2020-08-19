@@ -22,6 +22,7 @@
 #include "Tools/Network/DataPackages/WorkBeginRequest.h"
 #include "Tools/Network/DataPackages/WorkEndRequest.h"
 #include "Tools/Network/DataPackages/JobsInfoRequestData.h"
+#include "Tools/Network/DataPackages/WorkStatusRequestData.h"
 
 class WorkingWindow final : public SmallItemsContainerWindow
 {

@@ -398,7 +398,42 @@ void WorkingWindow::GetWorkingStatus()
     std::thread thread(
     []()
     {
+        auto tcpSocket = std::make_unique<QTcpSocket>();
+        tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+        if (!tcpSocket->waitForConnected())
+        {
+            return;
+        }
 
+        tcpSocket->write(WorkStatusRequestData{});
+        if (!tcpSocket->waitForBytesWritten())
+        {
+            return;
+        }
+
+        if (!tcpSocket->waitForReadyRead())
+        {
+            return;
+        }
+
+        // 服务器返回的json格式
+        // {
+        //    "isWorking": bool,
+        //    "job": string,    // 当isWorking为true时存在
+        //    "time": int       // 当isWorking为true时存在
+        // }
+        const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+        isWorking = remoteJson["isWorking"].toBool();
+        if (isWorking)
+        {
+            workingJob = remoteJson["job"].toString();
+            workingTime = remoteJson["time"].toInt();
+        }
+        else
+        {
+            workingJob.clear();
+            workingTime = 0;
+        }
     });
     thread.detach();
 }
