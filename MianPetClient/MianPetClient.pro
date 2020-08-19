@@ -40,6 +40,7 @@ SOURCES += \
     Src/Tools/Network/DataPackages/UseRequestData.cpp \
     Src/Tools/Network/DataPackages/WorkBeginRequest.cpp \
     Src/Tools/Network/DataPackages/WorkEndRequest.cpp \
+    Src/Tools/Network/DataPackages/WorkStatusRequestData.cpp \
     Src/TransparentItemLabel.cpp \
     Src/WorkingWindow.cpp \
     Src/main.cpp \
@@ -72,6 +73,7 @@ HEADERS += \
     Src/Tools/Network/DataPackages/UseRequestData.h \
     Src/Tools/Network/DataPackages/WorkBeginRequest.h \
     Src/Tools/Network/DataPackages/WorkEndRequest.h \
+    Src/Tools/Network/DataPackages/WorkStatusRequestData.h \
     Src/Tools/Network/NetworkTools.h \
     Src/Tools/Ui/UiTools.h \
     Src/TransparentItemLabel.h \

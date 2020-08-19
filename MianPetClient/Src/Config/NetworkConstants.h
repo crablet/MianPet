@@ -36,6 +36,7 @@ inline constexpr int USE = 6;
 inline constexpr int WORKBEGIN = 7;
 inline constexpr int WORKEND = 8;
 inline constexpr int JOBS_INFO = 9;
+inline constexpr int WORK_STATUS = 10;
 
 /* hint end */
 
