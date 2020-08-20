@@ -48,7 +48,9 @@ void WorkingWindow::InitializeUi()
     SetWindowTitle("打工");
 
     beginButton = new QPushButton("开始", this);
+    beginButton->setDisabled(true);
     endButton = new QPushButton("结束", this);
+    endButton->setDisabled(true);
 
     lowerBarWidgetLayout = new QHBoxLayout(this);
     lowerBarWidgetLayout->addStretch();
