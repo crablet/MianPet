@@ -54,8 +54,18 @@ CREATE TABLE jobsinfo
     eduRestrictions CHAR(128) NOT NULL
 );
 
+CREATE TABLE workinginfo
+(
+    id CHAR(16) NOT NULL,
+    job CHAR(18) NOT NULL,
+    begintime DATETIME NOT NULL,
+    count UNSIGNED INT NOT NULL DEFAULT 0,
+    PRIMARY KEY (name, job)
+);
+
 INSERT INTO userinfo VALUES("999", "miantuotuo", "123", NOW(), 0, NULL, NOW());
 INSERT INTO petprofile(id, username) VALUES("999", "miantuotuo");
 INSERT INTO shopinfo VALUES("lanxingtangguo", "80", "star-shaped blue candy", 0, 0, 0, 0);
 INSERT INTO ownitems VALUES("lanxingtangguo", 1, 0, "999");
 INSERT INTO jobsinfo VALUES("cazhuantou", 10, 0, "none");
+INSERT INTO workinginfo VALUES("999", "canzhuantou", NULL, 0);

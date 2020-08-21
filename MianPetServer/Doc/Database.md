@@ -39,3 +39,11 @@
 |  CHAR(18) |SMALLINT|UNSIGNED TINYINT|   CHAR(128)   |
 |  NOT NULL |NOT NULL|    NOT NULL    |   NOT NULL    |
 |PRIMARY KEY|        |                |               |
+
+# workinginfo
+## 打工状态信息
+|     id    |    job    |   begintime  |    count   |
+|:---------:|:---------:|:------------:|:----------:|
+|  CHAR(16) |  CHAR(18) |   DATETIME   |UNSIGNED INT|
+|  NOT NULL |  NOT NULL |   NOT NULL   |  NOT NULL  |
+|PRIMARY KEY|PRIMARY KEY|              |            |
