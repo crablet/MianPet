@@ -398,7 +398,7 @@ void WorkingWindow::SubmitWorkEndRequest(const QString &jobName)
 void WorkingWindow::GetWorkingStatus()
 {
     std::thread thread(
-    []()
+    [this]()
     {
         auto tcpSocket = std::make_unique<QTcpSocket>();
         tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
@@ -430,11 +430,15 @@ void WorkingWindow::GetWorkingStatus()
         {
             workingJob = remoteJson["job"].toString();
             workingTime = remoteJson["time"].toInt();
+
+            SetWindowTitle("打工-正在打工-" + workingJob + "已进行-" + QString::number(workingTime));
         }
         else
         {
             workingJob.clear();
             workingTime = 0;
+
+            SetWindowTitle("打工");
         }
     });
     thread.detach();
