@@ -60,6 +60,7 @@ CREATE TABLE workinginfo
     job CHAR(18) NOT NULL,
     begintime DATETIME NOT NULL,
     count UNSIGNED INT NOT NULL DEFAULT 0,
+    working TINYINT(1) NOT NULL,
     PRIMARY KEY (name, job)
 );
 
@@ -68,4 +69,4 @@ INSERT INTO petprofile(id, username) VALUES("999", "miantuotuo");
 INSERT INTO shopinfo VALUES("lanxingtangguo", "80", "star-shaped blue candy", 0, 0, 0, 0);
 INSERT INTO ownitems VALUES("lanxingtangguo", 1, 0, "999");
 INSERT INTO jobsinfo VALUES("cazhuantou", 10, 0, "none");
-INSERT INTO workinginfo VALUES("999", "canzhuantou", NULL, 0);
+INSERT INTO workinginfo VALUES("999", "canzhuantou", NULL, 0, 0);

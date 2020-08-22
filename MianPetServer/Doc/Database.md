@@ -42,8 +42,8 @@
 
 # workinginfo
 ## 打工状态信息
-|     id    |    job    |   begintime  |    count   |
-|:---------:|:---------:|:------------:|:----------:|
-|  CHAR(16) |  CHAR(18) |   DATETIME   |UNSIGNED INT|
-|  NOT NULL |  NOT NULL |   NOT NULL   |  NOT NULL  |
-|PRIMARY KEY|PRIMARY KEY|              |            |
+|     id    |    job    |   begintime  |    count   |  working |
+|:---------:|:---------:|:------------:|:----------:|:--------:|
+|  CHAR(16) |  CHAR(18) |   DATETIME   |UNSIGNED INT|TINYINT(1)|
+|  NOT NULL |  NOT NULL |   NOT NULL   |  NOT NULL  | NOT NULL |
+|PRIMARY KEY|PRIMARY KEY|              |            |          |
