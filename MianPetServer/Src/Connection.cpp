@@ -141,6 +141,10 @@ void Connection::TaskRunnerThread(int jsonLength)
                     }
                     DealWithJobsInfo(id, randomKey, jobsCharVector);
                 }
+                else if (hint == WORK_STATUS)
+                {
+                    DealWithWorkStatus(id, randomKey);
+                }
                 else
                 {
                     // error
@@ -967,4 +971,8 @@ void Connection::DealWithJobsInfo(const char *id, const char *randomKey, const s
         std::cout << exp.stm_text << std::endl;
         std::cout << exp.msg << std::endl;
     }
+}
+
+void Connection::DealWithWorkStatus(const char *id, const char *randomKey)
+{
 }

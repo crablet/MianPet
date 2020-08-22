@@ -76,6 +76,8 @@ private:
     void DealWithWorkEnd(const char *id, const char *randomKey, const char *job);
     // 处理打工职位内容的请求 /GET/JOBS_INFO
     void DealWithJobsInfo(const char *id, const char *randomKey, const std::vector<const char*> &jobs);
+    // 处理打工状态的请求 /GET/WORK_STATUS
+    void DealWithWorkStatus(const char *id, const char *randomKey);
 
 private:
     asio::ip::tcp::socket socket;
