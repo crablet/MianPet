@@ -975,4 +975,51 @@ void Connection::DealWithJobsInfo(const char *id, const char *randomKey, const s
 
 void Connection::DealWithWorkStatus(const char *id, const char *randomKey)
 {
+    try
+    {
+        std::lock_guard<std::mutex> lock(dbMutex);
+
+        constexpr const char *checkOnlineAndSecretKeySqlStr =
+            R"(SELECT online, secretKey FROM userinfo
+               WHERE id = :id<char[16]>)";
+        otl_stream checkOnlineStream(64, checkOnlineAndSecretKeySqlStr, db);
+        checkOnlineStream << id;
+
+        int online;
+        char trueSecretKey[18 + 1];
+        for (auto &r : checkOnlineStream)
+        {
+            r >> online >> trueSecretKey;
+        }
+
+        if (online) // 如果在线则检查randomKey是否一致，有点cookies的感觉
+        {
+            if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果连randomKey都一致，那就可以开始查询了
+            {
+                // 服务器返回的json格式
+                // {
+                //    "isWorking": bool,
+                //    "job": string,    // 当isWorking为true时存在
+                //    "time": int       // 当isWorking为true时存在
+                // }
+
+                reply = "";
+
+                DoWrite();
+            }
+            else
+            {
+                // error
+            }
+        }
+        else
+        {
+            // error
+        }
+    }
+    catch (const otl_exception &exp)
+    {
+        std::cout << exp.stm_text << std::endl;
+        std::cout << exp.msg << std::endl;
+    }
 }
