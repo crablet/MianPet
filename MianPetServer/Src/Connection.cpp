@@ -1003,7 +1003,47 @@ void Connection::DealWithWorkStatus(const char *id, const char *randomKey)
                 //    "time": int       // 当isWorking为true时存在
                 // }
 
-                reply = "";
+                constexpr const char *findStatusSql =
+                    R"(SELECT working, job, TIMESTAMPDIFF(MINUTE, begintime, NOW())
+                       FROM workinginfo
+                       WHERE id = :id<char[16]>)";
+                otl_stream findStatusStream(64, findStatusSql, db);
+                findStatusStream << id;
+
+                int isWorking;
+                char job[18 + 1];
+                int workingTime;
+                bool ok = true, doubleIsWorking = false;
+                for (auto &r : findStatusStream)
+                {
+                    r >> isWorking >> job >> workingTime;
+
+                    if (isWorking && doubleIsWorking)
+                    {
+                        ok = false;
+
+                        break;
+                    }
+                    else if (isWorking && !doubleIsWorking)
+                    {
+                        doubleIsWorking = true;
+                    }
+                }
+                if (ok)
+                {
+                    if (isWorking)
+                    {
+                        reply = R"({"isWorking":true,"job":")" + std::string(job) + R"(","time":)" + std::to_string(workingTime);
+                    }
+                    else
+                    {
+                        reply = R"({"isWorking":false})";
+                    }
+                }
+                else
+                {
+                    reply = R"("errmsg":"database error")";
+                }
 
                 DoWrite();
             }
