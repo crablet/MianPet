@@ -423,6 +423,7 @@ void WorkingWindow::GetWorkingStatus()
         //    "isWorking": bool,
         //    "job": string,    // 当isWorking为true时存在
         //    "time": int       // 当isWorking为true时存在
+        //    "errmsg": string  // 当出错时存在
         // }
         const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
         isWorking = remoteJson["isWorking"].toBool();
