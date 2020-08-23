@@ -426,20 +426,28 @@ void WorkingWindow::GetWorkingStatus()
         //    "errmsg": string  // 当出错时存在
         // }
         const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
-        isWorking = remoteJson["isWorking"].toBool();
-        if (isWorking)
+        if (const auto errmsg = remoteJson["errmsg"];
+            errmsg == QJsonValue::Undefined)
         {
-            workingJob = remoteJson["job"].toString();
-            workingTime = remoteJson["time"].toInt();
+            isWorking = remoteJson["isWorking"].toBool();
+            if (isWorking)
+            {
+                workingJob = remoteJson["job"].toString();
+                workingTime = remoteJson["time"].toInt();
 
-            SetWindowTitle("打工-正在打工-" + workingJob + "已进行-" + QString::number(workingTime));
+                SetWindowTitle("打工-正在打工-" + workingJob + "已进行-" + QString::number(workingTime));
+            }
+            else
+            {
+                workingJob.clear();
+                workingTime = 0;
+
+                SetWindowTitle("打工");
+            }
         }
         else
         {
-            workingJob.clear();
-            workingTime = 0;
-
-            SetWindowTitle("打工");
+            // 出错并且处理返回的errmsg
         }
     });
     thread.detach();
