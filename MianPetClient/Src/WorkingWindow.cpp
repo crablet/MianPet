@@ -155,6 +155,11 @@ void WorkingWindow::InitializeConnect()
             endButton->setDisabled(true);
         }
     });
+
+    connect(this, &WorkingWindow::GetWorkingStatusFailed, this, [=](const QString &str)
+    {
+        QMessageBox::information(this, "初始化错误", str);
+    });
 }
 
 void WorkingWindow::ViewPreviousPage()
@@ -447,7 +452,7 @@ void WorkingWindow::GetWorkingStatus()
         }
         else
         {
-            // 出错并且处理返回的errmsg
+            emit GetWorkingStatusFailed(errmsg.toString());
         }
     });
     thread.detach();

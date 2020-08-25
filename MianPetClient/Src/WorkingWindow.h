@@ -66,6 +66,8 @@ signals:
     void WorkEndSucceeded();
     void WorkEndFailed();
 
+    void GetWorkingStatusFailed(const QString &str);
+
 private:
     std::vector<JobInformation> jobs;
 
