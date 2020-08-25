@@ -20,7 +20,6 @@ inline void HideTaskbarIconOf(QWidget *widget) noexcept
     SetWindowLong(hWnd, GWL_EXSTYLE, style);
     ShowWindow(hWnd, SW_SHOW);
 #endif // Q_OS_WIN
-
 }
 
 #endif // UITOOLS_H
