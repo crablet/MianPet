@@ -1033,7 +1033,7 @@ void Connection::DealWithWorkStatus(const char *id, const char *randomKey)
                 {
                     if (isWorking)
                     {
-                        reply = R"({"isWorking":true,"job":")" + std::string(job) + R"(","time":)" + std::to_string(workingTime);
+                        reply = R"({"isWorking":true,"job":")" + std::string(job) + R"(","time":)" + std::to_string(workingTime) + "}";
                     }
                     else
                     {
