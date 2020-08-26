@@ -45,6 +45,7 @@ void WorkingWindow::InitializeUi()
 {
     GetWorkingStatus(); // 我们有理由相信，与服务器沟通的时间要比初始化下面的控件时间要长，所以先执行此操作
 
+    SetWidthOfWindowTitle(this->width() - 100);
     SetWindowTitle("打工");
 
     beginButton = new QPushButton("开始", this);
@@ -440,7 +441,7 @@ void WorkingWindow::GetWorkingStatus()
                 workingJob = remoteJson["job"].toString();
                 workingTime = remoteJson["time"].toInt();
 
-                SetWindowTitle("打工-正在打工-" + workingJob + "已进行-" + QString::number(workingTime));
+                SetWindowTitle("正在打工-" + workingJob + "-已进行-" + QString::number(workingTime) + "分钟");
             }
             else
             {

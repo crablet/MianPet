@@ -34,6 +34,8 @@ private:
 public:
     void SetIcon(const QPixmap &icon, const QSize &size = QSize(0, 0));
     void SetWindowTitle(const QString &text);
+    void SetWidthOfWindowTitle(int width);
+    void SetHeightOfWindowTitle(int height);
 
 signals:
     // 当鼠标放在中间四个格子之一的上面时，该信号被触发

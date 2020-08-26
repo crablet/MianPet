@@ -129,3 +129,13 @@ void SmallItemsContainerWindow::SetWindowTitle(const QString &text)
 {
     windowTitleLabel->setText(text);
 }
+
+void SmallItemsContainerWindow::SetWidthOfWindowTitle(int width)
+{
+    windowTitleLabel->setFixedWidth(width);
+}
+
+void SmallItemsContainerWindow::SetHeightOfWindowTitle(int height)
+{
+    windowTitleLabel->setFixedHeight(height);
+}
