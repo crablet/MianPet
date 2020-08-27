@@ -111,18 +111,14 @@ bool SmallItemsContainerWindow::eventFilter(QObject *object, QEvent *event)
     return FramelessWindow::eventFilter(object, event);
 }
 
-// size默认是QSize(0, 0)，即如果不填第二个字段则默认使用iconLabel大小强行调整
-// 如果指明了size则使用此大小
+void SmallItemsContainerWindow::SetIcon(const QPixmap &icon)
+{
+    iconLabel->setPixmap(icon.scaled(iconLabel->size()));
+}
+
 void SmallItemsContainerWindow::SetIcon(const QPixmap &icon, const QSize &size)
 {
-    if (size == QSize(0, 0))
-    {
-        iconLabel->setPixmap(icon.scaled(iconLabel->size()));
-    }
-    else
-    {
-        iconLabel->setPixmap(icon.scaled(size));
-    }
+    iconLabel->setPixmap(icon.scaled(size));
 }
 
 void SmallItemsContainerWindow::SetWindowTitle(const QString &text)

@@ -32,7 +32,8 @@ private:
     bool eventFilter(QObject *object, QEvent *event) override;
 
 public:
-    void SetIcon(const QPixmap &icon, const QSize &size = QSize(0, 0));
+    void SetIcon(const QPixmap &icon);
+    void SetIcon(const QPixmap &icon, const QSize &size);
     void SetWindowTitle(const QString &text);
     void SetWidthOfWindowTitle(int width);
     void SetHeightOfWindowTitle(int height);
