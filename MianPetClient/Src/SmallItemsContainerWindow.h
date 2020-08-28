@@ -36,8 +36,11 @@ public:
     void SetIcon(const QPixmap &icon);
     // 设置窗口图标（按size拉伸）
     void SetIcon(const QPixmap &icon, const QSize &size);
+    // 设置窗口标题
     void SetWindowTitle(const QString &text);
+    // 设置窗口标题的宽度
     void SetWidthOfWindowTitle(int width);
+    // 设置窗口标题的长度
     void SetHeightOfWindowTitle(int height);
 
 signals:
