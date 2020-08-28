@@ -32,7 +32,9 @@ private:
     bool eventFilter(QObject *object, QEvent *event) override;
 
 public:
+    // 设置窗口图标（不按比例拉伸填满）
     void SetIcon(const QPixmap &icon);
+    // 设置窗口图标（按size拉伸）
     void SetIcon(const QPixmap &icon, const QSize &size);
     void SetWindowTitle(const QString &text);
     void SetWidthOfWindowTitle(int width);
