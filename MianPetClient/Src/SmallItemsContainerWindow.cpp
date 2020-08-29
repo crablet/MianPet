@@ -90,6 +90,7 @@ void SmallItemsContainerWindow::InitializeConnect()
 
 bool SmallItemsContainerWindow::eventFilter(QObject *object, QEvent *event)
 {
+    // 过滤四个按钮
     if (object == static_cast<QObject*>(item0)
      || object == static_cast<QObject*>(item1)
      || object == static_cast<QObject*>(item2)
