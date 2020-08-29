@@ -300,6 +300,7 @@ void WorkingWindow::RequestJobsInfoInRange(int rangeBegin, int rangeEnd)
             eduRestrictionsVec.push_back(r.toString());
         }
 
+        // 应该更新的位置
         auto iter = std::find_if(jobs.begin(), jobs.end(), [=, &name](const JobInformation &rhs)
         {
             return name == rhs.name;
