@@ -475,7 +475,12 @@ void WorkingWindow::DataPrepare()
     for (int i = 0; i < tempArray.size(); ++i)  // 将本地缓存(MianPetData/JobsData.json)先存到items中
     {
         const auto itemInfo = tempArray[i].toObject();
-        jobs.emplace_back(itemInfo["name"].toString(), itemInfo["price"].toInt(), itemInfo["amount"].toInt());
+        std::vector<QString> eduRestrictions;
+        for (const auto &r : itemInfo["eduRestrictions"].toArray())
+        {
+            eduRestrictions.push_back(r.toString());
+        }
+        jobs.emplace_back(itemInfo["name"].toString(), itemInfo["wage"].toInt(), itemInfo["lowestLevel"].toInt(), eduRestrictions);
     }
 
     const auto rangeBegin = 0;
