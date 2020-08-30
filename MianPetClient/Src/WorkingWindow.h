@@ -47,6 +47,9 @@ private:
 
     void GetWorkingStatus();
 
+    // 获取最新的职位信息
+    void DataPrepare();
+
     struct JobInformation
     {
         JobInformation(const QString &name, int wage, int lowestLevel, const std::vector<QString> &eduRestrictions)

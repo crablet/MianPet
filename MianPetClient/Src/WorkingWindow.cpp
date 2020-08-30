@@ -43,6 +43,7 @@ WorkingWindow::~WorkingWindow()
 
 void WorkingWindow::InitializeUi()
 {
+    DataPrepare();
     GetWorkingStatus(); // 我们有理由相信，与服务器沟通的时间要比初始化下面的控件时间要长，所以先执行此操作
 
     SetWidthOfWindowTitle(this->width() - 100);
@@ -458,4 +459,8 @@ void WorkingWindow::GetWorkingStatus()
         }
     });
     thread.detach();
+}
+
+void WorkingWindow::DataPrepare()
+{
 }
