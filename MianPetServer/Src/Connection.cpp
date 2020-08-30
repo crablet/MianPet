@@ -879,6 +879,92 @@ void Connection::DealWithUse(const char *id, const char *randomKey, const char *
 
 void Connection::DealWithWorkBegin(const char *id, const char *randomKey, const char *job)
 {
+    try
+    {
+        std::lock_guard<std::mutex> lock(dbMutex);
+
+        constexpr const char *checkOnlineAndSecretKeySqlStr =
+            R"(SELECT online, secretKey FROM userinfo
+               WHERE id = :id<char[16]>)";
+        otl_stream checkOnlineStream(64, checkOnlineAndSecretKeySqlStr, db);
+        checkOnlineStream << id;
+
+        int online;
+        char trueSecretKey[18 + 1];
+        for (auto &r : checkOnlineStream)
+        {
+            r >> online >> trueSecretKey;
+        }
+
+        if (online) // 如果在线则检查randomKey是否一致，有点cookies的感觉
+        {
+            if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果连randomKey都一致，那就可以开始查询了
+            {
+                constexpr const char *countWorkingJobsSql =
+                    R"(SELECT COUNT(job) AS workingJobs
+                       FROM workinginfo
+                       WHERE id = :id<char[16]> AND working = 1)";
+                otl_stream countWorkingJobsStream(4, countWorkingJobsSql, db);
+                countWorkingJobsStream << id;
+
+                int count;
+                for (auto &r : countWorkingJobsStream)
+                {
+                    r >> count;
+                }
+
+                if (count != 0)
+                {
+                    reply = R"({"status":"failed"})";
+                }
+                else
+                {
+                    constexpr const char *checkGoalJobStatusSql =
+                        R"(SELECT working
+                           FROM workinginfo
+                           WHERE id = :id<char[16]> AND job = :job<char[18]>)";
+                    otl_stream checkGoalJobStatusStream(4, checkGoalJobStatusSql, db);
+                    checkGoalJobStatusStream << id << job;
+
+                    int isAlreadyWorking;
+                    for (auto &r : checkGoalJobStatusStream)
+                    {
+                        r >> isAlreadyWorking;
+                    }
+                    if (isAlreadyWorking)
+                    {
+                        reply = R"({"status":"failed"})";
+                    }
+                    else
+                    {
+                        constexpr const char *beginWorkingSql = 
+                            R"(UPDATE workinginfo
+                               SET begintime = NOW(), count = count + 1, working = 1
+                               WHERE id = :id<char[16] AND job = :job<char[18]>)";
+                        otl_stream beginWorkingStream(1, beginWorkingSql, db);
+                        beginWorkingStream << id << job;
+
+                        reply = R"({"status":"succeeded"})";
+                    }
+                }
+
+                DoWrite();
+            }
+            else
+            {
+                // error
+            }
+        }
+        else
+        {
+            // error
+        }
+    }
+    catch (const otl_exception &exp)
+    {
+        std::cout << exp.stm_text << std::endl;
+        std::cout << exp.msg << std::endl;
+    }
 }
 
 void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const char *job)
