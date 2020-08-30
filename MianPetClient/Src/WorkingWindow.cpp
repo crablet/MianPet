@@ -463,4 +463,37 @@ void WorkingWindow::GetWorkingStatus()
 
 void WorkingWindow::DataPrepare()
 {
+    QFile jsonFile("MianPetData/JobsData.json");
+    if (!jsonFile.open(QIODevice::Text | QIODevice::ReadOnly))
+    {
+        return;
+    }
+
+    QJsonParseError err;
+    const auto localJson = QJsonDocument::fromJson(jsonFile.readAll(), &err);
+    const auto tempArray = localJson["jobs"].toArray();
+    for (int i = 0; i < tempArray.size(); ++i)  // 将本地缓存(MianPetData/JobsData.json)先存到items中
+    {
+        const auto itemInfo = tempArray[i].toObject();
+        jobs.emplace_back(itemInfo["name"].toString(), itemInfo["price"].toInt(), itemInfo["amount"].toInt());
+    }
+
+    const auto rangeBegin = 0;
+    const auto rangeEnd = static_cast<decltype(rangeBegin)>(jobs.size() >= 4 ? 4 : jobs.size());
+    rangeBegin + 0 < rangeEnd
+        ? item0->setIcon(QIcon(":/Pic/" + jobs[rangeBegin + 0].name + ".png"))
+        : item0->setIcon(QIcon());
+    rangeBegin + 1 < rangeEnd
+        ? item1->setIcon(QIcon(":/Pic/" + jobs[rangeBegin + 1].name + ".png"))
+        : item1->setIcon(QIcon());
+    rangeBegin + 2 < rangeEnd
+        ? item2->setIcon(QIcon(":/Pic/" + jobs[rangeBegin + 2].name + ".png"))
+        : item2->setIcon(QIcon());
+    rangeBegin + 3 < rangeEnd
+        ? item3->setIcon(QIcon(":/Pic/" + jobs[rangeBegin + 3].name + ".png"))
+        : item3->setIcon(QIcon());
+
+    currentPage = 0;
+
+    RequestJobsInfoInRange(rangeBegin, rangeEnd);
 }
