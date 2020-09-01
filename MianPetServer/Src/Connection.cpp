@@ -969,6 +969,91 @@ void Connection::DealWithWorkBegin(const char *id, const char *randomKey, const 
 
 void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const char *job)
 {
+#ifdef DEBUG
+    std::cout << "In function Connection::DealWithWorkEnd: " << id << randomKey << std::endl;
+#endif // DEBUG
+
+    try
+    {
+        std::lock_guard<std::mutex> lock(dbMutex);
+
+        constexpr const char *checkOnlineAndSecretKeySqlStr =
+            R"(SELECT online, secretKey FROM userinfo
+               WHERE id = :id<char[16]>)";
+        otl_stream checkOnlineStream(64, checkOnlineAndSecretKeySqlStr, db);
+        checkOnlineStream << id;
+
+        int online;
+        char trueSecretKey[18 + 1];
+        for (auto &r : checkOnlineStream)
+        {
+            r >> online >> trueSecretKey;
+        }
+
+        if (online) // 如果在线则检查randomKey是否一致，有点cookies的感觉
+        {
+            if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果连randomKey都一致，那就可以开始查询了
+            {
+                constexpr const char *getWorkingStatusSql =
+                    R"(SELECT job, TIMESTAMPDIFF(MINUTE, begintime, NOW())
+                       FROM workinginfo
+                       WHERE id = :id<char[16]> AND working = 1)";
+                otl_stream getWorkingStatusStream(36, getWorkingStatusSql, db);
+                getWorkingStatusStream << id;
+
+                char jobName[36 + 1];
+                int workingTime;
+                for (auto &r : getWorkingStatusStream)
+                {
+                    r >> jobName >> workingTime;
+                }
+
+                if (workingTime >= 60)  // 暂定一次工作时间为60分钟，时薪为jobsinfo中的wage
+                {
+                    constexpr const char *getWageSql =
+                        R"(SELECT wage
+                           FROM jobsinfo
+                           WHERE name = :jobName<char[18]>)";
+                    otl_stream getWageStream(8, getWageSql, db);
+                    getWageStream << jobName;
+
+                    int wage;
+                    for (auto &r : getWageStream)
+                    {
+                        r >> wage;
+                    }
+
+                    constexpr const char *updateTuotuoSql =
+                        R"(UPDATE petprofile
+                           SET tuotuo = tuotuo + :wage<int>
+                           WHERE id = :id<char[16]>)";
+                    otl_stream updateTuotuoStream(1, updateTuotuoSql, db);
+                    updateTuotuoStream << wage << id;
+
+                    reply = R"({"status":"succeeded"})";
+                }
+                else
+                {
+                    reply = R"({"status":"failed"})";   // 可能是工作时间不满一小时
+                }
+
+                DoWrite();
+            }
+            else
+            {
+                // error
+            }
+        }
+        else
+        {
+            // error
+        }
+    }
+    catch (const otl_exception &exp)
+    {
+        std::cout << exp.stm_text << std::endl;
+        std::cout << exp.msg << std::endl;
+    }
 }
 
 void Connection::DealWithJobsInfo(const char *id, const char *randomKey, const std::vector<const char *> &jobs)
