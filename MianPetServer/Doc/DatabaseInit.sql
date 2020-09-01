@@ -23,7 +23,7 @@ CREATE TABLE petprofile
     growth_speed TINYINT UNSIGNED NOT NULL DEFAULT 1,
     status INT UNSIGNED NOT NULL DEFAULT 0,
     online_time INT UNSIGNED NOT NULL DEFAULT 0,
-    tuotuo INT DEFAULT 0
+    tuotuo INT NOT NULL DEFAULT 1000
 );
 
 CREATE TABLE shopinfo
