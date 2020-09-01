@@ -973,6 +973,10 @@ void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const ch
 
 void Connection::DealWithJobsInfo(const char *id, const char *randomKey, const std::vector<const char *> &jobs)
 {
+#ifdef DEBUG
+    std::cout << "In function Connection::DealWithJobsInfo: " << id << randomKey << std::endl;
+#endif // DEBUG
+
     try
     {
         std::lock_guard<std::mutex> lock(dbMutex);
