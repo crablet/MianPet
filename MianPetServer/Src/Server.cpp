@@ -34,6 +34,8 @@ Server::Server()
     DoAccept();
 
     CheckLogoutThread();
+
+    std::cout << "The server is running." << std::endl;
 }
 
 Server::~Server()
