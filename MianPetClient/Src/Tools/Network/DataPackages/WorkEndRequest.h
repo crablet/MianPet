@@ -15,7 +15,7 @@
 //  "random_key": string,
 //  "payload":
 //  {
-//     "job": string
+//     "job": string    // 当该项为空时意味着结束当前正在工作的项目
 //  }
 //}
 class WorkEndRequest : public RequestData
