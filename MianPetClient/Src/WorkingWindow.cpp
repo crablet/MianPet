@@ -258,6 +258,14 @@ void WorkingWindow::OnMouseHoversLeaveItem([[maybe_unused]] QObject *obj)
     itemLabel->SetLowerLabelText("");
 }
 
+void WorkingWindow::OnBeginButtonClicked()
+{
+}
+
+void WorkingWindow::OnEndButtonClicked()
+{
+}
+
 void WorkingWindow::RequestJobsInfoInRange(int rangeBegin, int rangeEnd)
 {
     auto tcpSocket = std::make_unique<QTcpSocket>();

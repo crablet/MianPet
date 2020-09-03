@@ -41,6 +41,9 @@ private:
     void OnMouseHoversMoveItem(QObject *obj);
     void OnMouseHoversLeaveItem(QObject *obj);
 
+    void OnBeginButtonClicked();
+    void OnEndButtonClicked();
+
     void RequestJobsInfoInRange(int rangeBegin, int rangeEnd);
     void SubmitWorkBeginRequest(const QString &jobName);
     void SubmitWorkEndRequest(const QString &jobName);
