@@ -260,6 +260,47 @@ void WorkingWindow::OnMouseHoversLeaveItem([[maybe_unused]] QObject *obj)
 
 void WorkingWindow::OnBeginButtonClicked()
 {
+    std::thread thread(
+    [=]()
+    {
+        auto tcpSocket = std::make_unique<QTcpSocket>();
+        tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+        if (!tcpSocket->waitForConnected())
+        {
+            return;
+        }
+
+        WorkBeginRequest data;
+        data.SetJob(selectedJob);
+        tcpSocket->write(data);
+        if (!tcpSocket->waitForBytesWritten())
+        {
+            return;
+        }
+
+        if (!tcpSocket->waitForReadyRead())
+        {
+            return;
+        }
+
+        const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+        const auto status = remoteJson["status"].toString();
+        if (status == "succeeded")
+        {
+            //emit BuySucceeded(selectedFood, 1);
+            // 开始成功
+        }
+        else if (status == "failed")
+        {
+            //emit BuyFailed(selectedFood, 1);
+            // 开始失败
+        }
+        else
+        {
+            // error
+        }
+    });
+    thread.detach();
 }
 
 void WorkingWindow::OnEndButtonClicked()
