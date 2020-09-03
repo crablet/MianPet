@@ -305,6 +305,45 @@ void WorkingWindow::OnBeginButtonClicked()
 
 void WorkingWindow::OnEndButtonClicked()
 {
+    std::thread thread(
+    [=]()
+    {
+        auto tcpSocket = std::make_unique<QTcpSocket>();
+        tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+        if (!tcpSocket->waitForConnected())
+        {
+            return;
+        }
+
+        tcpSocket->write(WorkEndRequest{});
+        if (!tcpSocket->waitForBytesWritten())
+        {
+            return;
+        }
+
+        if (!tcpSocket->waitForReadyRead())
+        {
+            return;
+        }
+
+        const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+        const auto status = remoteJson["status"].toString();
+        if (status == "succeeded")
+        {
+            //emit BuySucceeded(selectedFood, 1);
+            // 结束成功
+        }
+        else if (status == "failed")
+        {
+            //emit BuyFailed(selectedFood, 1);
+            // 结束失败
+        }
+        else
+        {
+            // error
+        }
+    });
+    thread.detach();
 }
 
 void WorkingWindow::RequestJobsInfoInRange(int rangeBegin, int rangeEnd)
