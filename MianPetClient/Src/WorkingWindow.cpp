@@ -287,13 +287,11 @@ void WorkingWindow::OnBeginButtonClicked()
         const auto status = remoteJson["status"].toString();
         if (status == "succeeded")
         {
-            //emit BuySucceeded(selectedFood, 1);
-            // 开始成功
+            emit WorkBeginSucceeded();
         }
         else if (status == "failed")
         {
-            //emit BuyFailed(selectedFood, 1);
-            // 开始失败
+            emit WorkBeginFailed();
         }
         else
         {
@@ -330,12 +328,12 @@ void WorkingWindow::OnEndButtonClicked()
         const auto status = remoteJson["status"].toString();
         if (status == "succeeded")
         {
-            //emit BuySucceeded(selectedFood, 1);
+            emit WorkEndSucceeded();
             // 结束成功
         }
         else if (status == "failed")
         {
-            //emit BuyFailed(selectedFood, 1);
+            emit WorkEndFailed();
             // 结束失败
         }
         else
