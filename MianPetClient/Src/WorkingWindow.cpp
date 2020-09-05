@@ -162,6 +162,9 @@ void WorkingWindow::InitializeConnect()
     {
         QMessageBox::information(this, "初始化错误", str);
     });
+
+    connect(beginButton, &QPushButton::clicked, this, &WorkingWindow::OnBeginButtonClicked);
+    connect(endButton, &QPushButton::clicked, this, &WorkingWindow::OnEndButtonClicked);
 }
 
 void WorkingWindow::ViewPreviousPage()
