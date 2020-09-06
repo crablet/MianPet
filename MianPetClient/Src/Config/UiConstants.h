@@ -146,4 +146,8 @@ inline constexpr int WorkingWindowLowerBarWidgetWidth = FoodWindowLowerBarWidget
 inline constexpr int WorkingWindowLowerBarWidgetHeight = FoodWindowLowerBarWidgetHeight;
 inline constexpr int WorkingWindowLowerBarWidgetX = FoodWindowLowerBarWidgetX;
 inline constexpr int WorkingWindowLowerBarWidgetY = FoodWindowLowerBarWidgetY;
+
+inline constexpr int SettingsWindowCloseButtonWidth = 20;
+inline constexpr int SettingsWindowCloseButtonHeight = SettingsWindowCloseButtonWidth;
+
 #endif // UICONSTANTS_H
