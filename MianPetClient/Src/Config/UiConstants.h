@@ -147,12 +147,12 @@ inline constexpr int WorkingWindowLowerBarWidgetHeight = FoodWindowLowerBarWidge
 inline constexpr int WorkingWindowLowerBarWidgetX = FoodWindowLowerBarWidgetX;
 inline constexpr int WorkingWindowLowerBarWidgetY = FoodWindowLowerBarWidgetY;
 
-inline constexpr int SettingsWindowWidth = 400;
-inline constexpr int SettingsWindowHeight = 300;
+inline constexpr int SettingsWindowWidth = LoginWindowWidth;
+inline constexpr int SettingsWindowHeight = LoginWindowHeight;
 
-inline constexpr int SettingsWindowCloseButtonWidth = 20;
-inline constexpr int SettingsWindowCloseButtonHeight = SettingsWindowCloseButtonWidth;
-inline constexpr int SettingsWindowCloseButtonX = SettingsWindowWidth - SettingsWindowCloseButtonWidth;
-inline constexpr int SettingsWindowCloseButtonY = 0;
+inline constexpr int SettingsWindowCloseButtonWidth = LoginWindowCloseButtonWidth;
+inline constexpr int SettingsWindowCloseButtonHeight = LoginWindowCloseButtonHeight;
+inline constexpr int SettingsWindowCloseButtonX = LoginWindowCloseButtonX;
+inline constexpr int SettingsWindowCloseButtonY = LoginWindowCloseButtonY;
 
 #endif // UICONSTANTS_H
