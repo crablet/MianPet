@@ -401,6 +401,40 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                 otl_stream updateHeartbeatStream(1, updateHeartbeatSql, db);
                 updateHeartbeatStream << id;
 
+                // TODO：更新打工状态，若正在打工，则需要关注此处
+                constexpr const char *countWorkingJobsSql =
+                    R"(SELECT COUNT(job) AS workingJobs
+                       FROM workinginfo
+                       WHERE id = :id<char[16]> AND working = 1)";
+                otl_stream countWorkingJobsStream(4, countWorkingJobsSql, db);
+                countWorkingJobsStream << id;
+
+                int count;
+                for (auto &r : countWorkingJobsStream)
+                {
+                    r >> count;
+                }
+
+                if (count == 0)
+                {
+                    // 无正在打工的项目
+                }
+                else if (count == 1)
+                {
+                    constexpr const char *findStatusSql =
+                        R"(SELECT working, job, TIMESTAMPDIFF(MINUTE, begintime, NOW())
+                           FROM workinginfo
+                           WHERE id = :id<char[16]>)";
+                    otl_stream findStatusStream(64, findStatusSql, db);
+                    findStatusStream << id;
+
+                    // TODO：更新打工状态
+                }
+                else
+                {
+                    // error
+                }
+
                 constexpr const char *petprofileSql =
                     R"(SELECT level, age, growth, food, clean, health, mood, growth_speed, status, online_time
                        FROM petprofile
