@@ -436,7 +436,7 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                         r >> jobName >> workingTime;
                     }
 
-                    if (workingTime >= 60)
+                    if (workingTime >= 60)  // 打工一小时后即可停止
                     {
                         constexpr const char *getWageSql =
                             R"(SELECT wage
@@ -449,6 +449,13 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                         {
                             r >> tuotuoDelta;
                         }
+
+                        constexpr const char *stopWorkingSql =
+                            R"(UPDATE workinginfo
+                               SET count = count + 1, working = 0
+                               WHERE id = :id<char[16]> AND job = :job<char[18]>)";
+                        otl_stream stopWorkingStream(1, stopWorkingSql, db);
+                        stopWorkingStream << id << jobName;
                     }
                 }
                 else
