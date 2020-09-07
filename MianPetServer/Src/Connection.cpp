@@ -415,6 +415,7 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                     r >> count;
                 }
 
+                int tuotuoDelta = 0;
                 if (count == 0)
                 {
                     // 无正在打工的项目
@@ -422,13 +423,33 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                 else if (count == 1)
                 {
                     constexpr const char *findStatusSql =
-                        R"(SELECT working, job, TIMESTAMPDIFF(MINUTE, begintime, NOW())
+                        R"(SELECT job, TIMESTAMPDIFF(MINUTE, begintime, NOW())
                            FROM workinginfo
                            WHERE id = :id<char[16]>)";
                     otl_stream findStatusStream(64, findStatusSql, db);
                     findStatusStream << id;
 
-                    // TODO：更新打工状态
+                    char jobName[18 + 1];
+                    int workingTime;
+                    for (auto &r : findStatusStream)
+                    {
+                        r >> jobName >> workingTime;
+                    }
+
+                    if (workingTime >= 60)
+                    {
+                        constexpr const char *getWageSql =
+                            R"(SELECT wage
+                               FROM jobsinfo
+                               WHERE name = :name<char[18]>)";
+                        otl_stream getWageStream(4, getWageSql, db);
+                        getWageStream << jobName;
+
+                        for (auto &r : getWageStream)
+                        {
+                            r >> tuotuoDelta;
+                        }
+                    }
                 }
                 else
                 {
@@ -436,7 +457,7 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                 }
 
                 constexpr const char *petprofileSql =
-                    R"(SELECT level, age, growth, food, clean, health, mood, growth_speed, status, online_time
+                    R"(SELECT level, age, growth, food, clean, health, mood, growth_speed, status, online_time, tuotuo
                        FROM petprofile
                        WHERE id = :id<char[16]>)";
                 otl_stream petprofileStream(384, petprofileSql, db);
@@ -445,11 +466,12 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                 int level, age, growth, food, clean, health, mood, growthSpeed;
                 int status;
                 int onlineTime;
+                int tuotuo;
                 for (auto &r : petprofileStream)
                 {
                     r >> level >> age >> growth
                       >> food >> clean >> health >> mood >> growthSpeed
-                      >> status >> onlineTime;
+                      >> status >> onlineTime >> tuotuo;
                 }
 
                 const auto newAge = age + minuteDelta;
@@ -469,16 +491,18 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
 
                 const auto newOnlineTime = onlineTime + minuteDelta;
 
+                const auto newTuotuo = tuotuo + tuotuoDelta;
+
                 constexpr const char *updateProfileSql =
                     R"(UPDATE petprofile
                        SET level = :newLevel<int>, age = :newAge<int>, growth = :newGrowth<int>, 
                            food = :newFood<int>, clean = :newClean<int>, health = :newHealth<int>, mood = :newMood<int>, growth_speed = :newGrowthSpeed<int>, 
-                           status = :newStatus<int>, online_time = :newOnlineTime<int>
+                           status = :newStatus<int>, online_time = :newOnlineTime<int>, tuotuo = :newTuotuo<int>
                        WHERE id = :id<char[16]>)";
                 otl_stream updateProfileStream(1, updateProfileSql, db);
                 updateProfileStream << newLevel << newAge << newGrowth 
                                     << newFood << newClean << newHealth << newMood << newGrowthSpeed
-                                    << newStatus << newOnlineTime
+                                    << newStatus << newOnlineTime << newTuotuo
                                     << id;
             }
         }
