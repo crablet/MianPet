@@ -46,7 +46,9 @@ private:
 
     // 根据jobs中的下标范围向服务器请求职位具体数据
     void RequestJobsInfoInRange(int rangeBegin, int rangeEnd);
+    // 向服务器提交开始打jobName工的请求
     void SubmitWorkBeginRequest(const QString &jobName);
+    // 向服务器提交结束打jobName工的请求
     void SubmitWorkEndRequest(const QString &jobName);
 
     void GetWorkingStatus();
