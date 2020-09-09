@@ -44,6 +44,7 @@ private:
     void OnBeginButtonClicked();
     void OnEndButtonClicked();
 
+    // 根据jobs中的下标范围向服务器请求职位具体数据
     void RequestJobsInfoInRange(int rangeBegin, int rangeEnd);
     void SubmitWorkBeginRequest(const QString &jobName);
     void SubmitWorkEndRequest(const QString &jobName);
