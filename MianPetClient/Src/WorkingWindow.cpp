@@ -78,7 +78,7 @@ void WorkingWindow::InitializeConnect()
     });
     connect(this, &WorkingWindow::WorkEndSucceeded, this, [=]()
     {
-        QMessageBox::information(this, "成功", "我们先不打这个工了。");
+        QMessageBox::information(this, "成功", "好累，终于结束了。");
     });
     connect(this, &WorkingWindow::WorkEndFailed, this, [=]()
     {
