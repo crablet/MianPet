@@ -82,7 +82,7 @@ void WorkingWindow::InitializeConnect()
     });
     connect(this, &WorkingWindow::WorkEndFailed, this, [=]()
     {
-        QMessageBox::information(this, "失败", "怎么办？这工作结束不了。");
+        QMessageBox::information(this, "失败", "怎么办？这工作停不下来了。");
     });
 
     connect(item0, &QPushButton::clicked, this, [=]()
