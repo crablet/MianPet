@@ -629,7 +629,10 @@ void Connection::DealWithFoodShopInfo(const char *id, const char *randomKey, con
                     replyJson += R"(},)";
                 }
 
-                replyJson.pop_back();   // 去除最后一个','
+                if (replyJson.back() == ',')
+                {
+                    replyJson.pop_back();   // 去除最后一个','
+                }
                 replyJson += R"(]})";
                 reply = std::move(replyJson);
 
@@ -1190,7 +1193,11 @@ void Connection::DealWithJobsInfo(const char *id, const char *randomKey, const s
                     replyJson += R"(},)";
                 }
 
-                replyJson.pop_back();   // 去除最后一个','
+                // 如果数组不空，则最后一定存在一个','需要被去除
+                if (replyJson.back() == ',')
+                {
+                    replyJson.pop_back();   // 去除最后一个','
+                }
                 replyJson += R"(]})";
                 reply = std::move(replyJson);
 
