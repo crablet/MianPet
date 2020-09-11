@@ -50,7 +50,7 @@ CREATE TABLE jobsinfo
 (
     name CHAR(18) NOT NULL PRIMARY KEY,
     wage SMALLINT NOT NULL,
-    lowestLevel UNSIGNED TINYINT NOT NULL,
+    lowestLevel TINYINT UNSIGNED NOT NULL,
     eduRestrictions CHAR(128) NOT NULL
 );
 
