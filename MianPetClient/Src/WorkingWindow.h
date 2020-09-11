@@ -70,6 +70,7 @@ private:
     };
 
 signals:
+    // 当开始工作成功时发射该信号
     void WorkBeginSucceeded();
     void WorkBeginFailed();
     void WorkEndSucceeded();
