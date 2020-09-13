@@ -70,6 +70,8 @@ void WorkingWindow::InitializeConnect()
 {
     connect(this, &WorkingWindow::WorkBeginSucceeded, this, [=]()
     {
+        SetWindowTitle("正在打工-" + workingJob + "-已进行-0分钟");
+
         QMessageBox::information(this, "成功", "开始打工！");
     });
     connect(this, &WorkingWindow::WorkBeginFailed, this, [=]()
@@ -78,8 +80,9 @@ void WorkingWindow::InitializeConnect()
     });
     connect(this, &WorkingWindow::WorkEndSucceeded, this, [=]()
     {
-        QMessageBox::information(this, "成功", "好累，终于结束了。");
         SetWindowTitle("打工");   // 恢复标题栏为正常状态
+
+        QMessageBox::information(this, "成功", "好累，终于结束了。");
     });
     connect(this, &WorkingWindow::WorkEndFailed, this, [=]()
     {
@@ -291,6 +294,8 @@ void WorkingWindow::OnBeginButtonClicked()
         const auto status = remoteJson["status"].toString();
         if (status == "succeeded")
         {
+            workingJob = selectedJob;
+
             emit WorkBeginSucceeded();
         }
         else if (status == "failed")
