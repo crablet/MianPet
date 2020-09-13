@@ -79,6 +79,7 @@ void WorkingWindow::InitializeConnect()
     connect(this, &WorkingWindow::WorkEndSucceeded, this, [=]()
     {
         QMessageBox::information(this, "成功", "好累，终于结束了。");
+        SetWindowTitle("打工");   // 恢复标题栏为正常状态
     });
     connect(this, &WorkingWindow::WorkEndFailed, this, [=]()
     {
@@ -558,8 +559,7 @@ void WorkingWindow::DataPrepare()
         return;
     }
 
-    QJsonParseError err;
-    const auto localJson = QJsonDocument::fromJson(jsonFile.readAll(), &err);
+    const auto localJson = QJsonDocument::fromJson(jsonFile.readAll());
     const auto tempArray = localJson["jobs"].toArray();
     for (int i = 0; i < tempArray.size(); ++i)  // 将本地缓存(MianPetData/JobsData.json)先存到items中
     {
