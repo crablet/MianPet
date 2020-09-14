@@ -8,7 +8,7 @@ SettingsWindow::SettingsWindow()
 
 void SettingsWindow::InitializeUi()
 {
-    setAttribute(Qt::WA_DeleteOnClose);
+    setAttribute(Qt::WA_DeleteOnClose); // 当点击关闭时自动释放内存
     setFixedSize(SettingsWindowWidth, SettingsWindowHeight);
 
     closeButton = new QPushButton(this);
