@@ -948,6 +948,9 @@ void Connection::DealWithUse(const char *id, const char *randomKey, const char *
 // FIXME：有概率无法开始
 void Connection::DealWithWorkBegin(const char *id, const char *randomKey, const char *job)
 {
+#ifdef DEBUG
+    std::cout << "In function Connection::DealWithWorkBegin: " << id << randomKey << std::endl;
+#endif // DEBUG
     try
     {
         std::lock_guard<std::mutex> lock(dbMutex);
