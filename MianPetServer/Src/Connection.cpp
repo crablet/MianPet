@@ -945,6 +945,7 @@ void Connection::DealWithUse(const char *id, const char *randomKey, const char *
     }
 }
 
+// FIXME：有概率无法开始
 void Connection::DealWithWorkBegin(const char *id, const char *randomKey, const char *job)
 {
     try
@@ -1035,6 +1036,7 @@ void Connection::DealWithWorkBegin(const char *id, const char *randomKey, const 
     }
 }
 
+// FIXME：有概率无法结束
 void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const char *job)
 {
 #ifdef DEBUG
