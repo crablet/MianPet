@@ -835,6 +835,9 @@ void Connection::DealWithBuy(const char *id, const char *randomKey, const char *
 
 void Connection::DealWithUse(const char *id, const char *randomKey, const char *item, int count)
 {
+#ifdef DEBUG
+    std::cout << "In function Connection::DealWithUse: " << id << randomKey << std::endl;
+#endif // DEBUG
     try
     {
         std::lock_guard<std::mutex> lock(dbMutex);
