@@ -8,7 +8,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O2 -Wall")
 
 link_libraries(pthread)
 
-include_directories(./Src/asio-1.16.1)
+include_directories(./Src/asio-1.18.0)
 include_directories(./Src/simdjson-0.5.0) #repeated
 include_directories(./Src/otl-4.0.459)
 include_directories(./Src/Config)
