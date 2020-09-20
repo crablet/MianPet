@@ -351,6 +351,9 @@ void Connection::DealWithGetPetProfile(const char *id, const char *randomKey)
 
 void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
 {
+#ifdef DEBUG
+    std::cout << "In function Connection::DealWithHeartbeat: " << id << randomKey << std::endl;
+#endif // DEBUG
     try
     {
         std::lock_guard<std::mutex> lock(dbMutex);
