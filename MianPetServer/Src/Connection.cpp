@@ -218,6 +218,9 @@ void Connection::DealWithGetCoreKeyForPasswordTransportation(const char *id)
 
 void Connection::DealWithGetLogin(const char *id, const char *password, const char *randomKey)
 {
+#ifdef DEBUG
+    std::cout << "In function Connection::DealWithGetLogin: " << id << randomKey << std::endl;
+#endif // DEBUG
     try
     {
         std::lock_guard<std::mutex> lock(dbMutex);
