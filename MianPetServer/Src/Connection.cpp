@@ -280,6 +280,9 @@ void Connection::DealWithGetLogin(const char *id, const char *password, const ch
 
 void Connection::DealWithGetPetProfile(const char *id, const char *randomKey)
 {
+#ifdef DEBUG
+    std::cout << "In function Connection::DealWithGetPetProfile: " << id << randomKey << std::endl;
+#endif // DEBUG
     try
     {
         std::lock_guard<std::mutex> lock(dbMutex);
