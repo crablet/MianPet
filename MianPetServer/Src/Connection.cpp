@@ -170,7 +170,7 @@ void Connection::TaskRunnerThread(int jsonLength)
 void Connection::DealWithGetCoreKeyForPasswordTransportation(const char *id)
 {
 #ifdef DEBUG
-    std::cout << "In function Connection::DealWithGetCoreKeyForPasswordTransportation: " << id << randomKey << std::endl;
+    std::cout << "In function Connection::DealWithGetCoreKeyForPasswordTransportation: " << id << std::endl;
 #endif // DEBUG
     try
     {
