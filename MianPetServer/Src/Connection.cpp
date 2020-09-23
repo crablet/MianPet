@@ -66,10 +66,6 @@ void Connection::TaskRunnerThread(int jsonLength)
             const auto version = static_cast<std::int64_t>(json["version"]);
             const auto method = static_cast<std::int64_t>(json["method"]);
 
-#ifdef DEBUG
-            std::cout << id << ' ' << randomKey << ' ' << version << ' ' << method << std::endl;
-#endif // DEBUG
-
             if (method == GET)
             {
                 const auto payload = json["payload"];
