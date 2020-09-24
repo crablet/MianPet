@@ -251,7 +251,7 @@ void Connection::DealWithGetLogin(const char *id, const char *password, const ch
             }
             else        // 如果用户还没有在线，才可以执行下面的登录流程
             {
-                // TODO: need an extra compare between screctkey and tempKeyOf[id]
+                // TODO: screctkey和tempKeyOf[id]需要添加额外的比较
 
                 constexpr const char *updateSecretKeySql =
                     R"(UPDATE userinfo
