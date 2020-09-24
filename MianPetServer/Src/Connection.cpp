@@ -237,8 +237,8 @@ void Connection::DealWithGetLogin(const char *id, const char *password, const ch
         }
 
 #ifdef DEBUG
-        std::cout << "In function Connection::DealWithGetLogin: " << std::endl;
-        std::cout << id << ' ' << truePassword << ' '  << online << ' ' << trueSecretKey << std::endl;
+        std::cout << "In function Connection::DealWithGetLogin: "
+                  << id << ' ' << truePassword << ' '  << online << ' ' << trueSecretKey << std::endl;
 #endif // DEBUG
 
 
