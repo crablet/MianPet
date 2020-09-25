@@ -342,6 +342,10 @@ void Connection::DealWithGetPetProfile(const char *id, const char *randomKey)
             reply = R"({"status":"failed"})";
         }
 
+#ifdef DEBUG
+        std::cout << "In function Connection::DealWithGetPetProfile: reply = " << reply << std::endl;
+#endif // DEBUG
+
         DoWrite();
     }
     catch (const otl_exception &exp)
@@ -570,6 +574,9 @@ void Connection::DealWithLogout(const char *id, const char *randomKey)
         else
         {
             // error
+#ifdef DEBUG
+            std::cout << "In function Connection::DealWithLogout: LOGOUT FAILED!" << std::endl;
+#endif // DEBUG
         }
     }
     catch (const otl_exception &exp)
