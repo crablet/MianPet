@@ -569,6 +569,9 @@ void Connection::DealWithLogout(const char *id, const char *randomKey)
             else
             {
                 // error
+#ifdef DEBUG
+                std::cout << "In function Connection::DealWithLogout: LOGOUT FAILED!" << std::endl;
+#endif // DEBUG
             }
         }
         else
