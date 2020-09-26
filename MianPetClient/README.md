@@ -6,3 +6,7 @@
 
 ## 进度
 基础功能基本完成，但是很多素材并未到位。
+
+## 已知bug
+1. 在Arch Linux with KDE下，面宠应该出现透明的地方可能会已黑色背景填充
+2. 在Arch Linux with KDE下，面宠无法在SmallItemsContainer中展示图片
