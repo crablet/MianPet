@@ -4,7 +4,7 @@
 #include <QString>
 
 inline int levelValue;  // 面宠等级
-inline int ageValue;
+inline int ageValue;    // 面宠年龄
 inline int growthValue;
 inline int foodValue;
 inline int cleanValue;
