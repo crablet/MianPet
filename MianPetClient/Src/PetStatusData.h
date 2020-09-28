@@ -6,7 +6,7 @@
 inline int levelValue;  // 面宠等级
 inline int ageValue;    // 面宠年龄
 inline int growthValue; // 面宠成长速度
-inline int foodValue;
+inline int foodValue;   // 面宠饥饿值
 inline int cleanValue;
 inline int healthValue;
 inline int moodValue;
