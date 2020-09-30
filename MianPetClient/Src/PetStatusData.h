@@ -10,7 +10,7 @@ inline int foodValue;   // 面宠饥饿值
 inline int cleanValue;  // 面宠清洁值
 inline int healthValue; // 面宠健康度
 inline int moodValue;   // 面宠心情值
-inline int grouthSpeedValue;
+inline int grouthSpeedValue;    // 面宠成长速度（单位/每小时）
 inline int onlineTimeValue;
 
 inline bool isWorking;      // 标记是否正在打工：true -> 正在打工；false -> 没在打工
