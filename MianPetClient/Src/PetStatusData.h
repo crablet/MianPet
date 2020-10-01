@@ -14,7 +14,7 @@ inline int grouthSpeedValue;    // 面宠成长速度（单位/每小时）
 inline int onlineTimeValue;     // 面宠在线时间（单位分钟）
 
 inline bool isWorking;      // 标记是否正在打工：true -> 正在打工；false -> 没在打工
-inline QString workingJob;  // 若isWorking为true，则该项保存正在打的工种
-inline int workingTime;     // 若isWorking为true，则该项保存已经打工的时长
+inline QString workingJob;  // 若isWorking为true，则该项保存正在打的工种，否则该项无意义
+inline int workingTime;     // 若isWorking为true，则该项保存已经打工的时长，否则该项无意义
 
 #endif // PETSTATUSDATA_H
