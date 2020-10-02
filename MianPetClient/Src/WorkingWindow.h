@@ -79,6 +79,8 @@ signals:
     // 当结束工作成功时发射该信号
     void WorkEndFailed();
 
+    // 当获取工作状态失败时发射该信号
+    // 参数：str -> 错误信息
     void GetWorkingStatusFailed(const QString &str);
 
 private:
