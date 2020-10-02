@@ -74,7 +74,9 @@ signals:
     void WorkBeginSucceeded();
     // 当开始工作失败时发射该信号
     void WorkBeginFailed();
+    // 当结束工作成功时发射该信号
     void WorkEndSucceeded();
+    // 当结束工作成功时发射该信号
     void WorkEndFailed();
 
     void GetWorkingStatusFailed(const QString &str);
