@@ -89,7 +89,7 @@ private:
     QString selectedJob;    // 目前选择了哪个工作
 
     QWidget *lowerBarWidget;    // 打工页面底部的小容器，目前有“开始”和“结束”打工的按钮
-    QHBoxLayout *lowerBarWidgetLayout;
+    QHBoxLayout *lowerBarWidgetLayout;  // 打工页面底部的小容器的布局
     QPushButton *beginButton, *endButton;
 };
 
