@@ -84,7 +84,7 @@ signals:
     void GetWorkingStatusFailed(const QString &str);
 
 private:
-    std::vector<JobInformation> jobs;
+    std::vector<JobInformation> jobs;   // 存放所有的工作信息，一开始先读取缓存中的，然后和服务器同步校正
 
     QString selectedJob;    // 目前选择了哪个工作
 
