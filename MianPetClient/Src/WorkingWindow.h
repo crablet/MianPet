@@ -90,7 +90,7 @@ private:
 
     QWidget *lowerBarWidget;    // 打工页面底部的小容器，目前有“开始”和“结束”打工的按钮
     QHBoxLayout *lowerBarWidgetLayout;  // 打工页面底部的小容器的布局
-    QPushButton *beginButton, *endButton;
+    QPushButton *beginButton, *endButton;   // 打工页面底部的小容器中的开始打工和结束打工按钮
 };
 
 #endif // WORKINGWINDOW_H
