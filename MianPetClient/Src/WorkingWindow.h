@@ -51,6 +51,7 @@ private:
     // 向服务器提交结束打jobName工的请求
     void SubmitWorkEndRequest(const QString &jobName);
 
+    // 获取当前打工状态，并作出相应响应（是否应该在此处做出响应，还是应该交给别的函数处理？）
     void GetWorkingStatus();
 
     // 获取最新的职位信息
