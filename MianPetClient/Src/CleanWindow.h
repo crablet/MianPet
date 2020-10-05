@@ -78,8 +78,8 @@ signals:
 private:
     std::vector<ItemInformation> items{};
 
-    QWidget *lowerBarWidget;    // 展示饥饿值、文字、购买按钮和使用按钮的地方
-    QHBoxLayout *lowerBarWidgetLayout;
+    QWidget *lowerBarWidget;    // 底部小容器，展示饥饿值、文字、购买按钮和使用按钮的地方
+    QHBoxLayout *lowerBarWidgetLayout;  // 底部小容器的布局
     QLabel *lowerBarTextLabel;
     QProgressBar *valueBar;
     QPushButton *buyButton, *useButton;
