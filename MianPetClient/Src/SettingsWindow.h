@@ -16,7 +16,7 @@ private:
     void InitializeConnect();
 
 private:
-    QPushButton *closeButton;
+    QPushButton *closeButton;   // 界面右上角的关闭按钮
 };
 
 #endif // SETTINGSWINDOW_H
