@@ -80,8 +80,8 @@ private:
 
     QWidget *lowerBarWidget;    // 底部小容器，展示饥饿值、文字、购买按钮和使用按钮的地方
     QHBoxLayout *lowerBarWidgetLayout;  // 底部小容器的布局
-    QLabel *lowerBarTextLabel;          // 底部小容器中显示“清洁值”的地方
-    QProgressBar *valueBar;
+    QLabel *lowerBarTextLabel;          // 底部小容器中显示“清洁值”文字的地方
+    QProgressBar *valueBar;             // 底部小容器中显示清洁值数值的地方
     QPushButton *buyButton, *useButton;
 
     QString selectedClean;  //  选中的日用品，准备购买/使用（为了保持一致语法错误就先不管了）
