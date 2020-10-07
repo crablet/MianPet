@@ -57,6 +57,7 @@ private:
     // 获取最新的职位信息
     void DataPrepare();
 
+    // 存放职位信息的结构体
     struct JobInformation
     {
         JobInformation(const QString &name, int wage, int lowestLevel, const std::vector<QString> &eduRestrictions)
