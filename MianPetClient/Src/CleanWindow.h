@@ -82,7 +82,7 @@ private:
     QHBoxLayout *lowerBarWidgetLayout;  // 底部小容器的布局
     QLabel *lowerBarTextLabel;          // 底部小容器中显示“清洁值”文字的地方
     QProgressBar *valueBar;             // 底部小容器中显示清洁值数值的地方
-    QPushButton *buyButton, *useButton;
+    QPushButton *buyButton, *useButton; // 底部小容器中的“购买”和“使用”按钮
 
     QString selectedClean;  //  选中的日用品，准备购买/使用（为了保持一致语法错误就先不管了）
 };
