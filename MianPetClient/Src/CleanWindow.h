@@ -52,6 +52,7 @@ private:
 
     void RequestDataInRange(int rangeBegin, int rangeEnd);
 
+    // 存放清洁品信息的结构体
     struct ItemInformation
     {
         ItemInformation(const QString &name, int price, int amount)
