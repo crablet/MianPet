@@ -62,7 +62,7 @@ private slots:
 
 private:
     QMovie *petGif;         // 面宠主界面中正在播放的动画
-    QLabel *petGifLabel;
+    QLabel *petGifLabel;    // 面宠主界面中用于播放动画的控件
     QPoint previousMousePos, previousUiPos;
 
     LoginWindow *loginWindow;
