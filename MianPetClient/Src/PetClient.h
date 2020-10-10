@@ -65,7 +65,7 @@ private:
     QLabel *petGifLabel;    // 面宠主界面中用于播放动画的控件
     QPoint previousMousePos, previousUiPos;     // 用于实现无边框界面的辅助变量
 
-    LoginWindow *loginWindow;
+    LoginWindow *loginWindow;   // 登录窗口
     PetToolButtonsContainer *petToolButtonsContainer;
     SettingsWindow *settingsWindow;
 
