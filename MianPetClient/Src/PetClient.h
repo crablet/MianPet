@@ -67,7 +67,7 @@ private:
 
     LoginWindow *loginWindow;   // 登录窗口
     PetToolButtonsContainer *petToolButtonsContainer;   // 主界面底部的按钮集合，有“打工”、“食品”、“清洁”等等
-    SettingsWindow *settingsWindow;
+    SettingsWindow *settingsWindow; // 右键托盘图标能调出此设置页面
 
     QTimer *heartbeat;
 
