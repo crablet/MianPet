@@ -66,7 +66,7 @@ private:
     QPoint previousMousePos, previousUiPos;     // 用于实现无边框界面的辅助变量
 
     LoginWindow *loginWindow;   // 登录窗口
-    PetToolButtonsContainer *petToolButtonsContainer;
+    PetToolButtonsContainer *petToolButtonsContainer;   // 主界面底部的按钮集合，有“打工”、“食品”、“清洁”等等
     SettingsWindow *settingsWindow;
 
     QTimer *heartbeat;
