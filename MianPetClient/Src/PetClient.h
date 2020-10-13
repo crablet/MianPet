@@ -72,7 +72,7 @@ private:
     QTimer *heartbeat;  // 负责发送心跳的定时器
 
     QSystemTrayIcon *tray;  // 系统托盘
-    QMenu *trayMenu;
+    QMenu *trayMenu;        // 系统托盘的菜单
 
     QAction *exitAction, *settingsAction;
 
