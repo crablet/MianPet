@@ -76,6 +76,6 @@ private:
 
     QAction *exitAction, *settingsAction;
 
-    bool isUiBeingDragging;
+    bool isUiBeingDragging; // 表示UI界面是否正在被拖动，用于实现无边框界面
 };
 #endif // PETCLIENT_H
