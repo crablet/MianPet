@@ -59,7 +59,7 @@ private:
     QVBoxLayout *lowerLayout, *allLayout;
     QLabel *usernameLabel, *idLabel, *levelLabel, *ageLabel, *grouthSpeedLabel, *statusLabel, *onlineTimeLabel;
     QProgressBar *growthBar, *foodBar, *cleanBar, *healthBar, *moodBar;
-    QTimer *closeCountdownTimer;
+    QTimer *closeCountdownTimer;    // 用于实现鼠标移开则自动关闭窗口的定时器
 };
 
 #endif // PETPROFILEWINDOW_H
