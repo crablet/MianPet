@@ -74,7 +74,8 @@ private:
     QSystemTrayIcon *tray;  // 系统托盘
     QMenu *trayMenu;        // 系统托盘的菜单
 
-    QAction *exitAction, *settingsAction;
+    QAction *exitAction;    // 托盘中退出程序的动作
+    QAction *settingsAction;// 托盘中打开设置窗口的动作
 
     bool isUiBeingDragging; // 表示UI界面是否正在被拖动，用于实现无边框界面
 };
