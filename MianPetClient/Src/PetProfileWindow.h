@@ -55,7 +55,7 @@ private:
 
 private:
     QWidget *upperWidget, *lowerWidget;
-    QFormLayout *upperLayout;
+    QFormLayout *upperLayout;   // 界面上半部分的框架
     QVBoxLayout *lowerLayout, *allLayout;
     QLabel *usernameLabel, *idLabel, *levelLabel, *ageLabel, *grouthSpeedLabel, *statusLabel, *onlineTimeLabel;
     QProgressBar *growthBar, *foodBar, *cleanBar, *healthBar, *moodBar;
