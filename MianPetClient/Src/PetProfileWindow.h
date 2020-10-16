@@ -54,7 +54,8 @@ private:
     void UpdatePetProfileHelper(const QByteArray &profile);
 
 private:
-    QWidget *upperWidget, *lowerWidget;
+    QWidget *upperWidget;       // 界面上半部分
+    QWidget *lowerWidget;
     QFormLayout *upperLayout;   // 界面上半部分的框架
     QVBoxLayout *lowerLayout;   // 界面下半部分的框架
     QVBoxLayout *allLayout;     // 结合界面上下部分的整体框架
