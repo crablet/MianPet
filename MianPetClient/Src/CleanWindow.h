@@ -77,7 +77,7 @@ signals:
     void UseFailed(const QString &item, int count);
 
 private:
-    std::vector<ItemInformation> items{};
+    std::vector<ItemInformation> items{};   // 存放所有清洁品信息的容器
 
     QWidget *lowerBarWidget;    // 底部小容器，展示清洁值、文字、购买按钮和使用按钮的地方
     QHBoxLayout *lowerBarWidgetLayout;  // 底部小容器的布局
