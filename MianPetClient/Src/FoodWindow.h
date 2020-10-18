@@ -80,7 +80,7 @@ private:
 
     QWidget *lowerBarWidget;    // 展示饥饿值、文字、购买按钮和使用按钮的地方
     QHBoxLayout *lowerBarWidgetLayout;  // 底部小容器的布局
-    QLabel *lowerBarTextLabel;
+    QLabel *lowerBarTextLabel;          // 底部小容器中显示“清洁值”文字的地方
     QProgressBar *valueBar;
     QPushButton *buyButton, *useButton;
 
