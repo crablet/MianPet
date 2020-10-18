@@ -79,7 +79,7 @@ private:
     std::vector<ItemInformation> items{};   // 存放所有食品的容器
 
     QWidget *lowerBarWidget;    // 展示饥饿值、文字、购买按钮和使用按钮的地方
-    QHBoxLayout *lowerBarWidgetLayout;
+    QHBoxLayout *lowerBarWidgetLayout;  // 底部小容器的布局
     QLabel *lowerBarTextLabel;
     QProgressBar *valueBar;
     QPushButton *buyButton, *useButton;
