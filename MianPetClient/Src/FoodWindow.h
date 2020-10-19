@@ -82,7 +82,7 @@ private:
     QHBoxLayout *lowerBarWidgetLayout;  // 底部小容器的布局
     QLabel *lowerBarTextLabel;          // 底部小容器中显示“饥饿值”文字的地方
     QProgressBar *valueBar;             // 底部小容器中显示饥饿值数值的地方
-    QPushButton *buyButton, *useButton;
+    QPushButton *buyButton, *useButton; // 底部小容器中的“购买”和“使用”按钮
 
     QString selectedFood;   // 选中的食品，准备购买/使用
 };
