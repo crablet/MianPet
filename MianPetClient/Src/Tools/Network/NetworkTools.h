@@ -1,4 +1,4 @@
-#ifndef NETWORKTOOLS_H
+ï»¿#ifndef NETWORKTOOLS_H
 #define NETWORKTOOLS_H
 
 #include <random>
@@ -6,7 +6,7 @@
 
 #include <QString>
 
-// Éú³ÉĞÎÈç¡°123456@coreKey@987654¡±µÄËæ»ú×Ö·û´®
+// ç”Ÿæˆå½¢å¦‚â€œ123456@coreKey@987654â€çš„éšæœºå­—ç¬¦ä¸²
 inline std::string GetRandomKeyForPasswordTransportation(const std::string &coreKey) noexcept
 {
     std::random_device rd;
@@ -16,7 +16,7 @@ inline std::string GetRandomKeyForPasswordTransportation(const std::string &core
     return std::to_string(dis(gen)) + '@' + coreKey + '@' + std::to_string(dis(gen));
 }
 
-// Éú³ÉĞÎÈç¡°123456@coreKey@987654¡±µÄËæ»ú×Ö·û´®
+// ç”Ÿæˆå½¢å¦‚â€œ123456@coreKey@987654â€çš„éšæœºå­—ç¬¦ä¸²
 inline QString GetRandomKeyForPasswordTransportation(const QString &coreKey) noexcept
 {
     return QString::fromStdString(GetRandomKeyForPasswordTransportation(coreKey.toStdString()));
