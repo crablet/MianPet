@@ -15,6 +15,7 @@
     #pragma execution_character_set("utf-8")
 #endif // Q_OS_WIN
 
+// 一种透明背景的控件，主要用于展示各食品、清洁和工种等项目
 class TransparentItemLabel : public QWidget
 {
     Q_OBJECT
