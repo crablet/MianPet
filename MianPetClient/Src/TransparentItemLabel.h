@@ -36,7 +36,8 @@ private:
     void paintEvent(QPaintEvent *event) override;
 
 protected:
-    QLabel *upperLabel, *lowerLabel;
+    QLabel *upperLabel; // 上半部分的QLabel
+    QLabel *lowerLabel;
 };
 
 #endif // TRANSPARENTITEMLABEL_H
