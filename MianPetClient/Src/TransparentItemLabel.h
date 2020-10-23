@@ -37,7 +37,7 @@ private:
 
 protected:
     QLabel *upperLabel; // 上半部分的QLabel
-    QLabel *lowerLabel;
+    QLabel *lowerLabel; // 下半部分的QLabel
 };
 
 #endif // TRANSPARENTITEMLABEL_H
