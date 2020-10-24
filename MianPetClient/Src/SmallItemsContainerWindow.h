@@ -50,7 +50,7 @@ signals:
     void MouseHoversLeaveOnItem(QObject *item);
 
 private:
-    QPushButton *closeButton;
+    QPushButton *closeButton;   // 点击该按钮会关闭此页面
     QLabel *iconLabel, *windowTitleLabel;
 
 protected:
