@@ -56,7 +56,7 @@ private:
 protected:
     QPushButton *item0, *item1, *item2, *item3;
     QPushButton *previousPageButton, *nextPageButton;
-    TransparentItemLabel *itemLabel;
+    TransparentItemLabel *itemLabel;    // 单个项目的详细信息悬浮框
 
     int currentPage;
 };
