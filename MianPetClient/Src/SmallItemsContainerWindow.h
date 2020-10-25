@@ -58,7 +58,7 @@ protected:
     QPushButton *previousPageButton, *nextPageButton;
     TransparentItemLabel *itemLabel;    // 单个项目的详细信息悬浮框
 
-    int currentPage;
+    int currentPage;    // 目前的页号
 };
 
 #endif // SMALLITEMSCONTAINERWINDOW_H
