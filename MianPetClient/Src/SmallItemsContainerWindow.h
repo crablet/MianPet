@@ -19,6 +19,7 @@
 #include "FramelessWindow.h"
 #include "TransparentItemLabel.h"
 
+// 拥有四个小项目展示位的窗口，目前作为喂食、清洁及打工页面的父类
 class SmallItemsContainerWindow : public FramelessWindow
 {
     Q_OBJECT
