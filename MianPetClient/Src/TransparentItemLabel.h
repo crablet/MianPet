@@ -24,7 +24,7 @@ public:
 
 public:
     void SetUpperLabelText(const QString &str); // 设置上半部分的QLabel的内容
-    void SetLowerLabelText(const QString &str);
+    void SetLowerLabelText(const QString &str); // 设置下半部分的QLabel的内容
 
     QLabel* GetUpperLabel() const;  // 返回上半部分的QLabel
     QLabel* GetLowerLabel() const;  // 返回下半部分的QLabel
