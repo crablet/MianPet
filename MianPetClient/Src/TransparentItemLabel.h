@@ -23,7 +23,7 @@ public:
     explicit TransparentItemLabel(QWidget *parent = nullptr);
 
 public:
-    void SetUpperLabelText(const QString &str);
+    void SetUpperLabelText(const QString &str); // 设置上半部分的QLabel的内容
     void SetLowerLabelText(const QString &str);
 
     QLabel* GetUpperLabel() const;  // 返回上半部分的QLabel
