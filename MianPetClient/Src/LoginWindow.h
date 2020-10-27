@@ -39,7 +39,7 @@ signals:
     void AccountOrPasswordWrong();
     void CannotGetCorekeyFromServer();
     void NotJsonObject();   // 当服务器返回的数据包不是一个JsonObject时发出此信号
-    void UnknownLoginError();
+    void UnknownLoginError();   // 当遇到未知错误时发出此信号
 
 private:
     QLineEdit *accountLineEdit, *passwordLineEdit;
