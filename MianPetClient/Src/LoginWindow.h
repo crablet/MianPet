@@ -38,7 +38,7 @@ signals:
     void LoginSucceeded(const QString &account);
     void AccountOrPasswordWrong();
     void CannotGetCorekeyFromServer();
-    void NotJsonObject();
+    void NotJsonObject();   // 当服务器返回的数据包不是一个JsonObject时发出此信号
     void UnknownLoginError();
 
 private:
