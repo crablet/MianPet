@@ -34,7 +34,7 @@ private:
     void LoginThreadFunction();
 
 signals:
-    void ConnectToHostFailed();
+    void ConnectToHostFailed();         // 当无法连接至服务器时发出此信号
     void LoginSucceeded(const QString &account);    // 当登录成功时发出此信号
     void AccountOrPasswordWrong();      // 当服务器认为传输的用户ID或者密码错误时发出此信号
     void CannotGetCorekeyFromServer();  // 当无法从服务器接收CoreKey时发出此信号
