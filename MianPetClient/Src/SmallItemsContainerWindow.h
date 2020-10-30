@@ -47,7 +47,7 @@ public:
 signals:
     // 当鼠标放在中间四个格子之一的上面时发出此信号
     void MouseHoversMoveOnItem(QObject *item);
-    // 当鼠标离开中间四个格子之一的上面时，该信号被触发
+    // 当鼠标离开中间四个格子之一的上面时发出此信号
     void MouseHoversLeaveOnItem(QObject *item);
 
 private:
