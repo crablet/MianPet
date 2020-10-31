@@ -66,7 +66,7 @@ private:
     };
 
 signals:
-    // 购买count个item成功
+    // 购买count个item成功时发出此信号
     void BuySucceeded(const QString &item, int count);
     // 购买count个item失败
     void BuyFailed(const QString &item, int count);
