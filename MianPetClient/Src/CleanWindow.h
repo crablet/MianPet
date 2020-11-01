@@ -73,7 +73,7 @@ signals:
 
     // 使用count个item成功时发出此信号
     void UseSucceeded(const QString &item, int count);
-    // 使用count个item失败
+    // 使用count个item失败时发出此信号
     void UseFailed(const QString &item, int count);
 
 private:
