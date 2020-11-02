@@ -31,6 +31,7 @@
 
 #include "FramelessWindow.h"
 
+// 展示面宠各项数据的窗口
 class PetProfileWindow final : public FramelessWindow
 {
     Q_OBJECT
