@@ -24,7 +24,7 @@ private:
     void InitializeConnect();
 
 private slots:
-    void OnFoodButtonClicked();
+    void OnFoodButtonClicked(); // 当点击喂食按钮时会发出此信号
     void OnCleanButtonClicked();
     void OnWorkingButtonClicked();
     void OnPetProfileButtonClicked();
