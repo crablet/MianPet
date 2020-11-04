@@ -27,7 +27,7 @@ private slots:
     void OnFoodButtonClicked();     // 当点击喂食按钮时会发出此信号
     void OnCleanButtonClicked();    // 当点击清洁按钮时会发出此信号
     void OnWorkingButtonClicked();  // 当点击打工按钮时会发出此信号
-    void OnPetProfileButtonClicked();
+    void OnPetProfileButtonClicked();   // 当点击面宠属性菜单时会发出此信号
 
 private:
     QHBoxLayout *layout;
