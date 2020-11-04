@@ -26,7 +26,7 @@ private:
 private slots:
     void OnFoodButtonClicked();     // 当点击喂食按钮时会发出此信号
     void OnCleanButtonClicked();    // 当点击清洁按钮时会发出此信号
-    void OnWorkingButtonClicked();
+    void OnWorkingButtonClicked();  // 当点击打工按钮时会发出此信号
     void OnPetProfileButtonClicked();
 
 private:
