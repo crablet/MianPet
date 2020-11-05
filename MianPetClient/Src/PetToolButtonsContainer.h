@@ -32,7 +32,7 @@ private slots:
 private:
     QHBoxLayout *layout;    // 主体布局，呈一字型排开
     QPushButton *foodButton, *cleanButton, *petProfileButton, *workingButton;
-    FoodWindow *foodWindow;
+    FoodWindow *foodWindow; // 食物窗口，为人为保证的单例
     CleanWindow *cleanWindow;
     WorkingWindow *workingWindow;
     PetProfileWindow *petProfileWindow;
