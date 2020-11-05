@@ -30,7 +30,7 @@ private slots:
     void OnPetProfileButtonClicked();   // 当点击面宠属性菜单时会发出此信号
 
 private:
-    QHBoxLayout *layout;
+    QHBoxLayout *layout;    // 主体布局，呈一字型排开
     QPushButton *foodButton, *cleanButton, *petProfileButton, *workingButton;
     FoodWindow *foodWindow;
     CleanWindow *cleanWindow;
