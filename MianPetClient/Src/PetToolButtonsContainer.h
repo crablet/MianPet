@@ -35,7 +35,7 @@ private:
     FoodWindow *foodWindow;         // 食物窗口，为人为保证的单例
     CleanWindow *cleanWindow;       // 洗澡窗口，为人为保证的单例
     WorkingWindow *workingWindow;   // 打工窗口，为人为保证的单例
-    PetProfileWindow *petProfileWindow;
+    PetProfileWindow *petProfileWindow; // 面宠属性窗口，为人为保证的单例
 };
 
 #endif // PETTOOLBUTTONSCONTAINER_H
