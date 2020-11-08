@@ -13,6 +13,7 @@
 #include "WorkingWindow.h"
 #include "PetProfileWindow.h"
 
+// 当鼠标放在面宠身上时底部会弹出的一个拥有几个小按钮的长条
 class PetToolButtonsContainer : public QWidget
 {
     Q_OBJECT
