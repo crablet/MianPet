@@ -31,6 +31,7 @@
     #pragma execution_character_set("utf-8")
 #endif // Q_OS_WIN
 
+// 面宠主窗口
 class PetClient : public QWidget
 {
     Q_OBJECT
