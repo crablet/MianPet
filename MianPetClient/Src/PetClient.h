@@ -53,7 +53,7 @@ private:
     void Logout();
 
 signals:
-    void HeartbeatError();
+    void HeartbeatError();  // 当遇到与心跳包有关的错误时会发出此信号
 
 private slots:
     void Heartbeat();
