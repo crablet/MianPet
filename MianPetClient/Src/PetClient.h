@@ -64,13 +64,13 @@ private slots:
 private:
     QMovie *petGif;         // 面宠主界面中正在播放的动画
     QLabel *petGifLabel;    // 面宠主界面中用于播放动画的控件
-    QPoint previousMousePos, previousUiPos;     // 用于实现无边框界面的辅助变量
+    QPoint previousMousePos, previousUiPos; // 用于实现无边框界面的辅助变量
 
-    LoginWindow *loginWindow;   // 登录窗口
+    LoginWindow *loginWindow;       // 登录窗口
     PetToolButtonsContainer *petToolButtonsContainer;   // 主界面底部的按钮集合，有“打工”、“食品”、“清洁”等等
     SettingsWindow *settingsWindow; // 右键托盘图标能调出此设置页面
 
-    QTimer *heartbeat;  // 负责发送心跳的定时器
+    QTimer *heartbeat;      // 负责发送心跳的定时器
 
     QSystemTrayIcon *tray;  // 系统托盘
     QMenu *trayMenu;        // 系统托盘的菜单
