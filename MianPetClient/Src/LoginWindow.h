@@ -38,8 +38,8 @@ signals:
     void LoginSucceeded(const QString &account);    // 当登录成功时发出此信号
     void AccountOrPasswordWrong();      // 当服务器认为传输的用户ID或者密码错误时发出此信号
     void CannotGetCorekeyFromServer();  // 当无法从服务器接收CoreKey时发出此信号
-    void NotJsonObject();   // 当服务器返回的数据包不是一个JsonObject时发出此信号
-    void UnknownLoginError();   // 当遇到未知错误时发出此信号
+    void NotJsonObject();               // 当服务器返回的数据包不是一个JsonObject时发出此信号
+    void UnknownLoginError();           // 当遇到未知错误时发出此信号
 
 private:
     QLineEdit *accountLineEdit, *passwordLineEdit;
