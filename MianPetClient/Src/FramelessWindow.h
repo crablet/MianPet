@@ -23,7 +23,7 @@ protected:
 private:
     QPoint previousMousePos, previousUiPos;
 
-    bool isUiBeingDragging;
+    bool isUiBeingDragging; // 窗体是否正在被拖动
 };
 
 #endif // FRAMELESSWINDOW_H
