@@ -86,12 +86,12 @@ signals:
     void GetWorkingStatusFailed(const QString &str);
 
 private:
-    std::vector<JobInformation> jobs;   // 存放所有的工作信息，一开始先读取缓存中的，然后和服务器同步校正
+    std::vector<JobInformation> jobs;       // 存放所有的工作信息，一开始先读取缓存中的，然后和服务器同步校正
 
-    QString selectedJob;    // 目前选择了哪个工作
+    QString selectedJob;                    // 目前选择了哪个工作
 
-    QWidget *lowerBarWidget;    // 打工页面底部的小容器，目前有“开始”和“结束”打工的按钮
-    QHBoxLayout *lowerBarWidgetLayout;  // 打工页面底部的小容器的布局
+    QWidget *lowerBarWidget;                // 打工页面底部的小容器，目前有“开始”和“结束”打工的按钮
+    QHBoxLayout *lowerBarWidgetLayout;      // 打工页面底部的小容器的布局
     QPushButton *beginButton, *endButton;   // 打工页面底部的小容器中的开始打工和结束打工按钮
 };
 
