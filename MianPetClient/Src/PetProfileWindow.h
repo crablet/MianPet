@@ -56,11 +56,11 @@ private:
     void UpdatePetProfileHelper(const QByteArray &profile);
 
 private:
-    QWidget *upperWidget;       // 界面上半部分
-    QWidget *lowerWidget;       // 界面下半部分
-    QFormLayout *upperLayout;   // 界面上半部分的框架
-    QVBoxLayout *lowerLayout;   // 界面下半部分的框架
-    QVBoxLayout *allLayout;     // 结合界面上下部分的整体框架
+    QWidget *upperWidget;           // 界面上半部分
+    QWidget *lowerWidget;           // 界面下半部分
+    QFormLayout *upperLayout;       // 界面上半部分的框架
+    QVBoxLayout *lowerLayout;       // 界面下半部分的框架
+    QVBoxLayout *allLayout;         // 结合界面上下部分的整体框架
     QLabel *usernameLabel, *idLabel, *levelLabel, *ageLabel, *grouthSpeedLabel, *statusLabel, *onlineTimeLabel;
     QProgressBar *growthBar, *foodBar, *cleanBar, *healthBar, *moodBar;
     QTimer *closeCountdownTimer;    // 用于实现鼠标移开则自动关闭窗口的定时器
