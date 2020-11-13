@@ -9,6 +9,7 @@
     #pragma execution_character_set("utf-8")
 #endif // Q_OS_WIN
 
+// 无边框窗体的基类
 class FramelessWindow : public QWidget
 {
     Q_OBJECT
