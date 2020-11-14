@@ -28,6 +28,7 @@
 #include "Tools/Network/DataPackages/BuyRequestData.h"
 #include "Tools/Network/DataPackages/UseRequestData.h"
 
+// 清洁品的商店
 class CleanWindow final : public SmallItemsContainerWindow
 {
     Q_OBJECT
