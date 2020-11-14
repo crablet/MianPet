@@ -28,6 +28,7 @@
 #include "Tools/Network/DataPackages/BuyRequestData.h"
 #include "Tools/Network/DataPackages/UseRequestData.h"
 
+// 食品的商店
 class FoodWindow final : public SmallItemsContainerWindow
 {
     Q_OBJECT
