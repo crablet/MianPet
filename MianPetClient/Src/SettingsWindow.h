@@ -6,6 +6,7 @@
 #include "FramelessWindow.h"
 #include "Src/Config/UiConstants.h"
 
+// 设置页面
 class SettingsWindow final : public FramelessWindow
 {
 public:
