@@ -22,6 +22,7 @@
 
 #include "FramelessWindow.h"
 
+// 登录窗口
 class LoginWindow : public FramelessWindow
 {
     Q_OBJECT
