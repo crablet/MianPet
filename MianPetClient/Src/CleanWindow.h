@@ -42,7 +42,7 @@ private:
 
     void DataPrepare();
 
-    void ViewPreviousPage();
+    void ViewPreviousPage();    // 展示清洁品列表的上一页
     void ViewNextPage();
 
     void OnMouseHoversMoveItem(QObject *obj);
