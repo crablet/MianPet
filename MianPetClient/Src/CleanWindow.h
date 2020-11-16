@@ -43,7 +43,7 @@ private:
     void DataPrepare();
 
     void ViewPreviousPage();    // 展示清洁品列表的上一页
-    void ViewNextPage();
+    void ViewNextPage();        // 展示清洁品列表的下一页
 
     void OnMouseHoversMoveItem(QObject *obj);
     void OnMouseHoversLeaveItem(QObject *obj);
