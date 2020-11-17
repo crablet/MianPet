@@ -11,7 +11,7 @@ CleanWindow::~CleanWindow()
     // 退出的时候保存一下缓存
 
     QJsonArray arr;
-    for (const auto &r : items)
+    for (const auto &r : items) // 遍历items中的内容，然后将其组成一个大的json数组
     {
         QJsonObject obj;
         obj.insert("amount", r.amount);
