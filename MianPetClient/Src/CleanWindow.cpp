@@ -8,6 +8,8 @@ CleanWindow::CleanWindow(QWidget *parent) : SmallItemsContainerWindow(parent)
 
 CleanWindow::~CleanWindow()
 {
+    // 退出的时候保存一下缓存
+
     QJsonArray arr;
     for (const auto &r : items)
     {
