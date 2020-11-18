@@ -71,6 +71,7 @@ void CleanWindow::InitializeConnect()
     connect(this, &CleanWindow::MouseHoversMoveOnItem, this, &CleanWindow::OnMouseHoversMoveItem);
     connect(this, &CleanWindow::MouseHoversLeaveOnItem, this, &CleanWindow::OnMouseHoversLeaveItem);
 
+    // 点击第一个按钮
     connect(item0, &QPushButton::clicked, this, [=]()
     {
         if (const auto index = currentPage * 4 + 0;
