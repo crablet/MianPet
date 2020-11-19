@@ -110,6 +110,8 @@ void CleanWindow::InitializeConnect()
             useButton->setDisabled(true);
         }
     });
+
+    // 点击第三个按钮
     connect(item2, &QPushButton::clicked, this, [=]()
     {
         if (const auto index = currentPage * 4 + 2;
