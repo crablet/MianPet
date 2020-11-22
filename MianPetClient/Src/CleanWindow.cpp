@@ -189,6 +189,7 @@ void CleanWindow::DataPrepare()
         items.emplace_back(itemInfo["name"].toString(), itemInfo["price"].toInt(), itemInfo["amount"].toInt());
     }
 
+    // 要保证展示的图标在范围内，不要越界了
     const auto rangeBegin = 0;
     const auto rangeEnd = static_cast<decltype(rangeBegin)>(items.size() >= 4 ? 4 : items.size());
     rangeBegin + 0 < rangeEnd
