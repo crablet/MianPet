@@ -212,7 +212,7 @@ void CleanWindow::DataPrepare()
 
 void CleanWindow::ViewPreviousPage()
 {
-    if (currentPage > 0)    // 只有页码大于零的情况下才可以翻页，不然一定越界了
+    if (currentPage > 0)    // 只有页码大于零的情况下才可以翻上一页，不然一定越界了
     {
         --currentPage;
         const auto rangeBegin = currentPage * 4;
@@ -236,7 +236,7 @@ void CleanWindow::ViewPreviousPage()
 void CleanWindow::ViewNextPage()
 {
     const auto max = static_cast<int>(items.size());
-    if (max >= 2 && currentPage <= max - 2)
+    if (max >= 2 && currentPage <= max - 2) // 只有页码小于max - 2才可以翻下一页，不然一定越界了
     {
         ++currentPage;
         const auto rangeBegin = currentPage * 4;
