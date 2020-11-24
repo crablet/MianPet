@@ -242,6 +242,7 @@ void CleanWindow::ViewNextPage()
         const auto rangeBegin = currentPage * 4;
         const auto rangeEnd = std::min(rangeBegin + 4, max);
 
+        // 请求当前页面所需要的数据
         std::thread requestThread(&CleanWindow::RequestDataInRange, this, rangeBegin, rangeEnd);
         requestThread.detach();
 
