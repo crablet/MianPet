@@ -246,6 +246,7 @@ void CleanWindow::ViewNextPage()
         std::thread requestThread(&CleanWindow::RequestDataInRange, this, rangeBegin, rangeEnd);
         requestThread.detach();
 
+        // 展示[rangeBegin, rangeEnd)中的内容
         rangeBegin + 0 < rangeEnd
             ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].name + ".png"))
             : item0->setIcon(QIcon());
@@ -258,7 +259,6 @@ void CleanWindow::ViewNextPage()
         rangeBegin + 3 < rangeEnd
             ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"))
             : item3->setIcon(QIcon());
-        // 展示[rangeBegin, rangeEnd)中的内容
 
         selectedClean.clear();
         buyButton->setDisabled(true);
