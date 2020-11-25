@@ -261,7 +261,7 @@ void CleanWindow::ViewNextPage()
             : item3->setIcon(QIcon());
 
         selectedClean.clear();  // 翻页后选中的清洁品要清空，不然就会被上一页的遗留信息影响了
-        buyButton->setDisabled(true);
+        buyButton->setDisabled(true);   // 既然可以翻页，那么下方两个按钮都可以正常展示
         useButton->setDisabled(true);
     }
 }
