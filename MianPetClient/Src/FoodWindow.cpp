@@ -71,6 +71,7 @@ void FoodWindow::InitializeConnect()
     connect(this, &FoodWindow::MouseHoversMoveOnItem, this, &FoodWindow::OnMouseHoversMoveItem);
     connect(this, &FoodWindow::MouseHoversLeaveOnItem, this, &FoodWindow::OnMouseHoversLeaveItem);
 
+    // 点击第一个按钮
     connect(item0, &QPushButton::clicked, this, [=]()
     {
         if (const auto index = currentPage * 4 + 0; 
