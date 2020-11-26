@@ -90,6 +90,8 @@ void FoodWindow::InitializeConnect()
             useButton->setDisabled(true);
         }
     });
+
+    // 点击第二个按钮
     connect(item1, &QPushButton::clicked, this, [=]()
     {
         if (const auto index = currentPage * 4 + 1;
