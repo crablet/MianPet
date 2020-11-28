@@ -9,6 +9,8 @@ FoodWindow::FoodWindow(QWidget *parent)
 
 FoodWindow::~FoodWindow()
 {
+    // 退出的时候保存一下缓存
+
     QJsonArray arr;
     for (const auto &r : items)
     {
