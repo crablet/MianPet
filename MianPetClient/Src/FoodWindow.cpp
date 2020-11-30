@@ -117,7 +117,7 @@ void FoodWindow::InitializeConnect()
     connect(item2, &QPushButton::clicked, this, [=]()
     {
         if (const auto index = currentPage * 4 + 2;
-            index < items.size())
+            index < items.size())   // 确保index不要越界，因为有可能有按钮没有对应的食品
         {
             selectedFood = items[index].name;
 
