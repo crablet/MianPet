@@ -261,7 +261,7 @@ void FoodWindow::ViewNextPage()
             : item3->setIcon(QIcon());
         // 展示[rangeBegin, rangeEnd)中的内容
 
-        selectedFood.clear();
+        selectedFood.clear();  // 翻页后选中的食品要清空，不然就会被上一页的遗留信息影响了
         buyButton->setDisabled(true);
         useButton->setDisabled(true);
     }
