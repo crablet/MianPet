@@ -238,7 +238,7 @@ void FoodWindow::ViewPreviousPage()
 void FoodWindow::ViewNextPage()
 {
     const auto max = static_cast<int>(items.size());
-    if (max >= 2 && currentPage <= max - 2)
+    if (max >= 2 && currentPage <= max - 2) // 只有页码小于max - 2才可以翻下一页，不然一定越界了d
     {
         ++currentPage;
         const auto rangeBegin = currentPage * 3;
