@@ -247,6 +247,7 @@ void FoodWindow::ViewNextPage()
         std::thread requestThread(&FoodWindow::RequestDataInRange, this, rangeBegin, rangeEnd);
         requestThread.detach();
 
+        // 展示[rangeBegin, rangeEnd)中的内容
         rangeBegin + 0 < rangeEnd
             ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].name + ".png"))
             : item0->setIcon(QIcon());
