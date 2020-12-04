@@ -194,7 +194,7 @@ void FoodWindow::DataPrepare()
 
     const auto rangeBegin = 0;
     const auto rangeEnd = static_cast<decltype(rangeBegin)>(items.size() >= 4 ? 4 : items.size());
-    rangeBegin + 0 < rangeEnd
+    rangeBegin + 0 < rangeEnd     // 确保不要越界
         ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].name + ".png"))
         : item0->setIcon(QIcon());
     rangeBegin + 1 < rangeEnd
