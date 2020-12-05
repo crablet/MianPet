@@ -202,7 +202,7 @@ void FoodWindow::DataPrepare()
         : item1->setIcon(QIcon());  // 如果越界了就展示空图标
     rangeBegin + 2 < rangeEnd
         ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].name + ".png"))
-        : item2->setIcon(QIcon());
+        : item2->setIcon(QIcon());  // 如果越界了就展示空图标
     rangeBegin + 3 < rangeEnd
         ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"))
         : item3->setIcon(QIcon());
