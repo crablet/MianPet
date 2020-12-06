@@ -209,7 +209,7 @@ void FoodWindow::DataPrepare()
 
     currentPage = 0;
 
-    RequestDataInRange(rangeBegin, rangeEnd);
+    RequestDataInRange(rangeBegin, rangeEnd);   // 请求更新数据
 }
 
 void FoodWindow::ViewPreviousPage()
