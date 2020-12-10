@@ -253,7 +253,7 @@ void CleanWindow::ViewNextPage()
         rangeBegin + 1 < rangeEnd   // 确保不要越界
             ? item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].name + ".png"))
             : item1->setIcon(QIcon());
-        rangeBegin + 2 < rangeEnd
+        rangeBegin + 2 < rangeEnd   // 确保不要越界
             ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].name + ".png"))
             : item2->setIcon(QIcon());
         rangeBegin + 3 < rangeEnd
