@@ -247,7 +247,7 @@ void CleanWindow::ViewNextPage()
         requestThread.detach();
 
         // 展示[rangeBegin, rangeEnd)中的内容
-        rangeBegin + 0 < rangeEnd   // 确保不要越界
+        rangeBegin + 0 < rangeEnd       // 确保不要越界
             ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].name + ".png"))
             : item0->setIcon(QIcon());  // 如果越界了就展示空图标
         rangeBegin + 1 < rangeEnd   // 确保不要越界
