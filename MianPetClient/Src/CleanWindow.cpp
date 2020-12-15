@@ -244,7 +244,7 @@ void CleanWindow::ViewNextPage()
 
         // 请求当前页面所需要的数据
         std::thread requestThread(&CleanWindow::RequestDataInRange, this, rangeBegin, rangeEnd);
-        requestThread.detach();
+        requestThread.detach(); // 开启请求线程后就可以扔一边不管了，让它自己去更新数据
 
         // 展示[rangeBegin, rangeEnd)中的内容
         rangeBegin + 0 < rangeEnd       // 确保不要越界
