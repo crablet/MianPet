@@ -259,7 +259,7 @@ void FoodWindow::ViewNextPage()
             : item2->setIcon(QIcon());  // 如果越界了就展示空图标
         rangeBegin + 3 < rangeEnd   // 确保不要越界
             ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"))
-            : item3->setIcon(QIcon());
+            : item3->setIcon(QIcon());  // 如果越界了就展示空图标
         // 展示[rangeBegin, rangeEnd)中的内容
 
         selectedFood.clear();  // 翻页后选中的食品要清空，不然就会被上一页的遗留信息影响了
