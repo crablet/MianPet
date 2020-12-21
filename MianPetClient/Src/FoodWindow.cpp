@@ -256,7 +256,7 @@ void FoodWindow::ViewNextPage()
             : item1->setIcon(QIcon());  // 如果越界了就展示空图标
         rangeBegin + 2 < rangeEnd   // 确保不要越界
             ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].name + ".png"))
-            : item2->setIcon(QIcon());
+            : item2->setIcon(QIcon());  // 如果越界了就展示空图标
         rangeBegin + 3 < rangeEnd   // 确保不要越界
             ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"))
             : item3->setIcon(QIcon());
