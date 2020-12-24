@@ -262,7 +262,9 @@ void FoodWindow::ViewNextPage()
             : item3->setIcon(QIcon());  // 如果越界了就展示空图标
 
         selectedFood.clear();  // 翻页后选中的食品要清空，不然就会被上一页的遗留信息影响了
-        buyButton->setDisabled(true);   // 既然可以翻页，那么下方两个按钮都可以正常展示
+
+        // 既然可以翻页，那么下方两个按钮都可以正常展示
+        buyButton->setDisabled(true);   
         useButton->setDisabled(true);
     }
 }
