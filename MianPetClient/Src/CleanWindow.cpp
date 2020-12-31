@@ -197,7 +197,7 @@ void CleanWindow::DataPrepare()
         : item0->setIcon(QIcon());  // 如果越界了就展示空图标
     rangeBegin + 1 < rangeEnd   // 确保不要越界
         ? item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].name + ".png"))
-        : item1->setIcon(QIcon());
+        : item1->setIcon(QIcon());  // 如果越界了就展示空图标
     rangeBegin + 2 < rangeEnd   // 确保不要越界
         ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].name + ".png"))
         : item2->setIcon(QIcon());
