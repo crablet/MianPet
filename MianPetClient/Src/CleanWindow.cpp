@@ -122,7 +122,7 @@ void CleanWindow::InitializeConnect()
             buyButton->setEnabled(true);
             useButton->setEnabled(true);
         }
-        else
+        else    // 越界处理
         {
             selectedClean.clear();
 
