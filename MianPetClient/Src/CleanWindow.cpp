@@ -440,6 +440,7 @@ void CleanWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
         const auto name = r["name"].toString();
         const auto amount = r["amount"].toInt();
 
+        // 去找对应名字的项然后更新amount字段
         auto iter = std::find_if(items.begin(), items.end(), [=, &name](const ItemInformation &rhs)
         {
             return name == rhs.name;
