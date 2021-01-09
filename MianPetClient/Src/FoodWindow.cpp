@@ -415,7 +415,7 @@ void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
         return;
     }
 
-    QJsonArray tempArray;
+    QJsonArray tempArray;   // 一会需要传入给SetItems的要请求的数据
     for (int i = rangeBegin; i < rangeEnd; ++i)
     {
         tempArray.append(items[i].name);
