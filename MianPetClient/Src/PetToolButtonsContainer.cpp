@@ -18,7 +18,7 @@ void PetToolButtonsContainer::InitializeUi()
     cleanButton = new QPushButton(PetToolButtonsContainerWaterButtonIcon, {});
     cleanButton->setIconSize(PetToolButtonsContainerButtonSize);
     cleanButton->setFlat(true);
-    cleanButton->setStyleSheet("QPushButton { border: none }");
+    cleanButton->setStyleSheet("QPushButton { border: none }"); // 让按钮无边框
 
     petProfileButton = new QPushButton;
 
