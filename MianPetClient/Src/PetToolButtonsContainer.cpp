@@ -13,7 +13,7 @@ void PetToolButtonsContainer::InitializeUi()
     foodButton = new QPushButton(PetToolButtonsContainerFoodButtonIcon, {});
     foodButton->setIconSize(PetToolButtonsContainerButtonSize);
     foodButton->setFlat(true);
-    foodButton->setStyleSheet("QPushButton { border: none }");
+    foodButton->setStyleSheet("QPushButton { border: none }");  // 让按钮无边框
 
     cleanButton = new QPushButton(PetToolButtonsContainerWaterButtonIcon, {});
     cleanButton->setIconSize(PetToolButtonsContainerButtonSize);
