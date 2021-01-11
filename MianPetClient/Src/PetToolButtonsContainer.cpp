@@ -98,6 +98,7 @@ void PetToolButtonsContainer::OnWorkingButtonClicked()
 
 void PetToolButtonsContainer::OnPetProfileButtonClicked()
 {
+    // 因为WorkingWindow有只要退出就自动delete自身的特性，所以可以重复new
     petProfileWindow = new PetProfileWindow;
     petProfileWindow->show();
     disconnect(petProfileButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnPetProfileButtonClicked);
