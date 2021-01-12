@@ -68,6 +68,7 @@ void WorkingWindow::InitializeUi()
 
 void WorkingWindow::InitializeConnect()
 {
+    // 成功开始打工的处理逻辑
     connect(this, &WorkingWindow::WorkBeginSucceeded, this, [=]()
     {
         SetWindowTitle("正在打工-" + workingJob + "-已进行-0分钟");
