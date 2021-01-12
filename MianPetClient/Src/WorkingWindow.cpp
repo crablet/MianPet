@@ -68,13 +68,15 @@ void WorkingWindow::InitializeUi()
 
 void WorkingWindow::InitializeConnect()
 {
-    // 成功开始打工的处理逻辑
+    // 开始打工成功的处理逻辑
     connect(this, &WorkingWindow::WorkBeginSucceeded, this, [=]()
     {
         SetWindowTitle("正在打工-" + workingJob + "-已进行-0分钟");
 
         QMessageBox::information(this, "成功", "开始打工！");
     });
+    
+    // 开始打工失败的处理逻辑
     connect(this, &WorkingWindow::WorkBeginFailed, this, [=]()
     {
         QMessageBox::information(this, "失败", "我们好像打不了这个工。");
