@@ -104,6 +104,8 @@ void PetToolButtonsContainer::OnPetProfileButtonClicked()
     
     // 点击以后就取消和这个槽的链接，就不会出现多次点击出现多个窗口的情况
     disconnect(petProfileButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnPetProfileButtonClicked);
+    
+    // 当窗口关闭时可以恢复链接，以响应下一次的信号
     connect(petProfileWindow, &PetProfileWindow::destroyed, [=]()
     {
         connect(petProfileButton, &QPushButton::clicked, this, &PetToolButtonsContainer::OnPetProfileButtonClicked);
