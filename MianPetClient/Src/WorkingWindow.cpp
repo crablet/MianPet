@@ -89,6 +89,8 @@ void WorkingWindow::InitializeConnect()
 
         QMessageBox::information(this, "成功", "好累，终于结束了。");
     });
+    
+    // 结束打工失败的处理逻辑
     connect(this, &WorkingWindow::WorkEndFailed, this, [=]()
     {
         QMessageBox::information(this, "失败", "怎么办？这工作停不下来了。");
