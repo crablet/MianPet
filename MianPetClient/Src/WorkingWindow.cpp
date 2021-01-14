@@ -81,6 +81,8 @@ void WorkingWindow::InitializeConnect()
     {
         QMessageBox::information(this, "失败", "我们好像打不了这个工。");
     });
+    
+    // 结束打工成功的处理逻辑
     connect(this, &WorkingWindow::WorkEndSucceeded, this, [=]()
     {
         SetWindowTitle("打工");   // 恢复标题栏为正常状态
