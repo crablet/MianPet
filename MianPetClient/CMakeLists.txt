@@ -12,7 +12,9 @@ set(CMAKE_AUTOUIC ON)
 
 find_package(Qt5 COMPONENTS Core Gui Widgets Network REQUIRED)
 
-link_libraries(pthread)
+if (UNIX)
+    link_libraries(pthread)
+ENDIF()
 
 set(SOURCES
     Src/CleanWindow.cpp
