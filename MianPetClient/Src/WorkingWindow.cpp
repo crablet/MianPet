@@ -28,7 +28,7 @@ WorkingWindow::~WorkingWindow()
         arr.push_back(obj);
     }
 
-    QFile jsonFile("MianPetData/JobsData.json");
+    QFile jsonFile("../MianPetData/JobsData.json");
     if (!jsonFile.open(QIODevice::Text | QIODevice::WriteOnly | QIODevice::Truncate))
     {
         return;

@@ -177,7 +177,7 @@ void FoodWindow::InitializeConnect()
 
 void FoodWindow::DataPrepare()
 {
-    QFile jsonFile("MianPetData/FoodShopData.json");
+    QFile jsonFile("../MianPetData/FoodShopData.json");
     if (!jsonFile.open(QIODevice::Text | QIODevice::ReadOnly))
     {
         return;

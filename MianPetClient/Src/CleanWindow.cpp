@@ -175,7 +175,7 @@ void CleanWindow::InitializeConnect()
 
 void CleanWindow::DataPrepare()
 {
-    QFile jsonFile("MianPetData/CleanShopData.json");
+    QFile jsonFile("../MianPetData/CleanShopData.json");
     if (!jsonFile.open(QIODevice::Text | QIODevice::ReadOnly))
     {
         return;
