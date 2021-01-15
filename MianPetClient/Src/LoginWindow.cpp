@@ -41,7 +41,13 @@ void LoginWindow::InitializeUi()
 
 void LoginWindow::InitializeConnect()
 {
-    connect(closeButton, &QPushButton::clicked, this, &LoginWindow::close);
+    connect(closeButton, &QPushButton::clicked, this,
+    [=]()
+    {
+        this->close();
+
+        emit LoginWindowClosed();
+    });
     connect(registerButton, &QPushButton::clicked, this, 
     [=]() 
     { 

@@ -67,6 +67,16 @@ void PetClient::InitializeConnect()
         heartbeat->start(1min);
     });
 
+    connect(loginWindow, &LoginWindow::LoginWindowClosed, this,
+    [=]()
+    {
+        tray->hide();
+        delete tray;
+        tray = nullptr;
+
+        this->close();
+    });
+
     // 处理收到错误的心跳包返回消息，应给出提示
     connect(this, &PetClient::HeartbeatError, this, [this]()
     {
