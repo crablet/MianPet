@@ -501,7 +501,7 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                 const auto newClean = clean;
                 const auto newHealth = health;
                 const auto newMood = mood;
-                const auto newGrowthSpeed = growthSpeed;
+                const auto newGrowthSpeed = newMood >= 50 ? 2 : 1;
                 const auto newStatus = status;
                 // TODO: finish the calculation
 
