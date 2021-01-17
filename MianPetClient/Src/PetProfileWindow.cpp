@@ -69,12 +69,12 @@ void PetProfileWindow::InitializeUi()
 
     //////////////////////////////////////////////////////
 
-    grouthSpeedLabel = new QLabel("成长速度：" + QString::number(growthValue) + "/小时");
+    growthSpeedLabel = new QLabel("成长速度：" + QString::number(growthSpeedValue) + "/小时");
     statusLabel = new QLabel("状态：正在成长");
     onlineTimeLabel = new QLabel("在线时间：" + QString::number(onlineTimeValue) + "分钟");
 
     lowerLayout = new QVBoxLayout(this);
-    lowerLayout->addWidget(grouthSpeedLabel);
+    lowerLayout->addWidget(growthSpeedLabel);
     lowerLayout->addWidget(statusLabel);
     lowerLayout->addWidget(onlineTimeLabel);
     lowerLayout->setContentsMargins({ 2, 0, 2, 0 });
@@ -176,7 +176,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         cleanValue = jsonDocument["clean"].toInt();
         healthValue = jsonDocument["health"].toInt();
         moodValue = jsonDocument["mood"].toInt();
-        grouthSpeedValue = jsonDocument["growth_speed"].toInt();
+        growthSpeedValue = jsonDocument["growth_speed"].toInt();
         onlineTimeValue = jsonDocument["online_time"].toInt();
 
         // 使用缓存的数据
@@ -189,7 +189,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         cleanBar->setValue(cleanValue);      // TODO: 这几个要按照换算公式换回百分比
         healthBar->setValue(healthValue);    // TODO: 这几个要按照换算公式换回百分比
         moodBar->setValue(moodValue);        // TODO: 这几个要按照换算公式换回百分比
-        grouthSpeedLabel->setText("成长速度：" + QString::number(growthValue) + "/小时");
+        growthSpeedLabel->setText("成长速度：" + QString::number(growthSpeedValue) + "/小时");
         statusLabel->setText("状态：" + QString::number(jsonDocument["status"].toInt()));
         onlineTimeLabel->setText("在线时间：" + QString::number(onlineTimeValue) + "分钟");
     }
