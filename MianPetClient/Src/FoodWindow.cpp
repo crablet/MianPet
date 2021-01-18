@@ -159,6 +159,13 @@ void FoodWindow::InitializeConnect()
     connect(this, &FoodWindow::BuySucceeded, this, [=](const QString &item, int count)
     {
         QMessageBox::information(this, "购买成功", "本次共购入" + QString::number(count) + "个" + item);
+
+        // 更新本地缓存，用于使悬停标签能及时更新数据
+        auto pos = std::find_if(items.begin(), items.end(), [&item](const ItemInformation &info)
+        {
+            return info.name == item;
+        });
+        pos->amount += count;
     });
     connect(this, &FoodWindow::BuyFailed, this, [=]()
     {
@@ -168,6 +175,13 @@ void FoodWindow::InitializeConnect()
     connect(this, &FoodWindow::UseSucceeded, this, [=](const QString &item, int count)
     {
         QMessageBox::information(this, "使用成功", "本次共使用" + QString::number(count) + "个" + item);
+
+        // 更新本地缓存，用于使悬停标签能及时更新数据
+        auto pos = std::find_if(items.begin(), items.end(), [&item](const ItemInformation &info)
+        {
+            return info.name == item;
+        });
+        pos->amount -= count;
     });
     connect(this, &FoodWindow::UseFailed, this, [=]()
     {
