@@ -497,8 +497,12 @@ void Connection::DealWithHeartbeat(const char *id, const char *randomKey)
                                 ((level % 2) == 0 ? (1 + level / 2) * level / 2 
                                                   : ((level + 1) / 2) * ((level + 1) / 2)));
                 // TODO: finish the calculation
-                const auto newFood = food;
-                const auto newClean = clean;
+                const auto newFood = food >= FoodNormalOrAbnormal ?
+                                     food - FoodDeltaWhenNormal :
+                                     food - FoodDeltaWhenAbnormal;
+                const auto newClean = clean >= CleanNormalOrAbnormal ?
+                                      clean - CleanDeltaWhenNormal :
+                                      clean - CleanDeltaWhenAbnormal;
                 const auto newHealth = health;
                 const auto newMood = mood;
                 const auto newGrowthSpeed = newMood >= 50 ? 2 : 1;
