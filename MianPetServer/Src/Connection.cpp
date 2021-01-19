@@ -569,12 +569,16 @@ void Connection::DealWithLogout(const char *id, const char *randomKey)
                        WHERE id = :id<char[16]>)";
                 otl_stream updateStream(1, updateSql, db);
                 updateStream << id;
+
+#ifdef DEBUG
+                std::cout << "In function Connection::DealWithLogout: LOGOUT SECCEEDED!" << std::endl;
+#endif
             }
             else
             {
                 // error
 #ifdef DEBUG
-                std::cout << "In function Connection::DealWithLogout: LOGOUT FAILED!" << std::endl;
+                std::cout << "In function Connection::DealWithLogout: LOGOUT FAILED! Reason: randomKey not matches secretKey" << std::endl;
 #endif // DEBUG
             }
         }
@@ -582,7 +586,7 @@ void Connection::DealWithLogout(const char *id, const char *randomKey)
         {
             // error
 #ifdef DEBUG
-            std::cout << "In function Connection::DealWithLogout: LOGOUT FAILED!" << std::endl;
+            std::cout << "In function Connection::DealWithLogout: LOGOUT FAILED! Reason: User is not online." << std::endl;
 #endif // DEBUG
         }
     }
