@@ -30,6 +30,10 @@ void PetClient::InitializeUi()
     petToolButtonsContainer->setFixedHeight(PetToolButtonsContainerHeight);
     petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - PetToolButtonsContainerUiDelta));
 
+    hidePetToolButtonsContainerTimer = new QTimer(this);
+    hidePetToolButtonsContainerTimer->setSingleShot(true);
+    hidePetToolButtonsContainerTimer->setInterval(PetToolButtonsContainerStayingTime);
+
     settingsAction = new QAction("设置", this);
     exitAction = new QAction("退出", this);
 
@@ -85,6 +89,15 @@ void PetClient::InitializeConnect()
 
     connect(exitAction, &QAction::triggered, this, &PetClient::OnExitActionTriggered);
     connect(settingsAction, &QAction::triggered, this, &PetClient::OnSettingsActionTriggered);
+
+    // 鼠标离开宠物主体时就开始计时，时间一到就隐藏底部工具栏
+    connect(hidePetToolButtonsContainerTimer, &QTimer::timeout, this, [=]()
+    {
+        if (!petToolButtonsContainer->underMouse())
+        {
+            petToolButtonsContainer->hide();
+        }
+    });
 }
 
 void PetClient::mouseMoveEvent(QMouseEvent *event)
@@ -124,6 +137,7 @@ void PetClient::mouseReleaseEvent(QMouseEvent *event)
 
 void PetClient::enterEvent([[maybe_unused]] QEvent *event)
 {
+    hidePetToolButtonsContainerTimer->stop();   // 先把之前的定时器停了，免得先前的定时器超时就把现在的隐藏了
     petToolButtonsContainer->move(frameGeometry().topLeft() + QPoint(0, width() - PetToolButtonsContainerUiDelta));
     petToolButtonsContainer->show();
 }
@@ -131,13 +145,7 @@ void PetClient::enterEvent([[maybe_unused]] QEvent *event)
 void PetClient::leaveEvent([[maybe_unused]] QEvent *event)
 {
     // 鼠标离开宠物主体时就开始计时，时间一到就隐藏底部工具栏
-    QTimer::singleShot(PetToolButtonsContainerStayingTime, this, [=]()
-    {
-        if (!petToolButtonsContainer->underMouse())
-        {
-            petToolButtonsContainer->hide();
-        }
-    });
+    hidePetToolButtonsContainerTimer->start();
 }
 
 void PetClient::Logout()

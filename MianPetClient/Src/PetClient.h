@@ -71,6 +71,7 @@ private:
     SettingsWindow *settingsWindow; // 右键托盘图标能调出此设置页面
 
     QTimer *heartbeat;      // 负责发送心跳的定时器
+    QTimer *hidePetToolButtonsContainerTimer;   // 用于隐藏主界面底部的按钮集合的定时器
 
     QSystemTrayIcon *tray;  // 系统托盘
     QMenu *trayMenu;        // 系统托盘的菜单
