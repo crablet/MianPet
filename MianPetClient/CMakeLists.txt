@@ -16,6 +16,9 @@ if (UNIX)
     link_libraries(pthread)
 ENDIF()
 
+set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
+set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
+
 set(SOURCES
     Src/CleanWindow.cpp
     Src/FoodWindow.cpp
