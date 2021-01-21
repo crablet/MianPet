@@ -25,6 +25,7 @@ class SmallItemsContainerWindow : public FramelessWindow
     Q_OBJECT
 public:
     explicit SmallItemsContainerWindow(QWidget *parent = nullptr);
+    virtual ~SmallItemsContainerWindow();
 
 private:
     void InitializeUi();

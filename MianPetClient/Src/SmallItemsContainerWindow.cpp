@@ -80,7 +80,7 @@ void SmallItemsContainerWindow::InitializeUi()
     item3->setIconSize(QSize(SmallItemsContainerWindowItem3IconWidth, SmallItemsContainerWindowItem3IconHeight));
     item3->installEventFilter(this);
 
-    itemLabel = new TransparentItemLabel;
+    itemLabel = new TransparentItemLabel;   // 由于没有设置parent，所以要记得delete，否则会造成内存泄漏
 }
 
 void SmallItemsContainerWindow::InitializeConnect()
@@ -135,4 +135,10 @@ void SmallItemsContainerWindow::SetWidthOfWindowTitle(int width)
 void SmallItemsContainerWindow::SetHeightOfWindowTitle(int height)
 {
     windowTitleLabel->setFixedHeight(height);
+}
+
+SmallItemsContainerWindow::~SmallItemsContainerWindow()
+{
+    delete itemLabel;
+    itemLabel = nullptr;
 }
