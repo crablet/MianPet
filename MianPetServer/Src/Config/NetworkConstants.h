@@ -1,4 +1,5 @@
-﻿#ifndef NETWORKCONSTANTS_H
+﻿#pragma once
+#ifndef NETWORKCONSTANTS_H
 #define NETWORKCONSTANTS_H
 
 inline constexpr int ServerPort = 9999;
