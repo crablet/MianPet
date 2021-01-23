@@ -185,10 +185,10 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         levelLabel->setText(QString::number(levelValue));
         ageLabel->setText(QString::number(ageValue / 60) + "小时");
         growthBar->setValue(growthValue);    // TODO: 这几个要按照换算公式换回百分比
-        foodBar->setValue(foodValue);        // TODO: 这几个要按照换算公式换回百分比
-        cleanBar->setValue(cleanValue);      // TODO: 这几个要按照换算公式换回百分比
-        healthBar->setValue(healthValue);    // TODO: 这几个要按照换算公式换回百分比
-        moodBar->setValue(moodValue);        // TODO: 这几个要按照换算公式换回百分比
+        foodBar->setValue(100 * foodValue / FoodValueMax);
+        cleanBar->setValue(100 * cleanValue / CleanValueMax);
+        healthBar->setValue(100 * healthValue / HealthValueMax);
+        moodBar->setValue(100 * moodValue / MoodValueMax);
         growthSpeedLabel->setText("成长速度：" + QString::number(growthSpeedValue) + "/小时");
         statusLabel->setText("状态：" + QString::number(jsonDocument["status"].toInt()));
         onlineTimeLabel->setText("在线时间：" + QString::number(onlineTimeValue) + "分钟");

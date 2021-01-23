@@ -3,6 +3,11 @@
 
 #include <QString>
 
+inline constexpr int FoodValueMax = 3600;
+inline constexpr int CleanValueMax = 3600;
+inline constexpr int HealthValueMax = 100;
+inline constexpr int MoodValueMax = 100;
+
 inline int levelValue;  // 面宠等级
 inline int ageValue;    // 面宠年龄
 inline int growthValue; // 面宠成长值
