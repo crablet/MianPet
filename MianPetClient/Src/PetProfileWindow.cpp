@@ -184,7 +184,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         idLabel->setText(jsonDocument["id"].toString());
         levelLabel->setText(QString::number(levelValue));
         ageLabel->setText(QString::number(ageValue / 60) + "小时");
-        growthBar->setValue(growthValue);    // TODO: 这几个要按照换算公式换回百分比
+        growthBar->setValue(100 * growthValue / GrowthValueMax(levelValue));
         foodBar->setValue(100 * foodValue / FoodValueMax);
         cleanBar->setValue(100 * cleanValue / CleanValueMax);
         healthBar->setValue(100 * healthValue / HealthValueMax);

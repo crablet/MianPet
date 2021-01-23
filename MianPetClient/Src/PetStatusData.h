@@ -3,10 +3,18 @@
 
 #include <QString>
 
-inline constexpr int FoodValueMax = 3600;
-inline constexpr int CleanValueMax = 3600;
-inline constexpr int HealthValueMax = 100;
-inline constexpr int MoodValueMax = 100;
+inline constexpr int FoodValueMax = 3600;   // 饥饿值的上限
+inline constexpr int CleanValueMax = 3600;  // 清洁值的上限
+inline constexpr int HealthValueMax = 100;  // 健康值的上限
+inline constexpr int MoodValueMax = 100;    // 心情值的上限
+
+// 返回升级到n + 1级所需的总经验值，用于在第n级时展示升级进度
+inline constexpr int GrowthValueMax(int n)
+{
+    ++n;    // 计算n + 1级，后面的公式根据文档来（MianPetServer/Doc/Rules.md）
+    return (n % 2 == 0) ? (1 + n / 2) * n / 2
+                        : ((n + 1) / 2) * ((n + 1) / 2);
+}
 
 inline int levelValue;  // 面宠等级
 inline int ageValue;    // 面宠年龄
