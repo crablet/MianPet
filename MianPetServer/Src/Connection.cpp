@@ -927,6 +927,13 @@ void Connection::DealWithUse(const char *id, const char *randomKey, const char *
                         r >> foodBonus >> cleanBonus >> healthBonus;
                     }
 
+#ifdef DEBUG
+                    std::cout << "In function Connection::DealWithUse: Use " << item
+                              << ", foodBonus: " << foodBonus
+                              << ", cleanBonus: " << cleanBonus
+                              << ", healthBonus: " << healthBonus << '\n';
+#endif
+
                     // 获取面宠原来的属性值
                     constexpr const char *getOriginalStatusSql =
                         R"(SELECT food, clean, health
@@ -941,9 +948,9 @@ void Connection::DealWithUse(const char *id, const char *randomKey, const char *
                         r >> food >> clean >> health;
                     }
 
-                    // 计算使用后的属性值，最大值为3200
-                    food = std::min(3200, food + foodBonus);
-                    clean = std::min(3200, clean + cleanBonus);
+                    // 计算使用后的属性值，最大值为3600
+                    food = std::min(3600, food + foodBonus);
+                    clean = std::min(3600, clean + cleanBonus);
                     health = std::min(100, health + healthBonus);
 
                     // 更新使用后的状态
