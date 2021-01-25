@@ -9,12 +9,12 @@ set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O2 -Wall")
 link_libraries(pthread)
 
 include_directories(./Src/asio-1.18.1)
-include_directories(./Src/simdjson-0.5.0) #repeated
+include_directories(./Src/simdjson-0.8.0) #repeated
 include_directories(./Src/otl-4.0.459)
 include_directories(./Src/Config)
 
 aux_source_directory(./Src DIR_SRSC)
-aux_source_directory(./Src/simdjson-0.5.0 SIMDJSON_SRC) #repeated
+aux_source_directory(./Src/simdjson-0.8.0 SIMDJSON_SRC) #repeated
 
 add_executable(MianPetServer ${SIMDJSON_SRC} ${DIR_SRSC})
 target_link_libraries(MianPetServer libmyodbc8a.so)
