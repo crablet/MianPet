@@ -22,7 +22,10 @@ void PetToolButtonsContainer::InitializeUi()
 
     petProfileButton = new QPushButton;
 
-    workingButton = new QPushButton;
+    workingButton = new QPushButton(PetToolButtonsContainerWorkingButtonIcon, {});
+    workingButton->setIconSize(PetToolButtonsContainerButtonSize);
+    workingButton->setFlat(true);
+    workingButton->setStyleSheet("QPushButton { border: none }"); // 让按钮无边框
 
     layout->addStretch();
     layout->addWidget(foodButton);

@@ -12,6 +12,7 @@ inline constexpr int PetToolButtonsContainerStayingTime = 520;
 inline const QSize PetToolButtonsContainerButtonSize = QSize(43, 66);
 #define PetToolButtonsContainerFoodButtonIcon (QIcon(":/Pic/bow-mix.png"))
 #define PetToolButtonsContainerWaterButtonIcon (QIcon(":/Pic/clean-mix.png"))
+#define PetToolButtonsContainerWorkingButtonIcon (QIcon(":/Pic/laboro-mix.png"))
 
 inline constexpr int SmallItemsContainerWindowWidth = 440;
 inline constexpr int SmallItemsContainerWindowHeight = 196;
