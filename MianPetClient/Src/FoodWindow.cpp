@@ -22,7 +22,7 @@ FoodWindow::~FoodWindow()
         arr.push_back(obj);
     }
 
-    QFile jsonFile("MianPetData/FoodShopData.json");
+    QFile jsonFile("../MianPetData/FoodShopData.json");
     if (!jsonFile.open(QIODevice::Text | QIODevice::WriteOnly | QIODevice::Truncate))   // 打开要存放的缓存文件
     {
         return;

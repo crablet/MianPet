@@ -565,7 +565,7 @@ void WorkingWindow::GetWorkingStatus()
 
 void WorkingWindow::DataPrepare()
 {
-    QFile jsonFile("MianPetData/JobsData.json");
+    QFile jsonFile("../MianPetData/JobsData.json");
     if (!jsonFile.open(QIODevice::Text | QIODevice::ReadOnly))
     {
         return;
