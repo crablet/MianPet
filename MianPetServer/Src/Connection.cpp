@@ -1158,6 +1158,11 @@ void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const ch
                     reply = R"({"status":"failed"})";   // 可能是工作时间不满一小时
                 }
 
+#ifdef DEBUG
+                std::cout << "In function Connection::DealWithWorkEnd: " << id
+                          << " reply: " << reply
+#endif // DEBUG
+
                 DoWrite();
             }
             else
