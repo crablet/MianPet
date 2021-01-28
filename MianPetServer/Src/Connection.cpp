@@ -987,7 +987,6 @@ void Connection::DealWithUse(const char *id, const char *randomKey, const char *
     }
 }
 
-// FIXME：有概率无法开始
 void Connection::DealWithWorkBegin(const char *id, const char *randomKey, const char *job)
 {
 #ifdef DEBUG
@@ -1054,7 +1053,7 @@ void Connection::DealWithWorkBegin(const char *id, const char *randomKey, const 
                         constexpr const char *beginWorkingSql = 
                             R"(UPDATE workinginfo
                                SET begintime = NOW(), count = count + 1, working = 1
-                               WHERE id = :id<char[16] AND job = :job<char[18]>)";
+                               WHERE id = :id<char[16]> AND job = :job<char[18]>)";
                         otl_stream beginWorkingStream(1, beginWorkingSql, db);
                         beginWorkingStream << id << job;
 
@@ -1123,6 +1122,12 @@ void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const ch
                     r >> jobName >> workingTime;
                 }
 
+#ifdef DEBUG
+                std::cout << "In function Connection::DealWithWorkEnd: " << id
+                          << " job name: " << jobName
+                          << " working time: " << workingTime;
+#endif // DEBUG
+
                 if (workingTime >= 60)  // 暂定一次工作时间为60分钟，时薪为jobsinfo中的wage
                 {
                     constexpr const char *getWageSql =
@@ -1149,6 +1154,7 @@ void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const ch
                 }
                 else
                 {
+                    // FIXME: 工作时间不满一小时就不能停止打工？这个逻辑显然有问题
                     reply = R"({"status":"failed"})";   // 可能是工作时间不满一小时
                 }
 
@@ -1247,6 +1253,12 @@ void Connection::DealWithJobsInfo(const char *id, const char *randomKey, const s
                 }
                 replyJson += R"(]})";
                 reply = std::move(replyJson);
+
+#ifdef DEBUG
+                std::cout << "In function Connection::DealWithJobsInfo: " << id
+                          << " reply: " << reply << '\n';
+
+#endif // DEBUG
 
                 DoWrite();
             }
