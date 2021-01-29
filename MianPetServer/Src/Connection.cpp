@@ -1128,6 +1128,13 @@ void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const ch
                           << " working time: " << workingTime;
 #endif // DEBUG
 
+                constexpr const char *endWorkingSql =
+                        R"(UPDATE workinginfo
+                           SET working = 0
+                           WHERE id = :id<char[16]> AND job = :job<char[36]>)";
+                otl_stream endWorkingStream(1, endWorkingSql, db);
+                endWorkingStream << id << jobName;
+
                 if (workingTime >= 60)  // 暂定一次工作时间为60分钟，时薪为jobsinfo中的wage
                 {
                     constexpr const char *getWageSql =
@@ -1160,7 +1167,7 @@ void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const ch
 
 #ifdef DEBUG
                 std::cout << "In function Connection::DealWithWorkEnd: " << id
-                          << " reply: " << reply
+                          << " reply: " << reply;
 #endif // DEBUG
 
                 DoWrite();
