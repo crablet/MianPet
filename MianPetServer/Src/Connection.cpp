@@ -1080,7 +1080,6 @@ void Connection::DealWithWorkBegin(const char *id, const char *randomKey, const 
     }
 }
 
-// FIXME：有概率无法结束
 void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const char *job)
 {
 #ifdef DEBUG
@@ -1156,14 +1155,9 @@ void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const ch
                            WHERE id = :id<char[16]>)";
                     otl_stream updateTuotuoStream(1, updateTuotuoSql, db);
                     updateTuotuoStream << wage << id;
+                }
 
-                    reply = R"({"status":"succeeded"})";
-                }
-                else
-                {
-                    // FIXME: 工作时间不满一小时就不能停止打工？这个逻辑显然有问题
-                    reply = R"({"status":"failed"})";   // 可能是工作时间不满一小时
-                }
+                reply = R"({"status":"succeeded"})";
 
 #ifdef DEBUG
                 std::cout << "In function Connection::DealWithWorkEnd: " << id
