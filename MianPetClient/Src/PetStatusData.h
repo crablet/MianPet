@@ -18,6 +18,7 @@ inline constexpr int GrowthValueMax(int n)
 
 inline int levelValue;  // 面宠等级
 inline int ageValue;    // 面宠年龄
+inline int tuotuoValue; // 面宠拥有的坨坨数
 inline int growthValue; // 面宠成长值
 inline int foodValue;   // 面宠饥饿值
 inline int cleanValue;  // 面宠清洁值

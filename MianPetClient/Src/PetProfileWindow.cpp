@@ -24,6 +24,7 @@ void PetProfileWindow::InitializeUi()
     idLabel = new QLabel;
     levelLabel = new QLabel;
     ageLabel = new QLabel;
+    tuotuoLabel = new QLabel;
     growthBar = new QProgressBar;
     foodBar = new QProgressBar;
     cleanBar = new QProgressBar;
@@ -38,6 +39,7 @@ void PetProfileWindow::InitializeUi()
 
     levelLabel->setText(QString::number(levelValue));
     ageLabel->setText(QString::number(ageValue));
+    tuotuoLabel->setText(QString::number(tuotuoValue));
     growthBar->setValue(growthValue);
     foodBar->setValue(foodValue);
     cleanBar->setValue(cleanValue);
@@ -57,6 +59,7 @@ void PetProfileWindow::InitializeUi()
     upperLayout->addRow("号码：", idLabel);
     upperLayout->addRow("等级：", levelLabel);
     upperLayout->addRow("年龄：", ageLabel);
+    upperLayout->addRow("坨坨：", tuotuoLabel);
     upperLayout->addRow("成长：", growthBar);
     upperLayout->addRow("饥饿：", foodBar);
     upperLayout->addRow("清洁：", cleanBar);
@@ -171,6 +174,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         // 缓存数据
         levelValue = jsonDocument["level"].toInt();
         ageValue = jsonDocument["age"].toInt();
+        //tuotuoValue = jsonDocument["tuotuo"].toInt(); // 暂未实现此功能
         growthValue = jsonDocument["growth"].toInt();
         foodValue = jsonDocument["food"].toInt();
         cleanValue = jsonDocument["clean"].toInt();
@@ -184,6 +188,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         idLabel->setText(jsonDocument["id"].toString());
         levelLabel->setText(QString::number(levelValue));
         ageLabel->setText(QString::number(ageValue / 60) + "小时");
+        tuotuoLabel->setText(QString::number(tuotuoValue));
         growthBar->setValue(100 * growthValue / GrowthValueMax(levelValue));
         foodBar->setValue(100 * foodValue / FoodValueMax);
         cleanBar->setValue(100 * cleanValue / CleanValueMax);
