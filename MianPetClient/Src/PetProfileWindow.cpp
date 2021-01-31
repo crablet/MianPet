@@ -166,7 +166,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
     }
 
     // 测试样例（中间故意不添加空格是为了模拟真实的发包环境）
-    // {"nickname":"test name","id":"9999999","level":88,"age":1901,"growth":32,"food":32,"clean":32,"health":32,"mood":32,"grouth_speed":99,"status":"normal","online_time":101}
+    // {"id":"999","username":"miantuotuo","level":68,"age":685,"growth":1177,"food":2415,"clean":2175,"health":100,"mood":100,"growth_speed":2,"status":"0","online_time":685,"tuotuo":54716}
 
     const auto jsonDocument = QJsonDocument::fromJson(profile);
     if (jsonDocument.isObject())
@@ -174,7 +174,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         // 缓存数据
         levelValue = jsonDocument["level"].toInt();
         ageValue = jsonDocument["age"].toInt();
-        //tuotuoValue = jsonDocument["tuotuo"].toInt(); // 暂未实现此功能
+        tuotuoValue = jsonDocument["tuotuo"].toInt();
         growthValue = jsonDocument["growth"].toInt();
         foodValue = jsonDocument["food"].toInt();
         cleanValue = jsonDocument["clean"].toInt();

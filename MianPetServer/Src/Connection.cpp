@@ -302,7 +302,7 @@ void Connection::DealWithGetPetProfile(const char *id, const char *randomKey)
             if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果密码正确，则直接取出结果返回
             {
                 constexpr const char *petprofileSql =
-                    R"(SELECT id, username, level, age, growth, food, clean, health, mood, growth_speed, status, online_time
+                    R"(SELECT id, username, level, age, growth, food, clean, health, mood, growth_speed, status, online_time, tuotuo
                        FROM petprofile
                        WHERE id = :id<char[16]>)";
                 otl_stream petprofileStream(384, petprofileSql, db);
@@ -310,22 +310,22 @@ void Connection::DealWithGetPetProfile(const char *id, const char *randomKey)
 
                 char id[16 + 1];
                 char username[24 + 1];
-                int level, age, growth, food, clean, health, mood, growthSpeed;
+                int level, age, growth, food, clean, health, mood, growthSpeed, tuotuo;
                 int status;
                 int onlineTime;
                 for (auto &r : petprofileStream)    // 从数据库中取出petprofile数据
                 {
                     r >> id >> username >> level >> age >> growth 
                       >> food >> clean >> health >> mood >> growthSpeed 
-                      >> status >> onlineTime;
+                      >> status >> onlineTime >> tuotuo;
                 }
 
                 char buffer[384];
                 std::snprintf
                 (
-                    buffer, 384,
-                    R"({"id":"%s","username":"%s","level":%d,"age":%d,"growth":%d,"food":%d,"clean":%d,"health":%d,"mood":%d,"growth_speed":%d,"status":"%d","online_time":%d})",
-                    id, username, level, age, growth, food, clean, health, mood, growthSpeed, status, onlineTime
+                    buffer, 394,
+                    R"({"id":"%s","username":"%s","level":%d,"age":%d,"growth":%d,"food":%d,"clean":%d,"health":%d,"mood":%d,"growth_speed":%d,"status":"%d","online_time":%d,"tuotuo":%d})",
+                    id, username, level, age, growth, food, clean, health, mood, growthSpeed, status, onlineTime, tuotuo
                 );
                 reply = buffer;
             }
