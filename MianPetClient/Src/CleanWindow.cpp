@@ -42,18 +42,19 @@ void CleanWindow::InitializeUi()
     SetWindowTitle("清洁");
 
     lowerBarTextLabel = new QLabel("清洁值", this);
-    valueBar = new QProgressBar(this);
+    cleanBar = new QProgressBar(this);
     buyButton = new QPushButton("购买", this);
     buyButton->setDisabled(true);
     useButton = new QPushButton("使用", this);
     useButton->setDisabled(true);
 
-    valueBar->setAlignment(Qt::AlignCenter);
-    valueBar->setValue(cleanValue);
+    cleanBar->setAlignment(Qt::AlignCenter);
+    cleanBar->setRange(0, 100);
+    cleanBar->setValue(100 * cleanValue / CleanValueMax);
 
     lowerBarWidgetLayout = new QHBoxLayout(this);
     lowerBarWidgetLayout->addWidget(lowerBarTextLabel);
-    lowerBarWidgetLayout->addWidget(valueBar);
+    lowerBarWidgetLayout->addWidget(cleanBar);
     lowerBarWidgetLayout->addWidget(buyButton);
     lowerBarWidgetLayout->addWidget(useButton);
 

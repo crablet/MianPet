@@ -44,18 +44,19 @@ void FoodWindow::InitializeUi()
     SetWindowTitle("喂食");
 
     lowerBarTextLabel = new QLabel("饥饿值", this);
-    valueBar = new QProgressBar(this);
+    foodBar = new QProgressBar(this);
     buyButton = new QPushButton("购买", this);
     buyButton->setDisabled(true);
     useButton = new QPushButton("使用", this);
     useButton->setDisabled(true);
 
-    valueBar->setAlignment(Qt::AlignCenter);
-    valueBar->setValue(foodValue);
+    foodBar->setAlignment(Qt::AlignCenter);
+    foodBar->setRange(0, 100);
+    foodBar->setValue(100 * foodValue / FoodValueMax);
 
     lowerBarWidgetLayout = new QHBoxLayout(this);
     lowerBarWidgetLayout->addWidget(lowerBarTextLabel);
-    lowerBarWidgetLayout->addWidget(valueBar);
+    lowerBarWidgetLayout->addWidget(foodBar);
     lowerBarWidgetLayout->addWidget(buyButton);
     lowerBarWidgetLayout->addWidget(useButton);
 
