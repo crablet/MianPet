@@ -559,6 +559,10 @@ void Connection::DealWithLogout(const char *id, const char *randomKey)
             if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果连randomKey都一致，那就可以开始登出
             {
                 // 登出操作只需要更改数据库userinfo表中相应id的online为0和secretkey为NULL即可
+                // 并且要把正在进行的状态比如打工停止
+
+                // 停止打工
+                DealWithWorkEnd(id, randomKey, "");
 
                 constexpr const char *updateSql =
                     R"(UPDATE userinfo
