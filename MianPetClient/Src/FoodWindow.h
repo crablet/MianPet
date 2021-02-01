@@ -22,6 +22,7 @@
 
 #include "SmallItemsContainerWindow.h"
 #include "PetStatusData.h"
+#include "ItemInformation.h"
 
 #include "Config/NetworkConstants.h"
 #include "Tools/Network/DataPackages/FoodShopRequestData.h"
@@ -52,18 +53,6 @@ private:
     void OnUseButtonClicked();
 
     void RequestDataInRange(int rangeBegin, int rangeEnd);
-
-    struct ItemInformation
-    {
-        ItemInformation(const QString &name, int price, int amount)
-            : name(name), price(price), amount(amount)
-        {
-        }
-
-        QString name;
-        int price;
-        int amount;
-    };
 
 signals:
     // 购买count个item成功

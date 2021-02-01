@@ -15,9 +15,9 @@ FoodWindow::~FoodWindow()
     for (const auto &r : items) // 遍历items中的内容，然后将其组成一个大的json数组
     {
         QJsonObject obj;
-        obj.insert("amount", r.amount);
-        obj.insert("name", r.name);
-        obj.insert("price", r.price);
+        obj.insert("amount", r.GetAmount());
+        obj.insert("name", r.GetName());
+        obj.insert("price", r.GetPrice());
 
         arr.push_back(obj);
     }
@@ -80,7 +80,7 @@ void FoodWindow::InitializeConnect()
         if (const auto index = currentPage * 4 + 0; 
             index < items.size())   // 确保index不要越界，因为有可能有按钮没有对应的食品
         {
-            selectedFood = items[index].name;
+            selectedFood = items[index].GetName();
 
             buyButton->setEnabled(true);
             useButton->setEnabled(true);
@@ -100,7 +100,7 @@ void FoodWindow::InitializeConnect()
         if (const auto index = currentPage * 4 + 1;
             index < items.size())   // 确保index不要越界，因为有可能有按钮没有对应的食品
         {
-            selectedFood = items[index].name;
+            selectedFood = items[index].GetName();
 
             buyButton->setEnabled(true);
             useButton->setEnabled(true);
@@ -120,7 +120,7 @@ void FoodWindow::InitializeConnect()
         if (const auto index = currentPage * 4 + 2;
             index < items.size())   // 确保index不要越界，因为有可能有按钮没有对应的食品
         {
-            selectedFood = items[index].name;
+            selectedFood = items[index].GetName();
 
             buyButton->setEnabled(true);
             useButton->setEnabled(true);
@@ -140,7 +140,7 @@ void FoodWindow::InitializeConnect()
         if (const auto index = currentPage * 4 + 3;
             index < items.size())   // 确保index不要越界，因为有可能有按钮没有对应的食品
         {
-            selectedFood = items[index].name;
+            selectedFood = items[index].GetName();
 
             buyButton->setEnabled(true);
             useButton->setEnabled(true);
@@ -164,9 +164,9 @@ void FoodWindow::InitializeConnect()
         // 更新本地缓存，用于使悬停标签能及时更新数据
         auto pos = std::find_if(items.begin(), items.end(), [&item](const ItemInformation &info)
         {
-            return info.name == item;
+            return info.GetName() == item;
         });
-        pos->amount += count;
+        pos->SetAmount(pos->GetAmount() + count);
     });
     connect(this, &FoodWindow::BuyFailed, this, [=]()
     {
@@ -180,9 +180,9 @@ void FoodWindow::InitializeConnect()
         // 更新本地缓存，用于使悬停标签能及时更新数据
         auto pos = std::find_if(items.begin(), items.end(), [&item](const ItemInformation &info)
         {
-            return info.name == item;
+            return info.GetName() == item;
         });
-        pos->amount -= count;
+        pos->SetAmount(pos->GetAmount() - count);
     });
     connect(this, &FoodWindow::UseFailed, this, [=]()
     {
@@ -203,23 +203,27 @@ void FoodWindow::DataPrepare()
     const auto tempArray = localJson["items"].toArray();
     for (int i = 0; i < tempArray.size(); ++i)  // 将本地缓存(MianPetData/FoodShopData.json)先存到items中
     {
-        const auto itemInfo = tempArray[i].toObject();
-        items.emplace_back(itemInfo["name"].toString(), itemInfo["price"].toInt(), itemInfo["amount"].toInt());
+        const auto itemInfoJsonObj = tempArray[i].toObject();
+        ItemInformation info;
+        info.SetName(itemInfoJsonObj["name"].toString());
+        info.SetPrice(itemInfoJsonObj["price"].toInt());
+        info.SetAmount(itemInfoJsonObj["amount"].toInt());
+        items.push_back(info);
     }
 
     const auto rangeBegin = 0;
     const auto rangeEnd = static_cast<decltype(rangeBegin)>(items.size() >= 4 ? 4 : items.size());
     rangeBegin + 0 < rangeEnd       // 确保不要越界
-        ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].name + ".png"))
+        ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].GetName() + ".png"))
         : item0->setIcon(QIcon());  // 如果越界了就展示空图标
     rangeBegin + 1 < rangeEnd       // 确保不要越界
-        ? item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].name + ".png"))
+        ? item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].GetName() + ".png"))
         : item1->setIcon(QIcon());  // 如果越界了就展示空图标
     rangeBegin + 2 < rangeEnd       // 确保不要越界
-        ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].name + ".png"))
+        ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].GetName() + ".png"))
         : item2->setIcon(QIcon());  // 如果越界了就展示空图标
     rangeBegin + 3 < rangeEnd       // 确保不要越界
-        ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"))
+        ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].GetName() + ".png"))
         : item3->setIcon(QIcon());  // 如果越界了就展示空图标
 
     currentPage = 0;
@@ -239,10 +243,10 @@ void FoodWindow::ViewPreviousPage()
         requestThread.detach();
 
         // 展示[rangeBegin, rangeEnd)中的内容
-        item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].name + ".png"));
-        item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].name + ".png"));
-        item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].name + ".png"));
-        item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"));
+        item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].GetName() + ".png"));
+        item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].GetName() + ".png"));
+        item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].GetName() + ".png"));
+        item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].GetName() + ".png"));
 
         selectedFood.clear();   // 翻页后选中的食品要清空，不然就会被上一页的遗留信息影响了
 
@@ -266,16 +270,16 @@ void FoodWindow::ViewNextPage()
 
         // 展示[rangeBegin, rangeEnd)中的内容
         rangeBegin + 0 < rangeEnd       // 确保不要越界
-            ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].name + ".png"))
+            ? item0->setIcon(QIcon(":/Pic/" + items[rangeBegin + 0].GetName() + ".png"))
             : item0->setIcon(QIcon());  // 如果越界了就展示空图标
         rangeBegin + 1 < rangeEnd       // 确保不要越界
-            ? item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].name + ".png"))
+            ? item1->setIcon(QIcon(":/Pic/" + items[rangeBegin + 1].GetName() + ".png"))
             : item1->setIcon(QIcon());  // 如果越界了就展示空图标
         rangeBegin + 2 < rangeEnd       // 确保不要越界
-            ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].name + ".png"))
+            ? item2->setIcon(QIcon(":/Pic/" + items[rangeBegin + 2].GetName() + ".png"))
             : item2->setIcon(QIcon());  // 如果越界了就展示空图标
         rangeBegin + 3 < rangeEnd       // 确保不要越界
-            ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].name + ".png"))
+            ? item3->setIcon(QIcon(":/Pic/" + items[rangeBegin + 3].GetName() + ".png"))
             : item3->setIcon(QIcon());  // 如果越界了就展示空图标
 
         selectedFood.clear();  // 翻页后选中的食品要清空，不然就会被上一页的遗留信息影响了
@@ -292,26 +296,26 @@ void FoodWindow::OnMouseHoversMoveItem(QObject *obj)
     if (obj == item0 && currentPage * 4 + 0 < items.size())
     {
         itemLabel->show();
-        itemLabel->SetUpperLabelText(items[currentPage * 4 + 0].name);
-        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 0].amount));
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 0].GetName());
+        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 0].GetAmount()));
     }
     else if (obj == item1 && currentPage * 4 + 1 < items.size())
     {
         itemLabel->show();
-        itemLabel->SetUpperLabelText(items[currentPage * 4 + 1].name);
-        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 1].amount));
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 1].GetName());
+        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 1].GetAmount()));
     }
     else if (obj == item2 && currentPage * 4 + 2 < items.size())
     {
         itemLabel->show();
-        itemLabel->SetUpperLabelText(items[currentPage * 4 + 2].name);
-        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 2].amount));
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 2].GetName());
+        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 2].GetAmount()));
     }
     else if (obj == item3 && currentPage * 4 + 3 < items.size())
     {
         itemLabel->show();
-        itemLabel->SetUpperLabelText(items[currentPage * 4 + 3].name);
-        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 3].amount));
+        itemLabel->SetUpperLabelText(items[currentPage * 4 + 3].GetName());
+        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 3].GetAmount()));
     }
     else
     {
@@ -433,7 +437,7 @@ void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
     QJsonArray tempArray;   // 一会需要传入给SetItems的要请求的数据
     for (int i = rangeBegin; i < rangeEnd; ++i)
     {
-        tempArray.append(items[i].name);
+        tempArray.append(items[i].GetName());
     }
     FoodShopRequestData requestData;
     requestData.SetItems(tempArray);
@@ -452,15 +456,14 @@ void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
     const auto jsonArray = remoteJson["items"].toArray();
     for (const auto &r : jsonArray)
     {
-        const auto obj = r.toObject();
         const auto name = r["name"].toString();
         const auto amount = r["amount"].toInt();
 
         // 去找对应名字的项然后更新amount字段
         auto iter = std::find_if(items.begin(), items.end(), [=, &name](const ItemInformation &rhs)
         {
-            return name == rhs.name;
+            return name == rhs.GetName();
         });
-        iter->amount = amount;  // iter可能为空
+        iter->SetAmount(amount);  // iter可能为空
     }
 }
