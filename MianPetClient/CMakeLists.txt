@@ -46,7 +46,8 @@ set(SOURCES
     Src/TransparentItemLabel.cpp
     Src/WorkingWindow.cpp
     Src/main.cpp
-    Src/PetClient.cpp)
+    Src/PetClient.cpp
+    Src/ItemInformation.cpp)
 
 SET(HEADER_DIRS
     Src
