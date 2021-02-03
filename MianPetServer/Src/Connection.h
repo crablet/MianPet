@@ -85,7 +85,7 @@ private:
     
     ConnectionManager& connectionManager;
 
-    std::array<char, 8192> buffer;
+    std::array<char, 8192> buffer{};
 
     std::string reply;
 

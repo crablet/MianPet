@@ -320,14 +320,14 @@ void Connection::DealWithGetPetProfile(const char *id, const char *randomKey)
                       >> status >> onlineTime >> tuotuo;
                 }
 
-                char buffer[384];
+                char jsonBuffer[400];
                 std::snprintf
                 (
-                    buffer, 394,
+                    jsonBuffer, sizeof(jsonBuffer),
                     R"({"id":"%s","username":"%s","level":%d,"age":%d,"growth":%d,"food":%d,"clean":%d,"health":%d,"mood":%d,"growth_speed":%d,"status":"%d","online_time":%d,"tuotuo":%d})",
                     id, username, level, age, growth, food, clean, health, mood, growthSpeed, status, onlineTime, tuotuo
                 );
-                reply = buffer;
+                reply = jsonBuffer;
             }
             else
             {
