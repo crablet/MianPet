@@ -562,7 +562,50 @@ void Connection::DealWithLogout(const char *id, const char *randomKey)
                 // 并且要把正在进行的状态比如打工停止
 
                 // 停止打工
-                DealWithWorkEnd(id, randomKey, "");
+
+                constexpr const char *getWorkingStatusSql =
+                        R"(SELECT job, TIMESTAMPDIFF(MINUTE, begintime, NOW())
+                           FROM workinginfo
+                           WHERE id = :id<char[16]> AND working = 1)";
+                otl_stream getWorkingStatusStream(36, getWorkingStatusSql, db);
+                getWorkingStatusStream << id;
+
+                char jobName[36 + 1];
+                int workingTime;
+                for (auto &r : getWorkingStatusStream)
+                {
+                    r >> jobName >> workingTime;
+                }
+
+                constexpr const char *endWorkingSql =
+                        R"(UPDATE workinginfo
+                           SET working = 0
+                           WHERE id = :id<char[16]> AND job = :job<char[36]>)";
+                otl_stream endWorkingStream(1, endWorkingSql, db);
+                endWorkingStream << id << jobName;
+
+                if (workingTime >= 60)  // 暂定一次工作时间为60分钟，时薪为jobsinfo中的wage
+                {
+                    constexpr const char *getWageSql =
+                            R"(SELECT wage
+                               FROM jobsinfo
+                               WHERE name = :jobName<char[18]>)";
+                    otl_stream getWageStream(8, getWageSql, db);
+                    getWageStream << jobName;
+
+                    int wage;
+                    for (auto &r : getWageStream)
+                    {
+                        r >> wage;
+                    }
+
+                    constexpr const char *updateTuotuoSql =
+                            R"(UPDATE petprofile
+                           SET tuotuo = tuotuo + :wage<int>
+                           WHERE id = :id<char[16]>)";
+                    otl_stream updateTuotuoStream(1, updateTuotuoSql, db);
+                    updateTuotuoStream << wage << id;
+                }
 
                 constexpr const char *updateSql =
                     R"(UPDATE userinfo
