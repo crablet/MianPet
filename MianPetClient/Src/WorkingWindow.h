@@ -80,6 +80,7 @@ signals:
     void WorkEndSucceeded();
     // 当结束工作成功时发射该信号
     void WorkEndFailed();
+    void WorkNotBegins();
 
     // 当获取工作状态失败时发射该信号
     // 参数：str -> 错误信息

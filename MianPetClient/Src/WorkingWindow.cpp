@@ -96,6 +96,11 @@ void WorkingWindow::InitializeConnect()
         QMessageBox::information(this, "失败", "怎么办？这工作停不下来了。");
     });
 
+    connect(this, &WorkingWindow::WorkNotBegins, this, [=]()
+    {
+        QMessageBox::information(this, "失败", "还没开始打工，无法结束。");
+    });
+
     connect(item0, &QPushButton::clicked, this, [=]()
     {
         if (const auto index = currentPage * 4 + 0;
@@ -351,6 +356,10 @@ void WorkingWindow::OnEndButtonClicked()
         {
             emit WorkEndFailed();
             // 结束失败
+        }
+        else if (status == "work not begins")
+        {
+            emit WorkNotBegins();
         }
         else
         {

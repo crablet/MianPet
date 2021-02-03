@@ -1163,9 +1163,19 @@ void Connection::DealWithWorkEnd(const char *id, const char *randomKey, const ch
 
                 char jobName[36 + 1];
                 int workingTime;
-                for (auto &r : getWorkingStatusStream)
+                if (getWorkingStatusStream.eof())   // 如果还没开始打工就会进入这个if，因为获取不到任何打工信息，eof为真
                 {
-                    r >> jobName >> workingTime;
+                    reply = R"({"status":"work not begins"})";
+                    DoWrite();
+
+                    return;
+                }
+                else
+                {
+                    for (auto &r : getWorkingStatusStream)
+                    {
+                        r >> jobName >> workingTime;
+                    }
                 }
 
 #ifdef DEBUG
