@@ -68,6 +68,9 @@ void WorkingWindow::InitializeUi()
 
 void WorkingWindow::InitializeConnect()
 {
+    connect(previousPageButton, &QPushButton::clicked, this, &WorkingWindow::ViewPreviousPage);
+    connect(nextPageButton, &QPushButton::clicked, this, &WorkingWindow::ViewNextPage);
+
     // 开始打工成功的处理逻辑
     connect(this, &WorkingWindow::WorkBeginSucceeded, this, [=]()
     {
@@ -184,7 +187,6 @@ void WorkingWindow::InitializeConnect()
 
     connect(this, &WorkingWindow::MouseHoversMoveOnItem, this, &WorkingWindow::OnMouseHoversMoveItem);
     connect(this, &WorkingWindow::MouseHoversLeaveOnItem, this, &WorkingWindow::OnMouseHoversLeaveItem);
-
 }
 
 void WorkingWindow::ViewPreviousPage()
