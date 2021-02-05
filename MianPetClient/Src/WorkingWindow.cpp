@@ -181,6 +181,10 @@ void WorkingWindow::InitializeConnect()
 
     connect(beginButton, &QPushButton::clicked, this, &WorkingWindow::OnBeginButtonClicked);
     connect(endButton, &QPushButton::clicked, this, &WorkingWindow::OnEndButtonClicked);
+
+    connect(this, &WorkingWindow::MouseHoversMoveOnItem, this, &WorkingWindow::OnMouseHoversMoveItem);
+    connect(this, &WorkingWindow::MouseHoversLeaveOnItem, this, &WorkingWindow::OnMouseHoversLeaveItem);
+
 }
 
 void WorkingWindow::ViewPreviousPage()
