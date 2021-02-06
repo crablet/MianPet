@@ -38,6 +38,7 @@ inline constexpr int WORKEND = 8;
 inline constexpr int JOBS_INFO = 9;
 inline constexpr int WORK_STATUS = 10;
 inline constexpr int FOOD_VALUE = 11;
+inline constexpr int CLEAN_VALUE = 12;
 
 /* hint end */
 
