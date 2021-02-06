@@ -47,7 +47,8 @@ set(SOURCES
     Src/WorkingWindow.cpp
     Src/main.cpp
     Src/PetClient.cpp
-    Src/ItemInformation.cpp)
+    Src/ItemInformation.cpp
+    Src/Tools/Network/DataPackages/FoodValueRequestData.cpp)
 
 SET(HEADER_DIRS
     Src
