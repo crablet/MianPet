@@ -70,6 +70,8 @@ private:
     void DealWithBuy(const char *id, const char *randomKey, const char *item, int count);
     // 处理使用食品/日用品的请求 /GET/USE
     void DealWithUse(const char *id, const char *randomKey, const char *item, int count);
+    void DealWithFoodValue(const char *id, const char *randomKey);
+    void DealWithCleanValue(const char *id, const char *randomKey);
 
     // 处理开始工作的请求 /GET/WORKBEGIN
     void DealWithWorkBegin(const char *id, const char *randomKey, const char *job);

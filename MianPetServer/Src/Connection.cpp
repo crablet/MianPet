@@ -141,6 +141,14 @@ void Connection::TaskRunnerThread(int jsonLength)
                 {
                     DealWithWorkStatus(id, randomKey);
                 }
+                else if (hint == FOOD_VALUE)
+                {
+                    DealWithFoodValue(id, randomKey);
+                }
+                else if (hint == CLEAN_VALUE)
+                {
+                    DealWithCleanValue(id, randomKey);
+                }
                 else
                 {
                     // error
@@ -1431,4 +1439,14 @@ void Connection::DealWithWorkStatus(const char *id, const char *randomKey)
         std::cout << exp.stm_text << std::endl;
         std::cout << exp.msg << std::endl;
     }
+}
+
+void Connection::DealWithFoodValue(const char *id, const char *randomKey)
+{
+
+}
+
+void Connection::DealWithCleanValue(const char *id, const char *randomKey)
+{
+
 }
