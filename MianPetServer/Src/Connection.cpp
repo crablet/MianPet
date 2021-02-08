@@ -1443,7 +1443,67 @@ void Connection::DealWithWorkStatus(const char *id, const char *randomKey)
 
 void Connection::DealWithFoodValue(const char *id, const char *randomKey)
 {
+#ifdef DEBUG
+    std::cout << "In function Connection::DealWithFoodValue: " << id << randomKey << std::endl;
+#endif // DEBUG
 
+    try
+    {
+        std::lock_guard<std::mutex> lock(dbMutex);
+
+        constexpr const char *checkOnlineAndSecretKeySqlStr =
+                R"(SELECT online, secretKey FROM userinfo
+                   WHERE id = :id<char[16]>)";
+        otl_stream checkOnlineStream(64, checkOnlineAndSecretKeySqlStr, db);
+        checkOnlineStream << id;
+
+        int online;
+        char trueSecretKey[18 + 1];
+        for (auto &r : checkOnlineStream)
+        {
+            r >> online >> trueSecretKey;
+        }
+
+        if (online) // 如果在线则检查randomKey是否一致，有点cookies的感觉
+        {
+            if (std::strncmp(randomKey, trueSecretKey, 18) == 0)    // 如果连randomKey都一致，那就可以开始查询了
+            {
+                constexpr const char *selectFoodValueSql =
+                        R"(SELECT food
+                           FROM petprofile
+                           WHERE id = :id<char[16]>)";
+                otl_stream selectFoodValueStream(12, selectFoodValueSql, db);
+                selectFoodValueStream << id;
+
+                int foodValue;
+                for (auto &r : selectFoodValueStream)
+                {
+                    r >> foodValue;
+                }
+
+                reply = R"({"food":})" + std::to_string(foodValue) + '}';
+#ifdef DEBUG
+                std::cout << "In function Connection::DealWithFoodValue: " << id
+                          << " reply: " << reply;
+#endif // DEBUG
+
+                DoWrite();
+            }
+            else
+            {
+                // error
+            }
+        }
+        else
+        {
+            // error
+        }
+    }
+    catch (const otl_exception &exp)
+    {
+        std::cout << exp.stm_text << std::endl;
+        std::cout << exp.msg << std::endl;
+    }
 }
 
 void Connection::DealWithCleanValue(const char *id, const char *randomKey)
