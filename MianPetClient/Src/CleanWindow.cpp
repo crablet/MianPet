@@ -181,6 +181,9 @@ void CleanWindow::InitializeConnect()
             return info.GetName() == item;
         });
         pos->SetAmount(pos->GetAmount() - count);
+
+//        cleanValue += pos->GetClean();
+//        cleanBar->setValue(100 * cleanValue / CleanValueMax);
     });
     connect(this, &CleanWindow::UseFailed, this, [=]()
     {

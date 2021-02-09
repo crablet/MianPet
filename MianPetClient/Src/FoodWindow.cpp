@@ -183,6 +183,9 @@ void FoodWindow::InitializeConnect()
             return info.GetName() == item;
         });
         pos->SetAmount(pos->GetAmount() - count);
+
+//        foodValue += pos->GetFood();
+//        foodBar->setValue(100 * foodValue / FoodValueMax);
     });
     connect(this, &FoodWindow::UseFailed, this, [=]()
     {
