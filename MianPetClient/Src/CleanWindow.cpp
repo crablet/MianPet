@@ -295,27 +295,43 @@ void CleanWindow::OnMouseHoversMoveItem(QObject *obj)
     // 判断鼠标放在了哪个控件上面，然后根据控件编号设置展示的itemLabel中的内容应写什么
     if (obj == item0 && currentPage * 4 + 0 < items.size())
     {
+        const auto item = items[currentPage * 4 + 0];
+        itemLabel->SetUpperLabelText(item.GetName());
+        itemLabel->SetLowerLabelText(QString("清洁：%1\n单价：%2\n拥有：%3")
+                                                .arg(item.GetClean())
+                                                .arg(item.GetPrice())
+                                                .arg(item.GetAmount()));
         itemLabel->show();
-        itemLabel->SetUpperLabelText(items[currentPage * 4 + 0].GetName());
-        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 0].GetAmount()));
     }
     else if (obj == item1 && currentPage * 4 + 1 < items.size())
     {
+        const auto item = items[currentPage * 4 + 1];
+        itemLabel->SetUpperLabelText(item.GetName());
+        itemLabel->SetLowerLabelText(QString("清洁：%1\n单价：%2\n拥有：%3")
+                                                .arg(item.GetClean())
+                                                .arg(item.GetPrice())
+                                                .arg(item.GetAmount()));
         itemLabel->show();
-        itemLabel->SetUpperLabelText(items[currentPage * 4 + 1].GetName());
-        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 1].GetAmount()));
     }
     else if (obj == item2 && currentPage * 4 + 2 < items.size())
     {
+        const auto item = items[currentPage * 4 + 2];
+        itemLabel->SetUpperLabelText(item.GetName());
+        itemLabel->SetLowerLabelText(QString("清洁：%1\n单价：%2\n拥有：%3")
+                                                .arg(item.GetClean())
+                                                .arg(item.GetPrice())
+                                                .arg(item.GetAmount()));
         itemLabel->show();
-        itemLabel->SetUpperLabelText(items[currentPage * 4 + 2].GetName());
-        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 2].GetAmount()));
     }
     else if (obj == item3 && currentPage * 4 + 3 < items.size())
     {
+        const auto item = items[currentPage * 4 + 3];
+        itemLabel->SetUpperLabelText(item.GetName());
+        itemLabel->SetLowerLabelText(QString("清洁：%1\n单价：%2\n拥有：%3")
+                                                .arg(item.GetClean())
+                                                .arg(item.GetPrice())
+                                                .arg(item.GetAmount()));
         itemLabel->show();
-        itemLabel->SetUpperLabelText(items[currentPage * 4 + 3].GetName());
-        itemLabel->SetLowerLabelText(QString::number(items[currentPage * 4 + 3].GetAmount()));
     }
     else
     {
