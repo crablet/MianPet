@@ -26,6 +26,7 @@
 
 #include "Config/NetworkConstants.h"
 #include "Tools/Network/DataPackages/FoodShopRequestData.h"
+#include "Tools/Network/DataPackages/FoodValueRequestData.h"
 #include "Tools/Network/DataPackages/BuyRequestData.h"
 #include "Tools/Network/DataPackages/UseRequestData.h"
 
@@ -53,6 +54,8 @@ private:
     void OnUseButtonClicked();
 
     void RequestDataInRange(int rangeBegin, int rangeEnd);
+
+    void UpdateFoodValue();
 
 signals:
     // 购买count个item成功

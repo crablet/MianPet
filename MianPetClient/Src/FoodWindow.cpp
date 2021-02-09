@@ -227,6 +227,7 @@ void FoodWindow::DataPrepare()
 
     currentPage = 0;
 
+    UpdateFoodValue();
     RequestDataInRange(rangeBegin, rangeEnd);   // 请求更新数据
 }
 
@@ -465,4 +466,37 @@ void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
         });
         iter->SetAmount(amount);  // iter可能为空
     }
+}
+
+void FoodWindow::UpdateFoodValue()
+{
+    std::thread thrd(
+    [=]()
+    {
+        auto tcpSocket = std::make_unique<QTcpSocket>();
+        tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+        if (!tcpSocket->waitForConnected())
+        {
+            return;
+        }
+
+        tcpSocket->write(FoodValueRequestData{});
+        if (!tcpSocket->waitForBytesWritten())
+        {
+            return;
+        }
+
+        if (!tcpSocket->waitForReadyRead())
+        {
+            return;
+        }
+
+        const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+        foodValue = remoteJson["food"].toInt();
+        if (foodBar)
+        {
+            foodBar->setValue(100 * foodValue / FoodValueMax);
+        }
+    });
+    thrd.detach();
 }
