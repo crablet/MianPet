@@ -26,6 +26,7 @@
 
 #include "Config/NetworkConstants.h"
 #include "Tools/Network/DataPackages/CleanShopRequestData.h"
+#include "Tools/Network/DataPackages/CleanValueRequeastData.h"
 #include "Tools/Network/DataPackages/BuyRequestData.h"
 #include "Tools/Network/DataPackages/UseRequestData.h"
 
@@ -53,6 +54,8 @@ private:
     void OnUseButtonClicked();
 
     void RequestDataInRange(int rangeBegin, int rangeEnd);
+
+    void UpdateCleanValue();
 
 signals:
     // 购买count个item成功时发出此信号

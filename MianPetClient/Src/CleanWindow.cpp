@@ -226,6 +226,7 @@ void CleanWindow::DataPrepare()
 
     currentPage = 0;
 
+    UpdateCleanValue();
     RequestDataInRange(rangeBegin, rangeEnd);
 }
 
@@ -465,4 +466,37 @@ void CleanWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
         });
         iter->SetAmount(amount);  // iter可能为空
     }
+}
+
+void CleanWindow::UpdateCleanValue()
+{
+    std::thread thrd(
+    [=]()
+    {
+        auto tcpSocket = std::make_unique<QTcpSocket>();
+        tcpSocket->connectToHost(ServerAddress, ServerPort, QTcpSocket::ReadWrite);
+        if (!tcpSocket->waitForConnected())
+        {
+            return;
+        }
+
+        tcpSocket->write(CleanValueRequeastData{});
+        if (!tcpSocket->waitForBytesWritten())
+        {
+            return;
+        }
+
+        if (!tcpSocket->waitForReadyRead())
+        {
+            return;
+        }
+
+        const auto remoteJson = QJsonDocument::fromJson(tcpSocket->readAll());
+        cleanValue = remoteJson["clean"].toInt();
+        if (cleanBar)
+        {
+            cleanBar->setValue(100 * cleanValue / CleanValueMax);
+        }
+    });
+    thrd.detach();
 }
