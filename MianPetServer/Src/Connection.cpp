@@ -681,8 +681,9 @@ void Connection::DealWithFoodShopInfo(const char *id, const char *randomKey, con
                 //   "items":
                 //   [
                 //     {
-                //       "name": string
-                //       "amount": int
+                //       "name": string,
+                //       "amount": int,
+                //       "food": int
                 //     },
                 //     ...
                 //   ]
@@ -691,22 +692,39 @@ void Connection::DealWithFoodShopInfo(const char *id, const char *randomKey, con
 
                 for (const auto &itemname : items)
                 {
-                    constexpr const char *selectItemInfoSqlStr =
+                    constexpr const char *selectItemQuantitySqlStr =
                         R"(SELECT quantity FROM ownitems
                            WHERE id = :id<char[16]> AND itemname = :itemname<char[18]>)";
-                    otl_stream selectItemInfoStream(64, selectItemInfoSqlStr, db);
-                    selectItemInfoStream << id << itemname;
+                    otl_stream selectItemQuantityStream(64, selectItemQuantitySqlStr, db);
+                    selectItemQuantityStream << id << itemname;
 
                     int amount;
-                    for (auto &in : selectItemInfoStream)
+                    for (auto &in : selectItemQuantityStream)
                     {
                         in >> amount;
+                    }
+
+                    constexpr const char *selectItemInfoSql =
+                            R"(SELECT price, food
+                               FROM shopinfo
+                               WHERE itemname = :itemname<char[18]>)";
+                    otl_stream selectItemInfoStream(64, selectItemInfoSql, db);
+                    selectItemInfoStream << itemname;
+
+                    int price, food;
+                    for (auto &in : selectItemInfoStream)
+                    {
+                        in >> price >> food;
                     }
 
                     replyJson += R"({"name":")";
                     replyJson += itemname;
                     replyJson += R"(","amount":)";
                     replyJson += std::to_string(amount);
+                    replyJson += R"(,"food":)";
+                    replyJson += std::to_string(food);
+                    replyJson += R"(,"price:")";
+                    replyJson += std::to_string(price);
                     replyJson += R"(},)";
                 }
 
@@ -716,6 +734,11 @@ void Connection::DealWithFoodShopInfo(const char *id, const char *randomKey, con
                 }
                 replyJson += R"(]})";
                 reply = std::move(replyJson);
+
+#ifdef DEBUG
+                std::cout << "In function Connection::DealWithFoodShopInfo: "
+                          << " reply: " << reply << '\n';
+#endif
 
                 DoWrite();
             }
@@ -1481,7 +1504,7 @@ void Connection::DealWithFoodValue(const char *id, const char *randomKey)
                     r >> foodValue;
                 }
 
-                reply = R"({"food":})" + std::to_string(foodValue) + '}';
+                reply = R"({"food":)" + std::to_string(foodValue) + '}';
 #ifdef DEBUG
                 std::cout << "In function Connection::DealWithFoodValue: " << id
                           << " reply: " << reply;
@@ -1546,7 +1569,7 @@ void Connection::DealWithCleanValue(const char *id, const char *randomKey)
                     r >> cleanValue;
                 }
 
-                reply = R"({"clean":})" + std::to_string(cleanValue) + '}';
+                reply = R"({"clean":)" + std::to_string(cleanValue) + '}';
 #ifdef DEBUG
                 std::cout << "In function Connection::DealWithCleanValue: " << id
                           << " reply: " << reply;
