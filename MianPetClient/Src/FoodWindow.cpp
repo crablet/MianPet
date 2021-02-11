@@ -18,6 +18,7 @@ FoodWindow::~FoodWindow()
         obj.insert("amount", r.GetAmount());
         obj.insert("name", r.GetName());
         obj.insert("price", r.GetPrice());
+        obj.insert("food", r.GetFood());
 
         arr.push_back(obj);
     }
@@ -210,6 +211,7 @@ void FoodWindow::DataPrepare()
         info.SetName(itemInfoJsonObj["name"].toString());
         info.SetPrice(itemInfoJsonObj["price"].toInt());
         info.SetAmount(itemInfoJsonObj["amount"].toInt());
+        info.SetFood(itemInfoJsonObj["food"].toInt());
         items.push_back(info);
     }
 
@@ -475,6 +477,8 @@ void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
     {
         const auto name = r["name"].toString();
         const auto amount = r["amount"].toInt();
+        const auto price = r["price"].toInt();
+        const auto food = r["food"].toInt();
 
         // 去找对应名字的项然后更新amount字段
         auto iter = std::find_if(items.begin(), items.end(), [=, &name](const ItemInformation &rhs)
@@ -482,6 +486,8 @@ void FoodWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
             return name == rhs.GetName();
         });
         iter->SetAmount(amount);  // iter可能为空
+        iter->SetPrice(price);
+        iter->SetFood(food);
     }
 }
 

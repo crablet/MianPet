@@ -723,7 +723,7 @@ void Connection::DealWithFoodShopInfo(const char *id, const char *randomKey, con
                     replyJson += std::to_string(amount);
                     replyJson += R"(,"food":)";
                     replyJson += std::to_string(food);
-                    replyJson += R"(,"price:")";
+                    replyJson += R"(,"price":)";
                     replyJson += std::to_string(price);
                     replyJson += R"(},)";
                 }
