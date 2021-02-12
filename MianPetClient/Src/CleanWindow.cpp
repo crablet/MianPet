@@ -17,6 +17,7 @@ CleanWindow::~CleanWindow()
         obj.insert("amount", r.GetAmount());
         obj.insert("name", r.GetName());
         obj.insert("price", r.GetPrice());
+        obj.insert("clean", r.GetClean());
 
         arr.push_back(obj);
     }
@@ -182,8 +183,8 @@ void CleanWindow::InitializeConnect()
         });
         pos->SetAmount(pos->GetAmount() - count);
 
-//        cleanValue += pos->GetClean();
-//        cleanBar->setValue(100 * cleanValue / CleanValueMax);
+        cleanValue += pos->GetClean();
+        cleanBar->setValue(100 * cleanValue / CleanValueMax);
     });
     connect(this, &CleanWindow::UseFailed, this, [=]()
     {
@@ -208,6 +209,7 @@ void CleanWindow::DataPrepare()
         info.SetName(itemInfoJsonObj["name"].toString());
         info.SetPrice(itemInfoJsonObj["price"].toInt());
         info.SetAmount(itemInfoJsonObj["amount"].toInt());
+        info.SetClean(itemInfoJsonObj["clean"].toInt());
         items.push_back(info);
     }
 
@@ -477,6 +479,8 @@ void CleanWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
     {
         const auto name = r["name"].toString();
         const auto amount = r["amount"].toInt();
+        const auto price = r["price"].toInt();
+        const auto clean = r["clean"].toInt();
 
         // 去找对应名字的项然后更新amount字段
         auto iter = std::find_if(items.begin(), items.end(), [=, &name](const ItemInformation &rhs)
@@ -484,6 +488,8 @@ void CleanWindow::RequestDataInRange(int rangeBegin, int rangeEnd)
             return name == rhs.GetName();
         });
         iter->SetAmount(amount);  // iter可能为空
+        iter->SetPrice(price);
+        iter->SetClean(clean);
     }
 }
 

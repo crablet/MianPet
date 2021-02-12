@@ -185,8 +185,8 @@ void FoodWindow::InitializeConnect()
         });
         pos->SetAmount(pos->GetAmount() - count);
 
-//        foodValue += pos->GetFood();
-//        foodBar->setValue(100 * foodValue / FoodValueMax);
+        foodValue += pos->GetFood();
+        foodBar->setValue(100 * foodValue / FoodValueMax);
     });
     connect(this, &FoodWindow::UseFailed, this, [=]()
     {
