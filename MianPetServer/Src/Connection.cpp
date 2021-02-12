@@ -683,7 +683,8 @@ void Connection::DealWithFoodShopInfo(const char *id, const char *randomKey, con
                 //     {
                 //       "name": string,
                 //       "amount": int,
-                //       "food": int
+                //       "food": int,
+                //       "price": int
                 //     },
                 //     ...
                 //   ]
@@ -769,8 +770,8 @@ void Connection::DealWithCleanShopInfo(const char *id, const char *randomKey, co
         std::lock_guard<std::mutex> lock(dbMutex);
 
         constexpr const char *checkOnlineAndSecretKeySqlStr =
-            R"(SELECT online, secretKey FROM userinfo
-               WHERE id = :id<char[16]>)";
+                R"(SELECT online, secretKey FROM userinfo
+                   WHERE id = :id<char[16]>)";
         otl_stream checkOnlineStream(64, checkOnlineAndSecretKeySqlStr, db);
         checkOnlineStream << id;
 
@@ -791,8 +792,10 @@ void Connection::DealWithCleanShopInfo(const char *id, const char *randomKey, co
                 //   "items":
                 //   [
                 //     {
-                //       "name": string
-                //       "amount": int
+                //       "name": string,
+                //       "amount": int,
+                //       "clean": int,
+                //       "price": int
                 //     },
                 //     ...
                 //   ]
@@ -801,28 +804,53 @@ void Connection::DealWithCleanShopInfo(const char *id, const char *randomKey, co
 
                 for (const auto &itemname : items)
                 {
-                    constexpr const char *selectItemInfoSqlStr =
-                        R"(SELECT quantity FROM ownitems
-                           WHERE id = :id<char[16]> AND itemname = :itemname<char[18]>)";
-                    otl_stream selectItemInfoStream(64, selectItemInfoSqlStr, db);
-                    selectItemInfoStream << id << itemname;
+                    constexpr const char *selectItemQuantitySqlStr =
+                            R"(SELECT quantity FROM ownitems
+                               WHERE id = :id<char[16]> AND itemname = :itemname<char[18]>)";
+                    otl_stream selectItemQuantityStream(64, selectItemQuantitySqlStr, db);
+                    selectItemQuantityStream << id << itemname;
 
                     int amount;
-                    for (auto &in : selectItemInfoStream)
+                    for (auto &in : selectItemQuantityStream)
                     {
                         in >> amount;
+                    }
+
+                    constexpr const char *selectItemInfoSql =
+                            R"(SELECT price, clean
+                               FROM shopinfo
+                               WHERE itemname = :itemname<char[18]>)";
+                    otl_stream selectItemInfoStream(64, selectItemInfoSql, db);
+                    selectItemInfoStream << itemname;
+
+                    int price, clean;
+                    for (auto &in : selectItemInfoStream)
+                    {
+                        in >> price >> clean;
                     }
 
                     replyJson += R"({"name":")";
                     replyJson += itemname;
                     replyJson += R"(","amount":)";
                     replyJson += std::to_string(amount);
+                    replyJson += R"(,"clean":)";
+                    replyJson += std::to_string(clean);
+                    replyJson += R"(,"price":)";
+                    replyJson += std::to_string(price);
                     replyJson += R"(},)";
                 }
 
-                replyJson.pop_back();   // 去除最后一个','
+                if (replyJson.back() == ',')
+                {
+                    replyJson.pop_back();   // 去除最后一个','
+                }
                 replyJson += R"(]})";
                 reply = std::move(replyJson);
+
+#ifdef DEBUG
+                std::cout << "In function Connection::DealWithCleanShopInfo: "
+                          << " reply: " << reply << '\n';
+#endif
 
                 DoWrite();
             }
