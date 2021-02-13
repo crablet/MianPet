@@ -54,7 +54,7 @@ set(SOURCES
 SET(HEADER_DIRS
     Src
     Src/Config
-    Src/Tools/Log/spdlog-1.7.0
+    Src/Tools/Log/spdlog-1.8.2
     Src/Tools/Network
     Src/Tools/Network/DataPackages
     Src/Tools/Ui)
