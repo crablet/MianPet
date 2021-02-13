@@ -801,6 +801,7 @@ void Connection::DealWithCleanShopInfo(const char *id, const char *randomKey, co
                 //   ]
                 //  }
                 std::string replyJson = R"({"items":[)";
+                replyJson.reserve(64);
 
                 for (const auto &itemname : items)
                 {
@@ -1340,6 +1341,7 @@ void Connection::DealWithJobsInfo(const char *id, const char *randomKey, const s
                 //   ]
                 //  }
                 std::string replyJson = R"({"jobs":[)";
+                replyJson.reserve(64);
 
                 for (const auto &jobName : jobs)
                 {
