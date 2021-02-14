@@ -20,7 +20,7 @@ public:
     {
     }
 
-    [[nodiscard]] const QString &GetName() const;
+    [[nodiscard]] QString GetName() const;
     void SetName(const QString &name);
 
     [[nodiscard]] int GetPrice() const;
@@ -29,7 +29,7 @@ public:
     [[nodiscard]] int GetAmount() const;
     void SetAmount(int amount);
 
-    [[nodiscard]] const QString &GetDescription() const;
+    [[nodiscard]] QString GetDescription() const;
     void SetDescription(const QString &description);
 
     [[nodiscard]] int GetType() const;

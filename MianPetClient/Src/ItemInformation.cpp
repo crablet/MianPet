@@ -4,7 +4,7 @@
 
 #include "ItemInformation.h"
 
-const QString &ItemInformation::GetName() const
+QString ItemInformation::GetName() const
 {
     return name;
 }
@@ -34,7 +34,7 @@ void ItemInformation::SetAmount(int amount)
     this->amount = amount;
 }
 
-const QString &ItemInformation::GetDescription() const
+QString ItemInformation::GetDescription() const
 {
     return description;
 }

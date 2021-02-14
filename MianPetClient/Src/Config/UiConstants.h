@@ -129,7 +129,8 @@ inline constexpr int TransparentItemLabelLowerLabelWidth = TransparentItemLabelU
 inline constexpr int TransparentItemLabelLowerLabelHeight = 56;
 inline constexpr int TransparentItemLabelLowerLabelX = TransparentItemLabelUpperLabelX;
 inline constexpr int TransparentItemLabelLowerLabelY = 64;
-inline const QString TransparentItemLabelLowerLabelStyle = "";
+inline const QString TransparentItemLabelLowerLabelStyle
+    = R"(QLabel { color: rgb(255, 255, 255) })";
 
 inline constexpr int FoodWindowLowerBarWidgetWidth 
     = SmallItemsContainerWindowItem3X + SmallItemsContainerWindowItem3IconWidth - SmallItemsContainerWindowItem0X;
