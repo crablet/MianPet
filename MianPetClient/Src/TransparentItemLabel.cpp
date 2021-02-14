@@ -34,7 +34,7 @@ void TransparentItemLabel::InitializeUi()
 #else
     setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool);  // Qt::Tool属性使得其任务栏图标被隐藏
 #endif // OS_LINUX
-    setWindowOpacity(0.8);
+    setWindowOpacity(0.8);  // FIXME: 这样写会让文字也变成透明的，需要只是窗口透明而控件不透明
 
     upperLabel = new QLabel(this);
     upperLabel->setFixedSize(TransparentItemLabelUpperLabelWidth, TransparentItemLabelUpperLabelHeight);
