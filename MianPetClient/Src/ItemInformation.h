@@ -47,9 +47,9 @@ public:
 
 private:
     QString name;
+    QString description;
     int price;
     int amount;
-    QString description;
     int type;
     int food, clean, health;
 };
