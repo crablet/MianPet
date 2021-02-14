@@ -41,6 +41,7 @@ void TransparentItemLabel::InitializeUi()
     upperLabel->move(TransparentItemLabelUpperLabelX, TransparentItemLabelUpperLabelY);
     upperLabel->setStyleSheet(TransparentItemLabelUpperLabelStyle);
 
+    // 后续这个lowerLabel可能不是一个QLabel而是个QFormLayout，然后用户按需继承或者使用TransparentItemLabel暴露出去的接口构建自己的标签
     lowerLabel = new QLabel(this);
     lowerLabel->setFixedSize(TransparentItemLabelLowerLabelWidth, TransparentItemLabelLowerLabelHeight);
     lowerLabel->move(TransparentItemLabelLowerLabelX, TransparentItemLabelLowerLabelY);
