@@ -245,27 +245,39 @@ void WorkingWindow::OnMouseHoversMoveItem(QObject *obj)
     // 判断鼠标放在了哪个控件上面，然后根据控件编号设置展示的itemLabel中的内容应写什么
     if (obj == item0 && currentPage * 4 + 0 < jobs.size())
     {
+        const auto item = jobs[currentPage * 4 + 0];
+        itemLabel->SetUpperLabelText(item.name);
+        itemLabel->SetLowerLabelText(QString("工资：%1\n等级：%2")
+                                                .arg(item.wage)
+                                                .arg(item.lowestLevel));
         itemLabel->show();
-        itemLabel->SetUpperLabelText(jobs[currentPage * 4 + 0].name);
-        itemLabel->SetLowerLabelText(QString::number(jobs[currentPage * 4 + 0].wage));
     }
     else if (obj == item1 && currentPage * 4 + 1 < jobs.size())
     {
+        const auto item = jobs[currentPage * 4 + 1];
+        itemLabel->SetUpperLabelText(item.name);
+        itemLabel->SetLowerLabelText(QString("工资：%1\n等级：%2")
+                                                .arg(item.wage)
+                                                .arg(item.lowestLevel));
         itemLabel->show();
-        itemLabel->SetUpperLabelText(jobs[currentPage * 4 + 1].name);
-        itemLabel->SetLowerLabelText(QString::number(jobs[currentPage * 4 + 1].wage));
     }
     else if (obj == item2 && currentPage * 4 + 2 < jobs.size())
     {
+        const auto item = jobs[currentPage * 4 + 2];
+        itemLabel->SetUpperLabelText(item.name);
+        itemLabel->SetLowerLabelText(QString("工资：%1\n等级：%2")
+                                                .arg(item.wage)
+                                                .arg(item.lowestLevel));
         itemLabel->show();
-        itemLabel->SetUpperLabelText(jobs[currentPage * 4 + 2].name);
-        itemLabel->SetLowerLabelText(QString::number(jobs[currentPage * 4 + 2].wage));
     }
     else if (obj == item3 && currentPage * 4 + 3 < jobs.size())
     {
+        const auto item = jobs[currentPage * 4 + 3];
+        itemLabel->SetUpperLabelText(item.name);
+        itemLabel->SetLowerLabelText(QString("工资：%1\n等级：%2")
+                                                .arg(item.wage)
+                                                .arg(item.lowestLevel));
         itemLabel->show();
-        itemLabel->SetUpperLabelText(jobs[currentPage * 4 + 3].name);
-        itemLabel->SetLowerLabelText(QString::number(jobs[currentPage * 4 + 3].wage));
     }
     else
     {
