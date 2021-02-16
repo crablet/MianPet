@@ -1,6 +1,7 @@
 ﻿#ifndef WORKINGWINDOW_H
 #define WORKINGWINDOW_H
 
+#include <utility>
 #include <vector>
 #include <thread>
 #include <algorithm>
@@ -60,8 +61,8 @@ private:
     // 存放职位信息的结构体
     struct JobInformation
     {
-        JobInformation(const QString &name, int wage, int lowestLevel, const std::vector<QString> &eduRestrictions)
-            : name(name), wage(wage), lowestLevel(lowestLevel), eduRestrictions(eduRestrictions)
+        JobInformation(QString name, int wage, int lowestLevel, std::vector<QString> eduRestrictions)
+            : name(std::move(name)), wage(wage), lowestLevel(lowestLevel), eduRestrictions(std::move(eduRestrictions))
         {
         }
 
