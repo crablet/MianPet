@@ -41,7 +41,7 @@ void PetProfileWindow::InitializeUi()
     ageLabel->setText(QString::number(ageValue));
     tuotuoLabel->setText(QString::number(tuotuoValue));
     growthBar->setValue(growthValue);
-    foodBar->setValue(foodValue);
+    foodBar->setValue(FoodValueToPercent(foodValue));
     cleanBar->setValue(cleanValue);
     healthBar->setValue(healthValue);
     moodBar->setValue(moodValue);
@@ -190,7 +190,7 @@ void PetProfileWindow::UpdatePetProfileHelper(const QByteArray &profile)
         ageLabel->setText(QString::number(ageValue / 60) + "小时");
         tuotuoLabel->setText(QString::number(tuotuoValue));
         growthBar->setValue(100 * growthValue / GrowthValueMax(levelValue));
-        foodBar->setValue(100 * foodValue / FoodValueMax);
+        foodBar->setValue(FoodValueToPercent(foodValue));
         cleanBar->setValue(100 * cleanValue / CleanValueMax);
         healthBar->setValue(100 * healthValue / HealthValueMax);
         moodBar->setValue(100 * moodValue / MoodValueMax);

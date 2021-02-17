@@ -53,7 +53,7 @@ void FoodWindow::InitializeUi()
 
     foodBar->setAlignment(Qt::AlignCenter);
     foodBar->setRange(0, 100);
-    foodBar->setValue(100 * foodValue / FoodValueMax);
+    foodBar->setValue(FoodValueToPercent(foodValue));
 
     lowerBarWidgetLayout = new QHBoxLayout(this);
     lowerBarWidgetLayout->addWidget(lowerBarTextLabel);
@@ -186,7 +186,7 @@ void FoodWindow::InitializeConnect()
         pos->SetAmount(pos->GetAmount() - count);
 
         foodValue += pos->GetFood();
-        foodBar->setValue(100 * foodValue / FoodValueMax);
+        foodBar->setValue(FoodValueToPercent(foodValue));
     });
     connect(this, &FoodWindow::UseFailed, this, [=]()
     {
@@ -518,7 +518,7 @@ void FoodWindow::UpdateFoodValue()
         foodValue = remoteJson["food"].toInt();
         if (foodBar)
         {
-            foodBar->setValue(100 * foodValue / FoodValueMax);
+            foodBar->setValue(FoodValueToPercent(foodValue));
         }
     });
     thrd.detach();

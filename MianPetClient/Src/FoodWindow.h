@@ -29,6 +29,7 @@
 #include "Tools/Network/DataPackages/FoodValueRequestData.h"
 #include "Tools/Network/DataPackages/BuyRequestData.h"
 #include "Tools/Network/DataPackages/UseRequestData.h"
+#include "Tools/Detail/Calculation.h"
 
 // 食品的商店
 class FoodWindow final : public SmallItemsContainerWindow
