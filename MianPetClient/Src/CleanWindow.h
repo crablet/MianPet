@@ -29,6 +29,7 @@
 #include "Tools/Network/DataPackages/CleanValueRequeastData.h"
 #include "Tools/Network/DataPackages/BuyRequestData.h"
 #include "Tools/Network/DataPackages/UseRequestData.h"
+#include "Tools/Detail/Calculation.h"
 
 // 清洁品的商店
 class CleanWindow final : public SmallItemsContainerWindow

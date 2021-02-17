@@ -52,7 +52,7 @@ void CleanWindow::InitializeUi()
 
     cleanBar->setAlignment(Qt::AlignCenter);
     cleanBar->setRange(0, 100);
-    cleanBar->setValue(100 * cleanValue / CleanValueMax);
+    cleanBar->setValue(CleanValueToPercent(cleanValue));
 
     lowerBarWidgetLayout = new QHBoxLayout(this);
     lowerBarWidgetLayout->addWidget(lowerBarTextLabel);
@@ -185,7 +185,7 @@ void CleanWindow::InitializeConnect()
         pos->SetAmount(pos->GetAmount() - count);
 
         cleanValue += pos->GetClean();
-        cleanBar->setValue(100 * cleanValue / CleanValueMax);
+        cleanBar->setValue(CleanValueToPercent(cleanValue));
     });
     connect(this, &CleanWindow::UseFailed, this, [=]()
     {
@@ -521,7 +521,7 @@ void CleanWindow::UpdateCleanValue()
         cleanValue = remoteJson["clean"].toInt();
         if (cleanBar)
         {
-            cleanBar->setValue(100 * cleanValue / CleanValueMax);
+            cleanBar->setValue(CleanValueToPercent(cleanValue));
         }
     });
     thrd.detach();
