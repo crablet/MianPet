@@ -40,6 +40,7 @@ void CleanWindow::InitializeUi()
     std::thread thread(&CleanWindow::DataPrepare, this);
     thread.detach();
 
+    SetIcon(CleanWindowIcon);
     SetWindowTitle("清洁");
 
     lowerBarTextLabel = new QLabel("清洁值", this);

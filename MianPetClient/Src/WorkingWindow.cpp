@@ -48,6 +48,7 @@ void WorkingWindow::InitializeUi()
 
     SetWidthOfWindowTitle(this->width() - 100);
     SetWindowTitle("打工");
+    SetIcon(WorkingWindowIcon);
 
     beginButton = new QPushButton("开始", this);
     beginButton->setDisabled(true);

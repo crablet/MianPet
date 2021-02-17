@@ -50,8 +50,6 @@ inline constexpr int SmallItemsContainerWindowNextPageButtonX
 inline constexpr int SmallItemsContainerWindowNextPageButtonY = SmallItemsContainerWindowPreviousPageButtonY;
 #define SmallItemsContainerWindowNextPageButtonIcon (QIcon(":/Pic/right-arrow.png"))
 
-#define FoodWindowIcon (QPixmap(":/Pic/fork-and-knife2.png"))
-
 inline constexpr int SmallItemsContainerWindowItem0X = 45;
 inline constexpr int SmallItemsContainerWindowItem0Y = 42;
 inline constexpr int SmallItemsContainerWindowItem0Width = 80;
@@ -132,6 +130,7 @@ inline constexpr int TransparentItemLabelLowerLabelY = 64;
 inline const QString TransparentItemLabelLowerLabelStyle
     = R"(QLabel { color: rgb(255, 255, 255) })";
 
+#define FoodWindowIcon (QPixmap(":/Pic/fork-and-knife2.png"))
 inline constexpr int FoodWindowLowerBarWidgetWidth 
     = SmallItemsContainerWindowItem3X + SmallItemsContainerWindowItem3IconWidth - SmallItemsContainerWindowItem0X;
 inline constexpr int FoodWindowLowerBarWidgetHeight = 53;
@@ -139,11 +138,13 @@ inline constexpr int FoodWindowLowerBarWidgetX = SmallItemsContainerWindowItem0X
 inline constexpr int FoodWindowLowerBarWidgetY 
     = SmallItemsContainerWindowItem0Y + SmallItemsContainerWindowItem0Height + 3;
 
+#define CleanWindowIcon (QPixmap(":/Pic/clean.png"))
 inline constexpr int CleanWindowLowerBarWidgetWidth = FoodWindowLowerBarWidgetWidth;
 inline constexpr int CleanWindowLowerBarWidgetHeight = FoodWindowLowerBarWidgetHeight;
 inline constexpr int CleanWindowLowerBarWidgetX = FoodWindowLowerBarWidgetX;
 inline constexpr int CleanWindowLowerBarWidgetY = FoodWindowLowerBarWidgetY;
 
+#define WorkingWindowIcon (QPixmap(":/Pic/laboro.png"))
 inline constexpr int WorkingWindowLowerBarWidgetWidth = FoodWindowLowerBarWidgetWidth;
 inline constexpr int WorkingWindowLowerBarWidgetHeight = FoodWindowLowerBarWidgetHeight;
 inline constexpr int WorkingWindowLowerBarWidgetX = FoodWindowLowerBarWidgetX;
