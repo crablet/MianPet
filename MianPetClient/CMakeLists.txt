@@ -49,7 +49,8 @@ set(SOURCES
     Src/PetClient.cpp
     Src/ItemInformation.cpp
     Src/Tools/Network/DataPackages/FoodValueRequestData.cpp
-    Src/Tools/Network/DataPackages/CleanValueRequeastData.cpp)
+    Src/Tools/Network/DataPackages/CleanValueRequeastData.cpp
+    Src/Tools/Detail/Calculation.h)
 
 SET(HEADER_DIRS
     Src
@@ -57,7 +58,8 @@ SET(HEADER_DIRS
     Src/Tools/Log/spdlog-1.8.2
     Src/Tools/Network
     Src/Tools/Network/DataPackages
-    Src/Tools/Ui)
+    Src/Tools/Ui
+    Src/Tools/Detail)
 include_directories(${HEADER_DIRS})
 
 add_executable(MianPetClient ${SOURCES} Res.qrc)
