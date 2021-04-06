@@ -1,9 +1,10 @@
 {
     "items": [
         {
-            "amount": 16777216,
+            "amount": 0,
+            "clean": 120,
             "name": "qimiaoyuyan",
-            "price": 10
+            "price": 80
         }
     ]
 }

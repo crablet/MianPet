@@ -1,4 +1,12 @@
 {
     "jobs": [
+        {
+            "eduRestrictions": [
+                "none"
+            ],
+            "lowestLevel": 0,
+            "name": "cazhuantou",
+            "wage": 10
+        }
     ]
 }

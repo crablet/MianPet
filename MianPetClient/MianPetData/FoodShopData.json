@@ -1,9 +1,10 @@
 {
     "items": [
         {
-            "amount": 0,
+            "amount": 70,
+            "food": 120,
             "name": "lanxingtangguo",
-            "price": 10
+            "price": 80
         }
     ]
 }
